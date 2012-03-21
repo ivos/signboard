@@ -80,6 +80,12 @@
           <failOnMissingWebXml>false</failOnMissingWebXml>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.jboss.as.plugins</groupId>
+        <artifactId>jboss-as-maven-plugin</artifactId>
+        <version>7.1.0.CR1</version>
+        <extensions>false</extensions>
+      </plugin>
     </plugins>
   </build>
 </project>
