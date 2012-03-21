@@ -41,7 +41,7 @@
 					<h:inputText id="userBeanUserEmail" value="#{userBean.user.email}"/>
 					<h:message for="userBeanUserEmail" styleClass="error"/>
 				</h:panelGroup>
-				<h:outputText/>
+				<h:outputText value="*"/>
 				<h:outputLabel for="userBeanUserFirstName" value="First Name:"/>
 				<h:panelGroup>
 					<h:inputText id="userBeanUserFirstName" value="#{userBean.user.firstName}"/>
@@ -66,6 +66,12 @@
 					<h:message for="userBeanUserSkype" styleClass="error"/>
 				</h:panelGroup>
 				<h:outputText/>
+				<h:outputLabel for="userBeanUserPassword" value="Password:"/>
+				<h:panelGroup>
+					<h:inputText id="userBeanUserPassword" value="#{userBean.user.password}"/>
+					<h:message for="userBeanUserPassword" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText value="*"/>
 			</h:panelGrid>
 
 			<div class="buttons">
