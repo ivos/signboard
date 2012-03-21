@@ -2,11 +2,14 @@ package net.sf.pms.user.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class User implements Serializable {
@@ -18,15 +21,26 @@ public class User implements Serializable {
 	@Version
 	private int version;
 
+	@NotNull
+	@Size(max = 100)
+	@Column(unique = true, updatable = false)
 	private String email;
 
+	@Size(max = 100)
 	private String firstName;
 
+	@Size(max = 100)
 	private String lastName;
 
+	@Size(max = 30)
 	private String phone;
 
+	@Size(max = 100)
 	private String skype;
+
+	@NotNull
+	@Size(min = 4, max = 100)
+	private String password;
 
 	public Long getId() {
 		return this.id;
@@ -84,6 +98,14 @@ public class User implements Serializable {
 		this.skype = skype;
 	}
 
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(final String password) {
+		this.password = password;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -113,7 +135,8 @@ public class User implements Serializable {
 	public String toString() {
 		return "User [id=" + id + ", version=" + version + ", email=" + email
 				+ ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", phone=" + phone + ", skype=" + skype + "]";
+				+ ", phone=" + phone + ", skype=" + skype + ", password="
+				+ password + "]";
 	}
 
 	private static final long serialVersionUID = 1L;
