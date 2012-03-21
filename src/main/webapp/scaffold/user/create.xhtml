@@ -38,34 +38,40 @@
 			<h:panelGrid columnClasses="label,component,required" columns="3">
 				<h:outputLabel for="userBeanUserEmail" value="Email:"/>
 				<h:panelGroup>
-					<h:inputText id="userBeanUserEmail" value="#{userBean.user.email}"/>
+					<h:inputText id="userBeanUserEmail" maxLength="100" required="true" value="#{userBean.user.email}"/>
 					<h:message for="userBeanUserEmail" styleClass="error"/>
 				</h:panelGroup>
-				<h:outputText/>
+				<h:outputText value="*"/>
 				<h:outputLabel for="userBeanUserFirstName" value="First Name:"/>
 				<h:panelGroup>
-					<h:inputText id="userBeanUserFirstName" value="#{userBean.user.firstName}"/>
+					<h:inputText id="userBeanUserFirstName" maxLength="100" value="#{userBean.user.firstName}"/>
 					<h:message for="userBeanUserFirstName" styleClass="error"/>
 				</h:panelGroup>
 				<h:outputText/>
 				<h:outputLabel for="userBeanUserLastName" value="Last Name:"/>
 				<h:panelGroup>
-					<h:inputText id="userBeanUserLastName" value="#{userBean.user.lastName}"/>
+					<h:inputText id="userBeanUserLastName" maxLength="100" value="#{userBean.user.lastName}"/>
 					<h:message for="userBeanUserLastName" styleClass="error"/>
 				</h:panelGroup>
 				<h:outputText/>
 				<h:outputLabel for="userBeanUserPhone" value="Phone:"/>
 				<h:panelGroup>
-					<h:inputText id="userBeanUserPhone" value="#{userBean.user.phone}"/>
+					<h:inputText id="userBeanUserPhone" maxLength="30" value="#{userBean.user.phone}"/>
 					<h:message for="userBeanUserPhone" styleClass="error"/>
 				</h:panelGroup>
 				<h:outputText/>
 				<h:outputLabel for="userBeanUserSkype" value="Skype:"/>
 				<h:panelGroup>
-					<h:inputText id="userBeanUserSkype" value="#{userBean.user.skype}"/>
+					<h:inputText id="userBeanUserSkype" maxLength="100" value="#{userBean.user.skype}"/>
 					<h:message for="userBeanUserSkype" styleClass="error"/>
 				</h:panelGroup>
 				<h:outputText/>
+				<h:outputLabel for="userBeanUserPassword" value="Password:"/>
+				<h:panelGroup>
+					<h:inputText id="userBeanUserPassword" maxLength="100" required="true" value="#{userBean.user.password}"/>
+					<h:message for="userBeanUserPassword" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText value="*"/>
 			</h:panelGrid>
 
 			<div class="buttons">

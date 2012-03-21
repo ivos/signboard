@@ -30,31 +30,31 @@
 				<h:panelGrid columnClasses="label,component,required" columns="3">
 					<h:outputLabel for="userBeanSearchEmail" value="Email:"/>
 					<h:panelGroup>
-						<h:inputText id="userBeanSearchEmail" value="#{userBean.search.email}"/>
+						<h:inputText id="userBeanSearchEmail" maxLength="100" value="#{userBean.search.email}"/>
 						<h:message for="userBeanSearchEmail" styleClass="error"/>
 					</h:panelGroup>
 					<h:outputText/>
 					<h:outputLabel for="userBeanSearchFirstName" value="First Name:"/>
 					<h:panelGroup>
-						<h:inputText id="userBeanSearchFirstName" value="#{userBean.search.firstName}"/>
+						<h:inputText id="userBeanSearchFirstName" maxLength="100" value="#{userBean.search.firstName}"/>
 						<h:message for="userBeanSearchFirstName" styleClass="error"/>
 					</h:panelGroup>
 					<h:outputText/>
 					<h:outputLabel for="userBeanSearchLastName" value="Last Name:"/>
 					<h:panelGroup>
-						<h:inputText id="userBeanSearchLastName" value="#{userBean.search.lastName}"/>
+						<h:inputText id="userBeanSearchLastName" maxLength="100" value="#{userBean.search.lastName}"/>
 						<h:message for="userBeanSearchLastName" styleClass="error"/>
 					</h:panelGroup>
 					<h:outputText/>
 					<h:outputLabel for="userBeanSearchPhone" value="Phone:"/>
 					<h:panelGroup>
-						<h:inputText id="userBeanSearchPhone" value="#{userBean.search.phone}"/>
+						<h:inputText id="userBeanSearchPhone" maxLength="30" value="#{userBean.search.phone}"/>
 						<h:message for="userBeanSearchPhone" styleClass="error"/>
 					</h:panelGroup>
 					<h:outputText/>
 					<h:outputLabel for="userBeanSearchSkype" value="Skype:"/>
 					<h:panelGroup>
-						<h:inputText id="userBeanSearchSkype" value="#{userBean.search.skype}"/>
+						<h:inputText id="userBeanSearchSkype" maxLength="100" value="#{userBean.search.skype}"/>
 						<h:message for="userBeanSearchSkype" styleClass="error"/>
 					</h:panelGroup>
 					<h:outputText/>
@@ -77,38 +77,11 @@
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="First Name"/>
+						<h:outputText value="Password"/>
 					</f:facet>
 					<h:link outcome="/scaffold/user/view">
 						<f:param name="id" value="#{_item.id}"/>
-						<h:outputText id="itemFirstName" value="#{_item.firstName}"/>
-					</h:link>
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Last Name"/>
-					</f:facet>
-					<h:link outcome="/scaffold/user/view">
-						<f:param name="id" value="#{_item.id}"/>
-						<h:outputText id="itemLastName" value="#{_item.lastName}"/>
-					</h:link>
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Phone"/>
-					</f:facet>
-					<h:link outcome="/scaffold/user/view">
-						<f:param name="id" value="#{_item.id}"/>
-						<h:outputText id="itemPhone" value="#{_item.phone}"/>
-					</h:link>
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Skype"/>
-					</f:facet>
-					<h:link outcome="/scaffold/user/view">
-						<f:param name="id" value="#{_item.id}"/>
-						<h:outputText id="itemSkype" value="#{_item.skype}"/>
+						<h:outputText id="itemPassword" value="#{_item.password}"/>
 					</h:link>
 				</h:column>
 			</h:dataTable>
