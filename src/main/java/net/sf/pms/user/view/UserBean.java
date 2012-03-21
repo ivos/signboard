@@ -1,4 +1,4 @@
-package net.sf.pms.view;
+package net.sf.pms.user.view;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,6 +12,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
@@ -29,11 +30,11 @@ import net.sf.pms.user.model.User;
  * This class provides CRUD functionality for all User entities. It focuses
  * purely on Java EE 6 standards (e.g. <tt>&#64;ConversationScoped</tt> for
  * state management, <tt>PersistenceContext</tt> for persistence,
- * <tt>CriteriaBuilder</tt> for searches) rather than introducing a CRUD
- * framework or custom base class.
+ * <tt>CriteriaBuilder</tt> for searches) rather than introducing a CRUD framework or
+ * custom base class.
  */
 
-// @Named
+@Named
 @Stateful
 @ConversationScoped
 public class UserBean implements Serializable {
@@ -71,7 +72,7 @@ public class UserBean implements Serializable {
 		this.conversation.begin();
 		return "create?faces-redirect=true";
 	}
-
+	
 	public void retrieve() {
 
 		if (FacesContext.getCurrentInstance().isPostback()) {
@@ -95,18 +96,17 @@ public class UserBean implements Serializable {
 
 	public String update() {
 		this.conversation.end();
-
+		
 		try {
 			if (this.id == null) {
 				this.entityManager.persist(this.user);
-				return "search?faces-redirect=true";
+				return "search?faces-redirect=true";			
 			} else {
 				this.entityManager.merge(this.user);
 				return "view?faces-redirect=true&id=" + this.user.getId();
 			}
-		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(e.getMessage()));
+		} catch( Exception e ) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage( e.getMessage() ));
 			return null;
 		}
 	}
@@ -119,9 +119,8 @@ public class UserBean implements Serializable {
 					getId()));
 			this.entityManager.flush();
 			return "search?faces-redirect=true";
-		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(e.getMessage()));
+		} catch( Exception e ) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage( e.getMessage() ));
 			return null;
 		}
 	}
@@ -133,7 +132,7 @@ public class UserBean implements Serializable {
 	private int page;
 	private long count;
 	private List<User> pageItems;
-
+	
 	private User search = new User();
 
 	public int getPage() {
@@ -191,28 +190,23 @@ public class UserBean implements Serializable {
 
 		String email = this.search.getEmail();
 		if (email != null && !"".equals(email)) {
-			predicatesList.add(builder.like(root.<String> get("email"),
-					'%' + email + '%'));
+			predicatesList.add(builder.like(root.<String>get("email"), '%' + email + '%'));
 		}
 		String firstName = this.search.getFirstName();
 		if (firstName != null && !"".equals(firstName)) {
-			predicatesList.add(builder.like(root.<String> get("firstName"),
-					'%' + firstName + '%'));
+			predicatesList.add(builder.like(root.<String>get("firstName"), '%' + firstName + '%'));
 		}
 		String lastName = this.search.getLastName();
 		if (lastName != null && !"".equals(lastName)) {
-			predicatesList.add(builder.like(root.<String> get("lastName"),
-					'%' + lastName + '%'));
+			predicatesList.add(builder.like(root.<String>get("lastName"), '%' + lastName + '%'));
 		}
 		String phone = this.search.getPhone();
 		if (phone != null && !"".equals(phone)) {
-			predicatesList.add(builder.like(root.<String> get("phone"),
-					'%' + phone + '%'));
+			predicatesList.add(builder.like(root.<String>get("phone"), '%' + phone + '%'));
 		}
 		String skype = this.search.getSkype();
 		if (skype != null && !"".equals(skype)) {
-			predicatesList.add(builder.like(root.<String> get("skype"),
-					'%' + skype + '%'));
+			predicatesList.add(builder.like(root.<String>get("skype"), '%' + skype + '%'));
 		}
 
 		return predicatesList.toArray(new Predicate[predicatesList.size()]);
@@ -233,8 +227,8 @@ public class UserBean implements Serializable {
 
 	public List<User> getAll() {
 
-		CriteriaQuery<User> criteria = this.entityManager.getCriteriaBuilder()
-				.createQuery(User.class);
+		CriteriaQuery<User> criteria = this.entityManager
+				.getCriteriaBuilder().createQuery(User.class);
 		return this.entityManager.createQuery(
 				criteria.select(criteria.from(User.class))).getResultList();
 	}
@@ -263,11 +257,11 @@ public class UserBean implements Serializable {
 			}
 		};
 	}
-
+	
 	/*
 	 * Support adding children to bidirectional, one-to-many tables
 	 */
-
+	 
 	private User add = new User();
 
 	public User getAdd() {
