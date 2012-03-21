@@ -1,22 +1,32 @@
 package net.sf.pms.user.model;
 
+import java.io.Serializable;
 
 import javax.persistence.Entity;
-import java.io.Serializable;
-import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Column;
+import javax.persistence.Id;
 import javax.persistence.Version;
-import java.lang.Override;@Entity public class User implements java.io.Serializable {
+
+@Entity
+public class User implements Serializable {
 
 	@Id
-	private @GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", updatable = false, nullable = false)
-	Long id = null;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+
 	@Version
-	private @Column(name = "version")
-	int version = 0;
+	private int version;
+
+	private String email;
+
+	private String firstName;
+
+	private String lastName;
+
+	private String phone;
+
+	private String skype;
 
 	public Long getId() {
 		return this.id;
@@ -34,34 +44,6 @@ import java.lang.Override;@Entity public class User implements java.io.Serializa
 		this.version = version;
 	}
 
-	@Override
-	public boolean equals(Object that) {
-		if (this == that) {
-			return true;
-		}
-		if (that == null) {
-			return false;
-		}
-		if (getClass() != that.getClass()) {
-			return false;
-		}
-		if (id != null) {
-			return id.equals(((User) that).id);
-		}
-		return super.equals(that);
-	}
-
-	@Override
-	public int hashCode() {
-		if (id != null) {
-			return id.hashCode();
-		}
-		return super.hashCode();
-	}
-
-	@Column
-	private String email;
-
 	public String getEmail() {
 		return this.email;
 	}
@@ -69,9 +51,6 @@ import java.lang.Override;@Entity public class User implements java.io.Serializa
 	public void setEmail(final String email) {
 		this.email = email;
 	}
-
-	@Column
-	private String firstName;
 
 	public String getFirstName() {
 		return this.firstName;
@@ -81,9 +60,6 @@ import java.lang.Override;@Entity public class User implements java.io.Serializa
 		this.firstName = firstName;
 	}
 
-	@Column
-	private String lastName;
-
 	public String getLastName() {
 		return this.lastName;
 	}
@@ -91,9 +67,6 @@ import java.lang.Override;@Entity public class User implements java.io.Serializa
 	public void setLastName(final String lastName) {
 		this.lastName = lastName;
 	}
-
-	@Column
-	private String phone;
 
 	public String getPhone() {
 		return this.phone;
@@ -103,9 +76,6 @@ import java.lang.Override;@Entity public class User implements java.io.Serializa
 		this.phone = phone;
 	}
 
-	@Column
-	private String skype;
-
 	public String getSkype() {
 		return this.skype;
 	}
@@ -114,17 +84,38 @@ import java.lang.Override;@Entity public class User implements java.io.Serializa
 		this.skype = skype;
 	}
 
-	public String toString() {
-		String result = "";
-		if (email != null && !email.trim().isEmpty())
-			result += email;
-		if (firstName != null && !firstName.trim().isEmpty())
-			result += " " + firstName;
-		if (lastName != null && !lastName.trim().isEmpty())
-			result += " " + lastName;
-		if (phone != null && !phone.trim().isEmpty())
-			result += " " + phone;
-		if (skype != null && !skype.trim().isEmpty())
-			result += " " + skype;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		return result;
-	} }
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", version=" + version + ", email=" + email
+				+ ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", phone=" + phone + ", skype=" + skype + "]";
+	}
+
+	private static final long serialVersionUID = 1L;
+
+}
