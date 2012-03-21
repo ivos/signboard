@@ -7,11 +7,11 @@
 	template="/resources/scaffold/page.xhtml">
 
 	<f:metadata>
-		<f:viewParam name="page" value="#{userBean.page}"/>
-		<f:event type="preRenderView" listener="#{userBean.paginate}"/>
+		<f:viewParam name="page" value="#{userBean.page}" />
+		<f:event type="preRenderView" listener="#{userBean.paginate}" />
 	</f:metadata>
 
-	<ui:param name="pageTitle" value="Search User entities"/>
+	<ui:param name="pageTitle" value="Search User entities" />
 
 	<ui:define name="header">
 		User
@@ -21,111 +21,117 @@
 		Search User entities
 	</ui:define>
 
-	<ui:define name="footer"/>
+	<ui:define name="footer" />
 
 	<ui:define name="main">
 		<h:form id="search">
 			<h:panelGroup styleClass="search">
 
 				<h:panelGrid columnClasses="label,component,required" columns="3">
-					<h:outputLabel for="userBeanSearchEmail" value="Email:"/>
+					<h:outputLabel for="userBeanSearchEmail" value="Email:" />
 					<h:panelGroup>
-						<h:inputText id="userBeanSearchEmail" value="#{userBean.search.email}"/>
-						<h:message for="userBeanSearchEmail" styleClass="error"/>
+						<h:inputText id="userBeanSearchEmail"
+							value="#{userBean.search.email}" />
+						<h:message for="userBeanSearchEmail" styleClass="error" />
 					</h:panelGroup>
-					<h:outputText/>
-					<h:outputLabel for="userBeanSearchFirstName" value="First Name:"/>
+					<h:outputText />
+					<h:outputLabel for="userBeanSearchFirstName" value="First Name:" />
 					<h:panelGroup>
-						<h:inputText id="userBeanSearchFirstName" value="#{userBean.search.firstName}"/>
-						<h:message for="userBeanSearchFirstName" styleClass="error"/>
+						<h:inputText id="userBeanSearchFirstName"
+							value="#{userBean.search.firstName}" />
+						<h:message for="userBeanSearchFirstName" styleClass="error" />
 					</h:panelGroup>
-					<h:outputText/>
-					<h:outputLabel for="userBeanSearchLastName" value="Last Name:"/>
+					<h:outputText />
+					<h:outputLabel for="userBeanSearchLastName" value="Last Name:" />
 					<h:panelGroup>
-						<h:inputText id="userBeanSearchLastName" value="#{userBean.search.lastName}"/>
-						<h:message for="userBeanSearchLastName" styleClass="error"/>
+						<h:inputText id="userBeanSearchLastName"
+							value="#{userBean.search.lastName}" />
+						<h:message for="userBeanSearchLastName" styleClass="error" />
 					</h:panelGroup>
-					<h:outputText/>
-					<h:outputLabel for="userBeanSearchPhone" value="Phone:"/>
+					<h:outputText />
+					<h:outputLabel for="userBeanSearchPhone" value="Phone:" />
 					<h:panelGroup>
-						<h:inputText id="userBeanSearchPhone" value="#{userBean.search.phone}"/>
-						<h:message for="userBeanSearchPhone" styleClass="error"/>
+						<h:inputText id="userBeanSearchPhone"
+							value="#{userBean.search.phone}" />
+						<h:message for="userBeanSearchPhone" styleClass="error" />
 					</h:panelGroup>
-					<h:outputText/>
-					<h:outputLabel for="userBeanSearchSkype" value="Skype:"/>
+					<h:outputText />
+					<h:outputLabel for="userBeanSearchSkype" value="Skype:" />
 					<h:panelGroup>
-						<h:inputText id="userBeanSearchSkype" value="#{userBean.search.skype}"/>
-						<h:message for="userBeanSearchSkype" styleClass="error"/>
+						<h:inputText id="userBeanSearchSkype"
+							value="#{userBean.search.skype}" />
+						<h:message for="userBeanSearchSkype" styleClass="error" />
 					</h:panelGroup>
-					<h:outputText/>
+					<h:outputText />
 				</h:panelGrid>
 				<h:panelGroup styleClass="buttons">
-					<h:commandLink value="Search" action="#{userBean.search}"/>
-					<h:commandLink value="Create New" action="#{userBean.create}"/>
+					<h:commandLink value="Search" action="#{userBean.search}" />
+					<h:link value="Create New" outcome="create" />
 				</h:panelGroup>
 			</h:panelGroup>
-			
-			<h:dataTable id="userBeanPageItems" styleClass="data-table" value="#{userBean.pageItems}" var="_item">
+
+			<h:dataTable id="userBeanPageItems" styleClass="data-table"
+				value="#{userBean.pageItems}" var="_item">
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Email"/>
+						<h:outputText value="Email" />
 					</f:facet>
 					<h:link outcome="/page/user/view">
-						<f:param name="id" value="#{_item.id}"/>
-						<h:outputText id="itemEmail" value="#{_item.email}"/>
+						<f:param name="id" value="#{_item.id}" />
+						<h:outputText id="itemEmail" value="#{_item.email}" />
 					</h:link>
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="First Name"/>
+						<h:outputText value="First Name" />
 					</f:facet>
 					<h:link outcome="/page/user/view">
-						<f:param name="id" value="#{_item.id}"/>
-						<h:outputText id="itemFirstName" value="#{_item.firstName}"/>
+						<f:param name="id" value="#{_item.id}" />
+						<h:outputText id="itemFirstName" value="#{_item.firstName}" />
 					</h:link>
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Last Name"/>
+						<h:outputText value="Last Name" />
 					</f:facet>
 					<h:link outcome="/page/user/view">
-						<f:param name="id" value="#{_item.id}"/>
-						<h:outputText id="itemLastName" value="#{_item.lastName}"/>
+						<f:param name="id" value="#{_item.id}" />
+						<h:outputText id="itemLastName" value="#{_item.lastName}" />
 					</h:link>
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Phone"/>
+						<h:outputText value="Phone" />
 					</f:facet>
 					<h:link outcome="/page/user/view">
-						<f:param name="id" value="#{_item.id}"/>
-						<h:outputText id="itemPhone" value="#{_item.phone}"/>
+						<f:param name="id" value="#{_item.id}" />
+						<h:outputText id="itemPhone" value="#{_item.phone}" />
 					</h:link>
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Skype"/>
+						<h:outputText value="Skype" />
 					</f:facet>
 					<h:link outcome="/page/user/view">
-						<f:param name="id" value="#{_item.id}"/>
-						<h:outputText id="itemSkype" value="#{_item.skype}"/>
+						<f:param name="id" value="#{_item.id}" />
+						<h:outputText id="itemSkype" value="#{_item.skype}" />
 					</h:link>
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Password"/>
+						<h:outputText value="Password" />
 					</f:facet>
 					<h:link outcome="/page/user/view">
-						<f:param name="id" value="#{_item.id}"/>
-						<h:outputText id="itemPassword" value="#{_item.password}"/>
+						<f:param name="id" value="#{_item.id}" />
+						<h:outputText id="itemPassword" value="#{_item.password}" />
 					</h:link>
 				</h:column>
 			</h:dataTable>
 			<ui:include src="/resources/scaffold/paginator.xhtml">
-				<ui:param name="paginatorBean" value="#{userBean}"/>
+				<ui:param name="paginatorBean" value="#{userBean}" />
 			</ui:include>
 		</h:form>
-			
+
 	</ui:define>
 
 </ui:composition>

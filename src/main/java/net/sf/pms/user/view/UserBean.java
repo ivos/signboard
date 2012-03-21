@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateful;
-import javax.enterprise.context.Conversation;
-import javax.enterprise.context.ConversationScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -14,8 +13,6 @@ import javax.faces.convert.Converter;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -25,20 +22,21 @@ import javax.persistence.criteria.Root;
 import net.sf.pms.user.model.User;
 import net.sf.pms.user.model.UserSearch;
 
-/**
- * Backing bean for User entities.
- * <p>
- * This class provides CRUD functionality for all User entities. It focuses
- * purely on Java EE 6 standards (e.g. <tt>&#64;ConversationScoped</tt> for
- * state management, <tt>PersistenceContext</tt> for persistence,
- * <tt>CriteriaBuilder</tt> for searches) rather than introducing a CRUD
- * framework or custom base class.
- */
+import org.jboss.solder.logging.Logger;
 
 @Named
 @Stateful
-@ConversationScoped
+@RequestScoped
 public class UserBean implements Serializable {
+
+	@Inject
+	Logger log;
+
+	public UserBean() {
+		System.out.println("Constructed.");
+	}
+
+	// generated:
 
 	private static final long serialVersionUID = 1L;
 
@@ -49,7 +47,7 @@ public class UserBean implements Serializable {
 	private Long id;
 
 	public Long getId() {
-		return this.id;
+		return id;
 	}
 
 	public void setId(Long id) {
@@ -59,35 +57,22 @@ public class UserBean implements Serializable {
 	private User user;
 
 	public User getUser() {
-		return this.user;
+		if (null == user) {
+			user = new User();
+		}
+		return user;
 	}
 
 	@Inject
-	private Conversation conversation;
-
-	@PersistenceContext(type = PersistenceContextType.EXTENDED)
 	private EntityManager entityManager;
-
-	public String create() {
-
-		this.conversation.begin();
-		return "create?faces-redirect=true";
-	}
 
 	public void retrieve() {
 
 		if (FacesContext.getCurrentInstance().isPostback()) {
 			return;
 		}
-
-		if (this.conversation.isTransient()) {
-			this.conversation.begin();
-		}
-
-		if (this.id == null) {
-			this.user = new User();
-		} else {
-			this.user = this.entityManager.find(User.class, getId());
+		if (id != null) {
+			user = entityManager.find(User.class, getId());
 		}
 	}
 
@@ -96,15 +81,14 @@ public class UserBean implements Serializable {
 	 */
 
 	public String update() {
-		this.conversation.end();
-
+		log.infov("update, id={0}, user={1}", id, user);
 		try {
-			if (this.id == null) {
-				this.entityManager.persist(this.user);
+			if (id == null) {
+				entityManager.persist(user);
 				return "search?faces-redirect=true";
 			} else {
-				this.entityManager.merge(this.user);
-				return "view?faces-redirect=true&id=" + this.user.getId();
+				entityManager.merge(user);
+				return "view?faces-redirect=true&id=" + user.getId();
 			}
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null,
@@ -114,12 +98,10 @@ public class UserBean implements Serializable {
 	}
 
 	public String delete() {
-		this.conversation.end();
 
 		try {
-			this.entityManager.remove(this.entityManager.find(User.class,
-					getId()));
-			this.entityManager.flush();
+			entityManager.remove(entityManager.find(User.class, getId()));
+			entityManager.flush();
 			return "search?faces-redirect=true";
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null,
@@ -139,7 +121,7 @@ public class UserBean implements Serializable {
 	private UserSearch search = new UserSearch();
 
 	public int getPage() {
-		return this.page;
+		return page;
 	}
 
 	public void setPage(int page) {
@@ -151,7 +133,7 @@ public class UserBean implements Serializable {
 	}
 
 	public UserSearch getSearch() {
-		return this.search;
+		return search;
 	}
 
 	public void setSearch(UserSearch search) {
@@ -159,59 +141,57 @@ public class UserBean implements Serializable {
 	}
 
 	public void search() {
-		this.page = 0;
+		page = 0;
 	}
 
 	public void paginate() {
 
-		CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 
-		// Populate this.count
+		// Populate count
 
 		CriteriaQuery<Long> countCriteria = builder.createQuery(Long.class);
 		Root<User> root = countCriteria.from(User.class);
 		countCriteria = countCriteria.select(builder.count(root)).where(
 				getSearchPredicates(root));
-		this.count = this.entityManager.createQuery(countCriteria)
-				.getSingleResult();
+		count = entityManager.createQuery(countCriteria).getSingleResult();
 
-		// Populate this.pageItems
+		// Populate pageItems
 
 		CriteriaQuery<User> criteria = builder.createQuery(User.class);
 		root = criteria.from(User.class);
-		TypedQuery<User> query = this.entityManager.createQuery(criteria
+		TypedQuery<User> query = entityManager.createQuery(criteria
 				.select(root).where(getSearchPredicates(root)));
-		query.setFirstResult(this.page * getPageSize()).setMaxResults(
-				getPageSize());
-		this.pageItems = query.getResultList();
+		query.setFirstResult(page * getPageSize()).setMaxResults(getPageSize());
+		pageItems = query.getResultList();
 	}
 
 	private Predicate[] getSearchPredicates(Root<User> root) {
 
-		CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 		List<Predicate> predicatesList = new ArrayList<Predicate>();
 
-		String email = this.search.getEmail();
+		String email = search.getEmail();
 		if (email != null && !"".equals(email)) {
 			predicatesList.add(builder.like(root.<String> get("email"),
 					'%' + email + '%'));
 		}
-		String firstName = this.search.getFirstName();
+		String firstName = search.getFirstName();
 		if (firstName != null && !"".equals(firstName)) {
 			predicatesList.add(builder.like(root.<String> get("firstName"),
 					'%' + firstName + '%'));
 		}
-		String lastName = this.search.getLastName();
+		String lastName = search.getLastName();
 		if (lastName != null && !"".equals(lastName)) {
 			predicatesList.add(builder.like(root.<String> get("lastName"),
 					'%' + lastName + '%'));
 		}
-		String phone = this.search.getPhone();
+		String phone = search.getPhone();
 		if (phone != null && !"".equals(phone)) {
 			predicatesList.add(builder.like(root.<String> get("phone"),
 					'%' + phone + '%'));
 		}
-		String skype = this.search.getSkype();
+		String skype = search.getSkype();
 		if (skype != null && !"".equals(skype)) {
 			predicatesList.add(builder.like(root.<String> get("skype"),
 					'%' + skype + '%'));
@@ -221,11 +201,11 @@ public class UserBean implements Serializable {
 	}
 
 	public List<User> getPageItems() {
-		return this.pageItems;
+		return pageItems;
 	}
 
 	public long getCount() {
-		return this.count;
+		return count;
 	}
 
 	/*
@@ -235,9 +215,9 @@ public class UserBean implements Serializable {
 
 	public List<User> getAll() {
 
-		CriteriaQuery<User> criteria = this.entityManager.getCriteriaBuilder()
+		CriteriaQuery<User> criteria = entityManager.getCriteriaBuilder()
 				.createQuery(User.class);
-		return this.entityManager.createQuery(
+		return entityManager.createQuery(
 				criteria.select(criteria.from(User.class))).getResultList();
 	}
 
@@ -249,8 +229,7 @@ public class UserBean implements Serializable {
 			public Object getAsObject(FacesContext context,
 					UIComponent component, String value) {
 
-				return UserBean.this.entityManager.find(User.class,
-						Long.valueOf(value));
+				return entityManager.find(User.class, Long.valueOf(value));
 			}
 
 			@Override
@@ -273,12 +252,12 @@ public class UserBean implements Serializable {
 	private User add = new User();
 
 	public User getAdd() {
-		return this.add;
+		return add;
 	}
 
 	public User getAdded() {
-		User added = this.add;
-		this.add = new User();
+		User added = add;
+		add = new User();
 		return added;
 	}
 }
