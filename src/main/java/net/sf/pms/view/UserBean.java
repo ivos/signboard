@@ -4,9 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.Stateful;
 import javax.enterprise.context.Conversation;
-import javax.enterprise.context.ConversationScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -34,8 +32,8 @@ import net.sf.pms.user.model.User;
  */
 
 // @Named
-@Stateful
-@ConversationScoped
+// @Stateful
+// @ConversationScoped
 public class UserBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
