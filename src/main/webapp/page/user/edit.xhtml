@@ -83,7 +83,7 @@
 			<div class="buttons">
 				<h:commandButton id="save" value="Save" action="#{userBean.update}" />
 				<c:choose>
-					<c:when test="#{!empty userBean.id}">
+					<c:when test="#{!empty userBean.id or facesContext.postback}">
 						<h:link id="cancel" value="Cancel" outcome="view">
 							<f:param name="id" value="#{userBean.id}" />
 						</h:link>
