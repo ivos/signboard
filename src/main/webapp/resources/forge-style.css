@@ -281,7 +281,28 @@ h1 {
 	vertical-align: middle;
 }
 
-#content .button:hover, #content .buttons a:hover {
+#content .buttons input[type=submit] {
+	font-size: 12pt;
+	margin-top: 5px;
+	margin-left: 1px;
+	margin-right: 1px;
+	margin-bottom: 5px;
+	color: #5b5b5b;
+	padding-top: 3px;
+	padding-bottom: 2px;
+	padding-left: 10px;
+	padding-right: 10px;
+	text-decoration: none;
+	border-top: 1px solid #dddddd;
+	border-left: 1px solid #dddddd;
+	border-right: 1px solid #bbbbbb;
+	border-bottom: 1px solid #bbbbbb;
+	border-radius: 5px;
+	background-color: #eeeeee;
+	vertical-align: middle;
+}
+
+#content .button:hover, #content .buttons a:hover, #content .buttons input[type=submit]:hover {
 	background-color: #d2e8f2;
 }
 

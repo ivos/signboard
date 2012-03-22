@@ -65,9 +65,11 @@
 					<h:outputText />
 				</h:panelGrid>
 				<h:panelGroup styleClass="buttons">
-					<h:commandLink value="Search" action="#{userBean.search}" />
-					<h:link value="Create New" outcome="edit" />
-					<h:commandLink value="Generate" action="#{userBean.generate}" />
+					<h:commandButton id="search" value="Search"
+						action="#{userBean.search}" />
+					<h:link id="create" value="Create New" outcome="edit" />
+					<h:commandButton id="generate" value="Generate"
+						action="#{userBean.generate}" />
 				</h:panelGroup>
 			</h:panelGroup>
 

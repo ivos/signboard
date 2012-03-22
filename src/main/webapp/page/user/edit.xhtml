@@ -81,16 +81,17 @@
 				value="#{userBean.user.version}" />
 
 			<div class="buttons">
-				<h:commandLink value="Save" action="#{userBean.update}" />
+				<h:commandButton id="save" value="Save" action="#{userBean.update}" />
 				<c:choose>
 					<c:when test="#{!empty userBean.id}">
-						<h:link value="Cancel" outcome="view">
+						<h:link id="cancel" value="Cancel" outcome="view">
 							<f:param name="id" value="#{userBean.id}" />
 						</h:link>
-						<h:commandLink value="Delete" action="#{userBean.delete}" />
+						<h:commandButton id="delete" value="Delete"
+							action="#{userBean.delete}" />
 					</c:when>
 					<c:otherwise>
-						<h:link value="Cancel" outcome="search" />
+						<h:link id="cancel" value="Cancel" outcome="search" />
 					</c:otherwise>
 				</c:choose>
 			</div>
