@@ -21,15 +21,10 @@ import javax.persistence.criteria.Root;
 import net.sf.pms.user.model.User;
 import net.sf.pms.user.model.UserSearch;
 
-import org.jboss.solder.logging.Logger;
-
 @Named
 @Stateful
 @RequestScoped
 public class UserListBean implements Serializable {
-
-	@Inject
-	Logger log;
 
 	public String generate() {
 		for (int i = 0; i < 121; i++) {

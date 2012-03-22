@@ -12,15 +12,10 @@ import javax.persistence.EntityManager;
 
 import net.sf.pms.user.model.User;
 
-import org.jboss.solder.logging.Logger;
-
 @Named
 @Stateful
 @RequestScoped
 public class UserBean implements Serializable {
-
-	@Inject
-	Logger log;
 
 	// generated:
 
@@ -53,9 +48,7 @@ public class UserBean implements Serializable {
 	private EntityManager entityManager;
 
 	public void retrieve() {
-		System.out.println(" ----------- retrieve ----------");
 		if (FacesContext.getCurrentInstance().isPostback()) {
-			System.out.println(" ============= TADY !!! =====================");
 			return;
 		}
 		if (id != null) {
@@ -68,7 +61,6 @@ public class UserBean implements Serializable {
 	 */
 
 	public String update() {
-		log.infov("update, id={0}, user={1}", id, user);
 		try {
 			if (id == null) {
 				entityManager.persist(user);
@@ -80,13 +72,12 @@ public class UserBean implements Serializable {
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(e.getMessage()));
+			e.printStackTrace();
 			return null;
 		}
 	}
 
 	public String delete() {
-		System.out.println(" ----------- delete ----------, id=" + id
-				+ ", user.id=" + user.getId());
 		try {
 			user = entityManager.merge(user);
 			entityManager.remove(user);
