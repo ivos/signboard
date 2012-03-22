@@ -32,10 +32,6 @@ public class UserBean implements Serializable {
 	@Inject
 	Logger log;
 
-	public UserBean() {
-		System.out.println("Constructed.");
-	}
-
 	// generated:
 
 	private static final long serialVersionUID = 1L;
@@ -85,10 +81,10 @@ public class UserBean implements Serializable {
 		try {
 			if (id == null) {
 				entityManager.persist(user);
-				return "search?faces-redirect=true";
+				return "edit?faces-redirect=true&id=" + user.getId();
 			} else {
 				entityManager.merge(user);
-				return "view?faces-redirect=true&id=" + user.getId();
+				return "edit?faces-redirect=true&id=" + user.getId();
 			}
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null,
