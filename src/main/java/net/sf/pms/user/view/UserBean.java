@@ -32,6 +32,20 @@ public class UserBean implements Serializable {
 	@Inject
 	Logger log;
 
+	public String generate() {
+		for (int i = 0; i < 121; i++) {
+			User user = new User();
+			user.setEmail("email" + i + "@bla.com");
+			user.setFirstName("firstName" + i);
+			user.setLastName("lastName" + i);
+			user.setPhone("543-678-" + i);
+			user.setSkype("name.surname" + i);
+			user.setPassword("qqqq");
+			entityManager.persist(user);
+		}
+		return "search?faces-redirect=true";
+	}
+
 	// generated:
 
 	private static final long serialVersionUID = 1L;
