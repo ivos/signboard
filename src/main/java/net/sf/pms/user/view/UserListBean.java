@@ -82,8 +82,9 @@ public class UserListBean implements Serializable {
 		this.search = search;
 	}
 
-	public void search() {
+	public String search() {
 		page = 0;
+		return "search?faces-redirect=true&includeViewParams=true";
 	}
 
 	public void paginate() {

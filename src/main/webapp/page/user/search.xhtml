@@ -8,6 +8,11 @@
 
 	<f:metadata>
 		<f:viewParam name="page" value="#{userListBean.page}" />
+		<f:viewParam name="email" value="#{userListBean.search.email}" />
+		<f:viewParam name="firstName" value="#{userListBean.search.firstName}" />
+		<f:viewParam name="lastName" value="#{userListBean.search.lastName}" />
+		<f:viewParam name="phone" value="#{userListBean.search.phone}" />
+		<f:viewParam name="skype" value="#{userListBean.search.skype}" />
 		<f:event type="preRenderView" listener="#{userListBean.paginate}" />
 	</f:metadata>
 
@@ -35,7 +40,8 @@
 						<h:message for="userListBeanSearchEmail" styleClass="error" />
 					</h:panelGroup>
 					<h:outputText />
-					<h:outputLabel for="userListBeanSearchFirstName" value="First Name:" />
+					<h:outputLabel for="userListBeanSearchFirstName"
+						value="First Name:" />
 					<h:panelGroup>
 						<h:inputText id="userListBeanSearchFirstName"
 							value="#{userListBean.search.firstName}" />
@@ -130,7 +136,7 @@
 					</h:link>
 				</h:column>
 			</h:dataTable>
-			<ui:include src="/resources/scaffold/paginator.xhtml">
+			<ui:include src="/page/paginator.xhtml">
 				<ui:param name="paginatorBean" value="#{userListBean}" />
 			</ui:include>
 		</h:form>
