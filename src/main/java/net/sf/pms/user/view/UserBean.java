@@ -53,11 +53,13 @@ public class UserBean implements Serializable {
 	private EntityManager entityManager;
 
 	public void retrieve() {
+		System.out.println(" ----------- retrieve ----------");
 		if (FacesContext.getCurrentInstance().isPostback()) {
+			System.out.println(" ============= TADY !!! =====================");
 			return;
 		}
 		if (id != null) {
-			user = entityManager.find(User.class, getId());
+			user = entityManager.find(User.class, id);
 		}
 	}
 
@@ -83,13 +85,17 @@ public class UserBean implements Serializable {
 	}
 
 	public String delete() {
+		System.out.println(" ----------- delete ----------, id=" + id
+				+ ", user.id=" + user.getId());
 		try {
-			entityManager.remove(entityManager.find(User.class, getId()));
+			user = entityManager.merge(user);
+			entityManager.remove(user);
 			entityManager.flush();
 			return "search?faces-redirect=true";
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(e.getMessage()));
+			e.printStackTrace();
 			return null;
 		}
 	}
