@@ -63,6 +63,11 @@
 			<artifactId>solder-impl</artifactId>
 			<version>3.1.0.Final</version>
 		</dependency>
+		<dependency>
+			<groupId>com.ocpsoft.rewrite</groupId>
+			<artifactId>rewrite-servlet</artifactId>
+			<version>1.0.0.Alpha11</version>
+		</dependency>
 	</dependencies>
 	<repositories>
 		<repository>
