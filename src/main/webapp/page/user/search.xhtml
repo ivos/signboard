@@ -16,24 +16,17 @@
 		<f:event type="preRenderView" listener="#{userListBean.paginate}" />
 	</f:metadata>
 
-	<ui:param name="pageTitle" value="Search User entities" />
-
-	<ui:define name="header">
-		User
-	</ui:define>
-
-	<ui:define name="subheader">
-		Search User entities
-	</ui:define>
-
+	<ui:param name="pageTitle" value="#{label['user.search.title']}" />
+	<ui:define name="header">#{label['user.page.header']}</ui:define>
+	<ui:define name="subheader">#{label['user.search.title']}</ui:define>
 	<ui:define name="footer" />
 
 	<ui:define name="main">
 		<h:form id="search">
 			<h:panelGroup styleClass="search">
-
 				<h:panelGrid columnClasses="label,component,required" columns="3">
-					<h:outputLabel for="userListBeanSearchEmail" value="Email:" />
+					<h:outputLabel for="userListBeanSearchEmail"
+						value="#{label['user.email']}:" />
 					<h:panelGroup>
 						<h:inputText id="userListBeanSearchEmail"
 							value="#{userListBean.search.email}" />
@@ -41,28 +34,31 @@
 					</h:panelGroup>
 					<h:outputText />
 					<h:outputLabel for="userListBeanSearchFirstName"
-						value="First Name:" />
+						value="#{label['user.firstName']}:" />
 					<h:panelGroup>
 						<h:inputText id="userListBeanSearchFirstName"
 							value="#{userListBean.search.firstName}" />
 						<h:message for="userListBeanSearchFirstName" styleClass="error" />
 					</h:panelGroup>
 					<h:outputText />
-					<h:outputLabel for="userListBeanSearchLastName" value="Last Name:" />
+					<h:outputLabel for="userListBeanSearchLastName"
+						value="#{label['user.lastName']}:" />
 					<h:panelGroup>
 						<h:inputText id="userListBeanSearchLastName"
 							value="#{userListBean.search.lastName}" />
 						<h:message for="userListBeanSearchLastName" styleClass="error" />
 					</h:panelGroup>
 					<h:outputText />
-					<h:outputLabel for="userListBeanSearchPhone" value="Phone:" />
+					<h:outputLabel for="userListBeanSearchPhone"
+						value="#{label['user.phone']}:" />
 					<h:panelGroup>
 						<h:inputText id="userListBeanSearchPhone"
 							value="#{userListBean.search.phone}" />
 						<h:message for="userListBeanSearchPhone" styleClass="error" />
 					</h:panelGroup>
 					<h:outputText />
-					<h:outputLabel for="userListBeanSearchSkype" value="Skype:" />
+					<h:outputLabel for="userListBeanSearchSkype"
+						value="#{label['user.skype']}:" />
 					<h:panelGroup>
 						<h:inputText id="userListBeanSearchSkype"
 							value="#{userListBean.search.skype}" />
@@ -71,9 +67,10 @@
 					<h:outputText />
 				</h:panelGrid>
 				<h:panelGroup styleClass="buttons">
-					<h:commandButton id="search" value="Search"
+					<h:commandButton id="search" value="#{label['button.search']}"
 						action="#{userListBean.search}" />
-					<h:link id="create" value="Create New" outcome="edit" />
+					<h:link id="create" value="#{label['button.create']}"
+						outcome="edit" />
 					<h:commandButton id="generate" value="Generate"
 						action="#{userListBean.generate}" />
 				</h:panelGroup>
@@ -83,7 +80,7 @@
 				value="#{userListBean.pageItems}" var="_item">
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Email" />
+						<h:outputText value="#{label['user.email']}" />
 					</f:facet>
 					<h:link outcome="/page/user/view">
 						<f:param name="id" value="#{_item.id}" />
@@ -92,7 +89,7 @@
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="First Name" />
+						<h:outputText value="#{label['user.firstName']}" />
 					</f:facet>
 					<h:link outcome="/page/user/view">
 						<f:param name="id" value="#{_item.id}" />
@@ -101,7 +98,7 @@
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Last Name" />
+						<h:outputText value="#{label['user.lastName']}" />
 					</f:facet>
 					<h:link outcome="/page/user/view">
 						<f:param name="id" value="#{_item.id}" />
@@ -110,7 +107,7 @@
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Phone" />
+						<h:outputText value="#{label['user.phone']}" />
 					</f:facet>
 					<h:link outcome="/page/user/view">
 						<f:param name="id" value="#{_item.id}" />
@@ -119,7 +116,7 @@
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Skype" />
+						<h:outputText value="#{label['user.skype']}" />
 					</f:facet>
 					<h:link outcome="/page/user/view">
 						<f:param name="id" value="#{_item.id}" />
@@ -128,7 +125,7 @@
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Password" />
+						<h:outputText value="#{label['user.password']}" />
 					</f:facet>
 					<h:link outcome="/page/user/view">
 						<f:param name="id" value="#{_item.id}" />
