@@ -12,23 +12,12 @@
 		<f:event type="preRenderView" listener="#{userBean.retrieve}" />
 	</f:metadata>
 
-	<ui:param name="pageTitle" value="Edit User" />
-
-	<ui:define name="header">
-		User
-	</ui:define>
-
+	<ui:param name="pageTitle"
+		value="#{(empty userBean.id)? label['user.create.title'] : label['user.edit.title']}" />
+	<ui:define name="header">#{label['user.page.header']}</ui:define>
 	<ui:define name="subheader">
-		<c:choose>
-			<c:when test="#{!empty userBean.id}">
-				Edit existing User
-			</c:when>
-			<c:otherwise>
-				Create a new User
-			</c:otherwise>
-		</c:choose>
+		#{(empty userBean.id)? label['user.create.title'] : label['user.edit.title']}
 	</ui:define>
-
 	<ui:define name="footer" />
 
 	<ui:define name="main">
@@ -36,39 +25,45 @@
 			<h:messages globalOnly="true" styleClass="error" />
 
 			<h:panelGrid columnClasses="label,component,required" columns="3">
-				<h:outputLabel for="userBeanUserEmail" value="Email:" />
+				<h:outputLabel for="userBeanUserEmail"
+					value="#{label['user.email']}:" />
 				<h:panelGroup>
 					<h:inputText id="userBeanUserEmail" value="#{userBean.user.email}" />
 					<h:message for="userBeanUserEmail" styleClass="error" />
 				</h:panelGroup>
 				<h:outputText value="*" />
-				<h:outputLabel for="userBeanUserFirstName" value="First Name:" />
+				<h:outputLabel for="userBeanUserFirstName"
+					value="#{label['user.firstName']}:" />
 				<h:panelGroup>
 					<h:inputText id="userBeanUserFirstName"
 						value="#{userBean.user.firstName}" />
 					<h:message for="userBeanUserFirstName" styleClass="error" />
 				</h:panelGroup>
 				<h:outputText />
-				<h:outputLabel for="userBeanUserLastName" value="Last Name:" />
+				<h:outputLabel for="userBeanUserLastName"
+					value="#{label['user.lastName']}:" />
 				<h:panelGroup>
 					<h:inputText id="userBeanUserLastName"
 						value="#{userBean.user.lastName}" />
 					<h:message for="userBeanUserLastName" styleClass="error" />
 				</h:panelGroup>
 				<h:outputText />
-				<h:outputLabel for="userBeanUserPhone" value="Phone:" />
+				<h:outputLabel for="userBeanUserPhone"
+					value="#{label['user.phone']}:" />
 				<h:panelGroup>
 					<h:inputText id="userBeanUserPhone" value="#{userBean.user.phone}" />
 					<h:message for="userBeanUserPhone" styleClass="error" />
 				</h:panelGroup>
 				<h:outputText />
-				<h:outputLabel for="userBeanUserSkype" value="Skype:" />
+				<h:outputLabel for="userBeanUserSkype"
+					value="#{label['user.skype']}:" />
 				<h:panelGroup>
 					<h:inputText id="userBeanUserSkype" value="#{userBean.user.skype}" />
 					<h:message for="userBeanUserSkype" styleClass="error" />
 				</h:panelGroup>
 				<h:outputText />
-				<h:outputLabel for="userBeanUserPassword" value="Password:" />
+				<h:outputLabel for="userBeanUserPassword"
+					value="#{label['user.password']}:" />
 				<h:panelGroup>
 					<h:inputText id="userBeanUserPassword"
 						value="#{userBean.user.password}" />
@@ -81,17 +76,20 @@
 				value="#{userBean.user.version}" />
 
 			<div class="buttons">
-				<h:commandButton id="save" value="Save" action="#{userBean.update}" />
+				<h:commandButton id="save" value="#{label['button.save']}"
+					action="#{userBean.update}" />
 				<c:choose>
 					<c:when test="#{!empty userBean.id or facesContext.postback}">
-						<h:link id="cancel" value="Cancel" outcome="view">
+						<h:link id="cancel" value="#{label['button.cancel']}"
+							outcome="view">
 							<f:param name="id" value="#{userBean.id}" />
 						</h:link>
-						<h:commandButton id="delete" value="Delete"
+						<h:commandButton id="delete" value="#{label['button.delete']}"
 							action="#{userBean.delete}" />
 					</c:when>
 					<c:otherwise>
-						<h:link id="cancel" value="Cancel" outcome="search" />
+						<h:link id="cancel" value="#{label['button.cancel']}"
+							outcome="search" />
 					</c:otherwise>
 				</c:choose>
 			</div>

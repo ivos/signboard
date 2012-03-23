@@ -11,7 +11,7 @@
 		<h:link styleClass="button" rendered="#{paginatorBean.page gt 0}"
 			includeViewParams="true">
 			<f:param name="page" value="#{paginatorBean.page - 1}" />
-			&lt; Previous 
+			&lt; #{label['button.previous']} 
 		</h:link>
 		<h:outputText styleClass="paginator-content"
 			value="#{paginatorBean.page * paginatorBean.pageSize + 1}..#{paginatorBean.page * paginatorBean.pageSize + fn:length(paginatorBean.pageItems)} (# #{paginatorBean.count})" />
@@ -19,7 +19,7 @@
 			rendered="#{(paginatorBean.page + 1) * paginatorBean.pageSize lt paginatorBean.count}"
 			includeViewParams="true">
 			<f:param name="page" value="#{paginatorBean.page + 1}" />
-			Next &gt;
+			#{label['button.next']} &gt;
 		</h:link>
 	</h:panelGroup>
 
