@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf.pms</groupId>
 	<artifactId>pms3</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>0.1.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<dependencyManagement>
 		<dependencies>
@@ -76,7 +76,7 @@
 		</repository>
 	</repositories>
 	<build>
-		<finalName>pms3</finalName>
+		<finalName>${project.artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
