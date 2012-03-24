@@ -4,6 +4,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:component="http://java.sun.com/jsf/composite/component"
 	template="/resources/scaffold/page.xhtml">
 
 	<f:metadata>
@@ -79,58 +80,28 @@
 			<h:dataTable id="userListBeanPageItems" styleClass="data-table"
 				value="#{userListBean.pageItems}" var="_item">
 				<h:column>
-					<f:facet name="header">
-						<h:outputText value="#{label['user.email']}" />
-					</f:facet>
-					<h:link outcome="/page/user/view">
-						<f:param name="id" value="#{_item.id}" />
-						<h:outputText id="itemEmail" value="#{_item.email}" />
-					</h:link>
+					<f:facet name="header">#{label['user.email']}</f:facet>
+					<component:view-link id="email" entity="user" item="#{_item}" />
 				</h:column>
 				<h:column>
-					<f:facet name="header">
-						<h:outputText value="#{label['user.firstName']}" />
-					</f:facet>
-					<h:link outcome="/page/user/view">
-						<f:param name="id" value="#{_item.id}" />
-						<h:outputText id="itemFirstName" value="#{_item.firstName}" />
-					</h:link>
+					<f:facet name="header">#{label['user.firstName']}</f:facet>
+					<component:view-link id="firstName" entity="user" item="#{_item}" />
 				</h:column>
 				<h:column>
-					<f:facet name="header">
-						<h:outputText value="#{label['user.lastName']}" />
-					</f:facet>
-					<h:link outcome="/page/user/view">
-						<f:param name="id" value="#{_item.id}" />
-						<h:outputText id="itemLastName" value="#{_item.lastName}" />
-					</h:link>
+					<f:facet name="header">#{label['user.lastName']}</f:facet>
+					<component:view-link id="lastName" entity="user" item="#{_item}" />
 				</h:column>
 				<h:column>
-					<f:facet name="header">
-						<h:outputText value="#{label['user.phone']}" />
-					</f:facet>
-					<h:link outcome="/page/user/view">
-						<f:param name="id" value="#{_item.id}" />
-						<h:outputText id="itemPhone" value="#{_item.phone}" />
-					</h:link>
+					<f:facet name="header">#{label['user.phone']}</f:facet>
+					<component:view-link id="phone" entity="user" item="#{_item}" />
 				</h:column>
 				<h:column>
-					<f:facet name="header">
-						<h:outputText value="#{label['user.skype']}" />
-					</f:facet>
-					<h:link outcome="/page/user/view">
-						<f:param name="id" value="#{_item.id}" />
-						<h:outputText id="itemSkype" value="#{_item.skype}" />
-					</h:link>
+					<f:facet name="header">#{label['user.skype']}</f:facet>
+					<component:view-link id="skype" entity="user" item="#{_item}" />
 				</h:column>
 				<h:column>
-					<f:facet name="header">
-						<h:outputText value="#{label['user.password']}" />
-					</f:facet>
-					<h:link outcome="/page/user/view">
-						<f:param name="id" value="#{_item.id}" />
-						<h:outputText id="itemPassword" value="#{_item.password}" />
-					</h:link>
+					<f:facet name="header">#{label['user.password']}</f:facet>
+					<component:view-link id="password" entity="user" item="#{_item}" />
 				</h:column>
 			</h:dataTable>
 			<ui:include src="/page/paginator.xhtml">
