@@ -5,7 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:component="http://java.sun.com/jsf/composite/component"
-	template="/page/page.xhtml">
+	xmlns:my="http://pms.sf.net/jsf/facelets" template="/page/page.xhtml">
 
 	<f:metadata>
 		<f:viewParam name="page" value="#{userListBean.page}" />
@@ -26,46 +26,16 @@
 		<h:form id="search">
 			<h:panelGroup styleClass="search">
 				<h:panelGrid columnClasses="label,component,required" columns="3">
-					<h:outputLabel for="userListBeanSearchEmail"
-						value="#{label['user.email']}:" />
-					<h:panelGroup>
-						<h:inputText id="userListBeanSearchEmail"
-							value="#{userListBean.search.email}" />
-						<h:message for="userListBeanSearchEmail" styleClass="error" />
-					</h:panelGroup>
-					<h:outputText />
-					<h:outputLabel for="userListBeanSearchFirstName"
-						value="#{label['user.firstName']}:" />
-					<h:panelGroup>
-						<h:inputText id="userListBeanSearchFirstName"
-							value="#{userListBean.search.firstName}" />
-						<h:message for="userListBeanSearchFirstName" styleClass="error" />
-					</h:panelGroup>
-					<h:outputText />
-					<h:outputLabel for="userListBeanSearchLastName"
-						value="#{label['user.lastName']}:" />
-					<h:panelGroup>
-						<h:inputText id="userListBeanSearchLastName"
-							value="#{userListBean.search.lastName}" />
-						<h:message for="userListBeanSearchLastName" styleClass="error" />
-					</h:panelGroup>
-					<h:outputText />
-					<h:outputLabel for="userListBeanSearchPhone"
-						value="#{label['user.phone']}:" />
-					<h:panelGroup>
-						<h:inputText id="userListBeanSearchPhone"
-							value="#{userListBean.search.phone}" />
-						<h:message for="userListBeanSearchPhone" styleClass="error" />
-					</h:panelGroup>
-					<h:outputText />
-					<h:outputLabel for="userListBeanSearchSkype"
-						value="#{label['user.skype']}:" />
-					<h:panelGroup>
-						<h:inputText id="userListBeanSearchSkype"
-							value="#{userListBean.search.skype}" />
-						<h:message for="userListBeanSearchSkype" styleClass="error" />
-					</h:panelGroup>
-					<h:outputText />
+					<my:field id="email" type="text" entity="user"
+						bean="#{userListBean.search}" />
+					<my:field id="firstName" type="text" entity="user"
+						bean="#{userListBean.search}" />
+					<my:field id="lastName" type="text" entity="user"
+						bean="#{userListBean.search}" />
+					<my:field id="phone" type="text" entity="user"
+						bean="#{userListBean.search}" />
+					<my:field id="skype" type="text" entity="user"
+						bean="#{userListBean.search}" />
 				</h:panelGrid>
 				<h:panelGroup styleClass="buttons">
 					<h:commandButton id="search" value="#{label['button.search']}"

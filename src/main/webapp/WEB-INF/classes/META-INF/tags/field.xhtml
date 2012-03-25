@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<c:set var="property" value="#{not empty property ? property : id}" />
+	<c:set var="required" value="#{not empty required and required}" />
+	<c:set var="labelKey" value="#{entity}.#{property}" />
+
+	<h:outputLabel for="#{id}" value="#{label[labelKey]}:" />
+	<c:choose>
+		<c:when test="#{type == 'output'}">
+			<h:outputText id="#{id}" value="#{bean[property]}" />
+		</c:when>
+		<c:when test="#{type == 'text'}">
+			<h:panelGroup>
+				<h:inputText id="#{id}" value="#{bean[property]}"
+					label="#{label[labelKey]}" />
+				<h:message id="#{id}-message" for="#{id}" styleClass="error" />
+			</h:panelGroup>
+		</c:when>
+		<c:when test="#{type == 'password'}">
+			<h:panelGroup>
+				<h:inputSecret id="#{id}" value="#{bean[property]}"
+					label="#{label[labelKey]}" />
+				<h:message id="#{id}-message" for="#{id}" styleClass="error" />
+			</h:panelGroup>
+		</c:when>
+		<c:when test="#{type == 'select'}">
+			<h:panelGroup>
+				<h:selectOneMenu id="#{id}" value="#{bean[property]}"
+					label="#{label[labelKey]}">
+					<f:selectItems value="#{options.entrySet()}" var="entry"
+						itemValue="#{entry.key}" itemLabel="#{entry.value}" />
+				</h:selectOneMenu>
+				<h:message id="#{id}-message" for="#{id}" styleClass="error" />
+			</h:panelGroup>
+		</c:when>
+		<c:otherwise>
+			<h:panelGroup />
+			<h:panelGroup />
+		</c:otherwise>
+	</c:choose>
+	<h:outputText value="#{required ? '*' : ''}" />
+
+</ui:composition>

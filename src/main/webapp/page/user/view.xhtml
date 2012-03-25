@@ -4,7 +4,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/page/page.xhtml">
+	xmlns:my="http://pms.sf.net/jsf/facelets" template="/page/page.xhtml">
 
 	<f:metadata>
 		<f:viewParam name="id" value="#{userBean.id}" />
@@ -18,33 +18,18 @@
 
 	<ui:define name="main">
 		<h:panelGrid columnClasses="label,component,required" columns="3">
-			<h:outputLabel for="userBeanUserEmail"
-				value="#{label['user.email']}:" />
-			<h:outputText id="userBeanUserEmail" value="#{userBean.user.email}" />
-			<h:outputText />
-			<h:outputLabel for="userBeanUserFirstName"
-				value="#{label['user.firstName']}:" />
-			<h:outputText id="userBeanUserFirstName"
-				value="#{userBean.user.firstName}" />
-			<h:outputText />
-			<h:outputLabel for="userBeanUserLastName"
-				value="#{label['user.lastName']}:" />
-			<h:outputText id="userBeanUserLastName"
-				value="#{userBean.user.lastName}" />
-			<h:outputText />
-			<h:outputLabel for="userBeanUserPhone"
-				value="#{label['user.phone']}:" />
-			<h:outputText id="userBeanUserPhone" value="#{userBean.user.phone}" />
-			<h:outputText />
-			<h:outputLabel for="userBeanUserSkype"
-				value="#{label['user.skype']}:" />
-			<h:outputText id="userBeanUserSkype" value="#{userBean.user.skype}" />
-			<h:outputText />
-			<h:outputLabel for="userBeanUserPassword"
-				value="#{label['user.password']}:" />
-			<h:outputText id="userBeanUserPassword"
-				value="#{userBean.user.password}" />
-			<h:outputText />
+			<my:field id="email" type="output" entity="user"
+				bean="#{userBean.user}" />
+			<my:field id="firstName" type="output" entity="user"
+				bean="#{userBean.user}" />
+			<my:field id="lastName" type="output" entity="user"
+				bean="#{userBean.user}" />
+			<my:field id="phone" type="output" entity="user"
+				bean="#{userBean.user}" />
+			<my:field id="skype" type="output" entity="user"
+				bean="#{userBean.user}" />
+			<my:field id="password" type="output" entity="user"
+				bean="#{userBean.user}" />
 		</h:panelGrid>
 
 		<div class="buttons">

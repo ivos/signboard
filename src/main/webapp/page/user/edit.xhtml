@@ -5,7 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	template="/page/page.xhtml">
+	xmlns:my="http://pms.sf.net/jsf/facelets" template="/page/page.xhtml">
 
 	<f:metadata>
 		<f:viewParam name="id" value="#{userBean.id}" />
@@ -25,51 +25,18 @@
 			<h:messages globalOnly="true" styleClass="error" />
 
 			<h:panelGrid columnClasses="label,component,required" columns="3">
-				<h:outputLabel for="userBeanUserEmail"
-					value="#{label['user.email']}:" />
-				<h:panelGroup>
-					<h:inputText id="userBeanUserEmail" value="#{userBean.user.email}" />
-					<h:message for="userBeanUserEmail" styleClass="error" />
-				</h:panelGroup>
-				<h:outputText value="*" />
-				<h:outputLabel for="userBeanUserFirstName"
-					value="#{label['user.firstName']}:" />
-				<h:panelGroup>
-					<h:inputText id="userBeanUserFirstName"
-						value="#{userBean.user.firstName}" />
-					<h:message for="userBeanUserFirstName" styleClass="error" />
-				</h:panelGroup>
-				<h:outputText />
-				<h:outputLabel for="userBeanUserLastName"
-					value="#{label['user.lastName']}:" />
-				<h:panelGroup>
-					<h:inputText id="userBeanUserLastName"
-						value="#{userBean.user.lastName}" />
-					<h:message for="userBeanUserLastName" styleClass="error" />
-				</h:panelGroup>
-				<h:outputText />
-				<h:outputLabel for="userBeanUserPhone"
-					value="#{label['user.phone']}:" />
-				<h:panelGroup>
-					<h:inputText id="userBeanUserPhone" value="#{userBean.user.phone}" />
-					<h:message for="userBeanUserPhone" styleClass="error" />
-				</h:panelGroup>
-				<h:outputText />
-				<h:outputLabel for="userBeanUserSkype"
-					value="#{label['user.skype']}:" />
-				<h:panelGroup>
-					<h:inputText id="userBeanUserSkype" value="#{userBean.user.skype}" />
-					<h:message for="userBeanUserSkype" styleClass="error" />
-				</h:panelGroup>
-				<h:outputText />
-				<h:outputLabel for="userBeanUserPassword"
-					value="#{label['user.password']}:" />
-				<h:panelGroup>
-					<h:inputText id="userBeanUserPassword"
-						value="#{userBean.user.password}" />
-					<h:message for="userBeanUserPassword" styleClass="error" />
-				</h:panelGroup>
-				<h:outputText value="*" />
+				<my:field id="email" type="text" entity="user"
+					bean="#{userBean.user}" required="true" />
+				<my:field id="firstName" type="text" entity="user"
+					bean="#{userBean.user}" />
+				<my:field id="lastName" type="text" entity="user"
+					bean="#{userBean.user}" />
+				<my:field id="phone" type="text" entity="user"
+					bean="#{userBean.user}" />
+				<my:field id="skype" type="text" entity="user"
+					bean="#{userBean.user}" />
+				<my:field id="password" type="text" entity="user"
+					bean="#{userBean.user}" required="true" />
 			</h:panelGrid>
 			<h:inputHidden id="userBeanUserId" value="#{userBean.user.id}" />
 			<h:inputHidden id="userBeanUserVersion"
