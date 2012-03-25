@@ -12,12 +12,12 @@
 		<f:event type="preRenderView" listener="#{userBean.retrieve}" />
 	</f:metadata>
 
+	<ui:param name="isCreate"
+		value="#{empty userBean.id and empty userBean.user.id}" />
 	<ui:param name="pageTitle"
-		value="#{(empty userBean.id)? label['user.create.title'] : label['user.edit.title']}" />
+		value="#{isCreate ? label['user.create.title'] : label['user.edit.title']}" />
 	<ui:define name="header">#{label['user.page.header']}</ui:define>
-	<ui:define name="subheader">
-		#{(empty userBean.id)? label['user.create.title'] : label['user.edit.title']}
-	</ui:define>
+	<ui:define name="subheader">#{pageTitle}</ui:define>
 	<ui:define name="footer" />
 
 	<ui:define name="main">
@@ -46,7 +46,7 @@
 				<h:commandButton id="save" value="#{label['button.save']}"
 					action="#{userBean.update}" />
 				<c:choose>
-					<c:when test="#{!empty userBean.id or facesContext.postback}">
+					<c:when test="#{!isCreate or facesContext.postback}">
 						<h:link id="cancel" value="#{label['button.cancel']}"
 							outcome="view">
 							<f:param name="id" value="#{userBean.id}" />
