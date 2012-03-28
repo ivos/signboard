@@ -4,7 +4,6 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:component="http://java.sun.com/jsf/composite/component"
 	xmlns:my="http://pms.sf.net/jsf/facelets" template="/page/page.xhtml">
 
 	<f:metadata>
@@ -49,30 +48,12 @@
 
 			<h:dataTable id="userListBeanPageItems" styleClass="data-table"
 				value="#{userListBean.pageItems}" var="_item">
-				<h:column>
-					<f:facet name="header">#{label['user.email']}</f:facet>
-					<component:view-link id="email" entity="user" item="#{_item}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">#{label['user.firstName']}</f:facet>
-					<component:view-link id="firstName" entity="user" item="#{_item}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">#{label['user.lastName']}</f:facet>
-					<component:view-link id="lastName" entity="user" item="#{_item}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">#{label['user.phone']}</f:facet>
-					<component:view-link id="phone" entity="user" item="#{_item}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">#{label['user.skype']}</f:facet>
-					<component:view-link id="skype" entity="user" item="#{_item}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">#{label['user.password']}</f:facet>
-					<component:view-link id="password" entity="user" item="#{_item}" />
-				</h:column>
+				<my:column id="email" entity="user" item="#{_item}" />
+				<my:column id="firstName" entity="user" item="#{_item}" />
+				<my:column id="lastName" entity="user" item="#{_item}" />
+				<my:column id="phone" entity="user" item="#{_item}" />
+				<my:column id="skype" entity="user" item="#{_item}" />
+				<my:column id="password" entity="user" item="#{_item}" />
 			</h:dataTable>
 			<ui:include src="/page/paginator.xhtml">
 				<ui:param name="paginatorBean" value="#{userListBean}" />

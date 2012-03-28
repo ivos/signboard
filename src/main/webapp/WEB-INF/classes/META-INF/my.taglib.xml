@@ -7,4 +7,8 @@
 		<tag-name>field</tag-name>
 		<source>tags/field.xhtml</source>
 	</tag>
+	<tag>
+		<tag-name>column</tag-name>
+		<source>tags/column.xhtml</source>
+	</tag>
 </facelet-taglib>
