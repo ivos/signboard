@@ -1,0 +1,18 @@
+ ---
+ Features
+ ---
+ Ivo Maixner
+ ---
+ 2012-03-16
+ ---
+
+Features
+
+* Users
+
+ [[1]] <<Register>>\
+ As a prospect user I can register with the system to become its user.
+ Registration data: email (becomes user system ID and login name),
+ password and password confirmation, first name, last name, phone, skype.
+ 
+ 

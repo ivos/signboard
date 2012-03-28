@@ -9,13 +9,38 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
+import javax.validation.constraints.NotNull;
 
 import net.sf.pms.user.model.User;
+import net.sf.pms.view.support.ViewContext;
 
 @Named
 @Stateful
 @ViewScoped
 public class UserBean implements Serializable {
+
+	@Inject
+	ViewContext viewContext;
+
+	@NotNull
+	private String confirmPassword;
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+
+	public String register() {
+		if (!user.getPassword().equals(confirmPassword)) {
+			viewContext.addErrorMessage("edit:confirmPassword",
+					"passwords.must.match");
+			return null;
+		}
+		return update();
+	}
 
 	// generated:
 

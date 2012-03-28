@@ -18,6 +18,7 @@ public class URLRewriteConfiguration extends HttpConfigurationProvider {
 
 				// Application mappings
 				.addRule(Join.path("/").to("/index.jsf"))
+				.addRule(Join.path("/register").to("/page/user/register.jsf"))
 
 				.addRule(
 						Join.path("/{domain}").where("domain")
