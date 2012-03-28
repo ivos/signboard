@@ -3,8 +3,8 @@ package net.sf.pms.user.view;
 import java.io.Serializable;
 
 import javax.ejb.Stateful;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -14,7 +14,7 @@ import net.sf.pms.user.model.User;
 
 @Named
 @Stateful
-@RequestScoped
+@ViewScoped
 public class UserBean implements Serializable {
 
 	// generated:

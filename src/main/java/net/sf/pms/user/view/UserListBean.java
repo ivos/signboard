@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateful;
-import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -23,7 +23,7 @@ import net.sf.pms.user.model.UserSearch;
 
 @Named
 @Stateful
-@RequestScoped
+@ViewScoped
 public class UserListBean implements Serializable {
 
 	public String generate() {

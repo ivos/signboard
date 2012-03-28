@@ -45,20 +45,12 @@
 			<div class="buttons">
 				<h:commandButton id="save" value="#{label['button.save']}"
 					action="#{userBean.update}" />
-				<c:choose>
-					<c:when test="#{!isCreate or facesContext.postback}">
-						<h:link id="cancel" value="#{label['button.cancel']}"
-							outcome="view">
-							<f:param name="id" value="#{userBean.id}" />
-						</h:link>
-						<h:commandButton id="delete" value="#{label['button.delete']}"
-							action="#{userBean.delete}" />
-					</c:when>
-					<c:otherwise>
-						<h:link id="cancel" value="#{label['button.cancel']}"
-							outcome="search" />
-					</c:otherwise>
-				</c:choose>
+				<h:link id="cancel" value="#{label['button.cancel']}"
+					outcome="#{isCreate ? 'search' : 'view'}">
+					<f:param name="id" value="#{userBean.id}" disable="#{isCreate}" />
+				</h:link>
+				<h:commandButton id="delete" value="#{label['button.delete']}"
+					action="#{userBean.delete}" rendered="#{!isCreate}" />
 			</div>
 		</h:form>
 	</ui:define>
