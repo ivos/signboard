@@ -43,7 +43,7 @@ public class User implements Serializable {
 	private String password;
 
 	public Long getId() {
-		return this.id;
+		return id;
 	}
 
 	public void setId(final Long id) {
@@ -51,7 +51,7 @@ public class User implements Serializable {
 	}
 
 	public int getVersion() {
-		return this.version;
+		return version;
 	}
 
 	public void setVersion(final int version) {
@@ -59,7 +59,7 @@ public class User implements Serializable {
 	}
 
 	public String getEmail() {
-		return this.email;
+		return email;
 	}
 
 	public void setEmail(final String email) {
@@ -67,7 +67,7 @@ public class User implements Serializable {
 	}
 
 	public String getFirstName() {
-		return this.firstName;
+		return firstName;
 	}
 
 	public void setFirstName(final String firstName) {
@@ -75,7 +75,7 @@ public class User implements Serializable {
 	}
 
 	public String getLastName() {
-		return this.lastName;
+		return lastName;
 	}
 
 	public void setLastName(final String lastName) {
@@ -83,7 +83,7 @@ public class User implements Serializable {
 	}
 
 	public String getPhone() {
-		return this.phone;
+		return phone;
 	}
 
 	public void setPhone(final String phone) {
@@ -91,7 +91,7 @@ public class User implements Serializable {
 	}
 
 	public String getSkype() {
-		return this.skype;
+		return skype;
 	}
 
 	public void setSkype(final String skype) {
@@ -99,7 +99,7 @@ public class User implements Serializable {
 	}
 
 	public String getPassword() {
-		return this.password;
+		return password;
 	}
 
 	public void setPassword(final String password) {
