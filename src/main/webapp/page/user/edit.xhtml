@@ -11,8 +11,7 @@
 		<f:event type="preRenderView" listener="#{userBean.retrieve}" />
 	</f:metadata>
 
-	<ui:param name="isCreate"
-		value="#{empty userBean.id and empty userBean.user.id}" />
+	<ui:param name="isCreate" value="#{empty userBean.id}" />
 	<ui:param name="pageTitle"
 		value="#{isCreate ? label['user.create.title'] : label['user.edit.title']}" />
 	<ui:define name="header">#{label['user.page.header']}</ui:define>
