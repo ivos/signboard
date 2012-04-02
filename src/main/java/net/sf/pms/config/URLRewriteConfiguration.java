@@ -21,6 +21,13 @@ public class URLRewriteConfiguration extends HttpConfigurationProvider {
 				.addRule(Join.path("/register").to("/page/user/register.jsf"))
 
 				.addRule(
+						Join.path("/{domain}/page/{page}").where("domain")
+								.matches(ENTITY_NAME).where("page")
+								.matches("\\d+")
+								.to("/page/{domain}/search.jsf")
+								.withInboundCorrection())
+
+				.addRule(
 						Join.path("/{domain}").where("domain")
 								.matches(ENTITY_NAME)
 								.to("/page/{domain}/search.jsf")

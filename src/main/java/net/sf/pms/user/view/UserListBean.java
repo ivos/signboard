@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateful;
-import javax.faces.bean.ViewScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -23,7 +23,7 @@ import net.sf.pms.user.model.UserSearch;
 
 @Named
 @Stateful
-@ViewScoped
+@SessionScoped
 public class UserListBean implements Serializable {
 
 	public String generate() {
@@ -38,6 +38,11 @@ public class UserListBean implements Serializable {
 			entityManager.persist(user);
 		}
 		return "search?faces-redirect=true";
+	}
+
+	public String reset() {
+		search = new UserSearch();
+		return search();
 	}
 
 	// generated:

@@ -8,11 +8,6 @@
 
 	<f:metadata>
 		<f:viewParam name="page" value="#{userListBean.page}" />
-		<f:viewParam name="email" value="#{userListBean.search.email}" />
-		<f:viewParam name="firstName" value="#{userListBean.search.firstName}" />
-		<f:viewParam name="lastName" value="#{userListBean.search.lastName}" />
-		<f:viewParam name="phone" value="#{userListBean.search.phone}" />
-		<f:viewParam name="skype" value="#{userListBean.search.skype}" />
 		<f:event type="preRenderView" listener="#{userListBean.paginate}" />
 	</f:metadata>
 
@@ -41,6 +36,8 @@
 						action="#{userListBean.search}" />
 					<h:link id="create" value="#{label['button.create']}"
 						outcome="edit" />
+					<h:commandButton id="reset" value="#{label['button.reset']}"
+						action="#{userListBean.reset}" />
 					<h:commandButton id="generate" value="Generate"
 						action="#{userListBean.generate}" />
 				</h:panelGroup>
