@@ -37,9 +37,6 @@
 				<my:field id="password" type="text" entity="user"
 					bean="#{userBean.user}" required="true" />
 			</h:panelGrid>
-			<h:inputHidden id="userBeanUserId" value="#{userBean.user.id}" />
-			<h:inputHidden id="userBeanUserVersion"
-				value="#{userBean.user.version}" />
 
 			<div class="buttons">
 				<h:commandButton id="save" value="#{label['button.save']}"
