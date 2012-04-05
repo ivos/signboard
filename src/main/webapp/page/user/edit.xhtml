@@ -20,7 +20,8 @@
 
 	<ui:define name="main">
 		<h:form id="edit">
-			<h:messages globalOnly="true" styleClass="error" />
+			<h:messages globalOnly="true" styleClass="messages"
+				errorClass="error" infoClass="info" />
 
 			<h:panelGrid columnClasses="label,component,required" columns="3">
 				<my:field id="email" type="text" entity="user"

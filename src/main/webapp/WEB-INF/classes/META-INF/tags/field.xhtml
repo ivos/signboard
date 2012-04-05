@@ -19,14 +19,16 @@
 			<h:panelGroup>
 				<h:inputText id="#{id}" value="#{bean[property]}"
 					label="#{label[labelKey]}" />
-				<h:message id="#{id}-message" for="#{id}" styleClass="error" />
+				<h:message id="#{id}-message" for="#{id}" errorClass="error"
+					infoClass="info" />
 			</h:panelGroup>
 		</c:when>
 		<c:when test="#{type == 'password'}">
 			<h:panelGroup>
 				<h:inputSecret id="#{id}" value="#{bean[property]}"
 					label="#{label[labelKey]}" />
-				<h:message id="#{id}-message" for="#{id}" styleClass="error" />
+				<h:message id="#{id}-message" for="#{id}" errorClass="error"
+					infoClass="info" />
 			</h:panelGroup>
 		</c:when>
 		<c:when test="#{type == 'select'}">
@@ -36,7 +38,8 @@
 					<f:selectItems value="#{options.entrySet()}" var="entry"
 						itemValue="#{entry.key}" itemLabel="#{entry.value}" />
 				</h:selectOneMenu>
-				<h:message id="#{id}-message" for="#{id}" styleClass="error" />
+				<h:message id="#{id}-message" for="#{id}" errorClass="error"
+					infoClass="info" />
 			</h:panelGroup>
 		</c:when>
 		<c:otherwise>

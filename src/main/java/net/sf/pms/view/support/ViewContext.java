@@ -9,6 +9,9 @@ import javax.inject.Inject;
 
 import net.sf.pms.cdi.qualifier.MessageResourceBundle;
 
+import org.jboss.seam.international.status.Messages;
+import org.jboss.seam.international.status.builder.BundleKey;
+
 public class ViewContext implements Serializable {
 
 	@Inject
@@ -18,20 +21,25 @@ public class ViewContext implements Serializable {
 	@MessageResourceBundle
 	ResourceBundle msg;
 
-	public void addErrorMessage(String messageCode) {
-		addErrorMessage(null, messageCode);
+	@Inject
+	Messages messages;
+
+	private final static String MESSAGE_BUNDLE = "i18n.msg";
+
+	public void error(String messageCode) {
+		messages.error(new BundleKey(MESSAGE_BUNDLE, messageCode));
 	}
 
-	public void addErrorMessage(String elementId, String messageCode) {
+	public void error(String elementId, String messageCode) {
 		facesContext.addMessage(elementId, new FacesMessage(
 				FacesMessage.SEVERITY_ERROR, msg.getString(messageCode), null));
 	}
 
-	public void addInfoMessage(String messageCode) {
-		addInfoMessage(null, messageCode);
+	public void info(String messageCode) {
+		messages.info(new BundleKey(MESSAGE_BUNDLE, messageCode));
 	}
 
-	public void addInfoMessage(String elementId, String messageCode) {
+	public void info(String elementId, String messageCode) {
 		facesContext.addMessage(elementId, new FacesMessage(
 				FacesMessage.SEVERITY_INFO, msg.getString(messageCode), null));
 	}

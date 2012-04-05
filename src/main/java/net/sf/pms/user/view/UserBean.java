@@ -35,8 +35,7 @@ public class UserBean implements Serializable {
 
 	public String register() {
 		if (!user.getPassword().equals(confirmPassword)) {
-			viewContext.addErrorMessage("edit:confirmPassword",
-					"passwords.must.match");
+			viewContext.error("edit:confirmPassword", "passwords.must.match");
 			return null;
 		}
 		return update();
@@ -89,9 +88,11 @@ public class UserBean implements Serializable {
 		try {
 			if (id == null) {
 				entityManager.persist(user);
+				viewContext.info("saved");
 				return "edit?faces-redirect=true&id=" + user.getId();
 			} else {
 				entityManager.merge(user);
+				viewContext.info("saved");
 				return "edit?faces-redirect=true&id=" + user.getId();
 			}
 		} catch (Exception e) {
