@@ -1,6 +1,6 @@
 package net.sf.pms.user.model;
 
-public class UserSearch {
+public class UserCriteria {
 
 	private String email;
 
@@ -74,7 +74,7 @@ public class UserSearch {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		UserSearch other = (UserSearch) obj;
+		UserCriteria other = (UserCriteria) obj;
 		if (email == null) {
 			if (other.email != null)
 				return false;
@@ -105,7 +105,7 @@ public class UserSearch {
 
 	@Override
 	public String toString() {
-		return "UserSearch [email=" + email + ", firstName=" + firstName
+		return "UserCriteria [email=" + email + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", phone=" + phone + ", skype="
 				+ skype + "]";
 	}

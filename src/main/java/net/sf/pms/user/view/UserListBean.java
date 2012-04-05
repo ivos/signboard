@@ -19,7 +19,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import net.sf.pms.user.model.User;
-import net.sf.pms.user.model.UserSearch;
+import net.sf.pms.user.model.UserCriteria;
 
 @Named
 @Stateful
@@ -41,7 +41,7 @@ public class UserListBean implements Serializable {
 	}
 
 	public String reset() {
-		search = new UserSearch();
+		criteria = new UserCriteria();
 		return search();
 	}
 
@@ -60,7 +60,7 @@ public class UserListBean implements Serializable {
 	private long count;
 	private List<User> pageItems;
 
-	private UserSearch search = new UserSearch();
+	private UserCriteria criteria = new UserCriteria();
 
 	public int getPage() {
 		return page;
@@ -74,12 +74,12 @@ public class UserListBean implements Serializable {
 		return 10;
 	}
 
-	public UserSearch getSearch() {
-		return search;
+	public UserCriteria getCriteria() {
+		return criteria;
 	}
 
-	public void setSearch(UserSearch search) {
-		this.search = search;
+	public void setCriteria(UserCriteria criteria) {
+		this.criteria = criteria;
 	}
 
 	public String search() {
@@ -110,27 +110,27 @@ public class UserListBean implements Serializable {
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 		List<Predicate> predicatesList = new ArrayList<Predicate>();
 
-		String email = search.getEmail();
+		String email = criteria.getEmail();
 		if (email != null && !"".equals(email)) {
 			predicatesList.add(builder.like(root.<String> get("email"),
 					'%' + email + '%'));
 		}
-		String firstName = search.getFirstName();
+		String firstName = criteria.getFirstName();
 		if (firstName != null && !"".equals(firstName)) {
 			predicatesList.add(builder.like(root.<String> get("firstName"),
 					'%' + firstName + '%'));
 		}
-		String lastName = search.getLastName();
+		String lastName = criteria.getLastName();
 		if (lastName != null && !"".equals(lastName)) {
 			predicatesList.add(builder.like(root.<String> get("lastName"),
 					'%' + lastName + '%'));
 		}
-		String phone = search.getPhone();
+		String phone = criteria.getPhone();
 		if (phone != null && !"".equals(phone)) {
 			predicatesList.add(builder.like(root.<String> get("phone"),
 					'%' + phone + '%'));
 		}
-		String skype = search.getSkype();
+		String skype = criteria.getSkype();
 		if (skype != null && !"".equals(skype)) {
 			predicatesList.add(builder.like(root.<String> get("skype"),
 					'%' + skype + '%'));

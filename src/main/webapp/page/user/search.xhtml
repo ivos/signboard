@@ -21,15 +21,15 @@
 			<h:panelGroup styleClass="search">
 				<h:panelGrid columnClasses="label,component,required" columns="3">
 					<my:field id="email" type="text" entity="user"
-						bean="#{userListBean.search}" />
+						bean="#{userListBean.criteria}" />
 					<my:field id="firstName" type="text" entity="user"
-						bean="#{userListBean.search}" />
+						bean="#{userListBean.criteria}" />
 					<my:field id="lastName" type="text" entity="user"
-						bean="#{userListBean.search}" />
+						bean="#{userListBean.criteria}" />
 					<my:field id="phone" type="text" entity="user"
-						bean="#{userListBean.search}" />
+						bean="#{userListBean.criteria}" />
 					<my:field id="skype" type="text" entity="user"
-						bean="#{userListBean.search}" />
+						bean="#{userListBean.criteria}" />
 				</h:panelGrid>
 				<h:panelGroup styleClass="buttons">
 					<h:commandButton id="search" value="#{label['button.search']}"
