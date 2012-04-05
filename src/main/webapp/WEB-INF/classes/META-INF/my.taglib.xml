@@ -6,9 +6,44 @@
 	<tag>
 		<tag-name>field</tag-name>
 		<source>tags/field.xhtml</source>
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>type</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>entity</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>bean</name>
+			<required>true</required>
+			<type>java.lang.Object</type>
+		</attribute>
 	</tag>
 	<tag>
 		<tag-name>column</tag-name>
 		<source>tags/column.xhtml</source>
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>entity</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>item</name>
+			<required>true</required>
+			<type>java.lang.Object</type>
+		</attribute>
 	</tag>
 </facelet-taglib>
