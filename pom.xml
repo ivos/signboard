@@ -92,9 +92,14 @@
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.ocpsoft</groupId>
-			<artifactId>prettyfaces-jsf2</artifactId>
-			<version>3.3.3</version>
+			<groupId>org.ocpsoft.rewrite</groupId>
+			<artifactId>rewrite-servlet</artifactId>
+			<version>1.0.3.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ocpsoft.rewrite</groupId>
+			<artifactId>rewrite-integration-faces</artifactId>
+			<version>1.0.3.Final</version>
 		</dependency>
 	</dependencies>
 	<repositories>
