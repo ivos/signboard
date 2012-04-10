@@ -159,12 +159,22 @@ h1 {
 
 #content table .required {
 	width: 1%;
+	white-space: pre;
+}
+
+#content table .required span {
 	color: red;
 	padding-top: 7pt;
 	padding-left: 4pt;
 	font-size: 20pt;
 	line-height: 8pt;
 	font-weight: bold;
+	display: inline-block;
+}
+
+#content table .required img {
+	display: inline-block;
+	vertical-align: top;
 }
 
 #content .data-table {

@@ -9,6 +9,7 @@
 	<c:set var="property" value="#{not empty property ? property : id}" />
 	<c:set var="required" value="#{not empty required and required}" />
 	<c:set var="labelKey" value="#{entity}.#{property}" />
+	<c:set var="hintKey" value="#{labelKey}.#{hint}.hint" />
 
 	<h:outputLabel for="#{id}" value="#{label[labelKey]}:" />
 	<c:choose>
@@ -44,9 +45,13 @@
 		</c:when>
 		<c:otherwise>
 			<h:panelGroup />
-			<h:panelGroup />
 		</c:otherwise>
 	</c:choose>
-	<h:outputText value="#{required ? '*' : ''}" />
+	<h:panelGroup>
+		<h:outputText value="*" title="#{label.required}"
+			rendered="#{required}" />
+		<h:graphicImage value="/resources/help.png" title="#{label[hintKey]}"
+			rendered="#{not empty hint}" />
+	</h:panelGroup>
 
 </ui:composition>
