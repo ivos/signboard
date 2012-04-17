@@ -3,7 +3,6 @@ package net.sf.pms.user.view;
 import java.io.Serializable;
 
 import javax.ejb.Stateful;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -14,9 +13,12 @@ import javax.validation.constraints.NotNull;
 import net.sf.pms.user.model.User;
 import net.sf.pms.view.support.ViewContext;
 
+import org.jboss.solder.exception.control.ExceptionHandled;
+
 @Named
 @Stateful
 @ViewScoped
+@ExceptionHandled
 public class UserBean implements Serializable {
 
 	@Inject
@@ -85,36 +87,22 @@ public class UserBean implements Serializable {
 	 */
 
 	public String update() {
-		try {
-			if (id == null) {
-				entityManager.persist(user);
-				viewContext.info("saved");
-				return "edit?faces-redirect=true&id=" + user.getId();
-			} else {
-				entityManager.merge(user);
-				viewContext.info("saved");
-				return "edit?faces-redirect=true&id=" + user.getId();
-			}
-		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(e.getMessage()));
-			e.printStackTrace();
-			return null;
+		if (id == null) {
+			entityManager.persist(user);
+			viewContext.info("saved");
+			return "edit?faces-redirect=true&id=" + user.getId();
+		} else {
+			entityManager.merge(user);
+			viewContext.info("saved");
+			return "edit?faces-redirect=true&id=" + user.getId();
 		}
 	}
 
 	public String delete() {
-		try {
-			user = entityManager.merge(user);
-			entityManager.remove(user);
-			entityManager.flush();
-			return "search?faces-redirect=true";
-		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(e.getMessage()));
-			e.printStackTrace();
-			return null;
-		}
+		user = entityManager.merge(user);
+		entityManager.remove(user);
+		entityManager.flush();
+		return "search?faces-redirect=true";
 	}
 
 }
