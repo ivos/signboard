@@ -12,7 +12,19 @@
 
 <h:body>
 	<div id="wrapper">
-
+		<div id="content">
+			<h1>
+				<ui:insert name="header" />
+			</h1>
+			<h2>
+				<ui:insert name="subheader" />
+			</h2>
+			<ui:insert name="main" />
+			<div id="footer">
+				Powered by <a href="http://jboss.org/forge">Forge</a>. Icons by the
+				<a href="http://everaldo.com/crystal">Crystal Project</a>
+			</div>
+		</div>
 		<div id="navigation">
 			<h:link outcome="/index.xhtml">
 				<img src="#{resource['forge-logo.png']}" alt="Forge... get hammered"
@@ -22,22 +34,6 @@
 				<li><h:link outcome="/page/user/search"
 						value="#{label['user.page.header']}" /></li>
 			</ul>
-		</div>
-
-		<div id="content">
-			<h1>
-				<ui:insert name="header" />
-			</h1>
-			<h2>
-				<ui:insert name="subheader" />
-			</h2>
-
-			<ui:insert name="main" />
-
-			<div id="footer">
-				Powered by <a href="http://jboss.org/forge">Forge</a>. Icons by the
-				<a href="http://everaldo.com/crystal">Crystal Project</a>
-			</div>
 		</div>
 	</div>
 </h:body>
