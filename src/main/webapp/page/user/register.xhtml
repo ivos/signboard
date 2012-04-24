@@ -4,7 +4,9 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:my="http://pms.sf.net/jsf/facelets" template="/page/template.xhtml">
+	xmlns:my="http://pms.sf.net/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich" template="/page/template.xhtml">
 
 	<ui:param name="pageTitle" value="#{label['user.register.title']}" />
 	<ui:define name="header">#{label['user.page.header']}</ui:define>
@@ -17,11 +19,17 @@
 
 			<h:panelGrid columnClasses="label,component,required" columns="3">
 				<my:field id="email" type="text" entity="user"
-					bean="#{userBean.user}" required="true" hint="register" />
+					bean="#{userBean.user}" required="true" hint="register">
+					<a4j:ajax event="blur" render="email-message" />
+				</my:field>
 				<my:field id="password" type="text" entity="user"
-					bean="#{userBean.user}" required="true" hint="register" />
+					bean="#{userBean.user}" required="true" hint="register">
+					<a4j:ajax event="blur" render="password-message" />
+				</my:field>
 				<my:field id="confirmPassword" type="text" entity="user"
-					bean="#{userBean}" required="true" hint="register" />
+					bean="#{userBean}" required="true" hint="register">
+					<a4j:ajax event="blur" render="confirmPassword-message" />
+				</my:field>
 				<my:field id="firstName" type="text" entity="user"
 					bean="#{userBean.user}" />
 				<my:field id="lastName" type="text" entity="user"

@@ -19,7 +19,9 @@
 		<c:when test="#{type == 'text'}">
 			<h:panelGroup>
 				<h:inputText id="#{id}" value="#{bean[property]}"
-					label="#{label[labelKey]}" />
+					label="#{label[labelKey]}">
+					<ui:insert />
+				</h:inputText>
 				<h:message id="#{id}-message" for="#{id}" errorClass="error"
 					infoClass="info" />
 			</h:panelGroup>
@@ -27,7 +29,9 @@
 		<c:when test="#{type == 'password'}">
 			<h:panelGroup>
 				<h:inputSecret id="#{id}" value="#{bean[property]}"
-					label="#{label[labelKey]}" />
+					label="#{label[labelKey]}">
+					<ui:insert />
+				</h:inputSecret>
 				<h:message id="#{id}-message" for="#{id}" errorClass="error"
 					infoClass="info" />
 			</h:panelGroup>
@@ -44,7 +48,9 @@
 			</h:panelGroup>
 		</c:when>
 		<c:otherwise>
-			<h:panelGroup />
+			<h:panelGroup>
+				<ui:insert />
+			</h:panelGroup>
 		</c:otherwise>
 	</c:choose>
 	<h:panelGroup>
