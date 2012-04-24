@@ -29,9 +29,11 @@ public class RequestClientLocaleOverride {
 
 	public void overrideClientLocaleWithRequest(
 			@Observes @After @RestoreView PhaseEvent event) {
-		Locale requestLocale = facesContext.getViewRoot().getLocale();
-		if (!clientLocale.equals(requestLocale)) {
-			alterLocale.fire(requestLocale);
+		if (!facesContext.isReleased()) {
+			Locale requestLocale = facesContext.getViewRoot().getLocale();
+			if (!clientLocale.equals(requestLocale)) {
+				alterLocale.fire(requestLocale);
+			}
 		}
 	}
 
