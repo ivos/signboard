@@ -10,11 +10,11 @@
 	</session-config>
 	<error-page>
 		<error-code>404</error-code>
-		<location>/faces/error.xhtml</location>
+		<location>/faces/page/error.xhtml</location>
 	</error-page>
 	<error-page>
 		<error-code>500</error-code>
-		<location>/faces/error.xhtml</location>
+		<location>/faces/page/error.xhtml</location>
 	</error-page>
 	<mime-mapping>
 		<extension>ico</extension>
