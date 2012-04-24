@@ -7,10 +7,10 @@
 <h:head>
 	<title>#{empty pageTitle ? '{#pageTitle}' : pageTitle}</title>
 	<link rel="icon" href="#{resource['favicon.ico']}" />
-	<h:outputStylesheet name="forge-style.css" />
 </h:head>
 
 <h:body>
+	<h:outputStylesheet name="forge-style.css" target="head" />
 	<div id="wrapper">
 		<div id="content">
 			<h1>
