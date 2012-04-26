@@ -26,6 +26,11 @@ public class ViewContext implements Serializable {
 
 	private final static String MESSAGE_BUNDLE = "i18n.msg";
 
+	public FacesMessage createError(String messageCode) {
+		return new FacesMessage(FacesMessage.SEVERITY_ERROR,
+				msg.getString(messageCode), null);
+	}
+
 	public void error(String messageCode) {
 		messages.error(new BundleKey(MESSAGE_BUNDLE, messageCode));
 	}

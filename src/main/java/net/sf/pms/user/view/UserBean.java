@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import net.sf.pms.user.model.User;
 import net.sf.pms.view.support.ViewContext;
@@ -25,6 +26,7 @@ public class UserBean implements Serializable {
 	ViewContext viewContext;
 
 	@NotNull
+	@Size(min = 4, max = 100)
 	private String confirmPassword;
 
 	public String getConfirmPassword() {
@@ -33,14 +35,6 @@ public class UserBean implements Serializable {
 
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
-	}
-
-	public String register() {
-		if (!user.getPassword().equals(confirmPassword)) {
-			viewContext.error("edit:confirmPassword", "passwords.must.match");
-			return null;
-		}
-		return update();
 	}
 
 	// generated:
