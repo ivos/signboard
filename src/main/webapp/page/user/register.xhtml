@@ -19,7 +19,9 @@
 			<rich:messages id="messages" globalOnly="true" styleClass="error" />
 			<h:panelGrid columnClasses="label,component,required" columns="3">
 				<my:field id="email" type="text" entity="user"
-					bean="#{userBean.user}" required="true" hint="register" />
+					bean="#{userBean.user}" required="true" hint="register">
+					<f:validator validatorId="emailNotRegistered" />
+				</my:field>
 				<my:field id="password" type="text" entity="user"
 					bean="#{userBean.user}" required="true" hint="register" />
 				<my:field id="confirmPassword" type="text" entity="user"
