@@ -163,9 +163,16 @@ h1 {
 	font-size: 11pt;
 }
 
+#content .hint-text {
+	display: none;
+	font-size: 11pt;
+}
+
 #content table .required {
 	width: 1%;
 	white-space: pre;
+	vertical-align: top;
+	padding-top: 3pt;
 }
 
 #content table .required span {

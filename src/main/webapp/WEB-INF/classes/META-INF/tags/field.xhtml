@@ -14,12 +14,12 @@
 	<c:set var="hintKey" value="#{labelKey}.#{hint}.hint" />
 
 	<h:outputLabel for="#{id}" value="#{label[labelKey]}:" />
-	<c:choose>
-		<c:when test="#{type == 'output'}">
-			<h:outputText id="#{id}" value="#{bean[property]}" />
-		</c:when>
-		<c:when test="#{type == 'text'}">
-			<h:panelGroup>
+	<h:panelGroup>
+		<c:choose>
+			<c:when test="#{type == 'output'}">
+				<h:outputText id="#{id}" value="#{bean[property]}" />
+			</c:when>
+			<c:when test="#{type == 'text'}">
 				<h:inputText id="#{id}" value="#{bean[property]}"
 					label="#{label[labelKey]}">
 					<ui:insert />
@@ -27,41 +27,44 @@
 						<rich:validator event="blur" />
 					</c:if>
 				</h:inputText>
-				<rich:message id="#{id}-message" for="#{id}" />
-			</h:panelGroup>
-		</c:when>
-		<c:when test="#{type == 'password'}">
-			<h:panelGroup>
-				<h:inputSecret id="#{id}" value="#{bean[property]}"
-					label="#{label[labelKey]}">
+			</c:when>
+			<c:when test="#{type == 'password'}">
+				<h:panelGroup>
+					<h:inputSecret id="#{id}" value="#{bean[property]}"
+						label="#{label[labelKey]}">
+						<ui:insert />
+						<c:if test="#{customAjaxValidation != true}">
+							<rich:validator event="blur" />
+						</c:if>
+					</h:inputSecret>
+				</h:panelGroup>
+			</c:when>
+			<c:when test="#{type == 'select'}">
+				<h:panelGroup>
+					<h:selectOneMenu id="#{id}" value="#{bean[property]}"
+						label="#{label[labelKey]}">
+						<f:selectItems value="#{options.entrySet()}" var="entry"
+							itemValue="#{entry.key}" itemLabel="#{entry.value}" />
+					</h:selectOneMenu>
+				</h:panelGroup>
+			</c:when>
+			<c:otherwise>
+				<h:panelGroup>
 					<ui:insert />
-					<c:if test="#{customAjaxValidation != true}">
-						<rich:validator event="blur" />
-					</c:if>
-				</h:inputSecret>
-				<rich:message id="#{id}-message" for="#{id}" />
-			</h:panelGroup>
-		</c:when>
-		<c:when test="#{type == 'select'}">
-			<h:panelGroup>
-				<h:selectOneMenu id="#{id}" value="#{bean[property]}"
-					label="#{label[labelKey]}">
-					<f:selectItems value="#{options.entrySet()}" var="entry"
-						itemValue="#{entry.key}" itemLabel="#{entry.value}" />
-				</h:selectOneMenu>
-				<rich:message id="#{id}-message" for="#{id}" />
-			</h:panelGroup>
-		</c:when>
-		<c:otherwise>
-			<h:panelGroup>
-				<ui:insert />
-			</h:panelGroup>
-		</c:otherwise>
-	</c:choose>
+				</h:panelGroup>
+			</c:otherwise>
+		</c:choose>
+		<c:if test="#{not empty hint}">
+			<h:outputText id="#{id}-hint-text" value="#{label[hintKey]}"
+				styleClass="hint-text" />
+		</c:if>
+		<rich:message id="#{id}-message" for="#{id}" />
+	</h:panelGroup>
 	<h:panelGroup>
 		<h:outputText value="*" title="#{label.required}"
 			rendered="#{required}" />
-		<h:graphicImage value="/resources/help.png" title="#{label[hintKey]}"
+		<h:graphicImage id="#{id}-hint-img" value="/resources/help.png"
+			onclick="$('span[id$=&quot;#{id}-hint-text&quot;]').toggle()"
 			rendered="#{not empty hint}" />
 	</h:panelGroup>
 
