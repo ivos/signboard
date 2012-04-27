@@ -65,7 +65,7 @@
 			rendered="#{required}" />
 		<h:graphicImage id="#{id}-hint-img" value="/resources/help.png"
 			onclick="$('span[id$=&quot;#{id}-hint-text&quot;]').slideToggle(300)"
-			rendered="#{not empty hint}" />
+			title="#{label['hint.img']}" rendered="#{not empty hint}" />
 	</h:panelGroup>
 
 </ui:composition>
