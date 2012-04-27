@@ -64,7 +64,7 @@
 		<h:outputText value="*" title="#{label.required}"
 			rendered="#{required}" />
 		<h:graphicImage id="#{id}-hint-img" value="/resources/help.png"
-			onclick="$('span[id$=&quot;#{id}-hint-text&quot;]').toggle()"
+			onclick="$('span[id$=&quot;#{id}-hint-text&quot;]').slideToggle(300)"
 			rendered="#{not empty hint}" />
 	</h:panelGroup>
 
