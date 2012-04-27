@@ -173,12 +173,12 @@ h1 {
 	width: 1%;
 	white-space: pre;
 	vertical-align: top;
-	padding-top: 3pt;
+	padding-top: 2pt;
 }
 
 #content table .required span {
 	color: red;
-	padding-top: 7pt;
+	padding-top: 6pt;
 	padding-left: 4pt;
 	font-size: 20pt;
 	line-height: 8pt;
