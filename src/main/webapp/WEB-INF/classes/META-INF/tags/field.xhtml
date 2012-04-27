@@ -22,8 +22,10 @@
 			<h:panelGroup>
 				<h:inputText id="#{id}" value="#{bean[property]}"
 					label="#{label[labelKey]}">
-					<rich:validator event="blur" />
 					<ui:insert />
+					<c:if test="#{customAjaxValidation != true}">
+						<rich:validator event="blur" />
+					</c:if>
 				</h:inputText>
 				<rich:message id="#{id}-message" for="#{id}" />
 			</h:panelGroup>
@@ -32,8 +34,10 @@
 			<h:panelGroup>
 				<h:inputSecret id="#{id}" value="#{bean[property]}"
 					label="#{label[labelKey]}">
-					<rich:validator event="blur" />
 					<ui:insert />
+					<c:if test="#{customAjaxValidation != true}">
+						<rich:validator event="blur" />
+					</c:if>
 				</h:inputSecret>
 				<rich:message id="#{id}-message" for="#{id}" />
 			</h:panelGroup>

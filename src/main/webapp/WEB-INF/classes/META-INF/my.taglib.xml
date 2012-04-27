@@ -46,6 +46,11 @@
 			<name>hint</name>
 			<type>java.lang.String</type>
 		</attribute>
+		<attribute>
+			<description>Set to true to prevent default Ajax validation.</description>
+			<name>customAjaxValidation</name>
+			<type>java.lang.Boolean</type>
+		</attribute>
 	</tag>
 	<tag>
 		<tag-name>column</tag-name>
