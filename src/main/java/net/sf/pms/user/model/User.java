@@ -26,9 +26,11 @@ public class User implements Serializable {
 	@Column(unique = true, updatable = false)
 	private String email;
 
+	@NotNull
 	@Size(max = 100)
 	private String firstName;
 
+	@NotNull
 	@Size(max = 100)
 	private String lastName;
 

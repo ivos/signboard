@@ -10,11 +10,11 @@
 	xmlns:s="http://jboss.org/seam/faces" template="/page/template.xhtml">
 
 	<ui:param name="pageTitle" value="#{label['user.register.title']}" />
-	<ui:define name="header">#{label['user.page.header']}</ui:define>
-	<ui:define name="subheader">#{pageTitle}</ui:define>
-	<ui:define name="footer" />
-
+	<ui:define name="header">#{pageTitle}</ui:define>
 	<ui:define name="main">
+		<p>
+			<h:outputText value="#{label['user.register.enter']}" />
+		</p>
 		<h:form id="main">
 			<rich:messages id="messages" globalOnly="true" styleClass="error" />
 			<h:panelGrid columnClasses="label,component,required" columns="3">
@@ -34,9 +34,9 @@
 					</rich:validator>
 				</my:field>
 				<my:field id="firstName" type="text" entity="user"
-					bean="#{userBean.user}" />
+					bean="#{userBean.user}" required="true" />
 				<my:field id="lastName" type="text" entity="user"
-					bean="#{userBean.user}" />
+					bean="#{userBean.user}" required="true" />
 				<my:field id="phone" type="text" entity="user"
 					bean="#{userBean.user}" />
 				<my:field id="skype" type="text" entity="user"
@@ -50,5 +50,4 @@
 			</div>
 		</h:form>
 	</ui:define>
-
 </ui:composition>

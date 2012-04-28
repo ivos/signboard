@@ -3,12 +3,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-
 <h:head>
-	<title>#{empty pageTitle ? '{#pageTitle}' : pageTitle}</title>
+	<title>#{pageTitle} - #{label['application.name']}</title>
 	<link rel="icon" href="#{resource['favicon.ico']}" />
 </h:head>
-
 <h:body>
 	<h:outputStylesheet name="forge-style.css" target="head" />
 	<div id="wrapper">
@@ -37,5 +35,4 @@
 		</div>
 	</div>
 </h:body>
-
 </html>
