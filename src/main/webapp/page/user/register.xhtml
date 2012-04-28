@@ -22,9 +22,9 @@
 					bean="#{userBean.user}" required="true" hint="register">
 					<f:validator validatorId="emailNotRegistered" />
 				</my:field>
-				<my:field id="password" type="text" entity="user"
+				<my:field id="password" type="password" entity="user"
 					bean="#{userBean.user}" required="true" hint="register" />
-				<my:field id="confirmPassword" type="text" entity="user"
+				<my:field id="confirmPassword" type="password" entity="user"
 					bean="#{userBean}" required="true" hint="register"
 					customAjaxValidation="true">
 					<f:validator validatorId="confirmPasswordMatching" />
@@ -44,7 +44,7 @@
 			</h:panelGrid>
 			<div class="buttons">
 				<h:commandButton id="register" value="#{label['button.register']}"
-					action="#{userBean.update}" />
+					action="#{userBean.register}" />
 				<h:link id="cancel" value="#{label['button.cancel']}"
 					outcome="/page/index.xhtml" />
 			</div>

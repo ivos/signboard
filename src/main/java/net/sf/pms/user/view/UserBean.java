@@ -14,6 +14,7 @@ import javax.validation.constraints.Size;
 import net.sf.pms.user.model.User;
 import net.sf.pms.view.support.ViewContext;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.jboss.solder.exception.control.ExceptionHandled;
 
 @Named
@@ -35,6 +36,14 @@ public class UserBean implements Serializable {
 
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
+	}
+
+	public String register() {
+		String digest = DigestUtils.md5Hex(user.getPassword());
+		user.setPassword(digest);
+		entityManager.persist(user);
+		viewContext.info("saved");
+		return "edit?faces-redirect=true&id=" + user.getId();
 	}
 
 	// generated:
@@ -81,15 +90,10 @@ public class UserBean implements Serializable {
 	 */
 
 	public String update() {
-		if (id == null) {
-			entityManager.persist(user);
-			viewContext.info("saved");
-			return "edit?faces-redirect=true&id=" + user.getId();
-		} else {
-			entityManager.merge(user);
-			viewContext.info("saved");
-			return "edit?faces-redirect=true&id=" + user.getId();
-		}
+		// if (id == null) {} else {}
+		entityManager.merge(user);
+		viewContext.info("saved");
+		return "edit?faces-redirect=true&id=" + user.getId();
 	}
 
 	public String delete() {
