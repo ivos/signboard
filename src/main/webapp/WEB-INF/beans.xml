@@ -3,6 +3,6 @@
       http://java.sun.com/xml/ns/javaee
       http://java.sun.com/xml/ns/javaee/beans_1_0.xsd">
 	<interceptors>
-		<class>net.sf.pms.cdi.interceptor.SerializableExceptionHandledInterceptor</class>
+		<class>com.github.ivos.signboard.cdi.interceptor.SerializableExceptionHandledInterceptor</class>
 	</interceptors>
 </beans>

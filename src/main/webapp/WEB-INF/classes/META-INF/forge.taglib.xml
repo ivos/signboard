@@ -5,7 +5,7 @@
 
 	<function>
 		<function-name>asList</function-name>
-		<function-class>net.sf.pms.view.ViewUtils</function-class>
+		<function-class>com.github.ivos.signboard.view.ViewUtils</function-class>
 		<function-signature>
 			java.util.List asList(java.util.Collection)
 		</function-signature>

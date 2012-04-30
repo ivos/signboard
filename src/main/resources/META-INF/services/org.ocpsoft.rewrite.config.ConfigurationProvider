@@ -1,1 +1,1 @@
-net.sf.pms.config.URLRewriteConfiguration
+com.github.ivos.signboard.config.URLRewriteConfiguration

@@ -7,7 +7,7 @@
 	<persistence-unit name="forge-default" transaction-type="JTA">
 		<description>Forge Persistence Unit</description>
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<jta-data-source>java:/pms3ds</jta-data-source>
+		<jta-data-source>java:/signboardds</jta-data-source>
 		<!-- 
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 		 -->
