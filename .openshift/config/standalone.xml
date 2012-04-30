@@ -114,7 +114,14 @@
                       <password>${env.OPENSHIFT_DB_PASSWORD}</password>
                     </security>
                 </datasource>
-                <drivers>
+                <datasource jndi-name="java:/signboardds" pool-name="SignboardDs_Pool" enabled="true" use-java-context="true">
+                    <connection-url>jdbc:h2:${jboss.server.data.dir}/signboard;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;MVCC=TRUE</connection-url>
+                    <driver>h2</driver>
+                    <security>
+                        <user-name>sa</user-name>
+                    </security>
+                </datasource>
+                 <drivers>
                     <driver name="h2" module="com.h2database.h2">
                         <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
                     </driver>
