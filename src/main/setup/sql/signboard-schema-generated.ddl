@@ -6,8 +6,8 @@
     create table user (
         id bigint not null,
         email varchar(100) not null unique,
-        first_name varchar(100),
-        last_name varchar(100),
+        first_name varchar(100) not null,
+        last_name varchar(100) not null,
         password varchar(100) not null,
         phone varchar(30),
         skype varchar(100),
