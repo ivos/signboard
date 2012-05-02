@@ -21,7 +21,6 @@ import javax.persistence.criteria.Root;
 import com.github.ivos.signboard.user.model.User;
 import com.github.ivos.signboard.user.model.UserCriteria;
 
-
 @Named
 @Stateful
 @SessionScoped
