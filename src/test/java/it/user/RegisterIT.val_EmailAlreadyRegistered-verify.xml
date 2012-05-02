@@ -2,6 +2,4 @@
 <dataset>
 	<user email="email1" first_name="firstName1" last_name="lastName1"
 		password="7c6a180b36896a0a8c02787eeafb0e4c" phone="phone1" skype="skype1" />
-	<user email="email2" first_name="firstName2" last_name="lastName2"
-		password="6cb75f652a9b52798eb6cf2201057c73" phone="phone2" skype="skype2" />
 </dataset>

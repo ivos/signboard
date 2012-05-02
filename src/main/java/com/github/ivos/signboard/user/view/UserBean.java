@@ -2,7 +2,6 @@ package com.github.ivos.signboard.user.view;
 
 import java.io.Serializable;
 
-import javax.ejb.Stateful;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -11,7 +10,6 @@ import javax.persistence.EntityManager;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-
 import org.apache.commons.codec.digest.DigestUtils;
 import org.jboss.solder.exception.control.ExceptionHandled;
 
@@ -19,7 +17,6 @@ import com.github.ivos.signboard.user.model.User;
 import com.github.ivos.signboard.view.support.ViewContext;
 
 @Named
-@Stateful
 @ViewScoped
 @ExceptionHandled
 public class UserBean implements Serializable {

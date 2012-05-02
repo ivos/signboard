@@ -5,15 +5,9 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/page/template.xhtml">
 
-	<ui:param name="pageTitle" value="Welcome to Forge" />
-
-	<ui:define name="header">
-		Welcome to Forge
-	</ui:define>
-
-	<ui:define name="subheader">
-		Your application is running.
-	</ui:define>
+	<ui:param name="pageTitle" value="#{label['index.title']}" />
+	<ui:define name="header">#{label['application.name']}</ui:define>
+	<ui:define name="subheader">#{pageTitle}</ui:define>
 
 	<ui:define name="main">
 		<p>
