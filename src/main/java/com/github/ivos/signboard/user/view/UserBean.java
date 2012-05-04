@@ -55,7 +55,7 @@ public class UserBean implements Serializable {
 		user.digestPassword();
 		if (identity.login() == Identity.RESPONSE_LOGIN_SUCCESS) {
 			log.infov("Log in user {0}.", user.getEmail());
-			return "list?faces-redirect=true";
+			return "search?faces-redirect=true";
 		}
 		viewContext.error("login.invalid");
 		log.warnv("Login invalid for user {0}.", user.getEmail());
