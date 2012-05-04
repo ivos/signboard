@@ -14,5 +14,10 @@ Features
  As a prospect user I can register with the system to become its user.
  Registration data: email (becomes user system ID and login name),
  password and password confirmation, first name, last name, phone, skype.
- 
- 
+
+ [[1]] <<Log in>>\
+ As a registered user I can log into the system to start using it.
+ Login data: email, password.
+
+ [[1]] <<Log out>>\
+ As a logged-in user I can log out to stop using the system.

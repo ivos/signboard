@@ -18,8 +18,8 @@ public class URLRewriteConfiguration extends HttpConfigurationProvider {
 				.begin()
 
 				.addRule(Join.path("/").to("/page/index.jsf"))
-
 				.addRule(Join.path("/register").to("/page/user/register.jsf"))
+				.addRule(Join.path("/login").to("/page/user/login.jsf"))
 
 				.addRule(
 						Join.path("/{domain}/page/{page}").where("domain")

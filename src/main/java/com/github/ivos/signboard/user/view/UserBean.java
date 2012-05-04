@@ -10,8 +10,9 @@ import javax.persistence.EntityManager;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.apache.commons.codec.digest.DigestUtils;
+import org.jboss.seam.security.Identity;
 import org.jboss.solder.exception.control.ExceptionHandled;
+import org.jboss.solder.logging.Logger;
 
 import com.github.ivos.signboard.user.model.User;
 import com.github.ivos.signboard.view.support.ViewContext;
@@ -20,6 +21,9 @@ import com.github.ivos.signboard.view.support.ViewContext;
 @ViewScoped
 @ExceptionHandled
 public class UserBean implements Serializable {
+
+	@Inject
+	private Logger log;
 
 	@Inject
 	ViewContext viewContext;
@@ -37,11 +41,31 @@ public class UserBean implements Serializable {
 	}
 
 	public String register() {
-		String digest = DigestUtils.md5Hex(user.getPassword());
-		user.setPassword(digest);
+		user.digestPassword();
 		entityManager.persist(user);
 		viewContext.info("saved");
-		return "edit?faces-redirect=true&id=" + user.getId();
+		log.infov("Register user {0}.", user.toLog());
+		return "login?faces-redirect=true";
+	}
+
+	@Inject
+	Identity identity;
+
+	public String login() {
+		user.digestPassword();
+		if (identity.login() == Identity.RESPONSE_LOGIN_SUCCESS) {
+			log.infov("Log in user {0}.", user.getEmail());
+			return "list?faces-redirect=true";
+		}
+		viewContext.error("login.invalid");
+		log.warnv("Login invalid for user {0}.", user.getEmail());
+		return null;
+	}
+
+	public String logout() {
+		log.infov("Log out user {0}.", identity.getUser().getId());
+		identity.logout();
+		return "/index?faces-redirect=true";
 	}
 
 	// generated:

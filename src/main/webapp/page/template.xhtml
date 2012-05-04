@@ -9,30 +9,46 @@
 </h:head>
 <h:body>
 	<h:outputStylesheet name="forge-style.css" target="head" />
-	<div id="wrapper">
-		<div id="content">
-			<h1>
-				<ui:insert name="header" />
-			</h1>
-			<h2>
-				<ui:insert name="subheader" />
-			</h2>
-			<ui:insert name="main" />
-			<div id="footer">
-				Powered by <a href="http://jboss.org/forge">Forge</a>. Icons by the
-				<a href="http://everaldo.com/crystal">Crystal Project</a>
-			</div>
-		</div>
-		<div id="navigation">
-			<h:link outcome="/page/index.xhtml">
-				<img src="#{resource['forge-logo.png']}" alt="Forge... get hammered"
-					border="0" />
-			</h:link>
-			<ul>
-				<li><h:link outcome="/page/user/search"
-						value="#{label['user.page.header']}" /></li>
-			</ul>
-		</div>
-	</div>
+	<table id="wrapper">
+		<tr id="header">
+			<td id="logo"><h:link outcome="/page/index.xhtml">
+					<img src="#{resource['forge-logo.png']}"
+						alt="Forge... get hammered" border="0" />
+				</h:link></td>
+			<td id="user"><ui:fragment rendered="#{!identity.loggedIn}">
+					<h:link id="header-login" value="#{label['template.login']}"
+						outcome="/page/user/login" /> |
+					<h:link id="header-register" value="#{label['template.register']}"
+						outcome="/page/user/register" />
+				</ui:fragment> <ui:fragment rendered="#{identity.loggedIn}">
+					<h:form id="header-user-form">
+						<h:link id="header-profile" value="#{identity.user.id}"
+							outcome="/page/user/profile" /> |
+						<h:commandLink id="header-logout"
+							value="#{label['template.logout']}" action="#{userBean.logout}" />
+					</h:form>
+				</ui:fragment></td>
+		</tr>
+		<tr>
+			<td id="navigation">
+				<ul>
+					<li><h:link outcome="/page/user/search"
+							value="#{label['user.page.header']}" /></li>
+				</ul>
+			</td>
+			<td id="content">
+				<h1>
+					<ui:insert name="header" />
+				</h1>
+				<h2>
+					<ui:insert name="subheader" />
+				</h2> <ui:insert name="main" />
+				<div id="footer">
+					Powered by <a href="http://jboss.org/forge">Forge</a>. Icons by the
+					<a href="http://everaldo.com/crystal">Crystal Project</a>
+				</div>
+			</td>
+		</tr>
+	</table>
 </h:body>
 </html>

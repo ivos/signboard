@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:my="http://signboard.ivos.github.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:s="http://jboss.org/seam/faces" template="/page/template.xhtml">
+
+	<ui:param name="pageTitle" value="#{label['user.login.title']}" />
+	<ui:define name="header">#{pageTitle}</ui:define>
+	<ui:define name="main">
+		<p>
+			<h:outputText value="#{label['user.login.enter']}" />
+		</p>
+		<h:form id="main">
+			<rich:messages id="messages" globalOnly="true" styleClass="error" />
+			<h:panelGrid columnClasses="label,component,required" columns="3">
+				<my:field id="email" type="text" entity="user"
+					bean="#{userBean.user}" required="true" />
+				<my:field id="password" type="password" entity="user"
+					bean="#{userBean.user}" required="true" />
+			</h:panelGrid>
+			<div class="buttons">
+				<h:commandButton id="login" value="#{label['button.login']}"
+					action="#{userBean.login}" />
+				<h:link id="cancel" value="#{label['button.cancel']}"
+					outcome="/page/index.xhtml" />
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
