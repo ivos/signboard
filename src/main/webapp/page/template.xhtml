@@ -12,8 +12,12 @@
 	<table id="wrapper">
 		<tr id="header">
 			<td id="logo"><h:link outcome="/page/index.xhtml">
-					<img src="#{resource['forge-logo.png']}"
-						alt="Forge... get hammered" border="0" />
+					<img src="#{resource['logo-gray.png']}"
+						alt="${label['application.name']}" border="0" height="30"
+						class="default" />
+					<img src="#{resource['logo-blue.png']}"
+						alt="${label['application.name']}" border="0" height="30"
+						class="hover" />
 				</h:link></td>
 			<td id="user"><ui:fragment rendered="#{!identity.loggedIn}">
 					<h:link id="header-login" value="#{label['template.login']}"
