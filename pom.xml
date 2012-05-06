@@ -279,6 +279,9 @@
 				<plugin>
 					<artifactId>maven-site-plugin</artifactId>
 					<version>3.1</version>
+					<configuration>
+						<skipDeploy>true</skipDeploy>
+					</configuration>
 					<dependencies>
 						<dependency>
 							<groupId>org.kohsuke</groupId>
@@ -289,6 +292,25 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>com.github.github</groupId>
+				<artifactId>site-maven-plugin</artifactId>
+				<version>0.6</version>
+				<configuration>
+					<message>Creating site for ${project.version}.</message>
+					<server>github.pages.server</server>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>site-deploy</phase>
+						<goals>
+							<goal>site</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
 	</build>
 	<reporting>
 		<plugins>
