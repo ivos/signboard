@@ -29,29 +29,23 @@
 				</h:inputText>
 			</c:when>
 			<c:when test="#{type == 'password'}">
-				<h:panelGroup>
-					<h:inputSecret id="#{id}" value="#{bean[property]}"
-						label="#{label[labelKey]}">
-						<ui:insert />
-						<c:if test="#{customAjaxValidation != true}">
-							<rich:validator event="blur" />
-						</c:if>
-					</h:inputSecret>
-				</h:panelGroup>
+				<h:inputSecret id="#{id}" value="#{bean[property]}"
+					label="#{label[labelKey]}">
+					<ui:insert />
+					<c:if test="#{customAjaxValidation != true}">
+						<rich:validator event="blur" />
+					</c:if>
+				</h:inputSecret>
 			</c:when>
 			<c:when test="#{type == 'select'}">
-				<h:panelGroup>
-					<h:selectOneMenu id="#{id}" value="#{bean[property]}"
-						label="#{label[labelKey]}">
-						<f:selectItems value="#{options.entrySet()}" var="entry"
-							itemValue="#{entry.key}" itemLabel="#{entry.value}" />
-					</h:selectOneMenu>
-				</h:panelGroup>
+				<h:selectOneMenu id="#{id}" value="#{bean[property]}"
+					label="#{label[labelKey]}">
+					<f:selectItems value="#{options.entrySet()}" var="entry"
+						itemValue="#{entry.key}" itemLabel="#{entry.value}" />
+				</h:selectOneMenu>
 			</c:when>
 			<c:otherwise>
-				<h:panelGroup>
-					<ui:insert />
-				</h:panelGroup>
+				<ui:insert />
 			</c:otherwise>
 		</c:choose>
 		<c:if test="#{not empty hint}">
