@@ -19,6 +19,8 @@
 
 	<ui:define name="main">
 		<h:form id="search">
+			<h:messages globalOnly="true" styleClass="messages"
+				errorClass="error" infoClass="info" />
 			<h:panelGroup styleClass="search">
 				<h:panelGrid columnClasses="label,component,required" columns="3">
 					<my:field id="email" type="text" entity="user"
@@ -43,7 +45,6 @@
 						action="#{userListBean.generate}" />
 				</h:panelGroup>
 			</h:panelGroup>
-
 			<h:dataTable id="userListBeanPageItems" styleClass="data-table"
 				value="#{userListBean.pageItems}" var="_item">
 				<my:column id="email" entity="user" item="#{_item}" />
@@ -57,7 +58,6 @@
 				<ui:param name="paginatorBean" value="#{userListBean}" />
 			</ui:include>
 		</h:form>
-
 	</ui:define>
 
 </ui:composition>
