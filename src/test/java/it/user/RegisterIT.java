@@ -2,19 +2,17 @@ package it.user;
 
 import static junit.framework.Assert.*;
 import static net.sourceforge.jwebunit.junit.JWebUnit.*;
-import net.sf.lightair.LightAir;
+import it.ITBase;
 import net.sf.lightair.annotation.BaseUrl;
 import net.sf.lightair.annotation.Setup;
 import net.sf.lightair.annotation.Verify;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
-@RunWith(LightAir.class)
 @Setup
 @Verify("RegisterIT.xml")
 @BaseUrl("http://localhost:8080/signboard")
-public class RegisterIT {
+public class RegisterIT extends ITBase {
 
 	@Test
 	@Verify

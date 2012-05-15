@@ -2,19 +2,17 @@ package it.user;
 
 import static junit.framework.Assert.*;
 import static net.sourceforge.jwebunit.junit.JWebUnit.*;
-import net.sf.lightair.LightAir;
+import it.ITBase;
 import net.sf.lightair.annotation.BaseUrl;
 import net.sf.lightair.annotation.Setup;
 import net.sf.lightair.annotation.Verify;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
-@RunWith(LightAir.class)
 @Setup
 @Verify("LogInOutIT.xml")
 @BaseUrl("http://localhost:8080/signboard")
-public class LogInOutIT {
+public class LogInOutIT extends ITBase {
 
 	@Test
 	public void fn() {
@@ -40,13 +38,6 @@ public class LogInOutIT {
 		assertTextPresent("email2");
 		assertLinkPresentWithExactText("Log out");
 		assertLinkNotPresentWithExactText("Log in");
-	}
-
-	private void login(String email, String password) {
-		beginAt("login");
-		setTextField("main:email", email);
-		setTextField("main:password", password);
-		submit();
 	}
 
 	@Test
