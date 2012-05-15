@@ -25,6 +25,14 @@ public class RegisterIT extends ITBase {
 		assertTextPresent("Saved.");
 	}
 
+	@Test
+	@Verify
+	public void fn_OptionalFields() {
+		register("email1", "password1", "password1", "firstName1", "lastName1",
+				"", "");
+		assertTextPresent("Saved.");
+	}
+
 	private void register(String email, String password,
 			String confirmPassword, String firstName, String lastName,
 			String phone, String skype) {
@@ -46,10 +54,10 @@ public class RegisterIT extends ITBase {
 		assertTextPresent("May not be empty.");
 		register("email1", "", "password1", "firstName1", "lastName1",
 				"phone1", "skype1");
-		assertTextNotPresent("Saved.");
+		assertTextPresent("May not be empty.");
 		register("email1", "password1", "", "firstName1", "lastName1",
 				"phone1", "skype1");
-		assertTextNotPresent("Saved.");
+		assertTextPresent("May not be empty.");
 		register("email1", "password1", "password1", "", "lastName1", "phone1",
 				"skype1");
 		assertTextPresent("May not be empty.");
