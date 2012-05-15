@@ -20,7 +20,6 @@ import javax.persistence.criteria.Root;
 
 import org.jboss.seam.security.annotations.LoggedIn;
 import org.jboss.solder.exception.control.ExceptionHandled;
-import org.jboss.solder.logging.Logger;
 
 import com.github.ivos.signboard.project.model.Project;
 import com.github.ivos.signboard.project.model.ProjectCriteria;
@@ -30,9 +29,6 @@ import com.github.ivos.signboard.project.model.ProjectCriteria;
 @SessionScoped
 @ExceptionHandled
 public class ProjectListBean implements Serializable {
-
-	@Inject
-	private Logger log;
 
 	public String reset() {
 		criteria = new ProjectCriteria();
@@ -77,8 +73,6 @@ public class ProjectListBean implements Serializable {
 
 	@LoggedIn
 	public void paginate() {
-		log.info("Paginate info");
-		log.debug("Paginate debug");
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 
 		// Populate count
