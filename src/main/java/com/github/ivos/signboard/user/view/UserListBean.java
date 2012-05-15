@@ -18,12 +18,15 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.jboss.solder.exception.control.ExceptionHandled;
+
 import com.github.ivos.signboard.user.model.User;
 import com.github.ivos.signboard.user.model.UserCriteria;
 
 @Named
 @Stateful
 @SessionScoped
+@ExceptionHandled
 public class UserListBean implements Serializable {
 
 	public String generate() {
