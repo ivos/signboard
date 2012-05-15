@@ -12,6 +12,10 @@ public class ITBase {
 
 	public static void login(String email, String password) {
 		beginAt("login");
+		fillAndSubmitLoginForm(email, password);
+	}
+
+	public static void fillAndSubmitLoginForm(String email, String password) {
 		setTextField("main:email", email);
 		setTextField("main:password", password);
 		submit();

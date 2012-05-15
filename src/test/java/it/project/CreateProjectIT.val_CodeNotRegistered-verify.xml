@@ -2,5 +2,4 @@
 <dataset>
 	<user id="1" version="0" />
 	<project code="code1" name="name1" description="description1" />
-	<project code="code2" name="name2" description="description2" />
 </dataset>

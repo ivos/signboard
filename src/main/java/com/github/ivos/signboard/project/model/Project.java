@@ -15,7 +15,7 @@ public class Project implements Serializable {
 	@Id
 	@NotNull
 	@Size(min = 3, max = 64)
-	@Pattern(regexp = "[\\w][\\w\\.\\-]*")
+	@Pattern(regexp = "[\\w][\\w\\-]*", message = "{project.code.regexp}")
 	private String code;
 
 	@Version

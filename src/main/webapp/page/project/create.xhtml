@@ -19,7 +19,10 @@
 				errorClass="error" infoClass="info" />
 			<h:panelGrid columnClasses="label,component,required" columns="3">
 				<my:field id="code" type="text" entity="project"
-					bean="#{projectBean.project}" required="true" hint="create" />
+					bean="#{projectBean.project}" required="true" hint="create">
+					<f:validator validatorId="codeNotReserved" />
+					<f:validator validatorId="codeNotRegistered" />
+				</my:field>
 				<my:field id="name" type="text" entity="project"
 					bean="#{projectBean.project}" required="true" hint="create" />
 				<my:field id="description" type="custom" entity="project"
