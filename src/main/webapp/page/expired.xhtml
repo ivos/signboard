@@ -5,12 +5,12 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/page/template.xhtml">
 
-	<ui:param name="pageTitle" value="#{label['error.header']}" />
-	<ui:define name="header">#{label['error.header']}</ui:define>
+	<ui:param name="pageTitle" value="#{label['expired.header']}" />
+	<ui:define name="header">#{label['expired.header']}</ui:define>
 	<ui:define name="subheader" />
 	<ui:define name="main">
 		<p>
-			<h:outputText value="#{label['error.text.report']}" />
+			<h:outputText value="#{label['expired.text.report']}" />
 		</p>
 		<p>
 			<h:outputText value="#{label['error.text.proceed.before']}" />

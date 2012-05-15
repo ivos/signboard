@@ -9,6 +9,10 @@
 		<session-timeout>30</session-timeout>
 	</session-config>
 	<error-page>
+		<exception-type>javax.faces.application.ViewExpiredException</exception-type>
+		<location>/faces/page/expired.xhtml</location>
+	</error-page>
+	<error-page>
 		<error-code>404</error-code>
 		<location>/faces/page/error.xhtml</location>
 	</error-page>
