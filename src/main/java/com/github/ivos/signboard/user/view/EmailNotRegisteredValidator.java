@@ -10,7 +10,6 @@ import javax.persistence.EntityManager;
 
 import com.github.ivos.signboard.view.support.ViewContext;
 
-
 @FacesValidator("emailNotRegistered")
 public class EmailNotRegisteredValidator implements Validator {
 
