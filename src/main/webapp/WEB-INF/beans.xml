@@ -4,5 +4,6 @@
       http://java.sun.com/xml/ns/javaee/beans_1_0.xsd">
 	<interceptors>
 		<class>com.github.ivos.signboard.cdi.interceptor.SerializableExceptionHandledInterceptor</class>
+		<class>org.jboss.seam.security.SecurityInterceptor</class>
 	</interceptors>
 </beans>
