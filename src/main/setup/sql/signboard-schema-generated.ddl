@@ -1,7 +1,18 @@
 
+    drop table project if exists;
+
     drop table user if exists;
 
     drop sequence hibernate_sequence;
+
+    create table project (
+        code varchar(64) not null,
+        date_created date not null,
+        description varchar(1024),
+        name varchar(128) not null,
+        version integer not null,
+        primary key (code)
+    );
 
     create table user (
         id bigint not null,

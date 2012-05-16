@@ -35,6 +35,10 @@
 						<rich:validator event="blur" />
 					</h:inputTextarea>
 				</my:field>
+				<my:field id="dateCreated" type="output" entity="project"
+					bean="#{projectBean.project}">
+					<f:convertDateTime timeZone="${userDateTimeZone.ID}" />
+				</my:field>
 			</h:panelGrid>
 			<div class="buttons">
 				<h:commandButton id="save" value="#{label['button.save']}"

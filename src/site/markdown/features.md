@@ -1,8 +1,8 @@
 Features
 ========
 
-Users
------
+User
+----
 
 1. __Register__
 
@@ -18,3 +18,12 @@ Login data: email, password.
 1. __Log out__
 
 	As a logged-in user I can log out to stop using the system.
+
+Project
+-------
+
+1. __Create project__
+
+	As a user I can create project.
+New project attributes: code (unique), name, description.
+System records date created.

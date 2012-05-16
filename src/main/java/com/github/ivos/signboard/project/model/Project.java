@@ -1,13 +1,20 @@
 package com.github.ivos.signboard.project.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import org.joda.time.DateMidnight;
 
 @Entity
 public class Project implements Serializable {
@@ -28,6 +35,13 @@ public class Project implements Serializable {
 	@Size(max = 1024)
 	private String description;
 
+	@NotNull
+	@Column(updatable = false)
+	@Temporal(TemporalType.DATE)
+	private Date dateCreated;
+
+	// business logic
+
 	public String getId() {
 		return code;
 	}
@@ -36,7 +50,12 @@ public class Project implements Serializable {
 		this.code = id;
 	}
 
-	// Java bean:
+	@PrePersist
+	public void initDateCreated() {
+		dateCreated = DateMidnight.now().toDate();
+	}
+
+	// Java bean
 
 	public String getCode() {
 		return code;
@@ -70,6 +89,10 @@ public class Project implements Serializable {
 		this.description = description;
 	}
 
+	public Date getDateCreated() {
+		return dateCreated;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -98,7 +121,8 @@ public class Project implements Serializable {
 	@Override
 	public String toString() {
 		return "Project [code=" + code + ", version=" + version + ", name="
-				+ name + ", description=" + description + "]";
+				+ name + ", description=" + description + ", dateCreated="
+				+ dateCreated + "]";
 	}
 
 	private static final long serialVersionUID = 1L;

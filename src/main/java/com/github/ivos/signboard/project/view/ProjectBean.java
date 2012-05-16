@@ -9,6 +9,7 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 
 import org.jboss.solder.exception.control.ExceptionHandled;
+import org.jboss.solder.logging.Logger;
 
 import com.github.ivos.signboard.project.model.Project;
 import com.github.ivos.signboard.view.support.ViewContext;
@@ -17,6 +18,9 @@ import com.github.ivos.signboard.view.support.ViewContext;
 @ViewScoped
 @ExceptionHandled
 public class ProjectBean implements Serializable {
+
+	@Inject
+	private Logger log;
 
 	@Inject
 	ViewContext viewContext;
@@ -57,6 +61,7 @@ public class ProjectBean implements Serializable {
 	public String update() {
 		if (id == null) {
 			entityManager.persist(project);
+			log.infov("Create project {0}.", project);
 		} else {
 			entityManager.merge(project);
 		}

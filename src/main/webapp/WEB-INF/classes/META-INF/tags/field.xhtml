@@ -17,7 +17,9 @@
 	<h:panelGroup>
 		<c:choose>
 			<c:when test="#{type == 'output'}">
-				<h:outputText id="#{id}" value="#{bean[property]}" />
+				<h:outputText id="#{id}" value="#{bean[property]}">
+					<ui:insert />
+				</h:outputText>
 			</c:when>
 			<c:when test="#{type == 'text'}">
 				<h:inputText id="#{id}" value="#{bean[property]}"

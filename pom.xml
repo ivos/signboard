@@ -246,7 +246,7 @@
 							</component>
 						</components>
 						<componentProperties>
-							<persistenceunit>forge-default</persistenceunit>
+							<persistenceunit>signboard</persistenceunit>
 							<outputfilename>${project.artifactId}-schema-generated.ddl</outputfilename>
 							<drop>true</drop>
 							<create>true</create>
