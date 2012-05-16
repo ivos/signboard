@@ -9,6 +9,7 @@
 </h:head>
 <h:body>
 	<h:outputStylesheet name="forge-style.css" target="head" />
+	<h:outputScript target="head">$(document).ready(function(){$("##{focusField}").focus();});</h:outputScript>
 	<table id="wrapper">
 		<tr id="header">
 			<td id="logo"><h:link id="header-home"
