@@ -2,6 +2,7 @@ package com.github.ivos.signboard.cdi.producer;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.ConversationScoped;
+import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,8 +16,12 @@ public class EntityManagerProducer {
 
 	@Produces
 	@ConversationScoped
-	EntityManager produce() {
+	EntityManager create() {
 		return factory.createEntityManager();
+	}
+
+	public void close(@Disposes EntityManager entityManager) {
+		entityManager.close();
 	}
 
 }
