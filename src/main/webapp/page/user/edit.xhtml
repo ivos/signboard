@@ -16,10 +16,8 @@
 	<ui:param name="pageTitle"
 		value="#{isCreate ? label['user.create.title'] : label['user.edit.title']}" />
 	<ui:define name="header">#{label['user.page.header']}</ui:define>
-	<ui:define name="subheader">#{pageTitle}</ui:define>
-	<ui:define name="footer" />
-
 	<ui:define name="main">
+		<h2>#{pageTitle}</h2>
 		<h:form id="edit">
 			<h:messages globalOnly="true" styleClass="messages"
 				errorClass="error" infoClass="info" />

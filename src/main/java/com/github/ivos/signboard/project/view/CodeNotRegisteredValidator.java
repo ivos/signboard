@@ -1,5 +1,6 @@
 package com.github.ivos.signboard.project.view;
 
+import javax.enterprise.context.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
@@ -8,9 +9,10 @@ import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-import com.github.ivos.signboard.view.support.ViewContext;
+import com.github.ivos.signboard.view.ViewContext;
 
 @FacesValidator("codeNotRegistered")
+@RequestScoped
 public class CodeNotRegisteredValidator implements Validator {
 
 	@Inject

@@ -14,10 +14,8 @@
 
 	<ui:param name="pageTitle" value="#{label['project.view.title']}" />
 	<ui:define name="header">#{label['project.page.header']}</ui:define>
-	<ui:define name="subheader">#{label['project.view.title']}</ui:define>
-	<ui:define name="footer" />
-
 	<ui:define name="main">
+		<h2>#{label['project.view.title']}</h2>
 		<h:panelGrid columnClasses="label,component,required" columns="3">
 			<my:field id="code" type="output" entity="project"
 				bean="#{projectBean.project}" />
@@ -29,7 +27,8 @@
 				outcome="search" />
 			<h:link id="edit" value="#{label['button.edit']}" outcome="edit"
 				includeViewParams="true" />
-			<h:link id="create" value="#{label['button.create']}" outcome="create" />
+			<h:link id="create" value="#{label['button.create']}"
+				outcome="create" />
 		</div>
 	</ui:define>
 

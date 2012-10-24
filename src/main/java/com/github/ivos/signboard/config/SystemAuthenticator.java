@@ -1,10 +1,11 @@
-package com.github.ivos.signboard.config.security;
+package com.github.ivos.signboard.config;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
 import org.jboss.seam.security.BaseAuthenticator;
+import org.jboss.solder.logging.Logger;
 import org.picketlink.idm.impl.api.model.SimpleUser;
 
 import com.github.ivos.signboard.user.view.UserBean;
@@ -17,8 +18,12 @@ public class SystemAuthenticator extends BaseAuthenticator {
 	@Inject
 	UserBean userBean;
 
+	@Inject
+	Logger log;
+
 	@Override
 	public void authenticate() {
+		log.debugv("Authenticate {0}.", userBean.getUser());
 		try {
 			entityManager
 					.createQuery(

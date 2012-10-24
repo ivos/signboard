@@ -14,10 +14,8 @@
 
 	<ui:param name="pageTitle" value="#{label['user.search.title']}" />
 	<ui:define name="header">#{label['user.page.header']}</ui:define>
-	<ui:define name="subheader">#{label['user.search.title']}</ui:define>
-	<ui:define name="footer" />
-
 	<ui:define name="main">
+		<h2>#{label['user.search.title']}</h2>
 		<h:form id="search">
 			<h:messages globalOnly="true" styleClass="messages"
 				errorClass="error" infoClass="info" />

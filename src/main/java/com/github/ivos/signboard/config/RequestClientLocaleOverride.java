@@ -1,4 +1,4 @@
-package com.github.ivos.signboard.cdi.observer;
+package com.github.ivos.signboard.config;
 
 import java.util.Locale;
 

@@ -20,45 +20,48 @@ public class URLRewriteConfiguration extends HttpConfigurationProvider {
 		return ConfigurationBuilder
 				.begin()
 
-				.addRule(Join.path("/").to("/page/index.jsf"))
-				.addRule(Join.path("/register").to("/page/user/register.jsf"))
-				.addRule(Join.path("/login").to("/page/user/login.jsf"))
 				.addRule(
-						Join.path("/project/create").to(
-								"/page/project/create.jsf"))
+						Join.path("/").to("/page/index.jsf")
+								.withInboundCorrection())
+				.addRule(
+						Join.path("/register").to("/page/user/register.jsf")
+								.withInboundCorrection())
+				.addRule(
+						Join.path("/login").to("/page/user/login.jsf")
+								.withInboundCorrection())
+				.addRule(
+						Join.path("/project/create")
+								.to("/page/project/create.jsf")
+								.withInboundCorrection())
 
 				.addRule(
-						Join.path("/{domain}").where("domain")
-								.matches(ENTITY_NAME)
+						Join.path("/{domain}").to("/page/{domain}/search.jsf")
+								.where("domain").matches(ENTITY_NAME)
+								.withInboundCorrection())
+
+				.addRule(
+						Join.path("/{domain}/page/{page}")
 								.to("/page/{domain}/search.jsf")
+								.where("domain").matches(ENTITY_NAME)
+								.where("page").matches("\\d+")
 								.withInboundCorrection())
 
 				.addRule(
-						Join.path("/{domain}/page/{page}").where("domain")
-								.matches(ENTITY_NAME).where("page")
-								.matches("\\d+")
-								.to("/page/{domain}/search.jsf")
-								.withInboundCorrection())
-
-				.addRule(
-						Join.path("/{domain}/{id}/edit").where("domain")
+						Join.path("/{domain}/{id}/edit")
+								.to("/page/{domain}/edit.jsf").where("domain")
 								.matches(ENTITY_NAME).where("id")
-								.matches(ENTITY_ID)
-								.to("/page/{domain}/edit.jsf")
-								.withInboundCorrection())
+								.matches(ENTITY_ID).withInboundCorrection())
 
 				.addRule(
-						Join.path("/{domain}/create").where("domain")
-								.matches(ENTITY_NAME)
-								.to("/page/{domain}/edit.jsf")
-								.withInboundCorrection())
+						Join.path("/{domain}/create")
+								.to("/page/{domain}/edit.jsf").where("domain")
+								.matches(ENTITY_NAME).withInboundCorrection())
 
 				.addRule(
-						Join.path("/{domain}/{id}").where("domain")
+						Join.path("/{domain}/{id}")
+								.to("/page/{domain}/view.jsf").where("domain")
 								.matches(ENTITY_NAME).where("id")
-								.matches(ENTITY_ID)
-								.to("/page/{domain}/view.jsf")
-								.withInboundCorrection())
+								.matches(ENTITY_ID).withInboundCorrection())
 
 				.addRule(Join.path("/error").to("/page/error.jsf"));
 	}

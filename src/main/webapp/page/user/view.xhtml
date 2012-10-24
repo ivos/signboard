@@ -14,10 +14,8 @@
 
 	<ui:param name="pageTitle" value="#{label['user.view.title']}" />
 	<ui:define name="header">#{label['user.page.header']}</ui:define>
-	<ui:define name="subheader">#{label['user.view.title']}</ui:define>
-	<ui:define name="footer" />
-
 	<ui:define name="main">
+		<h2>#{label['user.view.title']}</h2>
 		<h:panelGrid columnClasses="label,component,required" columns="3">
 			<my:field id="email" type="output" entity="user"
 				bean="#{userBean.user}" />

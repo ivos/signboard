@@ -12,7 +12,7 @@ import org.jboss.solder.exception.control.ExceptionHandled;
 import org.jboss.solder.logging.Logger;
 
 import com.github.ivos.signboard.project.model.Project;
-import com.github.ivos.signboard.view.support.ViewContext;
+import com.github.ivos.signboard.view.ViewContext;
 
 @Named
 @ViewScoped

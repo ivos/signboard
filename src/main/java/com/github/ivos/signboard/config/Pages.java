@@ -1,4 +1,4 @@
-package com.github.ivos.signboard.view;
+package com.github.ivos.signboard.config;
 
 import org.jboss.seam.faces.security.LoginView;
 import org.jboss.seam.faces.view.config.ViewConfig;

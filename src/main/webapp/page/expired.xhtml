@@ -7,14 +7,13 @@
 
 	<ui:param name="pageTitle" value="#{label['expired.header']}" />
 	<ui:define name="header">#{label['expired.header']}</ui:define>
-	<ui:define name="subheader" />
 	<ui:define name="main">
 		<p>
 			<h:outputText value="#{label['expired.text.report']}" />
 		</p>
 		<p>
 			<h:outputText value="#{label['error.text.proceed.before']}" />
-			<a href="#{label['application.base.url']}"><h:outputText
+			<a href="/#{viewContext.applicationName}/"><h:outputText
 					value="#{label['error.text.proceed.link']}" /></a>
 			<h:outputText value="#{label['error.text.proceed.after']}" />
 		</p>
