@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.ivos</groupId>
 	<artifactId>signboard</artifactId>
@@ -26,16 +24,16 @@
 			<comments>A business-friendly Open Source license</comments>
 		</license>
 	</licenses>
-	<scm>
-		<connection>scm:git:git://github.com/ivos/signboard.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com:ivos/signboard.git</developerConnection>
-		<url>https://ivos@github.com/ivos/signboard.git</url>
-	</scm>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
 	</properties>
+	<scm>
+		<connection>scm:git:git://github.com/ivos/signboard.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com:ivos/signboard.git</developerConnection>
+		<url>https://ivos@github.com/ivos/signboard.git</url>
+	</scm>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -48,6 +46,11 @@
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<scope>provided</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
 			<artifactId>hibernate-jpa-2.0-api</artifactId>
@@ -82,6 +85,12 @@
 			<groupId>org.jboss.spec.javax.faces</groupId>
 			<artifactId>jboss-jsf-api_2.1_spec</artifactId>
 			<version>2.0.2.Final</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-impl</artifactId>
+			<version>2.1.7</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -143,17 +152,29 @@
 			<artifactId>seam-security</artifactId>
 			<version>3.1.0.Final</version>
 			<!-- Use runtime after BaseAuthenticator moved to -api -->
+			<!-- and Identity.unAuthenticate() is available. -->
 			<!-- <scope>runtime</scope> -->
+		</dependency>
+		<dependency>
+			<groupId>org.picketlink.idm</groupId>
+			<artifactId>picketlink-idm-core</artifactId>
+			<version>1.5.0.Alpha02</version>
+		</dependency>
+		<dependency>
+			<groupId>org.picketlink.idm</groupId>
+			<artifactId>picketlink-idm-api</artifactId>
+			<version>1.5.0.Alpha02</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ocpsoft.rewrite</groupId>
 			<artifactId>rewrite-servlet</artifactId>
-			<version>1.0.3.Final</version>
+			<version>1.1.0.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ocpsoft.rewrite</groupId>
 			<artifactId>rewrite-integration-faces</artifactId>
-			<version>1.0.3.Final</version>
+			<version>1.1.0.Final</version>
+			<scope>runtime</scope>
 			<exclusions>
 				<exclusion>
 					<groupId>org.glassfish</groupId>
@@ -183,9 +204,21 @@
 		</dependency>
 		<!-- test -->
 		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.10</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>net.sf.lightair</groupId>
 			<artifactId>light-air</artifactId>
 			<version>0.2-SNAPSHOT</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.jwebunit</groupId>
+			<artifactId>jwebunit-core</artifactId>
+			<version>3.0</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -231,6 +264,16 @@
 		</testResources>
 		<pluginManagement>
 			<plugins>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.4</version>
+					<configuration>
+						<!-- For site project summary report: -->
+						<source>1.6</source>
+						<target>1.6</target>
+						<encoding>UTF-8</encoding>
+					</configuration>
+				</plugin>
 				<plugin>
 					<!-- run to refresh schema: -->
 					<!-- mvn hibernate3:hbm2ddl -->
@@ -282,14 +325,6 @@
 				<plugin>
 					<artifactId>maven-war-plugin</artifactId>
 					<version>2.1.1</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>2.4</version>
-					<configuration>
-						<!-- For site project summary report: -->
-						<source>1.6</source>
-					</configuration>
 				</plugin>
 				<plugin>
 					<artifactId>maven-site-plugin</artifactId>
@@ -416,7 +451,7 @@
 			<!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
 			<id>openshift</id>
 			<build>
-				<finalName>signboard</finalName>
+				<finalName>${project.artifactId}</finalName>
 				<plugins>
 					<plugin>
 						<artifactId>maven-war-plugin</artifactId>
