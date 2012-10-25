@@ -5,49 +5,56 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:my="http://signboard.ivos.github.com/jsf/facelets"
-	xmlns:a4j="http://richfaces.org/a4j"
-	xmlns:rich="http://richfaces.org/rich"
 	xmlns:s="http://jboss.org/seam/faces" template="/page/template.xhtml">
 
 	<ui:param name="pageTitle" value="#{label['user.register.title']}" />
 	<ui:param name="focusField" value="main\\:email" />
 	<ui:define name="header">#{pageTitle}</ui:define>
 	<ui:define name="main">
-		<p>
-			<h:outputText value="#{label['user.register.enter']}" />
-		</p>
-		<h:form id="main">
-			<rich:messages id="messages" globalOnly="true" styleClass="error" />
-			<h:panelGrid columnClasses="label,component,required" columns="3">
-				<my:field id="email" type="text" entity="user"
-					bean="#{userBean.user}" required="true" hint="register">
-					<f:validator validatorId="emailNotRegistered" />
-				</my:field>
-				<my:field id="password" type="password" entity="user"
-					bean="#{userBean.user}" required="true" hint="register" />
-				<my:field id="confirmPassword" type="password" entity="user"
-					bean="#{userBean}" required="true" hint="register"
-					customAjaxValidation="true">
-					<f:validator validatorId="confirmPasswordMatching" />
-					<rich:validator>
-						<a4j:ajax execute="password confirmPassword" event="blur"
-							render="confirmPassword-message" limitRender="true" />
-					</rich:validator>
-				</my:field>
-				<my:field id="firstName" type="text" entity="user"
-					bean="#{userBean.user}" required="true" />
-				<my:field id="lastName" type="text" entity="user"
-					bean="#{userBean.user}" required="true" />
-				<my:field id="phone" type="text" entity="user"
-					bean="#{userBean.user}" />
-				<my:field id="skype" type="text" entity="user"
-					bean="#{userBean.user}" />
-			</h:panelGrid>
-			<div class="buttons">
-				<h:commandButton id="register" value="#{label['button.register']}"
-					action="#{userBean.register}" />
-				<h:link id="cancel" value="#{label['button.cancel']}"
-					outcome="/page/index.xhtml" />
+		<h:form id="main" styleClass="form-horizontal">
+			<legend>#{label['user.register.form']}</legend>
+			<div class="control-group">
+				<div class="controls">
+					<p>
+						<h:outputText value="#{label['user.register.enter']}" />
+					</p>
+				</div>
+			</div>
+			<my:field id="email" type="text" entity="user"
+				bean="#{userBean.user}" required="true" hint="register">
+				<f:validator validatorId="emailNotRegistered" />
+			</my:field>
+			<my:field id="password" type="password" entity="user"
+				bean="#{userBean.user}" required="true" hint="register" />
+			<my:field id="confirmPassword" type="password" entity="user"
+				bean="#{userBean}" required="true" hint="register"
+				customAjaxValidation="true">
+				<f:validator validatorId="confirmPasswordMatching" />
+				<f:ajax event="blur" execute="password confirmPassword"
+					render="confirmPassword-message" />
+			</my:field>
+			<my:field id="firstName" type="text" entity="user"
+				bean="#{userBean.user}" required="true" />
+			<my:field id="lastName" type="text" entity="user"
+				bean="#{userBean.user}" required="true" />
+			<my:field id="phone" type="text" entity="user"
+				bean="#{userBean.user}" />
+			<my:field id="skype" type="text" entity="user"
+				bean="#{userBean.user}" />
+			<div class="control-group">
+				<div class="form-actions">
+					<h:commandButton id="register" action="#{userBean.register}"
+						tag="button" styleClass="btn btn-primary">
+						<i class="icon-edit"></i>
+						<h:outputText value=" #{label['button.register']}" />
+					</h:commandButton>
+					<h:link id="cancel" class="btn btn-danger pull-right"
+						outcome="/page/index">
+						<i class="icon-arrow-left"></i>
+						<h:outputText value=" #{label['button.cancel']}" />
+					</h:link>
+				</div>
+				<h:messages id="messages" globalOnly="true" styleClass="form-errors" />
 			</div>
 		</h:form>
 	</ui:define>
