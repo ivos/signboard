@@ -25,7 +25,7 @@
 							class="icon-bar"></span><span class="icon-bar"></span>
 						</a>
 						<!-- Le brand -->
-						<a class="brand" href="/#{viewContext.applicationName}/"> <h:outputText
+						<a class="brand" href="/#{viewContext.applicationName}"> <h:outputText
 								value="#{label['application.name']}" />
 						</a>
 						<!-- Le language button -->
@@ -60,11 +60,11 @@
 						<!-- Le user button -->
 						<h:panelGroup rendered="#{!identity.loggedIn}">
 							<div class="pull-right btn-group">
-								<h:link id="header-login" class="btn" outcome="/page/user/login">
+								<h:link id="navbar-login" class="btn" outcome="/page/user/login">
 									<i class="icon-signin"></i>
 									<h:outputText value=" #{label['template.login']}" />
 								</h:link>
-								<h:link id="header-register" class="btn"
+								<h:link id="navbar-register" class="btn"
 									outcome="/page/user/register">
 									<i class="icon-edit"></i>
 									<h:outputText value=" #{label['template.register']}" />
@@ -78,12 +78,12 @@
 										value="#{identity.user.id}" /> <span class="caret"></span>
 								</a>
 								<ul class="dropdown-menu">
-									<li><h:link id="header-profile"
+									<li><h:link id="navbar-profile"
 											outcome="/page/user/profile">
 											<i class="icon-cog"></i>
 											&#160;<h:outputText value="#{label['template.profile']}" />
 										</h:link></li>
-									<li><h:commandLink id="header-logout"
+									<li><h:commandLink id="navbar-logout"
 											action="#{userBean.logout}">
 											<i class="icon-signout"></i>
 											&#160;<h:outputText value="#{label['template.logout']}" />
@@ -95,7 +95,7 @@
 						<div class="nav-collapse">
 							<ul class="nav">
 								<li class="#{activeMenu=='home'? 'active':''}"><a
-									class="nav-home" href="/#{viewContext.applicationName}/"> <h:outputText
+									class="nav-home" href="/#{viewContext.applicationName}"> <h:outputText
 											value="#{label['template.home']}" />
 								</a></li>
 								<h:panelGroup rendered="#{identity.loggedIn}">
@@ -135,20 +135,6 @@
 		<h:outputScript>
 if("#{focusField}"!=""){$(document).ready(function(){$("##{focusField}").focus();});}
 		</h:outputScript>
-
-		<table id="wrapper">
-			<tr id="header">
-				<td id="logo"><h:link id="header-home"
-						outcome="/page/index.xhtml">
-						<img src="#{resource['img/logo-gray.png']}"
-							alt="${label['application.name']}" border="0" height="30"
-							width="101" class="default" />
-						<img src="#{resource['img/logo-blue.png']}"
-							alt="${label['application.name']}" border="0" height="30"
-							width="101" class="hover" />
-					</h:link></td>
-			</tr>
-		</table>
 	</h:body>
 </f:view>
 </html>
