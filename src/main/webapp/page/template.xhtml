@@ -59,17 +59,17 @@
 						</div>
 						<!-- Le user button -->
 						<h:panelGroup rendered="#{!identity.loggedIn}">
-							<ul class="pull-right nav">
-								<li><h:link id="header-login" outcome="/page/user/login">
-										<i class="icon-signin"></i>
-										<h:outputText value="#{label['template.login']}" />
-									</h:link></li>
-								<li><h:link id="header-register"
-										outcome="/page/user/register">
-										<i class="icon-edit"></i>
-										<h:outputText value="#{label['template.register']}" />
-									</h:link></li>
-							</ul>
+							<div class="pull-right btn-group">
+								<h:link id="header-login" class="btn" outcome="/page/user/login">
+									<i class="icon-signin"></i>
+									<h:outputText value=" #{label['template.login']}" />
+								</h:link>
+								<h:link id="header-register" class="btn"
+									outcome="/page/user/register">
+									<i class="icon-edit"></i>
+									<h:outputText value=" #{label['template.register']}" />
+								</h:link>
+							</div>
 						</h:panelGroup>
 						<h:panelGroup rendered="#{identity.loggedIn}">
 							<div class="btn-group pull-right navbar-button">
@@ -142,10 +142,10 @@ if("#{focusField}"!=""){$(document).ready(function(){$("##{focusField}").focus()
 						outcome="/page/index.xhtml">
 						<img src="#{resource['img/logo-gray.png']}"
 							alt="${label['application.name']}" border="0" height="30"
-							class="default" />
+							width="101" class="default" />
 						<img src="#{resource['img/logo-blue.png']}"
 							alt="${label['application.name']}" border="0" height="30"
-							class="hover" />
+							width="101" class="hover" />
 					</h:link></td>
 			</tr>
 		</table>
