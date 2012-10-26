@@ -3,6 +3,8 @@ package com.github.ivos.signboard.config.jsf;
 import java.io.IOException;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 public class BootstrapRendererSupport {
@@ -40,6 +42,18 @@ public class BootstrapRendererSupport {
 		}
 		// severity warning is default in Bootstrap
 		return styleClass.toString();
+	}
+
+	public void writeAdditionalInputAttributes(FacesContext context,
+			UIComponent component) throws IOException {
+		String[] attributes = { "placeholder" };
+		ResponseWriter writer = context.getResponseWriter();
+		for (String attribute : attributes) {
+			String value = (String) component.getAttributes().get(attribute);
+			if (value != null) {
+				writer.writeAttribute(attribute, value, attribute);
+			}
+		}
 	}
 
 	// single instance access

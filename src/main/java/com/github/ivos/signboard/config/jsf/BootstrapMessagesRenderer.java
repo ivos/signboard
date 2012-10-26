@@ -18,7 +18,7 @@ public class BootstrapMessagesRenderer extends HtmlBasicRenderer {
 
 	// copy & paste from MessagesRenderer
 
-	private static final Attribute[] ATTRIBUTES = AttributeManager
+	protected static final Attribute[] ATTRIBUTES = AttributeManager
 			.getAttributes(AttributeManager.Key.MESSAGESMESSAGES);
 
 	// ---------------------------------------------------------- Public Methods

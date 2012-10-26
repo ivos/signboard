@@ -23,24 +23,48 @@
 			<my:field id="email" type="text" entity="user"
 				bean="#{userBean.user}" required="true" hint="register">
 				<f:validator validatorId="emailNotRegistered" />
+				<f:facet name="prepend">
+					<i class="icon-envelope"></i>
+				</f:facet>
 			</my:field>
 			<my:field id="password" type="password" entity="user"
-				bean="#{userBean.user}" required="true" hint="register" />
+				bean="#{userBean.user}" required="true" hint="register">
+				<f:facet name="prepend">
+					<i class="icon-key"></i>
+				</f:facet>
+			</my:field>
 			<my:field id="confirmPassword" type="password" entity="user"
 				bean="#{userBean}" required="true" hint="register"
 				customAjaxValidation="true">
+				<f:facet name="prepend">
+					<i class="icon-key"></i>
+				</f:facet>
 				<f:validator validatorId="confirmPasswordMatching" />
 				<f:ajax event="blur" execute="password confirmPassword"
 					render="confirmPassword-message" />
 			</my:field>
 			<my:field id="firstName" type="text" entity="user"
-				bean="#{userBean.user}" required="true" />
+				bean="#{userBean.user}" required="true">
+				<f:facet name="prepend">
+					<i class="icon-user"></i>
+				</f:facet>
+			</my:field>
 			<my:field id="lastName" type="text" entity="user"
-				bean="#{userBean.user}" required="true" />
+				bean="#{userBean.user}" required="true">
+				<f:facet name="prepend">
+					<i class="icon-user"></i>
+				</f:facet>
+			</my:field>
 			<my:field id="phone" type="text" entity="user"
-				bean="#{userBean.user}" />
+				bean="#{userBean.user}">
+				<f:facet name="prepend">
+					<i class="icon-phone"></i>
+				</f:facet>
+			</my:field>
 			<my:field id="skype" type="text" entity="user"
-				bean="#{userBean.user}" />
+				bean="#{userBean.user}">
+				<f:facet name="prepend">S</f:facet>
+			</my:field>
 			<div class="control-group">
 				<div class="form-actions">
 					<h:commandButton id="register" action="#{userBean.register}"

@@ -19,7 +19,7 @@ import com.sun.faces.renderkit.html_basic.ButtonRenderer;
 
 public class BootstrapButtonRenderer extends ButtonRenderer {
 
-	private static final Attribute[] ATTRIBUTES = AttributeManager
+	protected static final Attribute[] ATTRIBUTES = AttributeManager
 			.getAttributes(AttributeManager.Key.COMMANDBUTTON);
 
 	@Override
