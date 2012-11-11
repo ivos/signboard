@@ -44,7 +44,7 @@ public class RegisterIT extends ITBase {
 		setTextField("main:lastName", lastName);
 		setTextField("main:phone", phone);
 		setTextField("main:skype", skype);
-		submit();
+		clickButton("main:register");
 	}
 
 	@Test

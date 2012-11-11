@@ -57,8 +57,8 @@ public class UserBean implements Serializable {
 			log.infov("Log in user {0}.", user.getEmail());
 			return "search?faces-redirect=true";
 		}
-		viewContext.error("login.invalid");
-		log.warnv("Login invalid for user {0}.", user.getEmail());
+		viewContext.error("login.failure");
+		log.warnv("Login failure for user {0}.", user.getEmail());
 		return null;
 	}
 
