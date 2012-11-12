@@ -3,6 +3,7 @@ package com.github.ivos.signboard.view;
 import java.io.Serializable;
 import java.util.ResourceBundle;
 
+import javax.enterprise.context.Dependent;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -15,6 +16,7 @@ import org.jboss.seam.international.status.builder.BundleKey;
 import com.github.ivos.signboard.cdi.qualifier.MessageResourceBundle;
 
 @Named
+@Dependent
 public class ViewContext implements Serializable {
 
 	@Inject

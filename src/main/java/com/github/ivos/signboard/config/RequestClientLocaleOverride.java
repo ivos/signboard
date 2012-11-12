@@ -12,6 +12,9 @@ import org.jboss.seam.faces.event.qualifier.After;
 import org.jboss.seam.faces.event.qualifier.RestoreView;
 import org.jboss.seam.international.Alter;
 import org.jboss.solder.core.Client;
+import org.jboss.solder.logging.Logger;
+
+import com.github.ivos.signboard.user.view.LanguageBean;
 
 public class RequestClientLocaleOverride {
 
@@ -27,10 +30,19 @@ public class RequestClientLocaleOverride {
 	@Alter
 	private Event<Locale> alterLocale;
 
+	@Inject
+	private LanguageBean languageBean;
+
+	@Inject
+	Logger log;
+
 	public void overrideClientLocaleWithRequest(
 			@Observes @After @RestoreView PhaseEvent event) {
-		if (!facesContext.isReleased()) {
+		if (!facesContext.isReleased()
+				&& !languageBean.isClientLocaleOverride()) {
 			Locale requestLocale = facesContext.getViewRoot().getLocale();
+			log.debugv("Client locale {0}, request locale {1}.", clientLocale,
+					requestLocale);
 			if (!clientLocale.equals(requestLocale)) {
 				alterLocale.fire(requestLocale);
 			}

@@ -25,7 +25,8 @@
 							class="icon-bar"></span><span class="icon-bar"></span>
 						</a>
 						<!-- Le brand -->
-						<a class="brand" href="/#{viewContext.applicationName}"> <h:outputText
+						<a id="nav-brand" class="brand"
+							href="/#{viewContext.applicationName}"> <h:outputText
 								value="#{label['application.name']}" />
 						</a>
 						<!-- Le language button -->
@@ -95,7 +96,7 @@
 						<div class="nav-collapse">
 							<ul class="nav">
 								<li class="#{activeMenu=='home'? 'active':''}"><a
-									class="nav-home" href="/#{viewContext.applicationName}"> <h:outputText
+									id="nav-home" href="/#{viewContext.applicationName}"> <h:outputText
 											value="#{label['template.home']}" />
 								</a></li>
 								<h:panelGroup rendered="#{identity.loggedIn}">

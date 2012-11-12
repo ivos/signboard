@@ -20,24 +20,24 @@ public class LogInOutIT extends ITBase {
 		assertNotLoggedIn();
 
 		login("email2", "password2");
-		clickLink("header-home");
+		clickLink("nav-home");
 		assertLoggedIn();
 
-		clickLinkWithExactText("Log out");
+		clickLinkWithText("Log out");
 		assertNotLoggedIn();
 	}
 
 	private void assertNotLoggedIn() {
 		assertLinkPresentWithExactText("Log in");
 		assertLinkPresentWithExactText("Register");
-		assertLinkNotPresentWithExactText("Log out");
+		assertLinkNotPresentWithText("Log out");
 		assertTextNotPresent("email2");
 	}
 
 	private void assertLoggedIn() {
 		assertTextPresent("email2");
-		assertLinkPresentWithExactText("Log out");
-		assertLinkNotPresentWithExactText("Log in");
+		assertLinkPresentWithText("Log out");
+		assertLinkNotPresentWithText("Log in");
 	}
 
 	@Test
@@ -54,7 +54,7 @@ public class LogInOutIT extends ITBase {
 		assertTitleEquals("Welcome - Signboard");
 		assertTrue(getTestingEngine().getPageURL().toString()
 				.endsWith("/signboard/"));
-		clickLinkWithExactText("log in");
+		clickLinkWithExactText("Log in");
 		assertTitleEquals("Log in - Signboard");
 		assertTrue(getTestingEngine().getPageURL().toString()
 				.contains("/signboard/login"));

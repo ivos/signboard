@@ -2,7 +2,7 @@ package com.github.ivos.signboard.cdi.producer;
 
 import java.util.ResourceBundle;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -10,8 +10,7 @@ import javax.inject.Inject;
 import com.github.ivos.signboard.cdi.qualifier.LabelResourceBundle;
 import com.github.ivos.signboard.cdi.qualifier.MessageResourceBundle;
 
-
-@ApplicationScoped
+@RequestScoped
 public class ResourceBundleProducer {
 
 	@Inject
