@@ -10,7 +10,6 @@ import javax.persistence.EntityManager;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.jboss.seam.security.Identity;
 import org.jboss.solder.exception.control.ExceptionHandled;
 import org.jboss.solder.logging.Logger;
 
@@ -46,26 +45,6 @@ public class UserBean implements Serializable {
 		viewContext.info("saved");
 		log.infov("Register user {0}.", user.toLog());
 		return "login?faces-redirect=true";
-	}
-
-	@Inject
-	Identity identity;
-
-	public String login() {
-		user.digestPassword();
-		if (identity.login() == Identity.RESPONSE_LOGIN_SUCCESS) {
-			log.infov("Log in user {0}.", user.getEmail());
-			return "search?faces-redirect=true";
-		}
-		viewContext.error("login.failure");
-		log.warnv("Login failure for user {0}.", user.getEmail());
-		return null;
-	}
-
-	public String logout() {
-		log.infov("Log out user {0}.", identity.getUser().getId());
-		identity.logout();
-		return "/index?faces-redirect=true";
 	}
 
 	// generated:
