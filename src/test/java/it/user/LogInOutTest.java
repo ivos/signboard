@@ -10,9 +10,9 @@ import net.sf.lightair.annotation.Verify;
 import org.junit.Test;
 
 @Setup
-@Verify("LogInOutIT.xml")
+@Verify("LogInOutTest.xml")
 @BaseUrl("http://localhost:8080/signboard")
-public class LogInOutIT extends ITBase {
+public class LogInOutTest extends ITBase {
 
 	@Test
 	public void fn() {

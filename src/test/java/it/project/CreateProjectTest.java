@@ -11,9 +11,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 @Setup
-@Verify("CreateProjectIT.xml")
+@Verify("CreateProjectTest.xml")
 @BaseUrl("http://localhost:8080/signboard")
-public class CreateProjectIT extends ITBase {
+public class CreateProjectTest extends ITBase {
 
 	@Before
 	public void before() {
