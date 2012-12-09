@@ -250,8 +250,8 @@ input,button,select,textarea{font-family:"Lucida Grande","Lucida Sans Unicode",A
 .navbar-search .search-query{font-family:"Lucida Grande","Lucida Sans Unicode",Arial,Helvetica,sans-serif}
 .required{color:red;font-weight:bold;font-size:12pt;}
 .help-inline.alert{padding: 4px 14px 4px 14px;}
-ul.form-errors{list-style-type:none;margin-left:0px;}
-ul.form-errors .alert{padding-right:14px;}
+ul.form-messages{list-style-type:none;margin-left:0px;}
+ul.form-messages .alert{padding-right:14px;}
 .table td{padding:0px;}
 .table td a{display:block;padding:8px;}
 .navbar-button{margin-left: 5px;margin-right: 5px;}
