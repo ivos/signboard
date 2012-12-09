@@ -53,6 +53,10 @@ public class User implements Serializable {
 		password = DigestUtils.md5Hex(password);
 	}
 
+	public String getFullName() {
+		return firstName + ' ' + lastName;
+	}
+
 	// Java bean:
 
 	public Long getId() {

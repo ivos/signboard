@@ -24,16 +24,16 @@ public class CreateProjectTest extends ITBase {
 	@Verify
 	public void fn() {
 		create("code1", "name1", "description1");
-		assertTextPresent("Saved.");
+		verifyAction("Saved.");
 		create("code2", "name2", "description2");
-		assertTextPresent("Saved.");
+		verifyAction("Saved.");
 	}
 
 	@Test
 	@Verify
 	public void fn_OptionalFields() {
 		create("code1", "name1", "");
-		assertTextPresent("Saved.");
+		verifyAction("Saved.");
 	}
 
 	private void create(String code, String name, String description) {
@@ -69,7 +69,7 @@ public class CreateProjectTest extends ITBase {
 		verifyCodeRegexpError();
 		// pass, verify allowed chars
 		create("A-b_c09", "name1", "description1");
-		assertTextPresent("Saved.");
+		verifyAction("Saved.");
 	}
 
 	private void verifyCodeRegexpError() {
@@ -93,7 +93,7 @@ public class CreateProjectTest extends ITBase {
 	@Verify
 	public void val_CodeNotRegistered() {
 		create("code1", "name1", "description1");
-		assertTextPresent("Saved.");
+		verifyAction("Saved.");
 		create("code1", "name2", "description2");
 		assertTextPresent("This project code is already registered.");
 	}

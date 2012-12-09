@@ -8,6 +8,8 @@ import org.jboss.seam.security.BaseAuthenticator;
 import org.jboss.solder.logging.Logger;
 import org.picketlink.idm.impl.api.model.SimpleUser;
 
+import com.github.ivos.signboard.user.model.User;
+import com.github.ivos.signboard.user.view.LoginBean;
 import com.github.ivos.signboard.user.view.UserBean;
 
 public class SystemAuthenticator extends BaseAuthenticator {
@@ -19,21 +21,26 @@ public class SystemAuthenticator extends BaseAuthenticator {
 	UserBean userBean;
 
 	@Inject
+	LoginBean loginBean;
+
+	@Inject
 	Logger log;
 
 	@Override
 	public void authenticate() {
-		log.debugv("Authenticate {0}.", userBean.getUser());
+		User loginUser = userBean.getUser();
+		log.debugv("Authenticate {0}.", loginUser.getEmail());
 		try {
-			entityManager
+			User userFound = entityManager
 					.createQuery(
-							"select user.id from User user where user.email=:email "
-									+ "and user.password=:password", Long.class)
-					.setParameter("email", userBean.getUser().getEmail())
-					.setParameter("password", userBean.getUser().getPassword())
+							"select user from User user where user.email=:email "
+									+ "and user.password=:password", User.class)
+					.setParameter("email", loginUser.getEmail())
+					.setParameter("password", loginUser.getPassword())
 					.getSingleResult();
 			setStatus(AuthenticationStatus.SUCCESS);
-			setUser(new SimpleUser(userBean.getUser().getEmail()));
+			setUser(new SimpleUser(loginUser.getEmail()));
+			loginBean.setUser(userFound);
 		} catch (NoResultException e) {
 			setStatus(AuthenticationStatus.FAILURE);
 		}

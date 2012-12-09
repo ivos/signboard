@@ -76,9 +76,11 @@
 							<div class="btn-group pull-right navbar-button">
 								<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 									<i class="icon-user"></i> &#160;<h:outputText
-										value="#{identity.user.id}" /> <span class="caret"></span>
+										value="#{clientUser.firstName}" /> <span class="caret"></span>
 								</a>
 								<ul class="dropdown-menu">
+									<li class="nav-header"><i class="icon-user"></i> &#160;<h:outputText
+											value="#{clientUser.fullName}" /></li>
 									<li><h:link id="navbar-profile"
 											outcome="/page/user/profile">
 											<i class="icon-cog"></i>

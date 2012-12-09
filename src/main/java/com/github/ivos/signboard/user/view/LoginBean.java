@@ -33,14 +33,14 @@ public class LoginBean implements Serializable {
 	UserBean userBean;
 
 	public String login() {
-		userBean.getUser().digestPassword();
+		User loginUser = userBean.getUser();
+		loginUser.digestPassword();
 		if (identity.login() == Identity.RESPONSE_LOGIN_SUCCESS) {
-			user = userBean.getUser();
-			log.infov("Log in user {0}.", userBean.getUser().getEmail());
+			log.infov("Log in user {0}.", user);
 			return "search?faces-redirect=true";
 		}
 		viewContext.error("login.failure");
-		log.warnv("Login failure for user {0}.", userBean.getUser().getEmail());
+		log.warnv("Login failure for user {0}.", loginUser.getEmail());
 		return null;
 	}
 
@@ -52,8 +52,13 @@ public class LoginBean implements Serializable {
 
 	@Produces
 	@Client
+	@Named("clientUser")
 	public User getUser() {
 		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	private static final long serialVersionUID = 1L;

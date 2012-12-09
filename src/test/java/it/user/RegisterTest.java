@@ -19,10 +19,10 @@ public class RegisterTest extends ITBase {
 	public void fn() {
 		register("email1", "password1", "password1", "firstName1", "lastName1",
 				"phone1", "skype1");
-		assertTextPresent("Saved.");
+		verifyAction("Saved.");
 		register("email2", "password2", "password2", "firstName2", "lastName2",
 				"phone2", "skype2");
-		assertTextPresent("Saved.");
+		verifyAction("Saved.");
 	}
 
 	@Test
@@ -30,13 +30,14 @@ public class RegisterTest extends ITBase {
 	public void fn_OptionalFields() {
 		register("email1", "password1", "password1", "firstName1", "lastName1",
 				"", "");
-		assertTextPresent("Saved.");
+		verifyAction("Saved.");
 	}
 
 	private void register(String email, String password,
 			String confirmPassword, String firstName, String lastName,
 			String phone, String skype) {
 		beginAt("register");
+		setupAjax();
 		setTextField("main:email", email);
 		setTextField("main:password", password);
 		setTextField("main:confirmPassword", confirmPassword);
@@ -73,7 +74,6 @@ public class RegisterTest extends ITBase {
 		assertTextPresent("Size must be between 4 and 100.");
 		register("email1", "password1", "abc", "firstName1", "lastName1",
 				"phone1", "skype1");
-		assertTextNotPresent("Saved.");
 	}
 
 	@Test
@@ -88,7 +88,7 @@ public class RegisterTest extends ITBase {
 	public void val_EmailAlreadyRegistered() {
 		register("email1", "password1", "password1", "firstName1", "lastName1",
 				"phone1", "skype1");
-		assertTextPresent("Saved.");
+		verifyAction("Saved.");
 		register("email1", "password2", "password2", "firstName2", "lastName2",
 				"phone2", "skype2");
 		assertTextPresent("This e-mail address is already registered.");

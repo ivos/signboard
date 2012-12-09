@@ -35,7 +35,7 @@ public class LogInOutTest extends ITBase {
 	}
 
 	private void assertLoggedIn() {
-		assertTextPresent("email2");
+		assertTextPresent("first2 last2");
 		assertLinkPresentWithText("Log out");
 		assertLinkNotPresentWithText("Log in");
 	}
@@ -51,6 +51,7 @@ public class LogInOutTest extends ITBase {
 	@Test
 	public void nav() {
 		beginAt("/");
+		setupAjax();
 		assertTitleEquals("Welcome - Signboard");
 		assertTrue(getTestingEngine().getPageURL().toString()
 				.endsWith("/signboard/"));
