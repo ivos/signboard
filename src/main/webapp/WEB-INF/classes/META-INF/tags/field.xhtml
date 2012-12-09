@@ -20,13 +20,15 @@
 		<div class="controls">
 			<c:choose>
 				<c:when test="#{type == 'output'}">
-					<h:outputText id="#{id}" value="#{bean[property]}">
+					<h:outputText id="#{id}" value="#{bean[property]}"
+						styleClass="#{class}">
 						<ui:insert />
 					</h:outputText>
 				</c:when>
 				<c:when test="#{type == 'text'}">
 					<h:inputText id="#{id}" value="#{bean[property]}"
-						label="#{label[labelKey]}" placeholder="#{label[labelKey]}">
+						label="#{label[labelKey]}" placeholder="#{label[labelKey]}"
+						styleClass="#{class}">
 						<ui:insert />
 						<c:if test="#{customAjaxValidation != true}">
 							<f:ajax event="blur" render="#{id}-message" />
@@ -35,7 +37,8 @@
 				</c:when>
 				<c:when test="#{type == 'password'}">
 					<h:inputSecret id="#{id}" value="#{bean[property]}"
-						label="#{label[labelKey]}" placeholder="#{label[labelKey]}">
+						label="#{label[labelKey]}" placeholder="#{label[labelKey]}"
+						styleClass="#{class}">
 						<ui:insert />
 						<c:if test="#{customAjaxValidation != true}">
 							<f:ajax event="blur" render="#{id}-message" />
@@ -44,7 +47,7 @@
 				</c:when>
 				<c:when test="#{type == 'select'}">
 					<h:selectOneMenu id="#{id}" value="#{bean[property]}"
-						label="#{label[labelKey]}">
+						label="#{label[labelKey]}" styleClass="#{class}">
 						<f:selectItems value="#{options.entrySet()}" var="entry"
 							itemValue="#{entry.key}" itemLabel="#{entry.value}" />
 					</h:selectOneMenu>
