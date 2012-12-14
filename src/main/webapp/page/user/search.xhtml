@@ -37,17 +37,24 @@
 			<div class="control-group">
 				<div class="form-actions">
 					<h:commandButton id="search" class="btn btn-primary"
-						value="#{label['button.search']}" action="#{userListBean.search}" />
-					<h:link id="create" class="btn" value="#{label['button.create']}"
-						outcome="edit" />
+						action="#{userListBean.search}" tag="button">
+						<i class="icon-search"></i>
+						<h:outputText value=" #{label['button.search']}" />
+					</h:commandButton>
+					<h:link id="create" class="btn" outcome="edit">
+						<i class="icon-plus-sign"></i>
+						<h:outputText value=" #{label['button.create']}" />
+					</h:link>
 					<h:commandButton id="reset" class="btn btn-danger pull-right"
-						value="#{label['button.reset']}" action="#{userListBean.reset}" />
+						action="#{userListBean.reset}" tag="button">
+						<i class="icon-remove-circle"></i>
+						<h:outputText value=" #{label['button.reset']}" />
+					</h:commandButton>
 					<h:commandButton id="generate" class="btn btn-danger pull-right"
 						value="Generate" action="#{userListBean.generate}" />
 				</div>
+				<h:messages globalOnly="true" styleClass="form-messages" />
 			</div>
-			<h:messages globalOnly="true" styleClass="form-messages"
-				errorClass="error" infoClass="info" />
 			<h:dataTable id="userListBeanPageItems"
 				styleClass="table table-striped table-bordered table-hover"
 				value="#{userListBean.pageItems}" var="_item">

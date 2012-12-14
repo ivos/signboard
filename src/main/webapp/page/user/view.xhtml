@@ -13,31 +13,41 @@
 	</f:metadata>
 
 	<ui:param name="pageTitle" value="#{label['user.view.title']}" />
-	<ui:define name="header">#{label['user.page.header']}</ui:define>
 	<ui:define name="main">
-		<h2>#{label['user.view.title']}</h2>
-		<h:panelGrid columnClasses="label,component,required" columns="3">
-			<my:field id="email" type="output" entity="user"
+		<h1>#{label['user.page.header']}</h1>
+		<h:form id="main" styleClass="form-horizontal">
+			<legend>#{label['user.view.title']}</legend>
+			<my:field id="lastName" type="output" entity="user"
 				bean="#{userBean.user}" />
 			<my:field id="firstName" type="output" entity="user"
 				bean="#{userBean.user}" />
-			<my:field id="lastName" type="output" entity="user"
+			<my:field id="email" type="output" entity="user"
 				bean="#{userBean.user}" />
 			<my:field id="phone" type="output" entity="user"
 				bean="#{userBean.user}" />
 			<my:field id="skype" type="output" entity="user"
 				bean="#{userBean.user}" />
-			<my:field id="password" type="output" entity="user"
-				bean="#{userBean.user}" />
-		</h:panelGrid>
 
-		<div class="buttons">
-			<h:link id="search" value="#{label['button.viewAll']}"
-				outcome="search" />
-			<h:link id="edit" value="#{label['button.edit']}" outcome="edit"
-				includeViewParams="true" />
-			<h:link id="create" value="#{label['button.create']}" outcome="edit" />
-		</div>
+			<div class="control-group">
+				<div class="form-actions">
+					<h:link id="edit" class="btn" outcome="edit"
+						includeViewParams="true">
+						<i class="icon-edit"></i>
+						<h:outputText value=" #{label['button.edit']}" />
+					</h:link>
+					<h:link id="create" class="btn" outcome="edit">
+						<i class="icon-plus-sign"></i>
+						<h:outputText value=" #{label['button.create']}" />
+					</h:link>
+					<h:link id="search" class="btn pull-right" outcome="search">
+						<i class="icon-arrow-left"></i>
+						<h:outputText value=" #{label['button.viewAll']}" />
+					</h:link>
+				</div>
+				<h:messages id="messages" globalOnly="true"
+					styleClass="form-messages" />
+			</div>
+		</h:form>
 	</ui:define>
 
 </ui:composition>

@@ -21,7 +21,7 @@
 			<c:choose>
 				<c:when test="#{type == 'output'}">
 					<h:outputText id="#{id}" value="#{bean[property]}"
-						styleClass="#{class}">
+						styleClass="#{class} uneditable-input">
 						<ui:insert />
 					</h:outputText>
 				</c:when>
