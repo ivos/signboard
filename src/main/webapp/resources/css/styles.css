@@ -261,6 +261,7 @@ input,button,select,textarea{font-family:"Lucida Grande","Lucida Sans Unicode",A
 .required{color:red;font-weight:bold;font-size:12pt;}
 .help-inline.alert{padding: 4px 14px 4px 14px;}
 div.form-actions input, div.form-actions a, div.form-actions button{margin-right:8px;}
+div.form-actions input.btn-primary, div.form-actions a.btn-primary, div.form-actions button.btn-primary{margin-right:16px;}
 ul.form-messages{list-style-type:none;margin-left:0px;}
 ul.form-messages .alert{padding-right:14px;}
 .table td{padding:0px;}
