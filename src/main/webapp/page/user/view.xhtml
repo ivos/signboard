@@ -30,17 +30,17 @@
 
 			<div class="control-group">
 				<div class="form-actions">
-					<h:link id="edit" class="btn" outcome="edit"
+					<h:link id="edit" class="btn btn-success" outcome="edit"
 						includeViewParams="true">
 						<i class="icon-edit"></i>
 						<h:outputText value=" #{label['button.edit']}" />
 					</h:link>
-					<h:link id="create" class="btn" outcome="edit">
-						<i class="icon-plus-sign"></i>
+					<h:link id="create" class="btn btn-info" outcome="edit">
+						<i class="icon-plus"></i>
 						<h:outputText value=" #{label['button.create']}" />
 					</h:link>
-					<h:link id="search" class="btn pull-right" outcome="search">
-						<i class="icon-arrow-left"></i>
+					<h:link id="search" class="btn" outcome="search">
+						<i class="icon-list"></i>
 						<h:outputText value=" #{label['button.viewAll']}" />
 					</h:link>
 				</div>
