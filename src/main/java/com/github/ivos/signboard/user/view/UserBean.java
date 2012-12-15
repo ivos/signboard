@@ -92,9 +92,9 @@ public class UserBean implements Serializable {
 
 	public String update() {
 		// if (id == null) {} else {}
-		entityManager.merge(user);
+		user = entityManager.merge(user);
 		viewContext.info("saved");
-		return "edit?faces-redirect=true&id=" + user.getId();
+		return "view?faces-redirect=true&id=" + user.getId();
 	}
 
 	public String delete() {
