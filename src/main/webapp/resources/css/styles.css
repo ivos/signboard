@@ -258,6 +258,8 @@ li[class^="icon-"].icon-large:before,li[class*=" icon-"].icon-large:before{text-
 body{font-family:"Lucida Grande","Lucida Sans Unicode",Arial,Helvetica,sans-serif}
 input,button,select,textarea{font-family:"Lucida Grande","Lucida Sans Unicode",Arial,Helvetica,sans-serif}
 .navbar-search .search-query{font-family:"Lucida Grande","Lucida Sans Unicode",Arial,Helvetica,sans-serif}
+.large {font-size: 120%;}
+.small {font-size: 85%;}
 .required{color:red;font-weight:bold;font-size:12pt;}
 .help-inline.alert{padding: 4px 14px 4px 14px;}
 div.form-actions input, div.form-actions a, div.form-actions button{margin-right:8px;}
