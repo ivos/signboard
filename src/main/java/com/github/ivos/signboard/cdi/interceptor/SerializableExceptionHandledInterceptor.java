@@ -81,20 +81,6 @@ public class SerializableExceptionHandledInterceptor implements Serializable {
 			}
 		}
 
-		if (ctx.getMethod().getReturnType().equals(Integer.TYPE)
-				|| ctx.getMethod().getReturnType().equals(Short.TYPE)
-				|| ctx.getMethod().getReturnType().equals(Long.TYPE)
-				|| ctx.getMethod().getReturnType().equals(Float.TYPE)
-				|| ctx.getMethod().getReturnType().equals(Byte.TYPE)
-				|| ctx.getMethod().getReturnType().equals(Double.TYPE))
-			return 0;
-
-		if (ctx.getMethod().getReturnType().equals(Character.TYPE))
-			return '\u0000';
-
-		if (ctx.getMethod().getReturnType().equals(Boolean.TYPE))
-			return false;
-
 		return result;
 	}
 

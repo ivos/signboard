@@ -59,7 +59,7 @@ public class UserListBean implements Serializable {
 	 * Support searching User entities with pagination
 	 */
 
-	private int page;
+	private int page = 1;
 	private long count;
 	private List<User> pageItems;
 
@@ -70,6 +70,12 @@ public class UserListBean implements Serializable {
 	}
 
 	public void setPage(int page) {
+		if (page < 1) {
+			page = 1;
+		}
+		if (page > getLastPage()) {
+			page = getLastPage();
+		}
 		this.page = page;
 	}
 
@@ -86,7 +92,7 @@ public class UserListBean implements Serializable {
 	}
 
 	public String search() {
-		page = 0;
+		page = 1;
 		return "search?faces-redirect=true";
 	}
 
@@ -105,7 +111,8 @@ public class UserListBean implements Serializable {
 		root = criteria.from(User.class);
 		TypedQuery<User> query = entityManager.createQuery(criteria
 				.select(root).where(getSearchPredicates(root)));
-		query.setFirstResult(page * getPageSize()).setMaxResults(getPageSize());
+		query.setFirstResult((page - 1) * getPageSize()).setMaxResults(
+				getPageSize());
 		pageItems = query.getResultList();
 	}
 
@@ -148,6 +155,10 @@ public class UserListBean implements Serializable {
 
 	public long getCount() {
 		return count;
+	}
+
+	public int getLastPage() {
+		return (int) (count / getPageSize()) + 1;
 	}
 
 	/*
