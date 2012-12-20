@@ -4,12 +4,13 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:s="http://jboss.org/seam/faces"
 	xmlns:my="http://signboard.ivos.github.com/jsf/facelets"
 	template="/page/template.xhtml">
 
 	<f:metadata>
 		<f:viewParam name="page" value="#{userListBean.page}" />
-		<f:event type="preRenderView" listener="#{userListBean.paginate}" />
+		<s:viewAction action="#{userListBean.paginate}" />
 	</f:metadata>
 
 	<ui:param name="pageTitle" value="#{label['user.search.title']}" />
