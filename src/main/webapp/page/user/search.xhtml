@@ -56,7 +56,7 @@
 				<h:messages globalOnly="true" styleClass="form-messages" />
 			</div>
 			<h:dataTable id="userListBeanPageItems"
-				styleClass="table table-striped table-bordered table-hover"
+				styleClass="table table-striped table-bordered table-hover data-table"
 				value="#{userListBean.pageItems}" var="_item">
 				<my:column id="lastName" entity="user" item="#{_item}" />
 				<my:column id="firstName" entity="user" item="#{_item}" />
