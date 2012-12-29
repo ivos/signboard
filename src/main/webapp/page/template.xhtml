@@ -133,9 +133,7 @@
 		</div>
 
 		<h:outputScript name="js/scripts.js" />
-		<h:outputScript>
-if("#{focusField}"!=""){jQuery(document).ready(function(){jQuery("##{focusField}").focus();});}
-		</h:outputScript>
+		<h:outputScript rendered="#{not empty focusField}">jQuery(document).ready(function(){jQuery("##{focusField}").focus();})</h:outputScript>
 	</h:body>
 </f:view>
 </html>
