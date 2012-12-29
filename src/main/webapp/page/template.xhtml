@@ -134,7 +134,7 @@
 
 		<h:outputScript name="js/scripts.js" />
 		<h:outputScript>
-if("#{focusField}"!=""){$(document).ready(function(){$("##{focusField}").focus();});}
+if("#{focusField}"!=""){jQuery(document).ready(function(){jQuery("##{focusField}").focus();});}
 		</h:outputScript>
 	</h:body>
 </f:view>
