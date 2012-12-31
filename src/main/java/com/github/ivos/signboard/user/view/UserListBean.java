@@ -122,7 +122,7 @@ public class UserListBean implements Serializable {
 		pageItems = query.getResultList();
 	}
 
-	private Predicate[] getSearchPredicates(Root<User> root) {
+	public Predicate[] getSearchPredicates(Root<User> root) {
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 		List<Predicate> predicatesList = new ArrayList<Predicate>();
 
