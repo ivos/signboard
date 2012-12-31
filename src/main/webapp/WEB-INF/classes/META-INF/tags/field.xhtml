@@ -35,6 +35,17 @@
 						</c:if>
 					</h:inputText>
 				</c:when>
+				<c:when test="#{type == 'typeahead'}">
+					<h:inputText id="#{id}" value="#{bean[property]}"
+						label="#{label[labelKey]}" placeholder="#{label[labelKey]}"
+						styleClass="typeahead #{class}" autocomplete="off"
+						data-bean="#{entity}Remoting" data-method="#{property}_Typeahead">
+						<ui:insert />
+						<c:if test="#{customAjaxValidation != true}">
+							<f:ajax event="blur" render="#{id}-message" />
+						</c:if>
+					</h:inputText>
+				</c:when>
 				<c:when test="#{type == 'password'}">
 					<h:inputSecret id="#{id}" value="#{bean[property]}"
 						label="#{label[labelKey]}" placeholder="#{label[labelKey]}"

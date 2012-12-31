@@ -46,7 +46,7 @@ public class BootstrapRendererSupport {
 
 	public void writeAdditionalInputAttributes(FacesContext context,
 			UIComponent component) throws IOException {
-		String[] attributes = { "placeholder" };
+		String[] attributes = { "placeholder", "data-bean", "data-method" };
 		ResponseWriter writer = context.getResponseWriter();
 		for (String attribute : attributes) {
 			String value = (String) component.getAttributes().get(attribute);

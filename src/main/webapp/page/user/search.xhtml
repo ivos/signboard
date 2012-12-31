@@ -21,11 +21,11 @@
 			<legend>#{label['user.search.title']}</legend>
 			<div class="row">
 				<div class="span6">
-					<my:field id="lastName" type="text" entity="user"
+					<my:field id="lastName" type="typeahead" entity="user"
 						bean="#{userListBean.criteria}" />
-					<my:field id="firstName" type="text" entity="user"
+					<my:field id="firstName" type="typeahead" entity="user"
 						bean="#{userListBean.criteria}" />
-					<my:field id="email" type="text" entity="user"
+					<my:field id="email" type="typeahead" entity="user"
 						bean="#{userListBean.criteria}" class="input-xlarge" />
 				</div>
 				<div class="span6">
@@ -69,6 +69,11 @@
 				<ui:param name="paginatorBean" value="#{userListBean}" />
 			</ui:include>
 		</h:form>
+
+		<script type="text/javascript"
+			src="seam/resource/remoting/resource/remote.js"></script>
+		<script type="text/javascript"
+			src="seam/resource/remoting/interface.js?userRemoting"></script>
 	</ui:define>
 
 </ui:composition>
