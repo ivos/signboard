@@ -29,7 +29,7 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description>Name of the bean.</description>
+			<description>The bean with properties.</description>
 			<name>bean</name>
 			<required>true</required>
 			<type>java.lang.Object</type>
