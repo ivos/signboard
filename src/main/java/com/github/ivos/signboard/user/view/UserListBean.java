@@ -18,6 +18,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import net.sf.seaf.util.Generator;
+
 import org.jboss.solder.exception.control.ExceptionHandled;
 
 import com.github.ivos.signboard.user.model.User;
@@ -30,14 +32,18 @@ import com.github.ivos.signboard.user.model.UserCriteria;
 public class UserListBean implements Serializable {
 
 	public String generate() {
+		Generator g = new Generator();
 		for (int i = 0; i < 121; i++) {
 			User user = new User();
-			user.setEmail("email" + i + "@bla.com");
-			user.setFirstName("firstName" + i);
-			user.setLastName("lastName" + i);
-			user.setPhone("543-678-" + i);
-			user.setSkype("name.surname" + i);
+			user.setEmail(g.word(3, 8).toLowerCase() + "@"
+					+ g.word(3, 6).toLowerCase() + ".com");
+			user.setFirstName(g.word(3, 7));
+			user.setLastName(g.word(5, 9));
+			user.setPhone(g.phone());
+			user.setSkype(user.getFirstName().toLowerCase() + "."
+					+ user.getLastName().toLowerCase());
 			user.setPassword("qqqq");
+			user.digestPassword();
 			entityManager.persist(user);
 		}
 		return "search?faces-redirect=true";
