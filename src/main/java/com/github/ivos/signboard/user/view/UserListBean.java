@@ -107,10 +107,10 @@ public class UserListBean implements Serializable {
 		count = entityManager.createQuery(countCriteria).getSingleResult();
 
 		// Populate pageItems
-		CriteriaQuery<User> criteria = builder.createQuery(User.class);
-		root = criteria.from(User.class);
-		TypedQuery<User> query = entityManager.createQuery(criteria
-				.select(root).where(getSearchPredicates(root)));
+		CriteriaQuery<User> listCriteria = builder.createQuery(User.class);
+		root = listCriteria.from(User.class);
+		TypedQuery<User> query = entityManager.createQuery(listCriteria.select(
+				root).where(getSearchPredicates(root)));
 		query.setFirstResult((page - 1) * getPageSize()).setMaxResults(
 				getPageSize());
 		pageItems = query.getResultList();
