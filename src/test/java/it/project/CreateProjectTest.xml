@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<user id="1" email="email1" first_name="f1" last_name="l1"
+		password="7c6a180b36896a0a8c02787eeafb0e4c" version="0" />
+	<project />
+</dataset>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:panelGroup
+		rendered="#{paginatorBean.count gt paginatorBean.pageSize}">
+		<div class="pull-right">
+			<span class="badge"><h:outputText
+					value="#{(paginatorBean.page-1) * paginatorBean.pageSize + 1}" />
+				.. <h:outputText
+					value="#{(paginatorBean.page-1) * paginatorBean.pageSize + fn:length(paginatorBean.pageItems)}" /></span>&nbsp;<h:outputText value="#{label['paginator.of']}" />&nbsp;<span class="badge badge-inverse"><h:outputText
+					value="#{paginatorBean.count}" /></span>
+		</div>
+		<div class="pagination pagination-centered">
+			<ul>
+				<li class="#{(paginatorBean.page==1)? 'disabled':''}"><h:link
+						title="#{label['paginator.firstPage']}" includeViewParams="true">
+						<f:param name="page" value="#{1}" />
+						&laquo;
+					</h:link></li>
+				<h:panelGroup rendered="#{paginatorBean.page > 11}">
+					<li><h:link title="#{label['paginator.back10Pages']}"
+							includeViewParams="true">
+							<f:param name="page" value="#{paginatorBean.page - 10}" />
+							<h:outputText value="#{paginatorBean.page - 10}" />
+						</h:link></li>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{paginatorBean.page > 4}">
+					<li><h:link
+							title="#{label['paginator.page']} #{paginatorBean.page - 4}"
+							includeViewParams="true">
+							<f:param name="page" value="#{paginatorBean.page - 4}" />
+							<h:outputText value="#{paginatorBean.page - 4}" />
+						</h:link></li>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{paginatorBean.page > 3}">
+					<li><h:link
+							title="#{label['paginator.page']} #{paginatorBean.page - 3}"
+							includeViewParams="true">
+							<f:param name="page" value="#{paginatorBean.page - 3}" />
+							<h:outputText value="#{paginatorBean.page - 3}" />
+						</h:link></li>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{paginatorBean.page > 2}">
+					<li><h:link
+							title="#{label['paginator.page']} #{paginatorBean.page - 2}"
+							includeViewParams="true">
+							<f:param name="page" value="#{paginatorBean.page - 2}" />
+							<h:outputText value="#{paginatorBean.page - 2}" />
+						</h:link></li>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{paginatorBean.page > 1}">
+					<li><h:link
+							title="#{label['paginator.page']} #{paginatorBean.page - 1}"
+							includeViewParams="true">
+							<f:param name="page" value="#{paginatorBean.page - 1}" />
+							<h:outputText value="#{paginatorBean.page - 1}" />
+						</h:link></li>
+				</h:panelGroup>
+				<li class="active"><h:link
+						title="#{label['paginator.currentPage']}">
+						<h:outputText value="#{paginatorBean.page}" />
+					</h:link></li>
+				<h:panelGroup
+					rendered="#{paginatorBean.page lt paginatorBean.lastPage}">
+					<li><h:link
+							title="#{label['paginator.page']} #{paginatorBean.page + 1}"
+							includeViewParams="true">
+							<f:param name="page" value="#{paginatorBean.page + 1}" />
+							<h:outputText value="#{paginatorBean.page + 1}" />
+						</h:link></li>
+				</h:panelGroup>
+				<h:panelGroup
+					rendered="#{paginatorBean.page lt paginatorBean.lastPage - 1}">
+					<li><h:link
+							title="#{label['paginator.page']} #{paginatorBean.page + 2}"
+							includeViewParams="true">
+							<f:param name="page" value="#{paginatorBean.page + 2}" />
+							<h:outputText value="#{paginatorBean.page + 2}" />
+						</h:link></li>
+				</h:panelGroup>
+				<h:panelGroup
+					rendered="#{paginatorBean.page lt paginatorBean.lastPage - 2}">
+					<li><h:link
+							title="#{label['paginator.page']} #{paginatorBean.page + 3}"
+							includeViewParams="true">
+							<f:param name="page" value="#{paginatorBean.page + 3}" />
+							<h:outputText value="#{paginatorBean.page + 3}" />
+						</h:link></li>
+				</h:panelGroup>
+				<h:panelGroup
+					rendered="#{paginatorBean.page lt paginatorBean.lastPage - 3}">
+					<li><h:link
+							title="#{label['paginator.page']} #{paginatorBean.page + 4}"
+							includeViewParams="true">
+							<f:param name="page" value="#{paginatorBean.page + 4}" />
+							<h:outputText value="#{paginatorBean.page + 4}" />
+						</h:link></li>
+				</h:panelGroup>
+				<h:panelGroup
+					rendered="#{paginatorBean.page lt paginatorBean.lastPage - 10}">
+					<li><h:link title="#{label['paginator.forward10Pages']}"
+							includeViewParams="true">
+							<f:param name="page" value="#{paginatorBean.page + 10}" />
+							<h:outputText value="#{paginatorBean.page + 10}" />
+						</h:link></li>
+				</h:panelGroup>
+				<li
+					class="#{(paginatorBean.page==paginatorBean.lastPage)? 'disabled':''}">
+					<h:link title="#{label['paginator.lastPage']}"
+						includeViewParams="true">
+						<f:param name="page" value="#{paginatorBean.lastPage}" />
+						&raquo;
+					</h:link>
+				</li>
+			</ul>
+		</div>
+	</h:panelGroup>
+
+</ui:composition>

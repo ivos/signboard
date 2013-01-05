@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:my="http://signboard.ivos.github.com/jsf/facelets"
+	template="/page/template.xhtml">
+
+	<ui:param name="pageTitle" value="#{label['user.register.title']}" />
+	<ui:param name="focusField" value="main\\:email" />
+	<ui:define name="main">
+		<h:form id="main" styleClass="form-horizontal">
+			<legend>#{label['user.register.form']}</legend>
+			<div class="control-group">
+				<div class="controls">
+					<p>
+						<h:outputText value="#{label['user.register.enter']}" />
+					</p>
+				</div>
+			</div>
+			<my:field id="email" type="text" entity="user"
+				bean="#{userBean.user}" required="true" hint="register">
+				<f:validator validatorId="emailNotRegistered" />
+				<f:facet name="prepend">
+					<i class="icon-envelope"></i>
+				</f:facet>
+			</my:field>
+			<my:field id="password" type="password" entity="user"
+				bean="#{userBean.user}" required="true" hint="register">
+				<f:facet name="prepend">
+					<i class="icon-key"></i>
+				</f:facet>
+			</my:field>
+			<my:field id="confirmPassword" type="password" entity="user"
+				bean="#{userBean}" required="true" hint="register"
+				customAjaxValidation="true">
+				<f:facet name="prepend">
+					<i class="icon-key"></i>
+				</f:facet>
+				<f:validator validatorId="confirmPasswordMatching" />
+				<f:ajax event="blur" execute="password confirmPassword"
+					render="confirmPassword-message" />
+			</my:field>
+			<my:field id="firstName" type="text" entity="user"
+				bean="#{userBean.user}" required="true">
+				<f:facet name="prepend">
+					<i class="icon-user"></i>
+				</f:facet>
+			</my:field>
+			<my:field id="lastName" type="text" entity="user"
+				bean="#{userBean.user}" required="true">
+				<f:facet name="prepend">
+					<i class="icon-user"></i>
+				</f:facet>
+			</my:field>
+			<my:field id="phone" type="text" entity="user"
+				bean="#{userBean.user}">
+				<f:facet name="prepend">
+					<i class="icon-phone"></i>
+				</f:facet>
+			</my:field>
+			<my:field id="skype" type="text" entity="user"
+				bean="#{userBean.user}">
+				<f:facet name="prepend">S</f:facet>
+			</my:field>
+			<div class="control-group">
+				<div class="form-actions">
+					<h:commandButton id="register" action="#{userBean.register}"
+						tag="button" styleClass="btn btn-primary">
+						<i class="icon-edit"></i>
+						<h:outputText value=" #{label['button.register']}" />
+					</h:commandButton>
+					<h:link id="cancel" class="btn btn-warning"
+						outcome="/page/index">
+						<i class="icon-remove"></i>
+						<h:outputText value=" #{label['button.cancel']}" />
+					</h:link>
+				</div>
+				<h:messages id="messages" globalOnly="true"
+					styleClass="form-messages" />
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:my="http://signboard.ivos.github.com/jsf/facelets"
+	template="/page/template.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value="#{userBean.id}" />
+		<f:event type="preRenderView" listener="#{userBean.retrieve}" />
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="#{label['user.view.title']}" />
+	<ui:define name="main">
+		<h1>#{label['user.page.header']}</h1>
+		<h:form id="main" styleClass="form-horizontal">
+			<legend>#{label['user.view.title']}</legend>
+			<my:field id="lastName" type="output" entity="user"
+				bean="#{userBean.user}" />
+			<my:field id="firstName" type="output" entity="user"
+				bean="#{userBean.user}" />
+			<my:field id="email" type="output" entity="user"
+				bean="#{userBean.user}" />
+			<my:field id="phone" type="output" entity="user"
+				bean="#{userBean.user}" />
+			<my:field id="skype" type="output" entity="user"
+				bean="#{userBean.user}" />
+
+			<div class="control-group">
+				<div class="form-actions">
+					<h:link id="edit" class="btn btn-success" outcome="edit"
+						includeViewParams="true">
+						<i class="icon-edit"></i>
+						<h:outputText value=" #{label['button.edit']}" />
+					</h:link>
+					<h:link id="create" class="btn btn-info" outcome="edit">
+						<i class="icon-plus"></i>
+						<h:outputText value=" #{label['button.create']}" />
+					</h:link>
+					<h:link id="search" class="btn" outcome="search">
+						<i class="icon-list"></i>
+						<h:outputText value=" #{label['button.viewAll']}" />
+					</h:link>
+				</div>
+				<h:messages id="messages" globalOnly="true"
+					styleClass="form-messages" />
+			</div>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

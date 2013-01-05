@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:my="http://signboard.ivos.github.com/jsf/facelets"
+	template="/page/template.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value="#{projectBean.id}" />
+		<f:event type="preRenderView" listener="#{projectBean.retrieve}" />
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="#{label['project.view.title']}" />
+	<ui:define name="header">#{label['project.page.header']}</ui:define>
+	<ui:define name="main">
+		<h2>#{label['project.view.title']}</h2>
+		<h:panelGrid columnClasses="label,component,required" columns="3">
+			<my:field id="code" type="output" entity="project"
+				bean="#{projectBean.project}" />
+			<my:field id="name" type="output" entity="project"
+				bean="#{projectBean.project}" />
+		</h:panelGrid>
+		<div class="buttons">
+			<h:link id="search" value="#{label['button.viewAll']}"
+				outcome="search" />
+			<h:link id="edit" value="#{label['button.edit']}" outcome="edit"
+				includeViewParams="true" />
+			<h:link id="create" value="#{label['button.create']}"
+				outcome="create" />
+		</div>
+	</ui:define>
+
+</ui:composition>

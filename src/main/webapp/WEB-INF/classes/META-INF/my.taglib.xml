@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<facelet-taglib xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd"
+	version="2.0">
+	<namespace>http://signboard.ivos.github.com/jsf/facelets</namespace>
+	<tag>
+		<description>Defines a form field.</description>
+		<tag-name>field</tag-name>
+		<source>tags/field.xhtml</source>
+		<attribute>
+			<description>Id of the HTML tag. 
+				If no property is defined, id defaults the property as well.</description>
+			<name>id</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>Type of field. One of: output, text, password, select.</description>
+			<name>type</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>Name of the entity. 
+				Provides the label in form "[entity].[property]".</description>
+			<name>entity</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>The bean with properties.</description>
+			<name>bean</name>
+			<required>true</required>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description>Property of the bean. 
+				If no property is defined, it is defaulted by id.</description>
+			<name>property</name>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>Code of the hint type. 
+				The hint is retrieved from labels in the form 
+				"[entity].[property].[hint-type-code].hint".</description>
+			<name>hint</name>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>Set to true to prevent default Ajax validation.</description>
+			<name>customAjaxValidation</name>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description>Style class to assign to the control element.</description>
+			<name>class</name>
+			<type>java.lang.String</type>
+		</attribute>
+	</tag>
+	<tag>
+		<tag-name>column</tag-name>
+		<source>tags/column.xhtml</source>
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>entity</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>item</name>
+			<required>true</required>
+			<type>java.lang.Object</type>
+		</attribute>
+	</tag>
+</facelet-taglib>

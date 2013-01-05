@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/page/template.xhtml">
+
+	<ui:param name="pageTitle" value="#{label['index.title']}" />
+	<ui:define name="header">#{label['application.name']}</ui:define>
+	<ui:define name="main">
+		<h2>#{pageTitle}</h2>
+		<p>
+			Please,
+			<h:link value="log in" outcome="/page/user/login" />
+			to start using the system...
+		</p>
+		<p>
+			... or
+			<h:link value="register" outcome="/page/user/register" />
+			to become a user.
+		</p>
+	</ui:define>
+</ui:composition>

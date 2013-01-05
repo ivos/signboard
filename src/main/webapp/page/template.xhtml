@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<f:view locale="#{userLocale}">
+	<h:head>
+		<meta charset="utf-8" />
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="robots" content="noindex, nofollow" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>#{pageTitle} - #{label['application.name']}</title>
+		<link rel="shortcut icon" href="#{resource['img/favicon.ico']}" />
+	</h:head>
+	<h:body>
+		<h:outputStylesheet name="css/styles.css" />
+
+		<!-- Le navbar -->
+		<h:form id="nav-form">
+			<div class="navbar navbar-fixed-top">
+				<div class="navbar-inner">
+					<div class="container-fluid">
+						<a class="btn btn-navbar" data-toggle="collapse"
+							data-target=".nav-collapse"> <span class="icon-bar"></span><span
+							class="icon-bar"></span><span class="icon-bar"></span>
+						</a>
+						<!-- Le brand -->
+						<a id="nav-brand" class="brand"
+							href="/#{viewContext.applicationName}"> <h:outputText
+								value="#{label['application.name']}" />
+						</a>
+						<!-- Le language button -->
+						<div class="btn-group pull-right navbar-button">
+							<a id="active-language" class="btn dropdown-toggle"
+								data-toggle="dropdown" href="#"> <h:panelGroup
+									rendered="#{languageBean.isLanguage('cs')}">
+									<img src="#{resource['img/flag-cz.jpg']}" alt="cz" height="14"
+										width="21" /> &#160;Česky
+								</h:panelGroup> <h:panelGroup rendered="#{languageBean.isLanguage('en')}">
+									<img src="#{resource['img/flag-en.jpg']}" alt="en" height="14"
+										width="23" /> &#160;English
+								</h:panelGroup> <span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+								<h:panelGroup rendered="#{!languageBean.isLanguage('cs')}">
+									<li><h:commandLink id="lang-cz"
+											action="#{languageBean.setLanguage('cs')}">
+											<img src="#{resource['img/flag-cz.jpg']}" alt="cz"
+												height="14" width="21" /> &#160;Česky 
+								</h:commandLink></li>
+								</h:panelGroup>
+								<h:panelGroup rendered="#{!languageBean.isLanguage('en')}">
+									<li><h:commandLink id="lang-en"
+											action="#{languageBean.setLanguage('en')}">
+											<img src="#{resource['img/flag-en.jpg']}" alt="en"
+												height="14" width="23" /> &#160;English 
+								</h:commandLink></li>
+								</h:panelGroup>
+							</ul>
+						</div>
+						<!-- Le user button -->
+						<h:panelGroup rendered="#{!identity.loggedIn}">
+							<div class="pull-right btn-group">
+								<h:link id="navbar-login" class="btn" outcome="/page/user/login">
+									<i class="icon-signin"></i>
+									<h:outputText value=" #{label['template.login']}" />
+								</h:link>
+								<h:link id="navbar-register" class="btn"
+									outcome="/page/user/register">
+									<i class="icon-edit"></i>
+									<h:outputText value=" #{label['template.register']}" />
+								</h:link>
+							</div>
+						</h:panelGroup>
+						<h:panelGroup rendered="#{identity.loggedIn}">
+							<div class="btn-group pull-right navbar-button">
+								<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+									<i class="icon-user"></i> &#160;<h:outputText
+										value="#{clientUser.firstName}" /> <span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<li class="nav-header"><i class="icon-user"></i> &#160;<h:outputText
+											value="#{clientUser.fullName}" /></li>
+									<li><h:link id="navbar-profile"
+											outcome="/page/user/profile">
+											<i class="icon-cog"></i>
+											&#160;<h:outputText value="#{label['template.profile']}" />
+										</h:link></li>
+									<li><h:commandLink id="navbar-logout"
+											action="#{loginBean.logout}">
+											<i class="icon-signout"></i>
+											&#160;<h:outputText value="#{label['template.logout']}" />
+										</h:commandLink></li>
+								</ul>
+							</div>
+						</h:panelGroup>
+						<!-- Le main menu -->
+						<div class="nav-collapse">
+							<ul class="nav">
+								<li class="#{activeMenu=='home'? 'active':''}"><a
+									id="nav-home" href="/#{viewContext.applicationName}"> <h:outputText
+											value="#{label['template.home']}" />
+								</a></li>
+								<h:panelGroup rendered="#{identity.loggedIn}">
+									<li class="#{activeMenu=='user'? 'active':''}"><h:link
+											id="nav-user" value="#{label['user.page.header']}"
+											outcome="/page/user/search" /></li>
+									<li class="#{activeMenu=='project'? 'active':''}"><h:link
+											id="nav-project" value="#{label['project.page.header']}"
+											outcome="/page/project/search" /></li>
+								</h:panelGroup>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</h:form>
+
+		<!-- Le main content -->
+		<div class="container-fluid">
+			<div id="main-section">
+				<ui:insert name="main" />
+			</div>
+
+			<!-- Le footer -->
+			<hr />
+			<footer>
+				<div class="pull-left">
+					<em><h:outputText value="#{label['application.name']}" /> v.
+						<h:outputText value="#{mvn['project.version']}" /></em>
+				</div>
+			</footer>
+		</div>
+
+		<h:outputScript name="js/scripts.js" />
+		<h:outputScript rendered="#{not empty focusField}">jQuery(document).ready(function(){jQuery("##{focusField}").focus();})</h:outputScript>
+	</h:body>
+</f:view>
+</html>

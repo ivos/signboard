@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:my="http://signboard.ivos.github.com/jsf/facelets"
+	template="/page/template.xhtml">
+
+	<ui:param name="pageTitle" value="#{label['user.login.title']}" />
+	<ui:param name="focusField" value="main\\:email" />
+	<ui:define name="main">
+		<h:form id="main" styleClass="form-horizontal">
+			<legend>#{label['user.login.form']}</legend>
+			<div class="control-group">
+				<div class="controls">
+					<p>
+						<h:outputText value="#{label['user.login.enter']}" />
+					</p>
+				</div>
+			</div>
+			<my:field id="email" type="text" entity="user"
+				bean="#{userBean.user}" required="true">
+				<f:facet name="prepend">
+					<i class="icon-envelope"></i>
+				</f:facet>
+			</my:field>
+			<my:field id="password" type="password" entity="user"
+				bean="#{userBean.user}" required="true">
+				<f:facet name="prepend">
+					<i class="icon-key"></i>
+				</f:facet>
+			</my:field>
+			<div class="control-group">
+				<div class="form-actions">
+					<h:commandButton id="login" action="#{loginBean.login}"
+						tag="button" styleClass="btn btn-primary">
+						<i class="icon-signin"></i>
+						<h:outputText value=" #{label['button.login']}" />
+					</h:commandButton>
+					<h:link id="cancel" class="btn" outcome="/page/index">
+						<i class="icon-remove"></i>
+						<h:outputText value=" #{label['button.cancel']}" />
+					</h:link>
+				</div>
+				<h:messages id="messages" globalOnly="true"
+					styleClass="form-messages" />
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

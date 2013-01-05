@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<c:set var="property" value="#{not empty property ? property : id}" />
+	<c:set var="required" value="#{not empty required and required}" />
+	<c:set var="labelKey" value="#{entity}.#{property}" />
+	<c:set var="hintKey" value="#{labelKey}.#{hint}.hint" />
+
+	<div class="control-group">
+		<h:outputLabel for="#{id}" styleClass="control-label">
+			<h:outputText value="#{label[labelKey]}" />
+			<h:outputText title="#{label.required}" value=" *"
+				rendered="#{required}" styleClass="required" />
+		</h:outputLabel>
+		<div class="controls">
+			<c:choose>
+				<c:when test="#{type == 'output'}">
+					<h:outputText id="#{id}" value="#{bean[property]}"
+						styleClass="#{class} uneditable-input">
+						<ui:insert />
+					</h:outputText>
+				</c:when>
+				<c:when test="#{type == 'text'}">
+					<h:inputText id="#{id}" value="#{bean[property]}"
+						label="#{label[labelKey]}" placeholder="#{label[labelKey]}"
+						styleClass="#{class}">
+						<ui:insert />
+						<c:if test="#{customAjaxValidation != true}">
+							<f:ajax event="blur" render="#{id}-message" />
+						</c:if>
+					</h:inputText>
+				</c:when>
+				<c:when test="#{type == 'typeahead'}">
+					<h:inputText id="#{id}" value="#{bean[property]}"
+						label="#{label[labelKey]}" placeholder="#{label[labelKey]}"
+						styleClass="typeahead #{class}" autocomplete="off"
+						data-bean="#{entity}Remoting" data-method="#{property}_Typeahead">
+						<ui:insert />
+						<c:if test="#{customAjaxValidation != true}">
+							<f:ajax event="blur" render="#{id}-message" />
+						</c:if>
+					</h:inputText>
+				</c:when>
+				<c:when test="#{type == 'password'}">
+					<h:inputSecret id="#{id}" value="#{bean[property]}"
+						label="#{label[labelKey]}" placeholder="#{label[labelKey]}"
+						styleClass="#{class}">
+						<ui:insert />
+						<c:if test="#{customAjaxValidation != true}">
+							<f:ajax event="blur" render="#{id}-message" />
+						</c:if>
+					</h:inputSecret>
+				</c:when>
+				<c:when test="#{type == 'select'}">
+					<h:selectOneMenu id="#{id}" value="#{bean[property]}"
+						label="#{label[labelKey]}" styleClass="#{class}">
+						<f:selectItems value="#{options.entrySet()}" var="entry"
+							itemValue="#{entry.key}" itemLabel="#{entry.value}" />
+					</h:selectOneMenu>
+				</c:when>
+				<c:otherwise>
+					<ui:insert />
+				</c:otherwise>
+			</c:choose>
+			<h:outputText value=" " />
+			<h:message id="#{id}-message" for="#{id}" />
+			<c:if test="#{not empty hint}">
+				<h:outputText id="#{id}-hint-text" value="#{label[hintKey]}"
+					styleClass="help-block" />
+			</c:if>
+		</div>
+	</div>
+</ui:composition>
