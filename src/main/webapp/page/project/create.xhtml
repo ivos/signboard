@@ -5,39 +5,48 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:my="http://signboard.ivos.github.com/jsf/facelets"
-	xmlns:a4j="http://richfaces.org/a4j"
-	xmlns:rich="http://richfaces.org/rich" template="/page/template.xhtml">
+	template="/page/template.xhtml">
 
 	<ui:param name="pageTitle" value="#{label['project.create.title']}" />
 	<ui:param name="focusField" value="edit\\:code" />
-	<ui:define name="header">#{label['project.page.header']}</ui:define>
 	<ui:define name="main">
-		<h2>#{pageTitle}</h2>
-		<h:form id="edit">
-			<h:messages globalOnly="true" styleClass="messages"
-				errorClass="error" infoClass="info" />
-			<h:panelGrid columnClasses="label,component,required" columns="3">
-				<my:field id="code" type="text" entity="project"
-					bean="#{projectBean.project}" required="true" hint="create">
-					<f:validator validatorId="codeNotReserved" />
-					<f:validator validatorId="codeNotRegistered" />
-				</my:field>
-				<my:field id="name" type="text" entity="project"
-					bean="#{projectBean.project}" required="true" hint="create" />
-				<my:field id="description" type="custom" entity="project"
-					bean="#{projectBean.project}">
-					<h:inputTextarea id="description"
-						value="#{projectBean.project.description}"
-						label="#{label['project.description']}" cols="50" rows="8">
-						<rich:validator event="blur" />
-					</h:inputTextarea>
-				</my:field>
-			</h:panelGrid>
-			<div class="buttons">
-				<h:commandButton id="save" value="#{label['button.save']}"
-					action="#{projectBean.update}" />
-				<h:link id="cancel" value="#{label['button.cancel']}"
-					outcome="search" />
+		<h1>#{label['project.page.header']}</h1>
+		<h:form id="edit" styleClass="form-horizontal">
+			<legend>#{pageTitle}</legend>
+			<my:field id="code" type="text" entity="project"
+				bean="#{projectBean.project}" required="true" hint="create">
+				<f:validator validatorId="codeNotReserved" />
+				<f:validator validatorId="codeNotRegistered" />
+			</my:field>
+			<my:field id="name" type="text" entity="project"
+				bean="#{projectBean.project}" required="true" hint="create"
+				class="input-xlarge" />
+			<my:field id="description" type="custom" entity="project"
+				bean="#{projectBean.project}">
+				<h:inputTextarea id="description"
+					value="#{projectBean.project.description}"
+					label="#{label['project.description']}"
+					placeholder="#{label['project.description']}" rows="8"
+					styleClass="input-xxlarge">
+					<f:ajax event="blur" render="description-message" />
+				</h:inputTextarea>
+			</my:field>
+
+			<div class="control-group">
+				<div class="form-actions">
+					<h:commandButton id="save" class="btn btn-primary"
+						action="#{projectBean.update}" tag="button">
+						<i class="icon-save"></i>
+						<h:outputText value=" #{label['button.save']}" />
+					</h:commandButton>
+					<h:link id="cancel" class="btn btn-warning" outcome="search">
+						<f:param name="id" value="#{userBean.id}" disable="#{isCreate}" />
+						<i class="icon-remove"></i>
+						<h:outputText value=" #{label['button.cancel']}" />
+					</h:link>
+				</div>
+				<h:messages id="messages" globalOnly="true"
+					styleClass="form-messages" />
 			</div>
 		</h:form>
 	</ui:define>

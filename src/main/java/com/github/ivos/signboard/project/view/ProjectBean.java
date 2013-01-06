@@ -66,7 +66,7 @@ public class ProjectBean implements Serializable {
 			entityManager.merge(project);
 		}
 		viewContext.info("saved");
-		return "edit?faces-redirect=true&id=" + project.getId();
+		return "view?faces-redirect=true&id=" + project.getId();
 	}
 
 }

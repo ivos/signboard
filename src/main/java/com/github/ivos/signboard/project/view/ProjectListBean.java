@@ -40,7 +40,7 @@ public class ProjectListBean implements Serializable {
 	@Inject
 	private EntityManager entityManager;
 
-	private int page;
+	private int page = 1;
 	private long count;
 	private List<Project> pageItems;
 
@@ -51,6 +51,12 @@ public class ProjectListBean implements Serializable {
 	}
 
 	public void setPage(int page) {
+		if (page < 1) {
+			page = 1;
+		}
+		if (page > getLastPage()) {
+			page = getLastPage();
+		}
 		this.page = page;
 	}
 
@@ -67,7 +73,7 @@ public class ProjectListBean implements Serializable {
 	}
 
 	public String search() {
-		page = 0;
+		page = 1;
 		return "search?faces-redirect=true";
 	}
 
@@ -87,11 +93,12 @@ public class ProjectListBean implements Serializable {
 		root = criteria.from(Project.class);
 		TypedQuery<Project> query = entityManager.createQuery(criteria.select(
 				root).where(getSearchPredicates(root)));
-		query.setFirstResult(page * getPageSize()).setMaxResults(getPageSize());
+		query.setFirstResult((page - 1) * getPageSize()).setMaxResults(
+				getPageSize());
 		pageItems = query.getResultList();
 	}
 
-	private Predicate[] getSearchPredicates(Root<Project> root) {
+	public Predicate[] getSearchPredicates(Root<Project> root) {
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 		List<Predicate> predicatesList = new ArrayList<Predicate>();
 
@@ -115,6 +122,10 @@ public class ProjectListBean implements Serializable {
 
 	public long getCount() {
 		return count;
+	}
+
+	public int getLastPage() {
+		return (int) (count / getPageSize()) + 1;
 	}
 
 	/*

@@ -4,46 +4,55 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:s="http://jboss.org/seam/faces"
 	xmlns:my="http://signboard.ivos.github.com/jsf/facelets"
-	xmlns:a4j="http://richfaces.org/a4j"
-	xmlns:rich="http://richfaces.org/rich" template="/page/template.xhtml">
+	template="/page/template.xhtml">
 
 	<f:metadata>
 		<f:viewParam name="id" value="#{projectBean.id}" />
-		<f:event type="preRenderView" listener="#{projectBean.retrieve}" />
+		<s:viewAction action="#{projectBean.retrieve}" />
 	</f:metadata>
 
 	<ui:param name="pageTitle" value="#{label['project.edit.title']}" />
-	<ui:define name="header">#{label['project.page.header']}</ui:define>
+	<ui:param name="focusField" value="edit\\:name" />
 	<ui:define name="main">
-		<h2>#{pageTitle}</h2>
-		<h:form id="edit">
-			<h:messages globalOnly="true" styleClass="messages"
-				errorClass="error" infoClass="info" />
-			<h:panelGrid columnClasses="label,component,required" columns="3">
-				<my:field id="code" type="output" entity="project"
-					bean="#{projectBean.project}" />
-				<my:field id="name" type="text" entity="project"
-					bean="#{projectBean.project}" required="true" />
-				<my:field id="description" type="custom" entity="project"
-					bean="#{projectBean.project}">
-					<h:inputTextarea id="description"
-						value="#{projectBean.project.description}"
-						label="#{label['project.description']}" cols="50" rows="8">
-						<rich:validator event="blur" />
-					</h:inputTextarea>
-				</my:field>
-				<my:field id="dateCreated" type="output" entity="project"
-					bean="#{projectBean.project}">
-					<f:convertDateTime timeZone="${userDateTimeZone.ID}" />
-				</my:field>
-			</h:panelGrid>
-			<div class="buttons">
-				<h:commandButton id="save" value="#{label['button.save']}"
-					action="#{projectBean.update}" />
-				<h:link id="cancel" value="#{label['button.cancel']}" outcome="view">
-					<f:param name="id" value="#{projectBean.id}" />
-				</h:link>
+		<h1>#{label['project.page.header']}</h1>
+		<h:form id="edit" styleClass="form-horizontal">
+			<legend>#{pageTitle}</legend>
+			<my:field id="code" type="output" entity="project"
+				bean="#{projectBean.project}" />
+			<my:field id="name" type="text" entity="project"
+				bean="#{projectBean.project}" required="true" class="input-xlarge" />
+			<my:field id="description" type="custom" entity="project"
+				bean="#{projectBean.project}">
+				<h:inputTextarea id="description"
+					value="#{projectBean.project.description}"
+					label="#{label['project.description']}"
+					placeholder="#{label['project.description']}" rows="8"
+					styleClass="input-xxlarge">
+					<f:ajax event="blur" render="description-message" />
+				</h:inputTextarea>
+			</my:field>
+			<my:field id="dateCreated" type="output" entity="project"
+				bean="#{projectBean.project}">
+				<f:convertDateTime timeZone="${userDateTimeZone.ID}" />
+			</my:field>
+
+			<div class="control-group">
+				<div class="form-actions">
+					<h:commandButton id="save" class="btn btn-primary"
+						action="#{projectBean.update}" tag="button">
+						<i class="icon-save"></i>
+						<h:outputText value=" #{label['button.save']}" />
+					</h:commandButton>
+					<h:link id="cancel" class="btn btn-warning" outcome="view">
+						<f:param name="id" value="#{projectBean.id}" />
+						<i class="icon-remove"></i>
+						<h:outputText value=" #{label['button.cancel']}" />
+					</h:link>
+				</div>
+				<h:messages id="messages" globalOnly="true"
+					styleClass="form-messages" />
 			</div>
 		</h:form>
 	</ui:define>
