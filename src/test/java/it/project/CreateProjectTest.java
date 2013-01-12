@@ -41,7 +41,7 @@ public class CreateProjectTest extends ITBase {
 		setTextField("edit:code", code);
 		setTextField("edit:name", name);
 		setTextField("edit:description", description);
-		submit();
+		clickButton("edit:save");
 	}
 
 	@Test
@@ -79,13 +79,12 @@ public class CreateProjectTest extends ITBase {
 
 	@Test
 	public void val_CodeNotReserved() {
-		create("create", "name1", "description1");
-		verifyProjectCodeNotReservedError();
-		create("page", "name1", "description1");
-		verifyProjectCodeNotReservedError();
+		verifyProjectCodeNotReservedError("create");
+		verifyProjectCodeNotReservedError("page");
 	}
 
-	private void verifyProjectCodeNotReservedError() {
+	private void verifyProjectCodeNotReservedError(String code) {
+		create(code, "name1", "description1");
 		assertTextPresent("Project codes 'create' and 'page' are reserved.");
 	}
 
