@@ -27,3 +27,8 @@ Project
 	As a user I can create project.
 New project attributes: code (unique), name, description.
 System records date created.
+
+1. __Find a project__
+
+	As a user I can find a project by name and code.
+I can view name and code attributes in the search table.
