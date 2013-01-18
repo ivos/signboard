@@ -9,6 +9,8 @@ User
 	As a prospect user I can register with the system to become its user.
 Registration data: email (becomes user system ID and login name),
 password and password confirmation, first name, last name, phone, skype.
+The first user to register becomes system administrator, 
+any subsequent user to register becomes system user.
 
 1. __Log in__
 

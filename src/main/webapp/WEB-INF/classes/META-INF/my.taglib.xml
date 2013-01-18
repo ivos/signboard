@@ -57,6 +57,11 @@
 			<name>class</name>
 			<type>java.lang.String</type>
 		</attribute>
+		<attribute>
+			<description>Set to true to disable select widgets.</description>
+			<name>disabled</name>
+			<type>java.lang.Boolean</type>
+		</attribute>
 	</tag>
 	<tag>
 		<tag-name>column</tag-name>

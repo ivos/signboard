@@ -23,6 +23,9 @@ public class RegisterTest extends ITBase {
 		register("email2", "password2", "password2", "firstName2", "lastName2",
 				"phone2", "skype2");
 		verifyAction("Saved.");
+		register("email3", "password3", "password3", "firstName3", "lastName3",
+				"phone3", "skype3");
+		verifyAction("Saved.");
 	}
 
 	@Test

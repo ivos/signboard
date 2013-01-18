@@ -1,9 +1,14 @@
 package com.github.ivos.signboard.user.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +17,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.hibernate.annotations.ForeignKey;
 
 @Entity
 public class User implements Serializable {
@@ -45,6 +51,12 @@ public class User implements Serializable {
 	@NotNull
 	@Size(min = 4, max = 100)
 	private String password;
+
+	@ElementCollection
+	@Enumerated(EnumType.STRING)
+	@Column(name = "system_role", length = 32, nullable = false)
+	@ForeignKey(name = "user_system_roles__user")
+	private Set<SystemRole> systemRoles = new HashSet<SystemRole>();
 
 	/**
 	 * Convert password to MD5 digest.
@@ -123,6 +135,14 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
+	public Set<SystemRole> getSystemRoles() {
+		return systemRoles;
+	}
+
+	public void setSystemRoles(Set<SystemRole> systemRoles) {
+		this.systemRoles = systemRoles;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -153,13 +173,14 @@ public class User implements Serializable {
 		return "User [id=" + id + ", version=" + version + ", email=" + email
 				+ ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", phone=" + phone + ", skype=" + skype + ", password="
-				+ password + "]";
+				+ password + ", systemRoles=" + systemRoles + "]";
 	}
 
 	public String toLog() {
 		return "User [id=" + id + ", version=" + version + ", email=" + email
 				+ ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", phone=" + phone + ", skype=" + skype + "]";
+				+ ", phone=" + phone + ", skype=" + skype + ", systemRoles="
+				+ systemRoles + "]";
 	}
 
 	private static final long serialVersionUID = 1L;

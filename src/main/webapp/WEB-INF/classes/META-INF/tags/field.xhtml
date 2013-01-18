@@ -10,6 +10,8 @@
 	<c:set var="required" value="#{not empty required and required}" />
 	<c:set var="labelKey" value="#{entity}.#{property}" />
 	<c:set var="hintKey" value="#{labelKey}.#{hint}.hint" />
+	<c:set var="disabled" value="#{not empty disabled ? disabled : false}" />
+	<c:set var="optionsProperty" value="#{property}__Options" />
 
 	<div class="control-group">
 		<h:outputLabel for="#{id}" styleClass="control-label">
@@ -62,6 +64,13 @@
 						<f:selectItems value="#{options.entrySet()}" var="entry"
 							itemValue="#{entry.key}" itemLabel="#{entry.value}" />
 					</h:selectOneMenu>
+				</c:when>
+				<c:when test="#{type == 'selectManyListbox'}">
+					<h:selectManyListbox id="#{id}" value="#{bean[property]}"
+						label="#{label[labelKey]}" styleClass="#{class}"
+						disabled="#{disabled}">
+						<f:selectItems value="#{bean[optionsProperty]}" />
+					</h:selectManyListbox>
 				</c:when>
 				<c:otherwise>
 					<ui:insert />
