@@ -13,6 +13,7 @@ import javax.servlet.ServletContext;
 import org.jboss.seam.international.status.Messages;
 import org.jboss.seam.international.status.builder.BundleKey;
 
+import com.github.ivos.signboard.cdi.qualifier.LabelResourceBundle;
 import com.github.ivos.signboard.cdi.qualifier.MessageResourceBundle;
 
 @Named
@@ -64,6 +65,14 @@ public class ViewContext implements Serializable {
 			contextPath = contextPath.substring(1);
 		}
 		return contextPath;
+	}
+
+	@Inject
+	@LabelResourceBundle
+	ResourceBundle label;
+
+	public String getLabel(String code) {
+		return label.getString(code);
 	}
 
 	private static final long serialVersionUID = 1L;
