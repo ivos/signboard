@@ -27,6 +27,11 @@ last name, first name, e-mail, phone, skype.
 I can view last name, first name, e-mail, phone, skype
 attributes in the search table.
 
+1. __View a user__
+	As a system administrator I can view a user's detail.
+I can view last name, first name, e-mail, phone, skype, system roles
+attributes.
+
 Project
 -------
 

@@ -84,8 +84,7 @@ public class SearchUserTest extends ITBase {
 	public void sec_DeniedForNonSystemAdministrator() {
 		login("email02", "qqqq");
 		gotoPage("user");
-		assertTitleEquals("Unauthorized access - Signboard");
-		assertTextPresent("You are not authorized to perform the requested operation.");
+		assertAccessDenied();
 	}
 
 }

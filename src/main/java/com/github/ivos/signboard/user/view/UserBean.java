@@ -17,6 +17,7 @@ import org.jboss.solder.exception.control.ExceptionHandled;
 import org.jboss.solder.logging.Logger;
 
 import com.github.ivos.signboard.config.PersistenceUtil;
+import com.github.ivos.signboard.config.security.SystemAdministrator;
 import com.github.ivos.signboard.user.model.SystemRole;
 import com.github.ivos.signboard.user.model.User;
 import com.github.ivos.signboard.view.SelectUtils;
@@ -95,13 +96,13 @@ public class UserBean implements Serializable {
 	@Inject
 	private EntityManager entityManager;
 
+	@SystemAdministrator
 	public void retrieve() {
 		if (FacesContext.getCurrentInstance().isPostback()) {
 			return;
 		}
 		if (id != null) {
 			log.debugv("Retrieve user by id {0}.", id);
-			entityManager.joinTransaction();
 			user = entityManager.find(User.class, id);
 		}
 	}

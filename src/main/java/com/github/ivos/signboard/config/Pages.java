@@ -33,6 +33,10 @@ public interface Pages {
 		@SystemAdministrator
 		userSearch,
 
+		@ViewPattern("/page/user/view.xhtml")
+		@SystemAdministrator
+		userView,
+
 		@ViewPattern("/*")
 		@LoginView("/page/user/login.xhtml")
 		@AccessDeniedView("/page/access-denied.xhtml")
