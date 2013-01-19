@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.jboss.seam.security.Identity;
+import org.jboss.seam.security.IdentityImpl;
 import org.jboss.solder.core.Client;
 import org.jboss.solder.logging.Logger;
 
@@ -35,8 +36,10 @@ public class LoginBean implements Serializable {
 	public String login() {
 		User loginUser = userBean.getUser();
 		loginUser.digestPassword();
+
+		((IdentityImpl) identity).unAuthenticate();
 		if (identity.login() == Identity.RESPONSE_LOGIN_SUCCESS) {
-			log.infov("Log in user {0}.", user);
+			log.infov("Log in user {0}.", user.toLog());
 			return "search?faces-redirect=true";
 		}
 		viewContext.error("login.failure");

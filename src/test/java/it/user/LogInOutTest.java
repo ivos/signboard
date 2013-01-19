@@ -15,16 +15,30 @@ import org.junit.Test;
 public class LogInOutTest extends ITBase {
 
 	@Test
-	public void fn() {
+	public void fn_Login_Logout() {
 		beginAt("login");
 		assertNotLoggedIn();
 
-		login("email2", "password2");
+		fillAndSubmitLoginForm("email2", "password2");
 		clickLink("nav-home");
-		assertLoggedIn();
+		assertLoggedIn("2");
 
 		clickLinkWithText("Log out");
 		assertNotLoggedIn();
+	}
+
+	@Test
+	public void fn_LoginWhenLoggedIn() {
+		beginAt("login");
+
+		fillAndSubmitLoginForm("email2", "password2");
+		clickLink("nav-home");
+		assertLoggedIn("2");
+
+		clickLinkWithExactText("log in");
+		fillAndSubmitLoginForm("email1", "password1");
+		clickLink("nav-home");
+		assertLoggedIn("1");
 	}
 
 	private void assertNotLoggedIn() {
@@ -34,8 +48,8 @@ public class LogInOutTest extends ITBase {
 		assertTextNotPresent("email2");
 	}
 
-	private void assertLoggedIn() {
-		assertTextPresent("first2 last2");
+	private void assertLoggedIn(String number) {
+		assertTextPresent("first" + number + " last" + number);
 		assertLinkPresentWithText("Log out");
 		assertLinkNotPresentWithText("Log in");
 	}
