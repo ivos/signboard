@@ -21,16 +21,19 @@ Login data: email, password.
 
 	As a logged-in user I can log out to stop using the system.
 
-1. __Find a user__
+1. __Find user__
 	As a system administrator I can find a user by 
 last name, first name, e-mail, phone, skype.
 I can view last name, first name, e-mail, phone, skype
 attributes in the search table.
 
-1. __View a user__
+1. __View user__
 	As a system administrator I can view a user's detail.
 I can view last name, first name, e-mail, phone, skype, system roles
 attributes.
+
+1. __Edit user__
+	As a system administrator I can edit a user's system roles attribute.
 
 Project
 -------

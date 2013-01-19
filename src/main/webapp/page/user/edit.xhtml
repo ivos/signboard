@@ -21,15 +21,15 @@
 		<h1>#{label['user.page.header']}</h1>
 		<h:form id="edit" styleClass="form-horizontal">
 			<legend>#{pageTitle}</legend>
-			<my:field id="lastName" type="text" entity="user"
-				bean="#{userBean.user}" required="true" />
-			<my:field id="firstName" type="text" entity="user"
-				bean="#{userBean.user}" required="true" />
-			<my:field id="email" type="text" entity="user"
-				bean="#{userBean.user}" required="true" />
-			<my:field id="phone" type="text" entity="user"
+			<my:field id="lastName" type="output" entity="user"
 				bean="#{userBean.user}" />
-			<my:field id="skype" type="text" entity="user"
+			<my:field id="firstName" type="output" entity="user"
+				bean="#{userBean.user}" />
+			<my:field id="email" type="output" entity="user"
+				bean="#{userBean.user}" />
+			<my:field id="phone" type="output" entity="user"
+				bean="#{userBean.user}" />
+			<my:field id="skype" type="output" entity="user"
 				bean="#{userBean.user}" />
 			<my:field id="systemRoles" type="selectManyListbox" entity="user"
 				bean="#{userBean}" />

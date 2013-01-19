@@ -111,6 +111,7 @@ public class UserBean implements Serializable {
 	 * Support updating and deleting User entities
 	 */
 
+	@SystemAdministrator
 	public String update() {
 		// if (id == null) {} else {}
 		log.infov("Update user {0}.", user.toLog());

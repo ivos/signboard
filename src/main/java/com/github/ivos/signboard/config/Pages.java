@@ -19,15 +19,13 @@ public interface Pages {
 		@ViewPattern("/page/error.xhtml")
 		error,
 
+		// user
+
 		@ViewPattern("/page/user/register.xhtml")
 		register,
 
 		@ViewPattern("/page/user/login.xhtml")
 		login,
-
-		@ViewPattern("/page/project/*")
-		@LoggedIn
-		projectAll,
 
 		@ViewPattern("/page/user/search.xhtml")
 		@SystemAdministrator
@@ -36,6 +34,18 @@ public interface Pages {
 		@ViewPattern("/page/user/view.xhtml")
 		@SystemAdministrator
 		userView,
+
+		@ViewPattern("/page/user/edit.xhtml")
+		@SystemAdministrator
+		userEdit,
+
+		// project
+
+		@ViewPattern("/page/project/*")
+		@LoggedIn
+		projectAll,
+
+		// common
 
 		@ViewPattern("/*")
 		@LoginView("/page/user/login.xhtml")
