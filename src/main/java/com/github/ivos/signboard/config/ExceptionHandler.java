@@ -15,23 +15,22 @@ import com.github.ivos.signboard.view.ViewContext;
 public class ExceptionHandler {
 
 	@Inject
-	Logger log;
+	private Logger log;
 
 	@Inject
-	ViewContext viewContext;
+	private ViewContext viewContext;
 
 	public void optimisticLockException(
 			@Handles CaughtException<OptimisticLockException> event) {
+		log.error("Caught optimistic lock exception.");
 		viewContext.error("optimistic.lock.exception");
 		event.handled();
 	}
 
 	public void authorizationException(
 			@Handles CaughtException<AuthorizationException> event) {
-		System.out
-				.println("  ===== ExceptionHandler.authorizationException ==");
-		// viewContext.error("authorization.exception");
-		viewContext.error(null, "authorization.exception");
+		log.error("Caught authorizationaut exception.");
+		viewContext.error("authorization.exception");
 		event.handled();
 	}
 

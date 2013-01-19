@@ -21,6 +21,12 @@ Login data: email, password.
 
 	As a logged-in user I can log out to stop using the system.
 
+1. __Find a user__
+	As a system administrator I can find a user by 
+last name, first name, e-mail, phone, skype.
+I can view last name, first name, e-mail, phone, skype
+attributes in the search table.
+
 Project
 -------
 
@@ -32,5 +38,5 @@ System records date created.
 
 1. __Find a project__
 
-	As a user I can find a project by name and code.
-I can view name and code attributes in the search table.
+	As a user I can find a project by name, code.
+I can view name, code attributes in the search table.

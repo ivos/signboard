@@ -22,6 +22,7 @@ import net.sf.seaf.util.Generator;
 
 import org.jboss.solder.exception.control.ExceptionHandled;
 
+import com.github.ivos.signboard.config.security.SystemAdministrator;
 import com.github.ivos.signboard.user.model.User;
 import com.github.ivos.signboard.user.model.UserCriteria;
 
@@ -102,6 +103,7 @@ public class UserListBean implements Serializable {
 		return "search?faces-redirect=true";
 	}
 
+	@SystemAdministrator
 	public void paginate() {
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 
@@ -155,6 +157,7 @@ public class UserListBean implements Serializable {
 		return predicatesList.toArray(new Predicate[predicatesList.size()]);
 	}
 
+	@SystemAdministrator
 	public List<User> getPageItems() {
 		return pageItems;
 	}
