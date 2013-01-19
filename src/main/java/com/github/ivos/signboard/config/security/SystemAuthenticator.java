@@ -1,4 +1,4 @@
-package com.github.ivos.signboard.config;
+package com.github.ivos.signboard.config.security;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
