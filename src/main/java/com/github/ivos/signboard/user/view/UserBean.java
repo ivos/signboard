@@ -68,6 +68,22 @@ public class UserBean implements Serializable {
 		return "login?faces-redirect=true";
 	}
 
+	@SystemAdministrator
+	public String disable() {
+		user.setStatus(UserStatus.disabled);
+		return update();
+	}
+
+	@SystemAdministrator
+	public String activate() {
+		user.setStatus(UserStatus.active);
+		return update();
+	}
+
+	public boolean isActive() {
+		return UserStatus.active.equals(getUser().getStatus());
+	}
+
 	// generated:
 
 	private static final long serialVersionUID = 1L;
@@ -136,12 +152,12 @@ public class UserBean implements Serializable {
 	SelectUtils selectUtils;
 
 	public Collection<String> getSystemRoles() {
-		return selectUtils.convertToStrings(user.getSystemRoles());
+		return selectUtils.convertToStrings(getUser().getSystemRoles());
 	}
 
 	public void setSystemRoles(Collection<String> systemRoles) {
-		user.setSystemRoles(selectUtils.convertToEnumSet(systemRoles,
-				SystemRole.class));
+		getUser().setSystemRoles(
+				selectUtils.convertToEnumSet(systemRoles, SystemRole.class));
 	}
 
 	public List<SelectItem> getSystemRoles__Options() {

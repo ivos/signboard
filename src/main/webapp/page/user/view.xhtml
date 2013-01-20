@@ -40,10 +40,18 @@
 						<i class="icon-edit"></i>
 						<h:outputText value=" #{label['button.edit']}" />
 					</h:link>
-					<h:link id="create" class="btn btn-info" outcome="edit">
-						<i class="icon-plus"></i>
-						<h:outputText value=" #{label['button.create']}" />
-					</h:link>
+					<h:commandButton id="disable" class="btn"
+						action="#{userBean.disable}" tag="button"
+						disabled="#{!userBean.active}">
+						<i class="icon-ban-circle"></i>
+						<h:outputText value=" #{label['button.disable']}" />
+					</h:commandButton>
+					<h:commandButton id="activate" class="btn"
+						action="#{userBean.activate}" tag="button"
+						disabled="#{userBean.active}">
+						<i class="icon-ok"></i>
+						<h:outputText value=" #{label['button.activate']}" />
+					</h:commandButton>
 					<h:link id="search" class="btn" outcome="search">
 						<i class="icon-list"></i>
 						<h:outputText value=" #{label['button.viewAll']}" />
