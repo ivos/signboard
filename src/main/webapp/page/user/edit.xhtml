@@ -49,11 +49,6 @@
 						<i class="icon-remove"></i>
 						<h:outputText value=" #{label['button.cancel']}" />
 					</h:link>
-					<h:commandButton id="delete" class="btn btn-danger pull-right"
-						action="#{userBean.delete}" rendered="#{!isCreate}" tag="button">
-						<i class="icon-trash"></i>
-						<h:outputText value=" #{label['button.delete']}" />
-					</h:commandButton>
 				</div>
 				<h:messages id="messages" globalOnly="true"
 					styleClass="form-messages" />
