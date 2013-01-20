@@ -131,7 +131,6 @@ public class UserBean implements Serializable {
 
 	@SystemAdministrator
 	public String update() {
-		// if (id == null) {} else {}
 		log.infov("Update user {0}.", user.toLog());
 		user = entityManager.merge(user);
 		viewContext.info("saved");
