@@ -42,7 +42,7 @@
 					</h:link>
 					<h:commandButton id="disable" class="btn"
 						action="#{userBean.disable}" tag="button"
-						disabled="#{!userBean.active}">
+						disabled="#{!userBean.active or userBean.user.equals(clientUser)}">
 						<i class="icon-ban-circle"></i>
 						<h:outputText value=" #{label['button.disable']}" />
 					</h:commandButton>

@@ -42,4 +42,14 @@ public class DisableAndActivateUserTest extends ITBase {
 		assertSelectedOptionEquals("main:status", "Active");
 	}
 
+	@Test
+	@Verify("DisableAndActivateUserTest.xml")
+	public void sec_CannotDisableOwnAccount() {
+		gotoPage("user");
+		clickLinkWithExactText("email01");
+		assertSelectedOptionEquals("main:status", "Active");
+		assertElementPresentByXPath("//button[@id='main:activate' and @disabled='disabled']");
+		assertElementPresentByXPath("//button[@id='main:disable' and @disabled='disabled']");
+	}
+
 }

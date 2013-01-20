@@ -42,7 +42,7 @@ attributes.
 1. __Disable and activate user__
 
 	As a system administrator I can disable an active user 
-and activate a disabled user.
+and activate a disabled user. A user cannot disable their own account.
 
 Project
 -------
