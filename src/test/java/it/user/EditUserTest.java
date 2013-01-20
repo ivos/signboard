@@ -50,6 +50,7 @@ public class EditUserTest extends ITBase {
 		}
 		selectOptions("edit:systemRoles", roles);
 		clickButton("edit:save");
+		verifyAction("Saved.");
 	}
 
 	@Test

@@ -29,6 +29,7 @@ public class ViewUserTest extends ITBase {
 	private void view(String number, String status, String... roles) {
 		gotoPage("user");
 		clickLinkWithExactText("email" + number);
+		assertTitleEquals("View user - Signboard");
 		assertTextPresent("View user");
 		assertTextPresent("lastName" + number);
 		assertTextPresent("firstName" + number);
