@@ -35,20 +35,42 @@ public class EditUserTest extends ITBase {
 		gotoPage("user");
 		clickLinkWithExactText("email" + number);
 		clickLinkWithText("Edit");
-		assertTextPresent("Edit user");
+		assertTitleEquals("Edit user - Signboard");
 		assertTextPresent("email" + number);
 		assertSelectOptionsEqual("edit:systemRoles", new String[] { "User",
 				"System administrator" });
 		List<String> rolesBefore = Arrays.asList(roles);
 		if (!rolesBefore.contains("User")) {
-			getTestingEngine().unselectOptions("edit:systemRoles",
-					new String[] { "User" });
+			unselectRole("User");
 		}
 		if (!rolesBefore.contains("System administrator")) {
-			getTestingEngine().unselectOptions("edit:systemRoles",
-					new String[] { "System administrator" });
+			unselectRole("System administrator");
 		}
 		selectOptions("edit:systemRoles", roles);
+		clickButton("edit:save");
+		verifyAction("Saved.");
+	}
+
+	private void unselectRole(String label) {
+		getTestingEngine().unselectOptions("edit:systemRoles",
+				new String[] { label });
+	}
+
+	@Test
+	public void val_KeepSystemAdminOnSelf() {
+		gotoPage("user");
+		clickLinkWithExactText("email01");
+		clickLinkWithText("Edit");
+		setWorkingForm("edit");
+		unselectRole("User");
+		unselectRole("System administrator");
+		clickButton("edit:save");
+		assertTextPresent("Cannot remove system administrator role on your own user.");
+		assertTitleEquals("Edit user - Signboard");
+
+		setWorkingForm("edit");
+		unselectRole("User");
+		selectOption("edit:systemRoles", "System administrator");
 		clickButton("edit:save");
 		verifyAction("Saved.");
 	}

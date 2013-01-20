@@ -16,7 +16,7 @@
 	<ui:param name="isCreate" value="#{empty userBean.id}" />
 	<ui:param name="pageTitle"
 		value="#{isCreate ? label['user.create.title'] : label['user.edit.title']}" />
-	<ui:param name="focusField" value="edit\\:lastName" />
+	<ui:param name="focusField" value="edit\\:systemRoles" />
 	<ui:define name="main">
 		<h1>#{label['user.page.header']}</h1>
 		<h:form id="edit" styleClass="form-horizontal">
@@ -34,7 +34,9 @@
 			<my:field id="status" type="selectOneMenu" entity="user"
 				bean="#{userBean.user}" selectBean="#{userBean}" disabled="true" />
 			<my:field id="systemRoles" type="selectManyListbox" entity="user"
-				bean="#{userBean}" />
+				bean="#{userBean}">
+				<f:validator validatorId="keepSystemAdminOnSelf" />
+			</my:field>
 
 			<div class="control-group">
 				<div class="form-actions">

@@ -63,6 +63,10 @@
 						label="#{label[labelKey]}" styleClass="#{class}"
 						disabled="#{disabled}">
 						<f:selectItems value="#{selectBean[optionsProperty]}" />
+						<ui:insert />
+						<c:if test="#{customAjaxValidation != true}">
+							<f:ajax event="blur" render="#{id}-message" />
+						</c:if>
 					</h:selectOneMenu>
 				</c:when>
 				<c:when test="#{type == 'selectManyListbox'}">
@@ -70,6 +74,10 @@
 						label="#{label[labelKey]}" styleClass="#{class}"
 						disabled="#{disabled}">
 						<f:selectItems value="#{bean[optionsProperty]}" />
+						<ui:insert />
+						<c:if test="#{customAjaxValidation != true}">
+							<f:ajax event="blur" render="#{id}-message" />
+						</c:if>
 					</h:selectManyListbox>
 				</c:when>
 				<c:otherwise>

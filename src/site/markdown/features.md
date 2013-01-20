@@ -38,11 +38,12 @@ attributes.
 1. __Edit user__
 
 	As a system administrator I can edit a user's system roles attribute.
+I cannot remove system administrator role from my own user.
 
 1. __Disable and activate user__
 
 	As a system administrator I can disable an active user 
-and activate a disabled user. A user cannot disable their own account.
+and activate a disabled user. I cannot disable my own user.
 
 Project
 -------
