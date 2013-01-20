@@ -63,6 +63,33 @@ public class LogInOutTest extends ITBase {
 	}
 
 	@Test
+	public void val_InvalidEmail() {
+		beginAt("login");
+		assertNotLoggedIn();
+
+		fillAndSubmitLoginForm("email2XXX", "password2");
+		assertTextPresent("Login failed. The provided e-mail and password do not identify an active system user.");
+	}
+
+	@Test
+	public void val_InvalidPassword() {
+		beginAt("login");
+		assertNotLoggedIn();
+
+		fillAndSubmitLoginForm("email2", "password2XXX");
+		assertTextPresent("Login failed. The provided e-mail and password do not identify an active system user.");
+	}
+
+	@Test
+	public void val_UserNotActive() {
+		beginAt("login");
+		assertNotLoggedIn();
+
+		fillAndSubmitLoginForm("email3", "password3");
+		assertTextPresent("Login failed. The provided e-mail and password do not identify an active system user.");
+	}
+
+	@Test
 	public void nav() {
 		beginAt("/");
 		setupAjax();

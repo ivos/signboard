@@ -7,4 +7,8 @@
 	<user id="2" email="email2" first_name="first2" last_name="last2"
 		password="6cb75f652a9b52798eb6cf2201057c73" status="active" version="0" />
 	<user_system_roles user="2" system_role="user" />
+
+	<user id="3" email="email3" first_name="first3" last_name="last3"
+		password="819b0643d6b89dc9b579fdfc9094f28e" status="disabled" version="0" />
+	<user_system_roles user="3" system_role="user" />
 </dataset>

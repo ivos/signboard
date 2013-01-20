@@ -15,7 +15,7 @@ any subsequent user to register becomes system user.
 
 1. __Log in__
 
-	As a registered user I can log into the system to start using it.
+	As an active user I can log into the system to start using it.
 Login data: email, password.
 
 1. __Log out__
