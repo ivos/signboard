@@ -52,6 +52,11 @@ public class User implements Serializable {
 	@Size(min = 4, max = 100)
 	private String password;
 
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	@Column(length = 32)
+	private UserStatus status;
+
 	@ElementCollection
 	@Enumerated(EnumType.STRING)
 	@Column(name = "system_role", length = 32, nullable = false)
@@ -135,6 +140,14 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
+	public UserStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(UserStatus status) {
+		this.status = status;
+	}
+
 	public Set<SystemRole> getSystemRoles() {
 		return systemRoles;
 	}
@@ -173,14 +186,15 @@ public class User implements Serializable {
 		return "User [id=" + id + ", version=" + version + ", email=" + email
 				+ ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", phone=" + phone + ", skype=" + skype + ", password="
-				+ password + ", systemRoles=" + systemRoles + "]";
+				+ password + ", status=" + status + ", systemRoles="
+				+ systemRoles + "]";
 	}
 
 	public String toLog() {
 		return "User [id=" + id + ", version=" + version + ", email=" + email
 				+ ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", phone=" + phone + ", skype=" + skype + ", systemRoles="
-				+ systemRoles + "]";
+				+ ", phone=" + phone + ", skype=" + skype + ", status="
+				+ status + ", systemRoles=" + systemRoles + "]";
 	}
 
 	private static final long serialVersionUID = 1L;

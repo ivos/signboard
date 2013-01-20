@@ -31,6 +31,8 @@
 				bean="#{userBean.user}" />
 			<my:field id="skype" type="output" entity="user"
 				bean="#{userBean.user}" />
+			<my:field id="status" type="selectOneMenu" entity="user"
+				bean="#{userBean.user}" selectBean="#{userBean}" disabled="true" />
 			<my:field id="systemRoles" type="selectManyListbox" entity="user"
 				bean="#{userBean}" />
 

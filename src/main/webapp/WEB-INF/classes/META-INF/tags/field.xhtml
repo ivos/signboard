@@ -58,11 +58,11 @@
 						</c:if>
 					</h:inputSecret>
 				</c:when>
-				<c:when test="#{type == 'select'}">
+				<c:when test="#{type == 'selectOneMenu'}">
 					<h:selectOneMenu id="#{id}" value="#{bean[property]}"
-						label="#{label[labelKey]}" styleClass="#{class}">
-						<f:selectItems value="#{options.entrySet()}" var="entry"
-							itemValue="#{entry.key}" itemLabel="#{entry.value}" />
+						label="#{label[labelKey]}" styleClass="#{class}"
+						disabled="#{disabled}">
+						<f:selectItems value="#{selectBean[optionsProperty]}" />
 					</h:selectOneMenu>
 				</c:when>
 				<c:when test="#{type == 'selectManyListbox'}">

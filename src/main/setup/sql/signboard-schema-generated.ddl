@@ -27,6 +27,7 @@
         password varchar(100) not null,
         phone varchar(30),
         skype varchar(100),
+        status varchar(32) not null,
         version integer not null,
         primary key (id)
     );

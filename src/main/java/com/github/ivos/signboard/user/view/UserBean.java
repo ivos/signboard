@@ -20,6 +20,7 @@ import com.github.ivos.signboard.config.PersistenceUtil;
 import com.github.ivos.signboard.config.security.SystemAdministrator;
 import com.github.ivos.signboard.user.model.SystemRole;
 import com.github.ivos.signboard.user.model.User;
+import com.github.ivos.signboard.user.model.UserStatus;
 import com.github.ivos.signboard.view.SelectUtils;
 import com.github.ivos.signboard.view.ViewContext;
 
@@ -51,6 +52,7 @@ public class UserBean implements Serializable {
 
 	public String register() {
 		user.digestPassword();
+		user.setStatus(UserStatus.active);
 		boolean isFirstUserInSystem = persistenceUtil.findAll(User.class, 0, 1)
 				.isEmpty();
 
@@ -144,6 +146,10 @@ public class UserBean implements Serializable {
 
 	public List<SelectItem> getSystemRoles__Options() {
 		return selectUtils.convertToSelectItems(SystemRole.class);
+	}
+
+	public List<SelectItem> getStatus__Options() {
+		return selectUtils.convertToSelectItems(UserStatus.class);
 	}
 
 }

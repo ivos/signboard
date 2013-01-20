@@ -21,12 +21,12 @@ public class ViewUserTest extends ITBase {
 
 	@Test
 	public void fn() {
-		view("02", "User");
-		view("03", "System administrator");
-		view("04", "User", "System administrator");
+		view("02", "Active", "User");
+		view("03", "Disabled", "System administrator");
+		view("04", "Active", "User", "System administrator");
 	}
 
-	private void view(String number, String... roles) {
+	private void view(String number, String status, String... roles) {
 		gotoPage("user");
 		clickLinkWithExactText("email" + number);
 		assertTextPresent("View user");
@@ -35,6 +35,7 @@ public class ViewUserTest extends ITBase {
 		assertTextPresent("email" + number);
 		assertTextPresent("phone" + number);
 		assertTextPresent("skype" + number);
+		assertSelectedOptionEquals("main:status", status);
 		assertSelectOptionsEqual("main:systemRoles", new String[] { "User",
 				"System administrator" });
 		assertSelectedOptionsEqual("main:systemRoles", roles);
