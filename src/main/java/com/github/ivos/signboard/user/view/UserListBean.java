@@ -25,6 +25,7 @@ import org.jboss.solder.exception.control.ExceptionHandled;
 import com.github.ivos.signboard.config.security.SystemAdministrator;
 import com.github.ivos.signboard.user.model.User;
 import com.github.ivos.signboard.user.model.UserCriteria;
+import com.github.ivos.signboard.user.model.UserStatus;
 
 @Named
 @Stateful
@@ -148,10 +149,10 @@ public class UserListBean implements Serializable {
 			predicatesList.add(builder.like(root.<String> get("phone"),
 					'%' + phone + '%'));
 		}
-		String skype = criteria.getSkype();
-		if (skype != null && !"".equals(skype)) {
-			predicatesList.add(builder.like(root.<String> get("skype"),
-					'%' + skype + '%'));
+		UserStatus status = criteria.getStatus();
+		if (status != null) {
+			predicatesList.add(builder.equal(root.<UserStatus> get("status"),
+					status));
 		}
 
 		return predicatesList.toArray(new Predicate[predicatesList.size()]);

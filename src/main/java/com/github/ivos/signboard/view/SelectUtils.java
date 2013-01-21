@@ -17,7 +17,20 @@ public class SelectUtils implements Serializable {
 
 	public <E extends Enum<E>> List<SelectItem> convertToSelectItems(
 			Class<E> enumClass) {
+		return convertToSelectItems(enumClass, false);
+	}
+
+	public <E extends Enum<E>> List<SelectItem> convertToSelectItemsWithEmpty(
+			Class<E> enumClass) {
+		return convertToSelectItems(enumClass, true);
+	}
+
+	private <E extends Enum<E>> List<SelectItem> convertToSelectItems(
+			Class<E> enumClass, boolean addEmptyItem) {
 		List<SelectItem> list = new ArrayList<SelectItem>();
+		if (addEmptyItem) {
+			list.add(new SelectItem(null, ""));
+		}
 		Enum<?>[] enums = enumClass.getEnumConstants();
 		for (Enum<?> e : enums) {
 			String code = "enum_" + enumClass.getSimpleName() + "_"

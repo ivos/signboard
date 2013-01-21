@@ -16,7 +16,8 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description>Type of field. One of: output, text, password, select.</description>
+			<description>Type of field. One of: output, text, typeahead, 
+				password, selectOneMenu, selectManyListbox.</description>
 			<name>type</name>
 			<required>true</required>
 			<type>java.lang.String</type>
@@ -85,6 +86,16 @@
 			<name>item</name>
 			<required>true</required>
 			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description>Type of column field. One of: output, select.</description>
+			<name>type</name>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>The select entity.</description>
+			<name>selectEntity</name>
+			<type>java.lang.String</type>
 		</attribute>
 	</tag>
 </facelet-taglib>

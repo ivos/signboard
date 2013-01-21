@@ -31,8 +31,8 @@
 				<div class="span6">
 					<my:field id="phone" type="text" entity="user"
 						bean="#{userListBean.criteria}" />
-					<my:field id="skype" type="text" entity="user"
-						bean="#{userListBean.criteria}" />
+					<my:field id="status" type="selectOneMenu" entity="user"
+						bean="#{userListBean.criteria}" selectBean="#{userBean}" />
 				</div>
 			</div>
 			<div class="control-group">
@@ -59,7 +59,8 @@
 				<my:column id="firstName" entity="user" item="#{_item}" />
 				<my:column id="email" entity="user" item="#{_item}" />
 				<my:column id="phone" entity="user" item="#{_item}" />
-				<my:column id="skype" entity="user" item="#{_item}" />
+				<my:column id="status" entity="user" item="#{_item}" type="select"
+					selectEntity="UserStatus" />
 			</h:dataTable>
 			<ui:include src="/page/paginator.xhtml">
 				<ui:param name="paginatorBean" value="#{userListBean}" />

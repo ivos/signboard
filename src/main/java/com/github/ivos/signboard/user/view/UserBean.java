@@ -166,7 +166,7 @@ public class UserBean implements Serializable {
 	}
 
 	public List<SelectItem> getStatus__Options() {
-		return selectUtils.convertToSelectItems(UserStatus.class);
+		return selectUtils.convertToSelectItemsWithEmpty(UserStatus.class);
 	}
 
 }

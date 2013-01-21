@@ -10,7 +10,7 @@ public class UserCriteria {
 
 	private String phone;
 
-	private String skype;
+	private UserStatus status;
 
 	public String getEmail() {
 		return email;
@@ -44,12 +44,12 @@ public class UserCriteria {
 		this.phone = phone;
 	}
 
-	public String getSkype() {
-		return skype;
+	public UserStatus getStatus() {
+		return status;
 	}
 
-	public void setSkype(String skype) {
-		this.skype = skype;
+	public void setStatus(UserStatus status) {
+		this.status = status;
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class UserCriteria {
 		result = prime * result
 				+ ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
-		result = prime * result + ((skype == null) ? 0 : skype.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		return result;
 	}
 
@@ -95,10 +95,10 @@ public class UserCriteria {
 				return false;
 		} else if (!phone.equals(other.phone))
 			return false;
-		if (skype == null) {
-			if (other.skype != null)
+		if (status == null) {
+			if (other.status != null)
 				return false;
-		} else if (!skype.equals(other.skype))
+		} else if (!status.equals(other.status))
 			return false;
 		return true;
 	}
@@ -106,8 +106,8 @@ public class UserCriteria {
 	@Override
 	public String toString() {
 		return "UserCriteria [email=" + email + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", phone=" + phone + ", skype="
-				+ skype + "]";
+				+ ", lastName=" + lastName + ", phone=" + phone + ", status="
+				+ status + "]";
 	}
 
 }
