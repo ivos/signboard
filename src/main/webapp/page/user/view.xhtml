@@ -30,6 +30,14 @@
 				bean="#{userBean.user}" />
 			<my:field id="status" type="selectOneMenu" entity="user"
 				bean="#{userBean.user}" selectBean="#{userBean}" disabled="true" />
+			<my:field id="registered" type="output" entity="user"
+				bean="#{userBean.user}">
+				<f:convertDateTime timeZone="${userDateTimeZone.ID}" />
+			</my:field>
+			<my:field id="lastLogin" type="output" entity="user"
+				bean="#{userBean.user}">
+				<f:convertDateTime timeZone="${userDateTimeZone.ID}" type="both" />
+			</my:field>
 			<my:field id="systemRoles" type="selectManyListbox" entity="user"
 				bean="#{userBean}" disabled="true" />
 

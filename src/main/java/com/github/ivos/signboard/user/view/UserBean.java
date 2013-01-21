@@ -2,6 +2,7 @@ package com.github.ivos.signboard.user.view;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ViewScoped;
@@ -53,6 +54,7 @@ public class UserBean implements Serializable {
 	public String register() {
 		user.digestPassword();
 		user.setStatus(UserStatus.active);
+		user.setRegistered(new Date());
 		boolean isFirstUserInSystem = persistenceUtil.findAll(User.class, 0, 1)
 				.isEmpty();
 

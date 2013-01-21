@@ -9,7 +9,7 @@ import net.sf.lightair.annotation.Verify;
 import org.junit.Before;
 import org.junit.Test;
 
-@Setup
+@Setup({ "SearchProjectTest-loginUser.xml", "SearchProjectTest.xml" })
 @Verify("SearchProjectTest.xml")
 @BaseUrl("http://localhost:8080/signboard")
 public class SearchProjectTest extends ITBase {

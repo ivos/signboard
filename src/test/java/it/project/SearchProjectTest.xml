@@ -1,8 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
-	<user id="1" email="email1" first_name="f1" last_name="l1"
-		password="7c6a180b36896a0a8c02787eeafb0e4c" status="active" version="0" />
-	<user_system_roles user="1" system_role="user" />
 	<project code="code01" name="name01" description="description01"
 		date_created="@date" version="0" />
 	<project code="code02" name="name02" description="description02"

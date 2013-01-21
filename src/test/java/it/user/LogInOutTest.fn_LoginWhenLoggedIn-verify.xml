@@ -2,12 +2,12 @@
 <dataset>
 	<user id="1" email="email1" first_name="first1" last_name="last1"
 		password="7c6a180b36896a0a8c02787eeafb0e4c" status="active"
-		registered="2010-01-01" last_login="2010-01-01 23:59:58" version="0" />
+		registered="2010-01-01" last_login="@timestamp" />
 	<user_system_roles user="1" system_role="user" />
 
 	<user id="2" email="email2" first_name="first2" last_name="last2"
 		password="6cb75f652a9b52798eb6cf2201057c73" status="active"
-		registered="2010-01-01" last_login="2010-01-01 23:59:58" version="0" />
+		registered="2010-01-01" last_login="@timestamp" />
 	<user_system_roles user="2" system_role="user" />
 
 	<user id="3" email="email3" first_name="first3" last_name="last3"

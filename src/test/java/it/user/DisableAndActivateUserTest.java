@@ -43,7 +43,6 @@ public class DisableAndActivateUserTest extends ITBase {
 	}
 
 	@Test
-	@Verify("DisableAndActivateUserTest.xml")
 	public void sec_CannotDisableOwnAccount() {
 		gotoPage("user");
 		clickLinkWithExactText("email01");

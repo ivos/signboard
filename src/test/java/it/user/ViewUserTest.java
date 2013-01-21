@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 @Setup
-@Verify("ViewUserTest.xml")
+@Verify
 @BaseUrl("http://localhost:8080/signboard")
 public class ViewUserTest extends ITBase {
 
@@ -21,21 +21,23 @@ public class ViewUserTest extends ITBase {
 
 	@Test
 	public void fn() {
-		view("02", "Active", "User");
-		view("03", "Disabled", "System administrator");
-		view("04", "Active", "User", "System administrator");
+		view("2", "Active", "User");
+		view("3", "Disabled", "System administrator");
+		view("4", "Active", "User", "System administrator");
 	}
 
 	private void view(String number, String status, String... roles) {
 		gotoPage("user");
-		clickLinkWithExactText("email" + number);
+		clickLinkWithExactText("email0" + number);
 		assertTitleEquals("View user - Signboard");
 		assertTextPresent("View user");
-		assertTextPresent("lastName" + number);
-		assertTextPresent("firstName" + number);
-		assertTextPresent("email" + number);
-		assertTextPresent("phone" + number);
-		assertTextPresent("skype" + number);
+		assertTextPresent("lastName0" + number);
+		assertTextPresent("firstName0" + number);
+		assertTextPresent("email0" + number);
+		assertTextPresent("phone0" + number);
+		assertTextPresent("skype0" + number);
+		assertTextPresent("Jan " + number + ", 2012");
+		assertTextPresent("May 1, 2012 12:59:0" + number + " PM");
 		assertSelectedOptionEquals("main:status", status);
 		assertSelectOptionsEqual("main:systemRoles", new String[] { "User",
 				"System administrator" });

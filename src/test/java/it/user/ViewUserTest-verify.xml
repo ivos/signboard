@@ -2,23 +2,21 @@
 <dataset>
 	<user id="1" email="email01" first_name="firstName01" last_name="lastName01"
 		password="3bad6af0fa4b8b330d162e19938ee981" phone="phone01" skype="skype01"
-		status="active" registered="2010-01-01" version="0" />
-	<user_system_roles user="1" system_role="user" />
+		status="active" registered="2012-01-01" />
 	<user_system_roles user="1" system_role="admin" />
 	<user id="2" email="email02" first_name="firstName02" last_name="lastName02"
 		password="3bad6af0fa4b8b330d162e19938ee981" phone="phone02" skype="skype02"
-		status="active" registered="2010-01-01" version="0" />
+		status="active" registered="2012-01-02" />
 	<user_system_roles user="2" system_role="user" />
 	<user id="3" email="email03" first_name="firstName03" last_name="lastName03"
 		password="3bad6af0fa4b8b330d162e19938ee981" phone="phone03" skype="skype03"
-		status="active" registered="2010-01-01" version="0" />
+		status="disabled" registered="2012-01-03" last_login="2012-05-01 12:59:03"
+		version="0" />
 	<user_system_roles user="3" system_role="admin" />
 	<user id="4" email="email04" first_name="firstName04" last_name="lastName04"
 		password="3bad6af0fa4b8b330d162e19938ee981" phone="phone04" skype="skype04"
-		status="active" registered="2010-01-01" version="0" />
+		status="active" registered="2012-01-04" last_login="2012-05-01 12:59:04"
+		version="0" />
 	<user_system_roles user="4" system_role="user" />
 	<user_system_roles user="4" system_role="admin" />
-	<user id="5" email="email05" first_name="firstName05" last_name="lastName05"
-		password="3bad6af0fa4b8b330d162e19938ee981" phone="phone05" skype="skype05"
-		status="active" registered="2010-01-01" version="0" />
 </dataset>

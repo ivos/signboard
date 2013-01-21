@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 @Setup
-@Verify("SearchUserTest.xml")
+@Verify
 @BaseUrl("http://localhost:8080/signboard")
 public class SearchUserTest extends ITBase {
 

@@ -1,6 +1,7 @@
 package com.github.ivos.signboard.user.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,6 +13,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -62,6 +65,13 @@ public class User implements Serializable {
 	@Column(name = "system_role", length = 32, nullable = false)
 	@ForeignKey(name = "user_system_roles__user")
 	private Set<SystemRole> systemRoles = new HashSet<SystemRole>();
+
+	@NotNull
+	@Temporal(TemporalType.DATE)
+	private Date registered;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date lastLogin;
 
 	/**
 	 * Convert password to MD5 digest.
@@ -156,6 +166,22 @@ public class User implements Serializable {
 		this.systemRoles = systemRoles;
 	}
 
+	public Date getRegistered() {
+		return registered;
+	}
+
+	public void setRegistered(Date registered) {
+		this.registered = registered;
+	}
+
+	public Date getLastLogin() {
+		return lastLogin;
+	}
+
+	public void setLastLogin(Date lastLogin) {
+		this.lastLogin = lastLogin;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -187,14 +213,16 @@ public class User implements Serializable {
 				+ ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", phone=" + phone + ", skype=" + skype + ", password="
 				+ password + ", status=" + status + ", systemRoles="
-				+ systemRoles + "]";
+				+ systemRoles + ", registered=" + registered + ", lastLogin="
+				+ lastLogin + "]";
 	}
 
 	public String toLog() {
 		return "User [id=" + id + ", version=" + version + ", email=" + email
 				+ ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", phone=" + phone + ", skype=" + skype + ", status="
-				+ status + ", systemRoles=" + systemRoles + "]";
+				+ status + ", systemRoles=" + systemRoles + ", registered="
+				+ registered + ", lastLogin=" + lastLogin + "]";
 	}
 
 	private static final long serialVersionUID = 1L;

@@ -1,6 +1,7 @@
 package com.github.ivos.signboard.user.view;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Produces;
@@ -40,6 +41,7 @@ public class LoginBean implements Serializable {
 		((IdentityImpl) identity).unAuthenticate();
 		if (identity.login() == Identity.RESPONSE_LOGIN_SUCCESS) {
 			log.infov("Log in user {0}.", user.toLog());
+			user.setLastLogin(new Date());
 			return "search?faces-redirect=true";
 		}
 		viewContext.error("login.failure");

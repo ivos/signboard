@@ -12,11 +12,13 @@ password and password confirmation, first name, last name, phone, skype.
 A newly registered user is active.
 The first user to register becomes system administrator, 
 any subsequent user to register becomes system user.
+System records registration date.
 
 1. __Log in__
 
 	As an active user I can log into the system to start using it.
 Login data: email, password.
+System records last login time.
 
 1. __Log out__
 
@@ -32,7 +34,8 @@ attributes in the search table.
 1. __View user__
 
 	As a system administrator I can view a user's detail.
-I can view last name, first name, e-mail, phone, skype, status, system roles
+I can view last name, first name, e-mail, phone, skype, status, 
+system roles, registration date, last login time
 attributes.
 
 1. __Edit user__

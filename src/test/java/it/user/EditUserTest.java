@@ -14,7 +14,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 @Setup
-@Verify
 @BaseUrl("http://localhost:8080/signboard")
 public class EditUserTest extends ITBase {
 
@@ -24,6 +23,7 @@ public class EditUserTest extends ITBase {
 	}
 
 	@Test
+	@Verify
 	public void fn() {
 		edit("02", "System administrator");
 		edit("03", "User");
@@ -57,6 +57,7 @@ public class EditUserTest extends ITBase {
 	}
 
 	@Test
+	@Verify
 	public void val_KeepSystemAdminOnSelf() {
 		gotoPage("user");
 		clickLinkWithExactText("email01");
@@ -76,7 +77,6 @@ public class EditUserTest extends ITBase {
 	}
 
 	@Test
-	@Verify("EditUserTest.xml")
 	public void sec_DeniedForNonSystemAdministrator() {
 		login("email02", "qqqq");
 		gotoPage("user/3/edit");

@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 @Setup
-@Verify("CreateProjectTest.xml")
+@Verify("CreateProjectTest-empty.xml")
 @BaseUrl("http://localhost:8080/signboard")
 public class CreateProjectTest extends ITBase {
 

@@ -15,6 +15,7 @@ import org.junit.Test;
 public class LogInOutTest extends ITBase {
 
 	@Test
+	@Verify
 	public void fn_Login_Logout() {
 		beginAt("login");
 		assertNotLoggedIn();
@@ -28,6 +29,7 @@ public class LogInOutTest extends ITBase {
 	}
 
 	@Test
+	@Verify
 	public void fn_LoginWhenLoggedIn() {
 		beginAt("login");
 

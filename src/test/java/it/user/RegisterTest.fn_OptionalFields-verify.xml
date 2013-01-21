@@ -2,5 +2,5 @@
 <dataset>
 	<user email="email1" first_name="firstName1" last_name="lastName1"
 		password="7c6a180b36896a0a8c02787eeafb0e4c" phone="@null" skype="@null"
-		status="active" />
+		status="active" registered="@date" />
 </dataset>

@@ -2,16 +2,16 @@
 <dataset>
 	<user id="$userId1" email="email1" first_name="firstName1"
 		last_name="lastName1" password="7c6a180b36896a0a8c02787eeafb0e4c"
-		phone="phone1" skype="skype1" status="active" />
+		phone="phone1" skype="skype1" status="active" registered="@date" />
 	<user_system_roles user="$userId1" system_role="admin" />
 
 	<user id="$userId2" email="email2" first_name="firstName2"
 		last_name="lastName2" password="6cb75f652a9b52798eb6cf2201057c73"
-		phone="phone2" skype="skype2" status="active" />
+		phone="phone2" skype="skype2" status="active" registered="@date" />
 	<user_system_roles user="$userId2" system_role="user" />
 
 	<user id="$userId3" email="email3" first_name="firstName3"
 		last_name="lastName3" password="819b0643d6b89dc9b579fdfc9094f28e"
-		phone="phone3" skype="skype3" status="active" />
+		phone="phone3" skype="skype3" status="active" registered="@date" />
 	<user_system_roles user="$userId3" system_role="user" />
 </dataset>
