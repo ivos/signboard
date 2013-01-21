@@ -21,30 +21,42 @@
 		<h1>#{label['user.page.header']}</h1>
 		<h:form id="edit" styleClass="form-horizontal">
 			<legend>#{pageTitle}</legend>
-			<my:field id="lastName" type="output" entity="user"
-				bean="#{userBean.user}" />
-			<my:field id="firstName" type="output" entity="user"
-				bean="#{userBean.user}" />
-			<my:field id="email" type="output" entity="user"
-				bean="#{userBean.user}" />
-			<my:field id="phone" type="output" entity="user"
-				bean="#{userBean.user}" />
-			<my:field id="skype" type="output" entity="user"
-				bean="#{userBean.user}" />
-			<my:field id="status" type="selectOneMenu" entity="user"
-				bean="#{userBean.user}" selectBean="#{userBean}" disabled="true" />
-			<my:field id="registered" type="output" entity="user"
-				bean="#{userBean.user}">
-				<f:convertDateTime timeZone="${userDateTimeZone.ID}" />
-			</my:field>
-			<my:field id="lastLogin" type="output" entity="user"
-				bean="#{userBean.user}">
-				<f:convertDateTime timeZone="${userDateTimeZone.ID}" type="both" />
-			</my:field>
-			<my:field id="systemRoles" type="selectManyListbox" entity="user"
-				bean="#{userBean}">
-				<f:validator validatorId="keepSystemAdminOnSelf" />
-			</my:field>
+			<div class="row">
+				<div class="span6">
+					<my:field id="lastName" type="output" entity="user"
+						bean="#{userBean.user}" />
+					<my:field id="firstName" type="output" entity="user"
+						bean="#{userBean.user}" />
+					<my:field id="status" type="selectOneMenu" entity="user"
+						bean="#{userBean.user}" selectBean="#{userBean}" disabled="true" />
+				</div>
+				<div class="span6">
+					<my:field id="email" type="output" entity="user"
+						bean="#{userBean.user}" />
+					<my:field id="phone" type="output" entity="user"
+						bean="#{userBean.user}" />
+					<my:field id="skype" type="output" entity="user"
+						bean="#{userBean.user}" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="span6">
+					<my:field id="registered" type="output" entity="user"
+						bean="#{userBean.user}">
+						<f:convertDateTime timeZone="${userDateTimeZone.ID}" />
+					</my:field>
+					<my:field id="lastLogin" type="output" entity="user"
+						bean="#{userBean.user}">
+						<f:convertDateTime timeZone="${userDateTimeZone.ID}" type="both" />
+					</my:field>
+				</div>
+				<div class="span6">
+					<my:field id="systemRoles" type="selectManyListbox" entity="user"
+						bean="#{userBean}">
+						<f:validator validatorId="keepSystemAdminOnSelf" />
+					</my:field>
+				</div>
+			</div>
 
 			<div class="control-group">
 				<div class="form-actions">
