@@ -2,6 +2,7 @@ package com.github.ivos.signboard.user.view;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateful;
@@ -15,6 +16,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -118,8 +120,9 @@ public class UserListBean implements Serializable {
 		// Populate pageItems
 		CriteriaQuery<User> listCriteria = builder.createQuery(User.class);
 		root = listCriteria.from(User.class);
-		TypedQuery<User> query = entityManager.createQuery(listCriteria.select(
-				root).where(getSearchPredicates(root)));
+		TypedQuery<User> query = entityManager.createQuery(listCriteria
+				.select(root).where(getSearchPredicates(root))
+				.orderBy(getOrder(builder, root)));
 		query.setFirstResult((page - 1) * getPageSize()).setMaxResults(
 				getPageSize());
 		pageItems = query.getResultList();
@@ -156,6 +159,24 @@ public class UserListBean implements Serializable {
 		}
 
 		return predicatesList.toArray(new Predicate[predicatesList.size()]);
+	}
+
+	public List<Order> getOrder(CriteriaBuilder builder, Root<User> root) {
+		List<Order> list = new ArrayList<Order>();
+		switch (criteria.getSort()) {
+		case alphabetically:
+			list.add(builder.asc(root.<String> get("lastName")));
+			list.add(builder.asc(root.<String> get("firstName")));
+			list.add(builder.asc(root.<Long> get("id")));
+			break;
+		case byRecentLogin:
+			list.add(builder.desc(root.<Date> get("lastLogin")));
+			break;
+		case byRecentRegistration:
+			list.add(builder.desc(root.<Date> get("registered")));
+			break;
+		}
+		return list;
 	}
 
 	@SystemAdministrator

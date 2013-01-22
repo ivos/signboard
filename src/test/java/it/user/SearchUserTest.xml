@@ -16,23 +16,26 @@
 		status="active" registered="2010-01-01" version="0" />
 	<user id="5" email="email05" first_name="firstName05" last_name="lastName05"
 		password="3bad6af0fa4b8b330d162e19938ee981" phone="phone05" skype="skype05"
-		status="disabled" registered="2010-01-01" version="0" />
+		status="disabled" registered="2010-01-01" last_login="2010-01-01 01:01:01"
+		version="0" />
 	<user id="6" email="email06" first_name="firstName06" last_name="lastName06"
 		password="3bad6af0fa4b8b330d162e19938ee981" phone="phone06" skype="skype06"
 		status="active" registered="2010-01-01" version="0" />
 	<user id="7" email="email07" first_name="firstName07" last_name="lastName07"
 		password="3bad6af0fa4b8b330d162e19938ee981" phone="phone07" skype="skype07"
-		status="disabled" registered="2010-01-01" version="0" />
+		status="disabled" registered="2010-01-01" last_login="2010-01-01 01:01:02"
+		version="0" />
 	<user id="8" email="email08" first_name="firstName08" last_name="lastName08"
 		password="3bad6af0fa4b8b330d162e19938ee981" phone="phone08" skype="skype08"
 		status="active" registered="2010-01-01" version="0" />
 	<user id="9" email="email09" first_name="firstName09" last_name="lastName09"
 		password="3bad6af0fa4b8b330d162e19938ee981" phone="phone09" skype="skype09"
-		status="active" registered="2010-01-01" version="0" />
+		status="disabled" registered="2010-01-01" last_login="2010-02-01 01:01:01"
+		version="0" />
 	<user id="10" email="email10" first_name="firstName10" last_name="lastName10"
 		password="3bad6af0fa4b8b330d162e19938ee981" phone="phone10" skype="skype10"
-		status="active" registered="2010-01-01" version="0" />
+		status="active" registered="2010-01-02" version="0" />
 	<user id="11" email="email11" first_name="firstName11" last_name="lastName11"
 		password="3bad6af0fa4b8b330d162e19938ee981" phone="phone11" skype="skype11"
-		status="disabled" registered="2010-01-01" version="0" />
+		status="active" registered="2010-02-01" version="0" />
 </dataset>

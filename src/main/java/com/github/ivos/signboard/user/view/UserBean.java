@@ -21,6 +21,7 @@ import com.github.ivos.signboard.config.PersistenceUtil;
 import com.github.ivos.signboard.config.security.SystemAdministrator;
 import com.github.ivos.signboard.user.model.SystemRole;
 import com.github.ivos.signboard.user.model.User;
+import com.github.ivos.signboard.user.model.UserSort;
 import com.github.ivos.signboard.user.model.UserStatus;
 import com.github.ivos.signboard.view.SelectUtils;
 import com.github.ivos.signboard.view.ViewContext;
@@ -167,6 +168,10 @@ public class UserBean implements Serializable {
 
 	public List<SelectItem> getStatus__Options() {
 		return selectUtils.convertToSelectItemsWithEmpty(UserStatus.class);
+	}
+
+	public List<SelectItem> getSort__Options() {
+		return selectUtils.convertToSelectItems(UserSort.class);
 	}
 
 }

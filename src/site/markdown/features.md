@@ -30,6 +30,8 @@ System records last login time.
 last name, first name, e-mail, phone, status.
 I can view last name, first name, e-mail, phone, status
 attributes in the search table.
+I can sort table alphabetically (last name, first name, id),
+by recent login, by recent registration.
 
 1. __View user__
 

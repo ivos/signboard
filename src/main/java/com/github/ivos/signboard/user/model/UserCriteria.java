@@ -3,14 +3,11 @@ package com.github.ivos.signboard.user.model;
 public class UserCriteria {
 
 	private String email;
-
 	private String firstName;
-
 	private String lastName;
-
 	private String phone;
-
 	private UserStatus status;
+	private UserSort sort = UserSort.alphabetically;
 
 	public String getEmail() {
 		return email;
@@ -52,6 +49,14 @@ public class UserCriteria {
 		this.status = status;
 	}
 
+	public UserSort getSort() {
+		return sort;
+	}
+
+	public void setSort(UserSort sort) {
+		this.sort = sort;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -62,6 +67,7 @@ public class UserCriteria {
 		result = prime * result
 				+ ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
+		result = prime * result + ((sort == null) ? 0 : sort.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		return result;
 	}
@@ -95,10 +101,9 @@ public class UserCriteria {
 				return false;
 		} else if (!phone.equals(other.phone))
 			return false;
-		if (status == null) {
-			if (other.status != null)
-				return false;
-		} else if (!status.equals(other.status))
+		if (sort != other.sort)
+			return false;
+		if (status != other.status)
 			return false;
 		return true;
 	}
@@ -107,7 +112,7 @@ public class UserCriteria {
 	public String toString() {
 		return "UserCriteria [email=" + email + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", phone=" + phone + ", status="
-				+ status + "]";
+				+ status + ", sort=" + sort + "]";
 	}
 
 }

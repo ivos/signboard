@@ -70,23 +70,53 @@ public class SearchUserTest extends ITBase {
 		search("", "", "", "", "Active");
 		assertTextPresent("phone01");
 		assertTextPresent("phone02");
-		assertTextPresent("phone09");
 		assertTextPresent("phone10");
+		assertTextPresent("phone11");
 		assertTextNotPresent("phone05");
 		assertTextNotPresent("phone07");
-		assertTextNotPresent("phone11");
+		assertTextNotPresent("phone09");
 
 		search("", "", "", "", "Disabled");
 		assertTextPresent("phone05");
 		assertTextPresent("phone07");
-		assertTextPresent("phone11");
+		assertTextPresent("phone09");
 		assertTextNotPresent("phone01");
 		assertTextNotPresent("phone02");
-		assertTextNotPresent("phone09");
 		assertTextNotPresent("phone10");
+		assertTextNotPresent("phone11");
 
 		clickButton("search:reset");
 		assertTextPresent("1 .. 10 of 11");
+	}
+
+	@Test
+	public void fn_Sort() {
+		gotoPage("user");
+		selectOption("search:sort", "By recent registration");
+		search("1", "", "", "", "");
+		assertTableEquals("search:userListBeanPageItems",
+				new String[][] {
+						{ "Last name", "First name", "E-mail", "Phone",
+								"Status" },
+						{ "lastName11", "firstName11", "email11", "phone11",
+								"Active" },
+						{ "lastName10", "firstName10", "email10", "phone10",
+								"Active" },
+						{ "lastName01", "firstName01", "email01", "phone01",
+								"Active" } });
+
+		selectOption("search:sort", "By recent login");
+		search("", "", "", "", "Disabled");
+		assertTableEquals("search:userListBeanPageItems",
+				new String[][] {
+						{ "Last name", "First name", "E-mail", "Phone",
+								"Status" },
+						{ "lastName09", "firstName09", "email09", "phone09",
+								"Disabled" },
+						{ "lastName07", "firstName07", "email07", "phone07",
+								"Disabled" },
+						{ "lastName05", "firstName05", "email05", "phone05",
+								"Disabled" } });
 	}
 
 	@Test
@@ -102,7 +132,7 @@ public class SearchUserTest extends ITBase {
 						{ "lastName10", "firstName10", "email10", "phone10",
 								"Active" },
 						{ "lastName11", "firstName11", "email11", "phone11",
-								"Disabled" } });
+								"Active" } });
 	}
 
 	@Test
