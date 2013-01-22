@@ -23,12 +23,22 @@ public class BootstrapSecretRenderer extends SecretRenderer {
 		ResponseWriter writer = context.getResponseWriter();
 		assert (writer != null);
 
-		// Bootstrap: prepend
+		// Bootstrap: prepend & append
 		UIComponent prependFacet = getFacet(component, "prepend");
-		if (null != prependFacet) {
+		UIComponent appendFacet = getFacet(component, "append");
+		if (null != prependFacet || null != appendFacet) {
 			writer.startElement("div", null);
-			writer.writeAttribute("class", "input-prepend", null);
-			writeInputAddon(context, writer, prependFacet);
+			StringBuilder divClass = new StringBuilder();
+			if (null != prependFacet) {
+				divClass.append("input-prepend");
+			}
+			if (null != appendFacet) {
+				divClass.append(" input-append");
+			}
+			writer.writeAttribute("class", divClass.toString(), null);
+			if (null != prependFacet) {
+				writeInputAddon(context, writer, prependFacet);
+			}
 		}
 
 		String redisplay = String.valueOf(component.getAttributes().get(
@@ -76,8 +86,11 @@ public class BootstrapSecretRenderer extends SecretRenderer {
 
 		writer.endElement("input");
 
-		// Bootstrap: prepend
-		if (null != prependFacet) {
+		// Bootstrap: prepend & append
+		if (null != appendFacet) {
+			writeInputAddon(context, writer, appendFacet);
+		}
+		if (null != prependFacet || null != appendFacet) {
 			writer.endElement("div");
 		}
 
@@ -85,10 +98,7 @@ public class BootstrapSecretRenderer extends SecretRenderer {
 
 	private void writeInputAddon(FacesContext context, ResponseWriter writer,
 			UIComponent facet) throws IOException {
-		writer.startElement("span", null);
-		writer.writeAttribute("class", "add-on", null);
 		encodeRecursive(context, facet);
-		writer.endElement("span");
 	}
 
 	// Bootstrap support instance
