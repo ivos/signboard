@@ -12,16 +12,22 @@
 			<span class="badge"><h:outputText
 					value="#{(paginatorBean.page-1) * paginatorBean.pageSize + 1}" />
 				.. <h:outputText
-					value="#{(paginatorBean.page-1) * paginatorBean.pageSize + fn:length(paginatorBean.pageItems)}" /></span>&nbsp;<h:outputText value="#{label['paginator.of']}" />&nbsp;<span class="badge badge-inverse"><h:outputText
+					value="#{(paginatorBean.page-1) * paginatorBean.pageSize + fn:length(paginatorBean.pageItems)}" /></span>&nbsp;
+			<h:outputText value="#{label['paginator.of']}" />
+			&nbsp;<span class="badge badge-inverse"><h:outputText
 					value="#{paginatorBean.count}" /></span>
 		</div>
 		<div class="pagination pagination-centered">
 			<ul>
 				<li class="#{(paginatorBean.page==1)? 'disabled':''}"><h:link
-						title="#{label['paginator.firstPage']}" includeViewParams="true">
-						<f:param name="page" value="#{1}" />
-						&laquo;
-					</h:link></li>
+						title="#{label['paginator.previousPage']}"
+						includeViewParams="true">
+						<f:param name="page" value="#{paginatorBean.page - 1}" />&laquo;</h:link></li>
+				<h:panelGroup rendered="#{paginatorBean.page > 1}">
+					<li><h:link title="#{label['paginator.firstPage']}"
+							includeViewParams="true">
+							<f:param name="page" value="#{1}" />1</h:link></li>
+				</h:panelGroup>
 				<h:panelGroup rendered="#{paginatorBean.page > 11}">
 					<li><h:link title="#{label['paginator.back10Pages']}"
 							includeViewParams="true">
@@ -31,21 +37,13 @@
 				</h:panelGroup>
 				<h:panelGroup rendered="#{paginatorBean.page > 4}">
 					<li><h:link
-							title="#{label['paginator.page']} #{paginatorBean.page - 4}"
-							includeViewParams="true">
-							<f:param name="page" value="#{paginatorBean.page - 4}" />
-							<h:outputText value="#{paginatorBean.page - 4}" />
-						</h:link></li>
-				</h:panelGroup>
-				<h:panelGroup rendered="#{paginatorBean.page > 3}">
-					<li><h:link
 							title="#{label['paginator.page']} #{paginatorBean.page - 3}"
 							includeViewParams="true">
 							<f:param name="page" value="#{paginatorBean.page - 3}" />
 							<h:outputText value="#{paginatorBean.page - 3}" />
 						</h:link></li>
 				</h:panelGroup>
-				<h:panelGroup rendered="#{paginatorBean.page > 2}">
+				<h:panelGroup rendered="#{paginatorBean.page > 3}">
 					<li><h:link
 							title="#{label['paginator.page']} #{paginatorBean.page - 2}"
 							includeViewParams="true">
@@ -53,7 +51,7 @@
 							<h:outputText value="#{paginatorBean.page - 2}" />
 						</h:link></li>
 				</h:panelGroup>
-				<h:panelGroup rendered="#{paginatorBean.page > 1}">
+				<h:panelGroup rendered="#{paginatorBean.page > 2}">
 					<li><h:link
 							title="#{label['paginator.page']} #{paginatorBean.page - 1}"
 							includeViewParams="true">
@@ -66,7 +64,7 @@
 						<h:outputText value="#{paginatorBean.page}" />
 					</h:link></li>
 				<h:panelGroup
-					rendered="#{paginatorBean.page lt paginatorBean.lastPage}">
+					rendered="#{paginatorBean.page lt paginatorBean.lastPage - 1}">
 					<li><h:link
 							title="#{label['paginator.page']} #{paginatorBean.page + 1}"
 							includeViewParams="true">
@@ -75,7 +73,7 @@
 						</h:link></li>
 				</h:panelGroup>
 				<h:panelGroup
-					rendered="#{paginatorBean.page lt paginatorBean.lastPage - 1}">
+					rendered="#{paginatorBean.page lt paginatorBean.lastPage - 2}">
 					<li><h:link
 							title="#{label['paginator.page']} #{paginatorBean.page + 2}"
 							includeViewParams="true">
@@ -84,21 +82,12 @@
 						</h:link></li>
 				</h:panelGroup>
 				<h:panelGroup
-					rendered="#{paginatorBean.page lt paginatorBean.lastPage - 2}">
+					rendered="#{paginatorBean.page lt paginatorBean.lastPage - 3}">
 					<li><h:link
 							title="#{label['paginator.page']} #{paginatorBean.page + 3}"
 							includeViewParams="true">
 							<f:param name="page" value="#{paginatorBean.page + 3}" />
 							<h:outputText value="#{paginatorBean.page + 3}" />
-						</h:link></li>
-				</h:panelGroup>
-				<h:panelGroup
-					rendered="#{paginatorBean.page lt paginatorBean.lastPage - 3}">
-					<li><h:link
-							title="#{label['paginator.page']} #{paginatorBean.page + 4}"
-							includeViewParams="true">
-							<f:param name="page" value="#{paginatorBean.page + 4}" />
-							<h:outputText value="#{paginatorBean.page + 4}" />
 						</h:link></li>
 				</h:panelGroup>
 				<h:panelGroup
@@ -109,13 +98,19 @@
 							<h:outputText value="#{paginatorBean.page + 10}" />
 						</h:link></li>
 				</h:panelGroup>
+				<h:panelGroup
+					rendered="#{paginatorBean.page lt paginatorBean.lastPage}">
+					<li><h:link title="#{label['paginator.lastPage']}"
+							includeViewParams="true">
+							<f:param name="page" value="#{paginatorBean.lastPage}" />
+							<h:outputText value="#{paginatorBean.lastPage}" />
+						</h:link></li>
+				</h:panelGroup>
 				<li
 					class="#{(paginatorBean.page==paginatorBean.lastPage)? 'disabled':''}">
-					<h:link title="#{label['paginator.lastPage']}"
+					<h:link title="#{label['paginator.nextPage']}"
 						includeViewParams="true">
-						<f:param name="page" value="#{paginatorBean.lastPage}" />
-						&raquo;
-					</h:link>
+						<f:param name="page" value="#{paginatorBean.page + 1}" />&raquo;</h:link>
 				</li>
 			</ul>
 		</div>
