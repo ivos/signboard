@@ -25,6 +25,7 @@ import net.sf.seaf.util.Generator;
 import org.jboss.solder.exception.control.ExceptionHandled;
 
 import com.github.ivos.signboard.config.security.SystemAdministrator;
+import com.github.ivos.signboard.user.model.SystemRole;
 import com.github.ivos.signboard.user.model.User;
 import com.github.ivos.signboard.user.model.UserCriteria;
 import com.github.ivos.signboard.user.model.UserStatus;
@@ -37,7 +38,7 @@ public class UserListBean implements Serializable {
 
 	public String generate() {
 		Generator g = new Generator();
-		for (int i = 0; i < 121; i++) {
+		for (int i = 0; i < 123; i++) {
 			User user = new User();
 			user.setEmail(g.word(3, 8).toLowerCase() + "@"
 					+ g.word(3, 6).toLowerCase() + ".com");
@@ -48,6 +49,15 @@ public class UserListBean implements Serializable {
 					+ user.getLastName().toLowerCase());
 			user.setPassword("qqqq");
 			user.digestPassword();
+			user.setRegistered(g.date().getTime());
+			user.setStatus(UserStatus.active);
+			if (g.numberIncl(0, 100) < 20) {
+				user.setStatus(UserStatus.disabled);
+			}
+			user.getSystemRoles().add(SystemRole.user);
+			if (g.numberIncl(0, 100) < 1) {
+				user.getSystemRoles().add(SystemRole.admin);
+			}
 			entityManager.persist(user);
 		}
 		return "search?faces-redirect=true";
