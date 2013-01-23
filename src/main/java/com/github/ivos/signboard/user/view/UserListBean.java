@@ -29,12 +29,16 @@ import com.github.ivos.signboard.user.model.SystemRole;
 import com.github.ivos.signboard.user.model.User;
 import com.github.ivos.signboard.user.model.UserCriteria;
 import com.github.ivos.signboard.user.model.UserStatus;
+import com.github.ivos.signboard.view.ViewContext;
 
 @Named
 @Stateful
 @SessionScoped
 @ExceptionHandled
 public class UserListBean implements Serializable {
+
+	@Inject
+	ViewContext viewContext;
 
 	public String generate() {
 		Generator g = new Generator();
@@ -199,7 +203,7 @@ public class UserListBean implements Serializable {
 	}
 
 	public int getLastPage() {
-		return (int) (count / getPageSize()) + 1;
+		return viewContext.calculateLastPage(count, getPageSize());
 	}
 
 	/*

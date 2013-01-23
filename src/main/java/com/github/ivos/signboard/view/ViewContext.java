@@ -75,6 +75,11 @@ public class ViewContext implements Serializable {
 		return label.getString(code);
 	}
 
+	public int calculateLastPage(long count, int pageSize) {
+		int last = (int) ((count - 1) / pageSize) + 1;
+		return (0 == last) ? 1 : last;
+	}
+
 	private static final long serialVersionUID = 1L;
 
 }
