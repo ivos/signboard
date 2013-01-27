@@ -12,9 +12,7 @@
 			<span class="badge"><h:outputText
 					value="#{(paginatorBean.page-1) * paginatorBean.pageSize + 1}" />
 				.. <h:outputText
-					value="#{(paginatorBean.page-1) * paginatorBean.pageSize + fn:length(paginatorBean.pageItems)}" /></span>&nbsp;
-			<h:outputText value="#{label['paginator.of']}" />
-			&nbsp;<span class="badge badge-inverse"><h:outputText
+					value="#{(paginatorBean.page-1) * paginatorBean.pageSize + fn:length(paginatorBean.pageItems)}" /></span>&nbsp;<h:outputText value="#{label['paginator.of']}" />&nbsp;<span class="badge badge-inverse"><h:outputText
 					value="#{paginatorBean.count}" /></span>
 		</div>
 		<div class="pagination pagination-centered">
