@@ -20,19 +20,24 @@ public class SearchUserTest extends ITBase {
 	}
 
 	private void search(String lastName, String firstName, String email,
-			String phone, String status) {
+			String phone, String status, String registeredFrom,
+			String registeredTo, String lastLoginFrom, String lastLoginTo) {
 		setTextField("search:lastName", lastName);
 		setTextField("search:firstName", firstName);
 		setTextField("search:email", email);
 		setTextField("search:phone", phone);
 		selectOption("search:status", status);
+		setTextField("search:registered", registeredFrom);
+		setTextField("search:registered__To", registeredTo);
+		setTextField("search:lastLogin", lastLoginFrom);
+		setTextField("search:lastLogin__To", lastLoginTo);
 		clickButton("search:search");
 	}
 
 	@Test
 	public void fn_Paging_NoSearch() {
 		gotoPage("user");
-		search("", "", "", "", "");
+		search("", "", "", "", "", "", "", "", "");
 		assertTextPresent("1 .. 10 of 11");
 		assertTextPresent("phone01");
 		assertTextPresent("phone02");
@@ -45,18 +50,18 @@ public class SearchUserTest extends ITBase {
 	@Test
 	public void fn_SearchByNames() {
 		gotoPage("user");
-		search("1", "", "", "", "");
+		search("1", "", "", "", "", "", "", "", "");
 		assertTextPresent("phone01");
 		assertTextPresent("phone10");
 		assertTextPresent("phone11");
 
-		search("", "0", "", "", "");
+		search("", "0", "", "", "", "", "", "", "");
 		assertTextPresent("phone01");
 		assertTextPresent("phone02");
 		assertTextPresent("phone09");
 		assertTextPresent("phone10");
 
-		search("1", "0", "", "", "");
+		search("1", "0", "", "", "", "", "", "", "");
 		assertTextPresent("phone01");
 		assertTextPresent("phone10");
 
@@ -67,7 +72,7 @@ public class SearchUserTest extends ITBase {
 	@Test
 	public void fn_SearchByStatus() {
 		gotoPage("user");
-		search("", "", "", "", "Active");
+		search("", "", "", "", "Active", "", "", "", "");
 		assertTextPresent("phone01");
 		assertTextPresent("phone02");
 		assertTextPresent("phone10");
@@ -76,7 +81,7 @@ public class SearchUserTest extends ITBase {
 		assertTextNotPresent("phone07");
 		assertTextNotPresent("phone09");
 
-		search("", "", "", "", "Disabled");
+		search("", "", "", "", "Disabled", "", "", "", "");
 		assertTextPresent("phone05");
 		assertTextPresent("phone07");
 		assertTextPresent("phone09");
@@ -90,10 +95,29 @@ public class SearchUserTest extends ITBase {
 	}
 
 	@Test
+	public void fn_SearchByDates() {
+		gotoPage("user");
+		turnJavaScriptOff();
+		search("", "", "", "", "", "01/26/2010", "02/02/2010", "01/02/2010",
+				"02/01/2010");
+		assertTableEquals("search:userListBeanPageItems",
+				new String[][] {
+						{ "Last name", "First name", "E-mail", "Phone",
+								"Status" },
+						{ "lastName03", "firstName03", "email03", "phone03",
+								"Active" },
+						{ "lastName04", "firstName04", "email04", "phone04",
+								"Active" },
+						{ "lastName06", "firstName06", "email06", "phone06",
+								"Active" } });
+		turnJavaScriptOn();
+	}
+
+	@Test
 	public void fn_Sort() {
 		gotoPage("user");
 		selectOption("search:sort", "By recent registration");
-		search("1", "", "", "", "");
+		search("1", "", "", "", "", "", "", "", "");
 		assertTableEquals("search:userListBeanPageItems",
 				new String[][] {
 						{ "Last name", "First name", "E-mail", "Phone",
@@ -106,7 +130,7 @@ public class SearchUserTest extends ITBase {
 								"Active" } });
 
 		selectOption("search:sort", "By recent login");
-		search("", "", "", "", "Disabled");
+		search("", "", "", "", "Disabled", "", "", "", "");
 		assertTableEquals("search:userListBeanPageItems",
 				new String[][] {
 						{ "Last name", "First name", "E-mail", "Phone",
@@ -122,7 +146,7 @@ public class SearchUserTest extends ITBase {
 	@Test
 	public void fn_Columns() {
 		gotoPage("user");
-		search("1", "", "", "", "");
+		search("1", "", "", "", "", "", "", "", "");
 		assertTableEquals("search:userListBeanPageItems",
 				new String[][] {
 						{ "Last name", "First name", "E-mail", "Phone",
@@ -133,6 +157,41 @@ public class SearchUserTest extends ITBase {
 								"Active" },
 						{ "lastName11", "firstName11", "email11", "phone11",
 								"Active" } });
+	}
+
+	@Test
+	public void val_SearchDatesInterval() {
+		gotoPage("user");
+		turnJavaScriptOff();
+		search("", "", "", "", "", "01/26/2010", "01/25/2010", "", "");
+		assertTextPresent("The end date must be after the start date.");
+		search("", "", "", "", "", "01/26/2010", "01/26/2010", "", "");
+		assertTextPresent("The end date must be after the start date.");
+		search("", "", "", "", "", "01/26/2010", "01/27/2010", "", "");
+		assertTextNotPresent("The end date must be after the start date.");
+		turnJavaScriptOn();
+	}
+
+	@Test
+	public void val_RegisteredMustBeInPast() {
+		gotoPage("user");
+		turnJavaScriptOff();
+		search("", "", "", "", "", "01/01/2050", "", "", "");
+		assertTextPresent("Must be in the past.");
+		search("", "", "", "", "", "01/01/2010", "", "", "");
+		assertTextNotPresent("Must be in the past.");
+		turnJavaScriptOn();
+	}
+
+	@Test
+	public void val_LastLoginMustBeInPast() {
+		gotoPage("user");
+		turnJavaScriptOff();
+		search("", "", "", "", "", "", "", "01/01/2050", "");
+		assertTextPresent("Must be in the past.");
+		search("", "", "", "", "", "", "", "01/01/2010", "");
+		assertTextNotPresent("Must be in the past.");
+		turnJavaScriptOn();
 	}
 
 	@Test

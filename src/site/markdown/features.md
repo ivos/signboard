@@ -27,7 +27,8 @@ System records last login time.
 1. __Find user__
 
 	As a system administrator I can find a user by 
-last name, first name, e-mail, phone, status.
+last name, first name, e-mail, phone, status, date registered,
+date of last login.
 I can view last name, first name, e-mail, phone, status
 attributes in the search table.
 I can sort table alphabetically (last name, first name, id),

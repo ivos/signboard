@@ -18,6 +18,14 @@ public class ITBase {
 				.setAjaxController(new NicelyResynchronizingAjaxController());
 	}
 
+	public static void turnJavaScriptOff() {
+		setScriptingEnabled(false);
+	}
+
+	public static void turnJavaScriptOn() {
+		setScriptingEnabled(true);
+	}
+
 	public static void login(String email, String password) {
 		beginAt("login");
 		setupAjax();

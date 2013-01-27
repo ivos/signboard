@@ -68,6 +68,16 @@
 			<name>disabled</name>
 			<type>java.lang.Boolean</type>
 		</attribute>
+		<attribute>
+			<description>Start date for a date field.</description>
+			<name>startDate</name>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>End date for a date field.</description>
+			<name>endDate</name>
+			<type>java.lang.String</type>
+		</attribute>
 	</tag>
 	<tag>
 		<tag-name>column</tag-name>

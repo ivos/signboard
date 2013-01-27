@@ -171,6 +171,26 @@ public class UserListBean implements Serializable {
 			predicatesList.add(builder.equal(root.<UserStatus> get("status"),
 					status));
 		}
+		Date registered__From = criteria.getRegistered__From();
+		if (null != registered__From) {
+			predicatesList.add(builder.greaterThanOrEqualTo(
+					root.<Date> get("registered"), registered__From));
+		}
+		Date registered__To = criteria.getRegistered__To();
+		if (null != registered__To) {
+			predicatesList.add(builder.lessThan(root.<Date> get("registered"),
+					registered__To));
+		}
+		Date lastLogin__From = criteria.getLastLogin__From();
+		if (null != lastLogin__From) {
+			predicatesList.add(builder.greaterThanOrEqualTo(
+					root.<Date> get("lastLogin"), lastLogin__From));
+		}
+		Date lastLogin__To = criteria.getLastLogin__To();
+		if (null != lastLogin__To) {
+			predicatesList.add(builder.lessThan(root.<Date> get("lastLogin"),
+					lastLogin__To));
+		}
 
 		return predicatesList.toArray(new Predicate[predicatesList.size()]);
 	}
