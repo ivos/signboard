@@ -52,7 +52,7 @@ public class LoginBean implements Serializable {
 	public String logout() {
 		log.infov("Log out user {0}.", identity.getUser().getId());
 		identity.logout();
-		return "/index?faces-redirect=true";
+		return "/page/index.jsf?faces-redirect=true";
 	}
 
 	@Produces
