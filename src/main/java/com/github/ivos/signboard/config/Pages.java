@@ -27,6 +27,14 @@ public interface Pages {
 		@ViewPattern("/page/user/login.xhtml")
 		login,
 
+		@ViewPattern("/page/user/dashboard.xhtml")
+		@LoggedIn
+		dashboard,
+
+		@ViewPattern("/page/user/profile.xhtml")
+		@LoggedIn
+		profile,
+
 		@ViewPattern("/page/user/search.xhtml")
 		@SystemAdministrator
 		userSearch,

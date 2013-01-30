@@ -42,6 +42,10 @@ public class ITBase {
 		assertTextPresent(message);
 	}
 
+	public static void verifyTitle(String title) {
+		assertTitleEquals(title + " - Signboard");
+	}
+
 	public static void assertAccessDenied() {
 		assertTitleEquals("Unauthorized access - Signboard");
 		assertTextPresent("You are not authorized to perform the requested operation.");

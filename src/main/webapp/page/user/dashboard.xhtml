@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:s="http://jboss.org/seam/faces"
+	xmlns:my="http://signboard.ivos.github.com/jsf/facelets"
+	template="/page/template.xhtml">
+
+	<ui:param name="pageTitle" value="#{label['user.dashboard.title']}" />
+	<ui:define name="main">
+		<h1>#{pageTitle}</h1>
+		<h:messages id="messages" globalOnly="true" styleClass="form-messages" />
+		<div class="row">
+			<div class="span4">
+				<h:outputText value="#{label['user.dashboard.of.user']}" />
+				<strong><h:outputText value="#{clientUser.firstName}" />&nbsp;<h:outputText
+						value="#{clientUser.lastName}" /></strong>
+				<br /><i class="icon-envelope"></i>&nbsp;<h:outputText value="#{clientUser.email}" />
+				<c:if test="#{not empty clientUser.phone}"><br /><i class="icon-phone"></i>&nbsp;<h:outputText value="#{clientUser.phone}" /></c:if>
+				<c:if test="#{not empty clientUser.skype}"><br />S&nbsp;<h:outputText value="#{clientUser.skype}" /></c:if>
+				<br />
+				<h:link class="btn btn-mini" outcome="/page/user/profile">
+					<h:outputText value="#{label['user.dashboard.change']}" />
+				</h:link>&nbsp;<h:outputText value="#{label['user.dashboard.profile']}" />
+			</div>
+		</div>
+	</ui:define>
+
+</ui:composition>

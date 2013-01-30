@@ -24,6 +24,12 @@ System records last login time.
 
 	As a logged-in user I can log out to stop using the system.
 
+1. __Edit my user profile__
+
+	As a user I can edit my user profile and change 
+first name, last name, phone, skype.
+I can also change my password separately from the above properties.
+
 1. __Find user__
 
 	As a system administrator I can find a user by 

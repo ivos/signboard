@@ -30,6 +30,12 @@ public class URLRewriteConfiguration extends HttpConfigurationProvider {
 						Join.path("/login").to("/page/user/login.jsf")
 								.withInboundCorrection())
 				.addRule(
+						Join.path("/profile").to("/page/user/profile.jsf")
+								.withInboundCorrection())
+				.addRule(
+						Join.path("/dashboard").to("/page/user/dashboard.jsf")
+								.withInboundCorrection())
+				.addRule(
 						Join.path("/project/create")
 								.to("/page/project/create.jsf")
 								.withInboundCorrection())

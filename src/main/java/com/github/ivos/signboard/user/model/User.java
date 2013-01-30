@@ -10,6 +10,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -60,7 +61,7 @@ public class User implements Serializable {
 	@Column(length = 32)
 	private UserStatus status;
 
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.EAGER)
 	@Enumerated(EnumType.STRING)
 	@Column(name = "system_role", length = 32, nullable = false)
 	@ForeignKey(name = "user_system_roles__user")
