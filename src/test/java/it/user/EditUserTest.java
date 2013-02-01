@@ -34,7 +34,7 @@ public class EditUserTest extends ITBase {
 	private void edit(String number, String... roles) {
 		gotoPage("user");
 		clickLinkWithExactText("email" + number);
-		clickLinkWithText("Edit");
+		clickLink("main:edit");
 		assertTitleEquals("Edit user - Signboard");
 		assertTextPresent("email" + number);
 		assertSelectOptionsEqual("edit:systemRoles", new String[] { "User",
@@ -61,7 +61,7 @@ public class EditUserTest extends ITBase {
 	public void val_KeepSystemAdminOnSelf() {
 		gotoPage("user");
 		clickLinkWithExactText("email01");
-		clickLinkWithText("Edit");
+		clickLink("main:edit");
 		setWorkingForm("edit");
 		unselectRole("User");
 		unselectRole("System administrator");

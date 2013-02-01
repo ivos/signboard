@@ -27,6 +27,7 @@ public class SearchProjectTest extends ITBase {
 
 	@Test
 	public void fn_Paging_NoSearch() {
+		turnJavaScriptOff();
 		gotoPage("project");
 		search("", "");
 		assertTextPresent("1 .. 10 of 21");
@@ -41,10 +42,12 @@ public class SearchProjectTest extends ITBase {
 		clickLinkWithExactText("3");
 		assertTextPresent("21 .. 21 of 21");
 		assertTextPresent("code21");
+		turnJavaScriptOn();
 	}
 
 	@Test
 	public void fn_Search() {
+		turnJavaScriptOff();
 		gotoPage("project");
 		search("1", "");
 		assertTextPresent("1 .. 10 of 12");
@@ -71,6 +74,7 @@ public class SearchProjectTest extends ITBase {
 
 		clickButton("search:reset");
 		assertTextPresent("1 .. 10 of 21");
+		turnJavaScriptOn();
 	}
 
 	@Test

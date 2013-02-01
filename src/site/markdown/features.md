@@ -24,6 +24,13 @@ System records last login time.
 
 	As a logged-in user I can log out to stop using the system.
 
+1. __My dashboard__
+
+	As a user I can see my dashboard page after I log in 
+to get an overview of current status of my assets within the system.
+The page shows my first name, last name, e-mail, phone, skype
+and a link to edit my profile.
+
 1. __Edit my user profile__
 
 	As a user I can edit my user profile and change 

@@ -21,7 +21,7 @@ public class LogInOutTest extends ITBase {
 		assertNotLoggedIn();
 
 		fillAndSubmitLoginForm("email2", "password2");
-		clickLink("nav-home");
+		clickLink("nav-form:nav-home");
 		assertLoggedIn("2");
 
 		clickLinkWithText("Log out");
@@ -34,12 +34,13 @@ public class LogInOutTest extends ITBase {
 		beginAt("login");
 
 		fillAndSubmitLoginForm("email2", "password2");
-		clickLink("nav-home");
+		clickLink("nav-form:nav-home");
 		assertLoggedIn("2");
 
+		clickLinkWithExactText("Signboard");
 		clickLinkWithExactText("log in");
 		fillAndSubmitLoginForm("email1", "password1");
-		clickLink("nav-home");
+		clickLink("nav-form:nav-home");
 		assertLoggedIn("1");
 	}
 

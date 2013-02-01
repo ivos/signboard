@@ -36,6 +36,7 @@ public class SearchUserTest extends ITBase {
 
 	@Test
 	public void fn_Paging_NoSearch() {
+		turnJavaScriptOff();
 		gotoPage("user");
 		search("", "", "", "", "", "", "", "", "");
 		assertTextPresent("1 .. 10 of 11");
@@ -45,6 +46,7 @@ public class SearchUserTest extends ITBase {
 		clickLinkWithExactText("2");
 		assertTextPresent("11 .. 11 of 11");
 		assertTextPresent("phone11");
+		turnJavaScriptOn();
 	}
 
 	@Test

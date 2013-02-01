@@ -62,11 +62,11 @@ public class EditUserProfileTest extends ITBase {
 	public void nav() {
 		clickLinkWithText("Edit profile");
 		clickLink("profile:cancel");
-		verifyTitle("Welcome");
+		verifyTitle("My dashboard");
 
 		clickLinkWithText("Edit profile");
 		clickLink("passwordChange:cancel");
-		verifyTitle("Welcome");
+		verifyTitle("My dashboard");
 	}
 
 }
