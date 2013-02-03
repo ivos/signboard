@@ -10,7 +10,7 @@ import net.sf.lightair.annotation.Verify;
 import org.junit.Before;
 import org.junit.Test;
 
-@Setup
+@Setup({ "../users.xml", "CreateProjectTest.xml" })
 @Verify("CreateProjectTest-empty.xml")
 @BaseUrl("http://localhost:8080/signboard")
 public class CreateProjectTest extends ITBase {
@@ -101,29 +101,29 @@ public class CreateProjectTest extends ITBase {
 	@Verify("CreateProjectTest.fn_OptionalFields-verify.xml")
 	public void nav() {
 		gotoPage("/");
-		assertTitleEquals("Welcome - Signboard");
+		verifyTitle("Welcome");
 		assertTrue(getTestingEngine().getPageURL().toString()
 				.endsWith("/signboard/"));
 
 		clickLinkWithExactText("Project");
-		assertTitleEquals("Search projects - Signboard");
+		verifyTitle("Search projects");
 		assertTrue(getTestingEngine().getPageURL().toString()
 				.endsWith("/signboard/project"));
 
 		clickLinkWithExactText("Create new");
-		assertTitleEquals("Create project - Signboard");
+		verifyTitle("Create project");
 		assertTrue(getTestingEngine().getPageURL().toString()
 				.endsWith("/signboard/project/create"));
 		assertTextPresent("Create project");
 
 		clickLinkWithExactText("Cancel");
-		assertTitleEquals("Search projects - Signboard");
+		verifyTitle("Search projects");
 		assertTrue(getTestingEngine().getPageURL().toString()
 				.endsWith("/signboard/project"));
 
 		clickLinkWithExactText("Create new");
 		create("code1", "name1", "");
-		assertTitleEquals("View project - Signboard");
+		verifyTitle("View project");
 		assertTrue(getTestingEngine().getPageURL().toString()
 				.endsWith("/signboard/project/code1"));
 	}
@@ -131,10 +131,10 @@ public class CreateProjectTest extends ITBase {
 	@Test
 	public void sec_MustBeLoggedIn() {
 		beginAt("/project/create");
-		assertTitleEquals("Log in - Signboard");
+		verifyTitle("Log in");
 		fillAndSubmitLoginForm("email1", "password1");
 		gotoPage("/project/create");
-		assertTitleEquals("Create project - Signboard");
+		verifyTitle("Create project");
 	}
 
 	@Test

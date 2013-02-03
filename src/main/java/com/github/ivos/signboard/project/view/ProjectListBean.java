@@ -21,6 +21,7 @@ import javax.persistence.criteria.Root;
 import org.jboss.seam.security.annotations.LoggedIn;
 import org.jboss.solder.exception.control.ExceptionHandled;
 
+import com.github.ivos.signboard.config.security.SystemUser;
 import com.github.ivos.signboard.project.model.Project;
 import com.github.ivos.signboard.project.model.ProjectCriteria;
 
@@ -78,6 +79,7 @@ public class ProjectListBean implements Serializable {
 	}
 
 	@LoggedIn
+	@SystemUser
 	public void paginate() {
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 
@@ -116,6 +118,8 @@ public class ProjectListBean implements Serializable {
 		return predicatesList.toArray(new Predicate[predicatesList.size()]);
 	}
 
+	@LoggedIn
+	@SystemUser
 	public List<Project> getPageItems() {
 		return pageItems;
 	}

@@ -4,4 +4,8 @@
 		password="7c6a180b36896a0a8c02787eeafb0e4c" status="active"
 		registered="2010-01-01" version="0" />
 	<user_system_roles user="1" system_role="user" />
+	<user id="2" email="email2" first_name="f2" last_name="l2"
+		password="6cb75f652a9b52798eb6cf2201057c73" status="active"
+		registered="2010-01-01" version="0" />
+	<user_system_roles user="2" system_role="admin" />
 </dataset>

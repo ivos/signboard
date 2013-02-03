@@ -1,15 +1,17 @@
 package it.project;
 
+import static junit.framework.Assert.*;
 import static net.sourceforge.jwebunit.junit.JWebUnit.*;
 import it.ITBase;
 import net.sf.lightair.annotation.BaseUrl;
 import net.sf.lightair.annotation.Setup;
 import net.sf.lightair.annotation.Verify;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-@Setup({ "SearchProjectTest-loginUser.xml", "SearchProjectTest.xml" })
+@Setup({ "../users.xml", "SearchProjectTest.xml" })
 @Verify("SearchProjectTest.xml")
 @BaseUrl("http://localhost:8080/signboard")
 public class SearchProjectTest extends ITBase {
@@ -17,6 +19,12 @@ public class SearchProjectTest extends ITBase {
 	@Before
 	public void before() {
 		login("email1", "password1");
+		turnJavaScriptOff();
+	}
+
+	@After
+	public void after() {
+		turnJavaScriptOn();
 	}
 
 	private void search(String name, String code) {
@@ -27,7 +35,6 @@ public class SearchProjectTest extends ITBase {
 
 	@Test
 	public void fn_Paging_NoSearch() {
-		turnJavaScriptOff();
 		gotoPage("project");
 		search("", "");
 		assertTextPresent("1 .. 10 of 21");
@@ -42,12 +49,10 @@ public class SearchProjectTest extends ITBase {
 		clickLinkWithExactText("3");
 		assertTextPresent("21 .. 21 of 21");
 		assertTextPresent("code21");
-		turnJavaScriptOn();
 	}
 
 	@Test
 	public void fn_Search() {
-		turnJavaScriptOff();
 		gotoPage("project");
 		search("1", "");
 		assertTextPresent("1 .. 10 of 12");
@@ -74,7 +79,6 @@ public class SearchProjectTest extends ITBase {
 
 		clickButton("search:reset");
 		assertTextPresent("1 .. 10 of 21");
-		turnJavaScriptOn();
 	}
 
 	@Test
@@ -84,6 +88,35 @@ public class SearchProjectTest extends ITBase {
 		assertTableEquals("search:projectListBeanPageItems", new String[][] {
 				{ "Code", "Name" }, { "code01", "name01" },
 				{ "code10", "name10" } });
+	}
+
+	@Test
+	public void nav() {
+		gotoPage("/");
+		verifyTitle("Welcome");
+		assertTrue(getTestingEngine().getPageURL().toString()
+				.endsWith("/signboard/"));
+
+		clickLinkWithExactText("Project");
+		verifyTitle("Search projects");
+		assertTrue(getTestingEngine().getPageURL().toString()
+				.endsWith("/signboard/project"));
+	}
+
+	@Test
+	public void sec_MustBeLoggedIn() {
+		beginAt("/project");
+		verifyTitle("Log in");
+		fillAndSubmitLoginForm("email1", "password1");
+		gotoPage("/project");
+		verifyTitle("Search projects");
+	}
+
+	@Test
+	public void sec_MustBeSystemUser() {
+		login("email2", "password2");
+		gotoPage("project");
+		assertAccessDenied();
 	}
 
 }
