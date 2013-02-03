@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<project code="code01" name="name01" description="description01"
+		date_created="2012-01-01" version="0" />
+	<project code="code02" name="name02" description="description02"
+		date_created="2012-01-02" version="0" />
+	<project code="code03" name="name03" description="description03"
+		date_created="2012-01-03" version="0" />
+</dataset>

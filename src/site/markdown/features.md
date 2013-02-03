@@ -77,3 +77,9 @@ System records date created.
 
 	As a system user I can find a project by name, code.
 I can view name, code attributes in the search table.
+
+1. __View project__
+
+	As a system user I can view a project's detail.
+I can view code, name
+attributes.
