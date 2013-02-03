@@ -50,11 +50,13 @@ public class ProjectBean implements Serializable {
 	@Inject
 	private EntityManager entityManager;
 
+	@SystemUser
 	public void retrieve() {
 		if (FacesContext.getCurrentInstance().isPostback()) {
 			return;
 		}
 		if (id != null) {
+			log.debugv("Retrieve project by id {0}.", id);
 			project = entityManager.find(Project.class, id);
 		}
 	}
@@ -65,6 +67,7 @@ public class ProjectBean implements Serializable {
 			entityManager.persist(project);
 			log.infov("Create project {0}.", project);
 		} else {
+			log.infov("Update project {0}.", project);
 			entityManager.merge(project);
 		}
 		viewContext.info("saved");

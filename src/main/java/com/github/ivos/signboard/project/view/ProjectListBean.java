@@ -18,18 +18,21 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import org.jboss.seam.security.annotations.LoggedIn;
 import org.jboss.solder.exception.control.ExceptionHandled;
 
 import com.github.ivos.signboard.config.security.SystemUser;
 import com.github.ivos.signboard.project.model.Project;
 import com.github.ivos.signboard.project.model.ProjectCriteria;
+import com.github.ivos.signboard.view.ViewContext;
 
 @Named
 @Stateful
 @SessionScoped
 @ExceptionHandled
 public class ProjectListBean implements Serializable {
+
+	@Inject
+	ViewContext viewContext;
 
 	public String reset() {
 		criteria = new ProjectCriteria();
@@ -78,7 +81,6 @@ public class ProjectListBean implements Serializable {
 		return "search?faces-redirect=true";
 	}
 
-	@LoggedIn
 	@SystemUser
 	public void paginate() {
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
@@ -118,7 +120,6 @@ public class ProjectListBean implements Serializable {
 		return predicatesList.toArray(new Predicate[predicatesList.size()]);
 	}
 
-	@LoggedIn
 	@SystemUser
 	public List<Project> getPageItems() {
 		return pageItems;
@@ -129,7 +130,7 @@ public class ProjectListBean implements Serializable {
 	}
 
 	public int getLastPage() {
-		return (int) (count / getPageSize()) + 1;
+		return viewContext.calculateLastPage(count, getPageSize());
 	}
 
 	/*
