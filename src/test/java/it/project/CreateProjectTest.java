@@ -98,6 +98,7 @@ public class CreateProjectTest extends ITBase {
 	}
 
 	@Test
+	@Verify("CreateProjectTest.fn_OptionalFields-verify.xml")
 	public void nav() {
 		gotoPage("/");
 		assertTitleEquals("Welcome - Signboard");
@@ -107,27 +108,40 @@ public class CreateProjectTest extends ITBase {
 		clickLinkWithExactText("Project");
 		assertTitleEquals("Search projects - Signboard");
 		assertTrue(getTestingEngine().getPageURL().toString()
-				.contains("/signboard/project"));
+				.endsWith("/signboard/project"));
 
 		clickLinkWithExactText("Create new");
 		assertTitleEquals("Create project - Signboard");
 		assertTrue(getTestingEngine().getPageURL().toString()
-				.contains("/signboard/project/create"));
+				.endsWith("/signboard/project/create"));
 		assertTextPresent("Create project");
 
 		clickLinkWithExactText("Cancel");
 		assertTitleEquals("Search projects - Signboard");
 		assertTrue(getTestingEngine().getPageURL().toString()
 				.endsWith("/signboard/project"));
+
+		clickLinkWithExactText("Create new");
+		create("code1", "name1", "");
+		assertTitleEquals("View project - Signboard");
+		assertTrue(getTestingEngine().getPageURL().toString()
+				.endsWith("/signboard/project/code1"));
 	}
 
 	@Test
-	public void sec() {
+	public void sec_MustBeLoggedIn() {
 		beginAt("/project/create");
 		assertTitleEquals("Log in - Signboard");
 		fillAndSubmitLoginForm("email1", "password1");
 		gotoPage("/project/create");
 		assertTitleEquals("Create project - Signboard");
+	}
+
+	@Test
+	public void sec_MustBeSystemUser() {
+		login("email2", "password2");
+		create("code1", "name1", "description1");
+		assertAccessDenied();
 	}
 
 }

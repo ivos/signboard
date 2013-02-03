@@ -21,4 +21,11 @@ public class SecurityCheck {
 				&& clientUser.getSystemRoles().contains(SystemRole.admin);
 	}
 
+	@Secures
+	@SystemUser
+	public boolean isSystemUser() {
+		return (null != clientUser)
+				&& clientUser.getSystemRoles().contains(SystemRole.user);
+	}
+
 }

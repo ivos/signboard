@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import org.jboss.solder.exception.control.ExceptionHandled;
 import org.jboss.solder.logging.Logger;
 
+import com.github.ivos.signboard.config.security.SystemUser;
 import com.github.ivos.signboard.project.model.Project;
 import com.github.ivos.signboard.view.ViewContext;
 
@@ -58,6 +59,7 @@ public class ProjectBean implements Serializable {
 		}
 	}
 
+	@SystemUser
 	public String update() {
 		if (id == null) {
 			entityManager.persist(project);

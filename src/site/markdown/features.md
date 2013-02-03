@@ -69,7 +69,7 @@ Project
 
 1. __Create project__
 
-	As a user I can create a project.
+	As a system user I can create a project.
 New project attributes: code (unique), name, description.
 System records date created.
 
