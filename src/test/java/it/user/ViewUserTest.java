@@ -29,7 +29,7 @@ public class ViewUserTest extends ITBase {
 	private void view(String number, String status, String... roles) {
 		gotoPage("user");
 		clickLinkWithExactText("email0" + number);
-		assertTitleEquals("View user - Signboard");
+		verifyTitle("View user");
 		assertTextPresent("View user");
 		assertTextPresent("lastName0" + number);
 		assertTextPresent("firstName0" + number);
@@ -45,7 +45,7 @@ public class ViewUserTest extends ITBase {
 	}
 
 	@Test
-	public void sec_DeniedForNonSystemAdministrator() {
+	public void sec_MustBeSystemAdministrator() {
 		login("email02", "qqqq");
 		gotoPage("user/3");
 		assertAccessDenied();
