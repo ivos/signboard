@@ -9,7 +9,7 @@ import net.sf.lightair.annotation.Verify;
 import org.junit.Before;
 import org.junit.Test;
 
-@Setup
+@Setup({ "../deleteAll.xml", "EditUserProfileTest.xml" })
 @Verify("EditUserProfileTest-verify.xml")
 @BaseUrl("http://localhost:8080/signboard")
 public class EditUserProfileTest extends ITBase {

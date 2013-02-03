@@ -2,6 +2,9 @@
 <dataset>
 	<project code="code1" name="name1" description="description1"
 		date_created="@date" />
+	<project_member project="code1" user="1" />
+
 	<project code="code2" name="name2" description="description2"
 		date_created="@date" />
+	<project_member project="code2" user="1" />
 </dataset>

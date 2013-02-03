@@ -11,14 +11,14 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-@Setup({ "../users.xml", "SearchProjectTest.xml" })
+@Setup({ "../deleteAll.xml", "../users.xml", "SearchProjectTest.xml" })
 @Verify("SearchProjectTest.xml")
 @BaseUrl("http://localhost:8080/signboard")
 public class SearchProjectTest extends ITBase {
 
 	@Before
 	public void before() {
-		login("email1", "password1");
+		login("email1", "qqqq");
 		turnJavaScriptOff();
 	}
 
@@ -107,14 +107,14 @@ public class SearchProjectTest extends ITBase {
 	public void sec_MustBeLoggedIn() {
 		beginAt("/project");
 		verifyTitle("Log in");
-		fillAndSubmitLoginForm("email1", "password1");
+		fillAndSubmitLoginForm("email1", "qqqq");
 		gotoPage("/project");
 		verifyTitle("Search projects");
 	}
 
 	@Test
 	public void sec_MustBeSystemUser() {
-		login("email2", "password2");
+		login("email2", "qqqq");
 		gotoPage("project");
 		assertAccessDenied();
 	}

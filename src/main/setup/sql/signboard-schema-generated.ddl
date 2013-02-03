@@ -1,8 +1,16 @@
 
+    alter table project_member 
+        drop constraint project_member__project;
+
+    alter table project_member 
+        drop constraint project_member__user;
+
     alter table user_system_roles 
         drop constraint user_system_roles__user;
 
     drop table project if exists;
+
+    drop table project_member if exists;
 
     drop table user if exists;
 
@@ -17,6 +25,14 @@
         name varchar(128) not null,
         version integer not null,
         primary key (code)
+    );
+
+    create table project_member (
+        id bigint not null,
+        version integer not null,
+        project varchar(64) not null,
+        user bigint not null,
+        primary key (id)
     );
 
     create table user (
@@ -39,6 +55,16 @@
         system_role varchar(32) not null,
         primary key (user, system_role)
     );
+
+    alter table project_member 
+        add constraint project_member__project 
+        foreign key (project) 
+        references project;
+
+    alter table project_member 
+        add constraint project_member__user 
+        foreign key (user) 
+        references user;
 
     alter table user_system_roles 
         add constraint user_system_roles__user 

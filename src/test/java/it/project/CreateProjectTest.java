@@ -10,14 +10,14 @@ import net.sf.lightair.annotation.Verify;
 import org.junit.Before;
 import org.junit.Test;
 
-@Setup({ "../users.xml", "CreateProjectTest.xml" })
+@Setup({ "../deleteAll.xml", "../users.xml", "CreateProjectTest.xml" })
 @Verify("CreateProjectTest-empty.xml")
 @BaseUrl("http://localhost:8080/signboard")
 public class CreateProjectTest extends ITBase {
 
 	@Before
 	public void before() {
-		login("email1", "password1");
+		login("email1", "qqqq");
 	}
 
 	@Test
@@ -26,6 +26,14 @@ public class CreateProjectTest extends ITBase {
 		create("code1", "name1", "description1");
 		verifyAction("Saved.");
 		create("code2", "name2", "description2");
+		verifyAction("Saved.");
+	}
+
+	@Test
+	@Verify
+	public void fn_OtherUser() {
+		login("email3", "qqqq");
+		create("code1", "name1", "description1");
 		verifyAction("Saved.");
 	}
 
@@ -132,14 +140,14 @@ public class CreateProjectTest extends ITBase {
 	public void sec_MustBeLoggedIn() {
 		beginAt("/project/create");
 		verifyTitle("Log in");
-		fillAndSubmitLoginForm("email1", "password1");
+		fillAndSubmitLoginForm("email1", "qqqq");
 		gotoPage("/project/create");
 		verifyTitle("Create project");
 	}
 
 	@Test
 	public void sec_MustBeSystemUser() {
-		login("email2", "password2");
+		login("email2", "qqqq");
 		create("code1", "name1", "description1");
 		assertAccessDenied();
 	}

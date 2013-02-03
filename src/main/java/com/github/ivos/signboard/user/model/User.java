@@ -14,6 +14,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
@@ -22,6 +23,8 @@ import javax.validation.constraints.Size;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.hibernate.annotations.ForeignKey;
+
+import com.github.ivos.signboard.project.model.ProjectMember;
 
 @Entity
 public class User implements Serializable {
@@ -73,6 +76,9 @@ public class User implements Serializable {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastLogin;
+
+	@OneToMany(mappedBy = "user")
+	private Set<ProjectMember> projectMembers = new HashSet<ProjectMember>();
 
 	/**
 	 * Convert password to MD5 digest.
@@ -181,6 +187,14 @@ public class User implements Serializable {
 
 	public void setLastLogin(Date lastLogin) {
 		this.lastLogin = lastLogin;
+	}
+
+	public Set<ProjectMember> getProjectMembers() {
+		return projectMembers;
+	}
+
+	public void setProjectMembers(Set<ProjectMember> projectMembers) {
+		this.projectMembers = projectMembers;
 	}
 
 	@Override

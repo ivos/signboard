@@ -8,11 +8,14 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 
+import org.jboss.solder.core.Client;
 import org.jboss.solder.exception.control.ExceptionHandled;
 import org.jboss.solder.logging.Logger;
 
 import com.github.ivos.signboard.config.security.SystemUser;
 import com.github.ivos.signboard.project.model.Project;
+import com.github.ivos.signboard.project.model.ProjectMember;
+import com.github.ivos.signboard.user.model.User;
 import com.github.ivos.signboard.view.ViewContext;
 
 @Named
@@ -25,6 +28,10 @@ public class ProjectBean implements Serializable {
 
 	@Inject
 	ViewContext viewContext;
+
+	@Inject
+	@Client
+	User clientUser;
 
 	private static final long serialVersionUID = 1L;
 
@@ -64,7 +71,12 @@ public class ProjectBean implements Serializable {
 	@SystemUser
 	public String update() {
 		if (id == null) {
+			clientUser = entityManager.find(User.class, clientUser.getId());
+			ProjectMember projectMember = new ProjectMember(project, clientUser);
+			project.getProjectMembers().add(projectMember);
+			clientUser.getProjectMembers().add(projectMember);
 			entityManager.persist(project);
+			entityManager.persist(projectMember);
 			log.infov("Create project {0}.", project);
 		} else {
 			log.infov("Update project {0}.", project);

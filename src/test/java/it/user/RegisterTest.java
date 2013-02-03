@@ -9,7 +9,7 @@ import net.sf.lightair.annotation.Verify;
 
 import org.junit.Test;
 
-@Setup
+@Setup({ "../deleteAll.xml", "RegisterTest.xml" })
 @Verify("RegisterTest.xml")
 @BaseUrl("http://localhost:8080/signboard")
 public class RegisterTest extends ITBase {

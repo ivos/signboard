@@ -9,7 +9,7 @@ import net.sf.lightair.annotation.Verify;
 
 import org.junit.Test;
 
-@Setup
+@Setup({ "../deleteAll.xml", "LogInOutTest.xml" })
 @Verify("LogInOutTest.xml")
 @BaseUrl("http://localhost:8080/signboard")
 public class LogInOutTest extends ITBase {

@@ -10,14 +10,14 @@ import net.sf.lightair.annotation.Verify;
 import org.junit.Before;
 import org.junit.Test;
 
-@Setup({ "../users.xml", "ViewProjectTest.xml" })
+@Setup({ "../deleteAll.xml", "../users.xml", "ViewProjectTest.xml" })
 @Verify("ViewProjectTest.xml")
 @BaseUrl("http://localhost:8080/signboard")
 public class ViewProjectTest extends ITBase {
 
 	@Before
 	public void before() {
-		login("email1", "password1");
+		login("email1", "qqqq");
 	}
 
 	@Test
@@ -55,7 +55,7 @@ public class ViewProjectTest extends ITBase {
 
 	@Test
 	public void sec_MustBeSystemUser() {
-		login("email2", "password2");
+		login("email2", "qqqq");
 		gotoPage("project/code2");
 		assertAccessDenied();
 	}

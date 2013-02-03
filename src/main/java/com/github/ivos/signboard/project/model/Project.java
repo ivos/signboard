@@ -2,10 +2,13 @@ package com.github.ivos.signboard.project.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -39,6 +42,9 @@ public class Project implements Serializable {
 	@Column(updatable = false)
 	@Temporal(TemporalType.DATE)
 	private Date dateCreated;
+
+	@OneToMany(mappedBy = "project")
+	private Set<ProjectMember> projectMembers = new HashSet<ProjectMember>();
 
 	// business logic
 
@@ -91,6 +97,14 @@ public class Project implements Serializable {
 
 	public Date getDateCreated() {
 		return dateCreated;
+	}
+
+	public Set<ProjectMember> getProjectMembers() {
+		return projectMembers;
+	}
+
+	public void setProjectMembers(Set<ProjectMember> projectMembers) {
+		this.projectMembers = projectMembers;
 	}
 
 	@Override
