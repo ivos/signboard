@@ -41,7 +41,7 @@
 						<h:outputText value=" #{label['button.create']}" />
 					</h:link>
 					<h:commandButton id="reset" class="btn btn-warning pull-right"
-						action="#{projectListBean.reset}" tag="button">
+						action="#{projectListBean.reset}" tag="button" immediate="true">
 						<i class="icon-remove"></i>
 						<h:outputText value=" #{label['button.reset']}" />
 					</h:commandButton>
