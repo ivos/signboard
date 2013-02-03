@@ -29,7 +29,7 @@ public class ExceptionHandler {
 
 	public void authorizationException(
 			@Handles CaughtException<AuthorizationException> event) {
-		log.error("Caught authorizationaut exception.");
+		log.error("Caught authorization exception", event.getException());
 		viewContext.error("authorization.exception");
 		event.handled();
 	}
