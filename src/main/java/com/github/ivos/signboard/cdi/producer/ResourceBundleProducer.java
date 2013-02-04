@@ -20,15 +20,13 @@ public class ResourceBundleProducer {
 	@Inject
 	private Logger log;
 
-	@Inject
-	private FacesContext facesContext;
-
 	private ResourceBundle messageResourceBundle;
 
 	@Produces
 	@MessageResourceBundle
 	ResourceBundle getMessageResourceBundle() {
 		if (null == messageResourceBundle) {
+			FacesContext facesContext = FacesContext.getCurrentInstance();
 			log.debugv("Getting message resource bundle for locale {0}.",
 					facesContext.getViewRoot().getLocale());
 			messageResourceBundle = facesContext.getApplication()
@@ -47,6 +45,7 @@ public class ResourceBundleProducer {
 	@LabelResourceBundle
 	ResourceBundle getLabelResourceBundle() {
 		if (null == labelResourceBundle) {
+			FacesContext facesContext = FacesContext.getCurrentInstance();
 			facesContext.getViewRoot().setLocale(userLocale);
 			log.debugv("Getting label resource bundle for locale {0}.",
 					facesContext.getViewRoot().getLocale());
