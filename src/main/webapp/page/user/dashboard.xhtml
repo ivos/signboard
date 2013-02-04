@@ -9,12 +9,17 @@
 	xmlns:my="http://signboard.ivos.github.com/jsf/facelets"
 	template="/page/template.xhtml">
 
+	<f:metadata>
+		<s:viewAction action="#{loginBean.retrieve}" />
+	</f:metadata>
+
 	<ui:param name="pageTitle" value="#{label['user.dashboard.title']}" />
 	<ui:define name="main">
 		<h1>#{pageTitle}</h1>
 		<h:messages id="messages" globalOnly="true" styleClass="form-messages" />
 		<div class="row">
-			<div class="span4">
+			<div id="my-user" class="span4">
+				<h2><h:outputText value="#{label['user.dashboard.user']}" /></h2>
 				<h:outputText value="#{label['user.dashboard.of.user']}" />
 				<strong><h:outputText value="#{clientUser.firstName}" />&nbsp;<h:outputText
 						value="#{clientUser.lastName}" /></strong>
@@ -26,6 +31,17 @@
 					outcome="/page/user/profile">
 					<h:outputText value="#{label['user.dashboard.change']}" />
 				</h:link>&nbsp;<h:outputText value="#{label['user.dashboard.profile']}" />
+			</div>
+			<div id="my-projects" class="span4">
+				<h2><h:outputText value="#{label['user.dashboard.my.projects']}" /></h2>
+				<ul class="nav nav-tabs nav-stacked">
+					<c:forEach items="#{clientUser.projectMembers}" var="pm">
+						<li><h:link outcome="/page/project/view">
+								<f:param name="id" value="#{pm.project.id}" />
+								<h:outputText value="#{pm.project.name}" />
+							</h:link></li>
+					</c:forEach>
+				</ul>
 			</div>
 		</div>
 	</ui:define>
