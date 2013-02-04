@@ -15,6 +15,7 @@ import org.jboss.solder.logging.Logger;
 import com.github.ivos.signboard.config.security.SystemUser;
 import com.github.ivos.signboard.project.model.Project;
 import com.github.ivos.signboard.project.model.ProjectMember;
+import com.github.ivos.signboard.project.model.ProjectRole;
 import com.github.ivos.signboard.user.model.User;
 import com.github.ivos.signboard.view.ViewContext;
 
@@ -75,6 +76,8 @@ public class ProjectBean implements Serializable {
 			ProjectMember projectMember = new ProjectMember(project, clientUser);
 			project.getProjectMembers().add(projectMember);
 			clientUser.getProjectMembers().add(projectMember);
+			projectMember.getRoles().add(ProjectRole.admin);
+			projectMember.getRoles().add(ProjectRole.user);
 			entityManager.persist(project);
 			entityManager.persist(projectMember);
 			log.infov("Create project {0}.", project);

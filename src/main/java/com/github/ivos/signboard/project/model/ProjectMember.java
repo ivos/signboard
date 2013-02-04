@@ -1,8 +1,15 @@
 package com.github.ivos.signboard.project.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,6 +37,12 @@ public class ProjectMember implements Serializable {
 	@ManyToOne(optional = false)
 	@ForeignKey(name = "project_member__user")
 	private User user;
+
+	@ElementCollection(fetch = FetchType.EAGER)
+	@Enumerated(EnumType.STRING)
+	@Column(name = "role", length = 32, nullable = false)
+	@ForeignKey(name = "project_member_roles__project_member")
+	private Set<ProjectRole> roles = new HashSet<ProjectRole>();
 
 	public ProjectMember() {
 	}
@@ -73,6 +86,14 @@ public class ProjectMember implements Serializable {
 		this.user = user;
 	}
 
+	public Set<ProjectRole> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<ProjectRole> roles) {
+		this.roles = roles;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -108,7 +129,7 @@ public class ProjectMember implements Serializable {
 	public String toString() {
 		return "ProjectMember [id=" + id + ", version=" + version
 				+ ", project=" + project.getId() + ", user=" + user.getId()
-				+ "]";
+				+ ", roles=" + roles + "]";
 	}
 
 	private static final long serialVersionUID = 1L;

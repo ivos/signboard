@@ -72,6 +72,8 @@ Project
 	As a system user I can create a project.
 New project attributes: code (unique), name, description.
 System records date created.
+I become project administrator and project user 
+of the newly created project.
 
 1. __Find a project__
 
