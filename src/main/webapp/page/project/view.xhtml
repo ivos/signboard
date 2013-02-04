@@ -22,18 +22,20 @@
 				bean="#{projectBean.project}" />
 			<my:field id="name" type="output" entity="project"
 				bean="#{projectBean.project}" class="input-xlarge" />
-			<my:field id="description" type="custom" entity="project"
-				bean="#{projectBean.project}">
-				<h:inputTextarea id="description"
-					value="#{projectBean.project.description}"
-					label="#{label['project.description']}" rows="8"
-					styleClass="input-xxlarge">
-				</h:inputTextarea>
-			</my:field>
-			<my:field id="dateCreated" type="output" entity="project"
-				bean="#{projectBean.project}">
-				<f:convertDateTime timeZone="${userDateTimeZone.ID}" />
-			</my:field>
+			<h:panelGroup rendered="#{projectBean.clientUserMember}">
+				<my:field id="description" type="custom" entity="project"
+					bean="#{projectBean.project}">
+					<h:inputTextarea id="description"
+						value="#{projectBean.project.description}"
+						label="#{label['project.description']}" rows="8"
+						styleClass="input-xxlarge">
+					</h:inputTextarea>
+				</my:field>
+				<my:field id="dateCreated" type="output" entity="project"
+					bean="#{projectBean.project}">
+					<f:convertDateTime timeZone="${userDateTimeZone.ID}" />
+				</my:field>
+			</h:panelGroup>
 
 			<div class="control-group">
 				<div class="form-actions">

@@ -96,5 +96,9 @@ I can view name, code attributes in the search table.
 1. __View project__
 
 	As a system user I can view a project's detail.
-I can view code, name
+
+	As non-project member, I can view code, name
+attributes.
+
+	As project member, I can view code, name, description, date created
 attributes.

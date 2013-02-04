@@ -6,4 +6,14 @@
 		date_created="2012-01-02" version="0" />
 	<project code="code03" name="name03" description="description03"
 		date_created="2012-01-03" version="0" />
+
+	<project_member id="11" project="code01" user="1"
+		version="0" />
+	<project_member id="12" project="code03" user="1"
+		version="0" />
+
+	<project_member id="21" project="code02" user="3"
+		version="0" />
+	<project_member id="22" project="code03" user="3"
+		version="0" />
 </dataset>

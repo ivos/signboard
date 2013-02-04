@@ -20,21 +20,42 @@ public class ViewProjectTest extends ITBase {
 		login("email1", "qqqq");
 	}
 
-	@Test
-	public void fn() {
-		view("1");
-		view("2");
-		view("3");
-	}
-
-	private void view(String number) {
+	private void navigate(String number) {
 		gotoPage("project");
 		clickLinkWithExactText("code0" + number);
 		verifyTitle("View project");
 		assertTextPresent("View project");
+	}
+
+	private void viewNonMember(String number) {
+		navigate(number);
 		assertTextPresent("code0" + number);
 		assertTextPresent("name0" + number);
-		// assertTextPresent("Jan " + number + ", 2012");
+		assertTextNotPresent("Description");
+		assertTextNotPresent("Date created");
+	}
+
+	private void viewMember(String number) {
+		navigate(number);
+		assertTextPresent("code0" + number);
+		assertTextPresent("name0" + number);
+		assertTextPresent("description0" + number);
+		assertTextPresent("Jan " + number + ", 2012");
+	}
+
+	@Test
+	public void fn() {
+		viewMember("1");
+		viewNonMember("2");
+		viewMember("3");
+	}
+
+	@Test
+	public void fn_OtherUser() {
+		login("email3", "qqqq");
+		viewNonMember("1");
+		viewMember("2");
+		viewMember("3");
 	}
 
 	@Test

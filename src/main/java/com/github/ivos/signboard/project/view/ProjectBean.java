@@ -34,6 +34,16 @@ public class ProjectBean implements Serializable {
 	@Client
 	User clientUser;
 
+	public boolean isClientUserMember() {
+		clientUser = entityManager.find(User.class, clientUser.getId());
+		for (ProjectMember projectMember : clientUser.getProjectMembers()) {
+			if (projectMember.getProject().equals(project)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	private static final long serialVersionUID = 1L;
 
 	private String id;
