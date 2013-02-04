@@ -20,28 +20,47 @@
 		<div class="row">
 			<div id="my-user" class="span4">
 				<h2><h:outputText value="#{label['user.dashboard.user']}" /></h2>
-				<h:outputText value="#{label['user.dashboard.of.user']}" />
+				<p><h:outputText value="#{label['user.dashboard.of.user']}" />
 				<strong><h:outputText value="#{clientUser.firstName}" />&nbsp;<h:outputText
 						value="#{clientUser.lastName}" /></strong>
 				<br /><i class="icon-envelope"></i>&nbsp;<h:outputText value="#{clientUser.email}" />
 				<c:if test="#{not empty clientUser.phone}"><br /><i class="icon-phone"></i>&nbsp;<h:outputText value="#{clientUser.phone}" /></c:if>
 				<c:if test="#{not empty clientUser.skype}"><br />S&nbsp;<h:outputText value="#{clientUser.skype}" /></c:if>
-				<br />
-				<h:link id="change-profile" class="btn btn-mini"
+				</p>
+				<p><h:link id="change-profile" class="btn btn-small"
 					outcome="/page/user/profile">
 					<h:outputText value="#{label['user.dashboard.change']}" />
-				</h:link>&nbsp;<h:outputText value="#{label['user.dashboard.profile']}" />
+				</h:link>&nbsp;<h:outputText value="#{label['user.dashboard.profile']}" /></p>
 			</div>
 			<div id="my-projects" class="span4">
 				<h2><h:outputText value="#{label['user.dashboard.my.projects']}" /></h2>
-				<ul class="nav nav-tabs nav-stacked">
-					<c:forEach items="#{clientUser.projectMembers}" var="pm">
-						<li><h:link outcome="/page/project/view">
-								<f:param name="id" value="#{pm.project.id}" />
-								<h:outputText value="#{pm.project.name}" />
-							</h:link></li>
-					</c:forEach>
-				</ul>
+				<h:panelGroup rendered="#{empty clientUser.projectMembers}">
+					<p><h:outputText value="#{label['user.dashboard.no.projects']}" /></p>
+					<p>
+						<h:link id="find-project" outcome="/page/project/search">
+							<h:outputText class="btn btn-small"
+								value="#{label['button.find']}" />
+						</h:link>
+						<h:outputText value=" #{label['user.dashboard.find.project']}" />
+					</p>
+					<p>
+						<h:link id="create-project" outcome="/page/project/create">
+							<h:outputText class="btn btn-small"
+								value="#{label['button.create']}" />
+						</h:link>
+						<h:outputText value=" #{label['user.dashboard.create.project']}" />
+					</p>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{not empty clientUser.projectMembers}">
+					<ul class="nav nav-tabs nav-stacked">
+						<c:forEach items="#{clientUser.projectMembers}" var="pm">
+							<li><h:link outcome="/page/project/view">
+									<f:param name="id" value="#{pm.project.id}" />
+									<h:outputText value="#{pm.project.name}" />
+								</h:link></li>
+						</c:forEach>
+					</ul>
+				</h:panelGroup>
 			</div>
 		</div>
 	</ui:define>

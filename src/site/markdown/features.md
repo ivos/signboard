@@ -29,11 +29,20 @@ System records last login time.
 	As a user I can see my dashboard page after I log in 
 to get an overview of current status of my assets within the system.
 
+	*__User overview__*
+
 	The page shows my first name, last name, e-mail, phone, skype
 and a link to edit my profile.
 
-	The page lists projects I am a member of.
+	*__My projects__*
+
+	If I am a member of a project, 
+the page lists the projects I am a member of.
 The list shows name attribute of project.
+
+	If I am not a member of any project, 
+the page states so and shows links to create a new project 
+and to find an existing project.
 
 1. __Edit my user profile__
 

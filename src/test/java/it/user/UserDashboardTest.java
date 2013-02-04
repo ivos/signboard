@@ -29,7 +29,24 @@ public class UserDashboardTest extends ITBase {
 		assertLinkPresentWithExactText("projectName04");
 		assertLinkPresentWithExactText("projectName05");
 		assertEquals("Projects count", 3,
-				getElementsByXPath("//div[@id='my-projects']//ul/li").size());
+				getElementsByXPath("//div[@id='my-projects']/ul/li").size());
+	}
+
+	@Test
+	public void fn_OtherUser() {
+		login("email01", "qqqq");
+		verifyTitle("My dashboard");
+
+		assertTextPresent("Dashboard of firstName01 lastName01");
+		assertTextPresent("email01");
+		assertTextPresent("phone01");
+		assertTextPresent("S skype01");
+		assertElementPresentByXPath("//div[@id='main-section']//i[@class='icon-phone']");
+
+		assertLinkPresentWithExactText("projectName03");
+		assertLinkPresentWithExactText("projectName04");
+		assertEquals("Projects count", 2,
+				getElementsByXPath("//div[@id='my-projects']/ul/li").size());
 	}
 
 	@Test
@@ -41,17 +58,39 @@ public class UserDashboardTest extends ITBase {
 		assertTextPresent("email03");
 		assertElementNotPresentByXPath("//div[@id='main-section']//i[@class='icon-phone']");
 
-		assertLinkPresentWithExactText("projectName03");
-		assertLinkPresentWithExactText("projectName04");
-		assertEquals("Projects count", 2,
-				getElementsByXPath("//div[@id='my-projects']//ul/li").size());
+		assertTextPresent("My projects");
+		assertTextPresent("You are not a member of any project yet.");
+		assertLinkPresent("find-project");
+		assertLinkPresent("create-project");
 	}
 
 	@Test
-	public void nav() {
+	public void nav_EditProfile() {
 		login("email02", "qqqq");
 		clickLink("change-profile");
 		verifyTitle("Edit my profile");
+	}
+
+	@Test
+	public void nav_FindProject() {
+		login("email03", "qqqq");
+		clickLink("find-project");
+		verifyTitle("Search projects");
+	}
+
+	@Test
+	public void nav_CreateProject() {
+		login("email03", "qqqq");
+		clickLink("create-project");
+		verifyTitle("Create project");
+	}
+
+	@Test
+	public void nav_ViewProject() {
+		login("email02", "qqqq");
+		clickLinkWithExactText("projectName05");
+		verifyTitle("View project");
+		assertTextPresent("projectCode05");
 	}
 
 }
