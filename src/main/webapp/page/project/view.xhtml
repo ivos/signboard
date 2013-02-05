@@ -15,49 +15,38 @@
 
 	<ui:param name="pageTitle" value="#{label['project.view.title']}" />
 	<ui:define name="main">
-		<h1>#{label['project.page.header']}</h1>
-		<h:form id="main" styleClass="form-horizontal">
-			<legend>#{label['project.view.title']}</legend>
-			<my:field id="code" type="output" entity="project"
-				bean="#{projectBean.project}" />
-			<my:field id="name" type="output" entity="project"
-				bean="#{projectBean.project}" class="input-xlarge" />
-			<h:panelGroup rendered="#{projectBean.clientUserMember}">
-				<my:field id="description" type="custom" entity="project"
-					bean="#{projectBean.project}">
-					<h:inputTextarea id="description"
-						value="#{projectBean.project.description}"
-						label="#{label['project.description']}" rows="8"
-						styleClass="input-xxlarge">
-					</h:inputTextarea>
-				</my:field>
-				<my:field id="dateCreated" type="output" entity="project"
-					bean="#{projectBean.project}">
-					<f:convertDateTime timeZone="${userDateTimeZone.ID}" />
-				</my:field>
-			</h:panelGroup>
+		<h1><span class="muted"><h:outputText value="#{label['project.page.header']}" /></span>
+			<h:outputText value=" #{projectBean.project.name}" /></h1>
+		<div class="row">
+			<div class="span9">
+				<p>
+					<h:outputText value="#{label['project.code']}" />
+					<strong><h:outputText value="#{projectBean.project.code}" /></strong>.
+				</p>
+				<h:panelGroup rendered="#{projectBean.clientUserMember}">
+					<h:panelGroup rendered="#{not empty projectBean.project.description}">
+						<pre><h:outputText value="#{projectBean.project.description}" /></pre>
+					</h:panelGroup>
+					<p>
+						<h:outputText value="#{label['project.dateCreated']} " />
+						<h:outputText value="#{projectBean.project.dateCreated}">
+							<f:convertDateTime timeZone="${userDateTimeZone.ID}" />
+						</h:outputText>.
+					</p>
+				</h:panelGroup>
 
-			<div class="control-group">
-				<div class="form-actions">
-					<h:link id="edit" class="btn btn-success" outcome="edit"
-						includeViewParams="true"
-						rendered="#{projectBean.clientUserAdministrator}">
-						<i class="icon-edit"></i>
-						<h:outputText value=" #{label['button.edit']}" />
-					</h:link>
-					<h:link id="create" class="btn btn-info" outcome="edit">
-						<i class="icon-plus"></i>
-						<h:outputText value=" #{label['button.create.new']}" />
-					</h:link>
-					<h:link id="search" class="btn" outcome="search">
-						<i class="icon-list"></i>
-						<h:outputText value=" #{label['button.viewAll']}" />
-					</h:link>
-				</div>
-				<h:messages id="messages" globalOnly="true"
-					styleClass="form-messages" />
+				<h:panelGroup rendered="#{projectBean.clientUserAdministrator}">
+					<p>
+						<h:link id="edit" class="btn btn-small" outcome="edit"
+							includeViewParams="true">
+							<h:outputText value=" #{label['button.edit']}" />
+						</h:link>
+						<h:outputText value=" #{label['project.view.project.details']}" />
+					</p>
+				</h:panelGroup>
 			</div>
-		</h:form>
+		</div>
+		<h:messages id="messages" globalOnly="true" styleClass="form-messages" />
 	</ui:define>
 
 </ui:composition>

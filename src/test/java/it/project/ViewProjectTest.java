@@ -67,11 +67,6 @@ public class ViewProjectTest extends ITBase {
 		assertTrue(getTestingEngine().getPageURL().toString()
 				.endsWith("/signboard/project/code2"));
 		assertTextPresent("View project");
-
-		clickLinkWithExactText("View all");
-		verifyTitle("Search projects");
-		assertTrue(getTestingEngine().getPageURL().toString()
-				.endsWith("/signboard/project"));
 	}
 
 	@Test
