@@ -19,8 +19,6 @@
 		<h1>#{label['project.page.header']}</h1>
 		<h:form id="edit" styleClass="form-horizontal">
 			<legend>#{pageTitle}</legend>
-			<my:field id="code" type="output" entity="project"
-				bean="#{projectBean.project}" />
 			<my:field id="name" type="text" entity="project"
 				bean="#{projectBean.project}" required="true" class="input-xlarge" />
 			<my:field id="description" type="custom" entity="project"
@@ -32,10 +30,6 @@
 					styleClass="input-xxlarge">
 					<f:ajax event="blur" render="description-message" />
 				</h:inputTextarea>
-			</my:field>
-			<my:field id="dateCreated" type="output" entity="project"
-				bean="#{projectBean.project}">
-				<f:convertDateTime timeZone="${userDateTimeZone.ID}" />
 			</my:field>
 
 			<div class="control-group">
