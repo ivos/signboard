@@ -18,7 +18,7 @@
 		<h1><span class="muted"><h:outputText value="#{label['project.page.header']}" /></span>
 			<h:outputText value=" #{projectBean.project.name}" /></h1>
 		<div class="row">
-			<div class="span9">
+			<div class="span6">
 				<p>
 					<h:outputText value="#{label['project.code']}" />
 					<strong><h:outputText value="#{projectBean.project.code}" /></strong>.
@@ -39,6 +39,7 @@
 					<p>
 						<h:link id="edit" class="btn btn-small" outcome="edit"
 							includeViewParams="true">
+							<i class="icon-edit"></i>
 							<h:outputText value=" #{label['button.edit']}" />
 						</h:link>
 						<h:outputText value=" #{label['project.view.project.details']}" />

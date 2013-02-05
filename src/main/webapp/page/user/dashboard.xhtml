@@ -20,17 +20,20 @@
 		<div class="row">
 			<div id="my-user" class="span4">
 				<h2><h:outputText value="#{label['user.dashboard.user']}" /></h2>
-				<p><h:outputText value="#{label['user.dashboard.of.user']}" />
-				<strong><h:outputText value="#{clientUser.firstName}" />&nbsp;<h:outputText
-						value="#{clientUser.lastName}" /></strong>
-				<br /><i class="icon-envelope"></i>&nbsp;<h:outputText value="#{clientUser.email}" />
-				<c:if test="#{not empty clientUser.phone}"><br /><i class="icon-phone"></i>&nbsp;<h:outputText value="#{clientUser.phone}" /></c:if>
-				<c:if test="#{not empty clientUser.skype}"><br />S&nbsp;<h:outputText value="#{clientUser.skype}" /></c:if>
-				</p>
+				<ul class="unstyled">
+					<li><h:outputText value="#{label['user.dashboard.of.user']} " /><strong><h:outputText
+						value="#{clientUser.fullName}" /></strong></li>
+					<li><i class="icon-envelope"></i>&nbsp;<h:outputText value="#{clientUser.email}" /></li>
+					<c:if test="#{not empty clientUser.phone}">
+					<li><i class="icon-phone"></i>&nbsp;<h:outputText value="#{clientUser.phone}" /></li></c:if>
+					<c:if test="#{not empty clientUser.skype}">
+					<li>S&nbsp;<h:outputText value="#{clientUser.skype}" /></li></c:if>
+				</ul>
 				<p><h:link id="change-profile" class="btn btn-small"
 					outcome="/page/user/profile">
-					<h:outputText value="#{label['user.dashboard.change']}" />
-				</h:link>&nbsp;<h:outputText value="#{label['user.dashboard.profile']}" /></p>
+					<i class="icon-edit"></i>
+					<h:outputText value=" #{label['button.edit']}" />
+				</h:link><h:outputText value=" #{label['user.dashboard.profile']}" /></p>
 			</div>
 			<div id="my-projects" class="span4">
 				<h2><h:outputText value="#{label['user.dashboard.my.projects']}" /></h2>
@@ -48,16 +51,18 @@
 					</ul>
 				</h:panelGroup>
 				<p>
-					<h:link id="find-project" outcome="/page/project/search">
-						<h:outputText class="btn btn-small"
-							value="#{label['button.find']}" />
+					<h:link id="find-project" styleClass="btn btn-small"
+						outcome="/page/project/search">
+						<i class="icon-search"></i>
+						<h:outputText value=" #{label['button.find']}" />
 					</h:link>
 					<h:outputText value=" #{label['user.dashboard.find.project']}" />
 				</p>
 				<p>
-					<h:link id="create-project" outcome="/page/project/create">
-						<h:outputText class="btn btn-small"
-							value="#{label['button.create']}" />
+					<h:link id="create-project" styleClass="btn btn-small"
+						outcome="/page/project/create">
+						<i class="icon-plus"></i>
+						<h:outputText value=" #{label['button.create']}" />
 					</h:link>
 					<h:outputText value=" #{label['user.dashboard.create.project']}" />
 				</p>
