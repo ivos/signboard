@@ -80,6 +80,15 @@ public class User implements Serializable {
 	@OneToMany(mappedBy = "user")
 	private Set<ProjectMember> projectMembers = new HashSet<ProjectMember>();
 
+	// business logic
+
+	public User() {
+	}
+
+	public User(String email) {
+		this.email = email;
+	}
+
 	/**
 	 * Convert password to MD5 digest.
 	 */
@@ -91,7 +100,7 @@ public class User implements Serializable {
 		return firstName + ' ' + lastName;
 	}
 
-	// Java bean:
+	// Java bean
 
 	public Long getId() {
 		return id;

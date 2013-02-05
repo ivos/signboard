@@ -40,7 +40,8 @@
 			<div class="control-group">
 				<div class="form-actions">
 					<h:link id="edit" class="btn btn-success" outcome="edit"
-						includeViewParams="true">
+						includeViewParams="true"
+						rendered="#{projectBean.clientUserAdministrator}">
 						<i class="icon-edit"></i>
 						<h:outputText value=" #{label['button.edit']}" />
 					</h:link>

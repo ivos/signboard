@@ -9,11 +9,15 @@
 
 	<project_member id="11" project="code1" user="1"
 		version="0" />
+	<project_member_roles project_member="11" role="admin" />
 	<project_member id="12" project="code3" user="1"
 		version="0" />
+	<project_member_roles project_member="12" role="user" />
 
 	<project_member id="21" project="code2" user="3"
 		version="0" />
+	<project_member_roles project_member="21" role="admin" />
 	<project_member id="22" project="code3" user="3"
 		version="0" />
+	<project_member_roles project_member="22" role="user" />
 </dataset>

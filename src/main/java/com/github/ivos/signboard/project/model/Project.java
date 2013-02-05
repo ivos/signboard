@@ -19,6 +19,8 @@ import javax.validation.constraints.Size;
 
 import org.joda.time.DateMidnight;
 
+import com.github.ivos.signboard.user.model.User;
+
 @Entity
 public class Project implements Serializable {
 
@@ -48,6 +50,13 @@ public class Project implements Serializable {
 
 	// business logic
 
+	public Project() {
+	}
+
+	public Project(String code) {
+		this.code = code;
+	}
+
 	public String getId() {
 		return code;
 	}
@@ -59,6 +68,24 @@ public class Project implements Serializable {
 	@PrePersist
 	public void initDateCreated() {
 		dateCreated = DateMidnight.now().toDate();
+	}
+
+	public boolean isMember(User user) {
+		for (ProjectMember projectMember : user.getProjectMembers()) {
+			if (projectMember.getProject().equals(this)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean isAdministrator(User user) {
+		for (ProjectMember projectMember : user.getProjectMembers()) {
+			if (projectMember.getProject().equals(this)) {
+				return projectMember.getRoles().contains(ProjectRole.admin);
+			}
+		}
+		return false;
 	}
 
 	// Java bean

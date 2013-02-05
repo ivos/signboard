@@ -77,7 +77,7 @@ public class EditUserTest extends ITBase {
 	}
 
 	@Test
-	public void sec_DeniedForNonSystemAdministrator() {
+	public void sec_MustBeSystemAdministrator() {
 		login("email02", "qqqq");
 		gotoPage("user/3/edit");
 		assertAccessDenied();

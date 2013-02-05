@@ -102,3 +102,8 @@ attributes.
 
 	As project member, I can view code, name, description, date created
 attributes.
+
+1. __Edit project__
+
+	As a project administrator I can edit the project's 
+name, description attributes.

@@ -12,6 +12,7 @@ import org.jboss.solder.core.Client;
 import org.jboss.solder.exception.control.ExceptionHandled;
 import org.jboss.solder.logging.Logger;
 
+import com.github.ivos.signboard.config.security.ProjectAdministrator;
 import com.github.ivos.signboard.config.security.SystemUser;
 import com.github.ivos.signboard.project.model.Project;
 import com.github.ivos.signboard.project.model.ProjectMember;
@@ -36,12 +37,12 @@ public class ProjectBean implements Serializable {
 
 	public boolean isClientUserMember() {
 		clientUser = entityManager.find(User.class, clientUser.getId());
-		for (ProjectMember projectMember : clientUser.getProjectMembers()) {
-			if (projectMember.getProject().equals(project)) {
-				return true;
-			}
-		}
-		return false;
+		return project.isMember(clientUser);
+	}
+
+	public boolean isClientUserAdministrator() {
+		clientUser = entityManager.find(User.class, clientUser.getId());
+		return project.isAdministrator(clientUser);
 	}
 
 	private static final long serialVersionUID = 1L;
@@ -80,21 +81,25 @@ public class ProjectBean implements Serializable {
 	}
 
 	@SystemUser
+	public String create() {
+		clientUser = entityManager.find(User.class, clientUser.getId());
+		ProjectMember projectMember = new ProjectMember(project, clientUser);
+		project.getProjectMembers().add(projectMember);
+		clientUser.getProjectMembers().add(projectMember);
+		projectMember.getRoles().add(ProjectRole.admin);
+		projectMember.getRoles().add(ProjectRole.user);
+		entityManager.persist(project);
+		entityManager.persist(projectMember);
+		log.infov("Create project {0}.", project);
+		viewContext.info("saved");
+		return "view?faces-redirect=true&id=" + project.getId();
+	}
+
+	@SystemUser
+	@ProjectAdministrator
 	public String update() {
-		if (id == null) {
-			clientUser = entityManager.find(User.class, clientUser.getId());
-			ProjectMember projectMember = new ProjectMember(project, clientUser);
-			project.getProjectMembers().add(projectMember);
-			clientUser.getProjectMembers().add(projectMember);
-			projectMember.getRoles().add(ProjectRole.admin);
-			projectMember.getRoles().add(ProjectRole.user);
-			entityManager.persist(project);
-			entityManager.persist(projectMember);
-			log.infov("Create project {0}.", project);
-		} else {
-			log.infov("Update project {0}.", project);
-			entityManager.merge(project);
-		}
+		log.infov("Update project {0}.", project);
+		entityManager.merge(project);
 		viewContext.info("saved");
 		return "view?faces-redirect=true&id=" + project.getId();
 	}

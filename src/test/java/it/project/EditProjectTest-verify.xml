@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
-	<project code="code1" name="name1" description="description1"
-		date_created="2012-01-01" version="0" />
+	<project code="code1" name="name1a" description="description1b"
+		date_created="2012-01-01" />
 	<project code="code2" name="name2" description="description2"
 		date_created="2012-01-02" version="0" />
 	<project code="code3" name="name3" description="description3"

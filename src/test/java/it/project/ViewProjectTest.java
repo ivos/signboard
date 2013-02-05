@@ -22,24 +22,24 @@ public class ViewProjectTest extends ITBase {
 
 	private void navigate(String number) {
 		gotoPage("project");
-		clickLinkWithExactText("code0" + number);
+		clickLinkWithExactText("code" + number);
 		verifyTitle("View project");
 		assertTextPresent("View project");
 	}
 
 	private void viewNonMember(String number) {
 		navigate(number);
-		assertTextPresent("code0" + number);
-		assertTextPresent("name0" + number);
+		assertTextPresent("code" + number);
+		assertTextPresent("name" + number);
 		assertTextNotPresent("Description");
 		assertTextNotPresent("Date created");
 	}
 
 	private void viewMember(String number) {
 		navigate(number);
-		assertTextPresent("code0" + number);
-		assertTextPresent("name0" + number);
-		assertTextPresent("description0" + number);
+		assertTextPresent("code" + number);
+		assertTextPresent("name" + number);
+		assertTextPresent("description" + number);
 		assertTextPresent("Jan " + number + ", 2012");
 	}
 
@@ -62,10 +62,10 @@ public class ViewProjectTest extends ITBase {
 	public void nav() {
 		gotoPage("/");
 		clickLinkWithExactText("Project");
-		clickLinkWithExactText("code02");
+		clickLinkWithExactText("code2");
 		verifyTitle("View project");
 		assertTrue(getTestingEngine().getPageURL().toString()
-				.endsWith("/signboard/project/code02"));
+				.endsWith("/signboard/project/code2"));
 		assertTextPresent("View project");
 
 		clickLinkWithExactText("View all");

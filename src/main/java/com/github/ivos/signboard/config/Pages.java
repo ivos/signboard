@@ -6,6 +6,7 @@ import org.jboss.seam.faces.view.config.ViewConfig;
 import org.jboss.seam.faces.view.config.ViewPattern;
 import org.jboss.seam.security.annotations.LoggedIn;
 
+import com.github.ivos.signboard.config.security.ProjectAdministrator;
 import com.github.ivos.signboard.config.security.SystemAdministrator;
 import com.github.ivos.signboard.config.security.SystemUser;
 
@@ -49,6 +50,11 @@ public interface Pages {
 		userEdit,
 
 		// project
+
+		@ViewPattern("/page/project/edit.xhtml")
+		@LoggedIn
+		@ProjectAdministrator
+		projectEdit,
 
 		@ViewPattern("/page/project/*")
 		@LoggedIn
