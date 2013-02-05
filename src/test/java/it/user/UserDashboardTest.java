@@ -30,6 +30,8 @@ public class UserDashboardTest extends ITBase {
 		assertLinkPresentWithExactText("projectName05");
 		assertEquals("Projects count", 3,
 				getElementsByXPath("//div[@id='my-projects']/ul/li").size());
+		assertLinkPresent("find-project");
+		assertLinkPresent("create-project");
 	}
 
 	@Test
@@ -47,6 +49,8 @@ public class UserDashboardTest extends ITBase {
 		assertLinkPresentWithExactText("projectName04");
 		assertEquals("Projects count", 2,
 				getElementsByXPath("//div[@id='my-projects']/ul/li").size());
+		assertLinkPresent("find-project");
+		assertLinkPresent("create-project");
 	}
 
 	@Test

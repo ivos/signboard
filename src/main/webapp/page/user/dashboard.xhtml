@@ -36,20 +36,6 @@
 				<h2><h:outputText value="#{label['user.dashboard.my.projects']}" /></h2>
 				<h:panelGroup rendered="#{empty clientUser.projectMembers}">
 					<p><h:outputText value="#{label['user.dashboard.no.projects']}" /></p>
-					<p>
-						<h:link id="find-project" outcome="/page/project/search">
-							<h:outputText class="btn btn-small"
-								value="#{label['button.find']}" />
-						</h:link>
-						<h:outputText value=" #{label['user.dashboard.find.project']}" />
-					</p>
-					<p>
-						<h:link id="create-project" outcome="/page/project/create">
-							<h:outputText class="btn btn-small"
-								value="#{label['button.create']}" />
-						</h:link>
-						<h:outputText value=" #{label['user.dashboard.create.project']}" />
-					</p>
 				</h:panelGroup>
 				<h:panelGroup rendered="#{not empty clientUser.projectMembers}">
 					<ul class="nav nav-tabs nav-stacked">
@@ -61,6 +47,20 @@
 						</c:forEach>
 					</ul>
 				</h:panelGroup>
+				<p>
+					<h:link id="find-project" outcome="/page/project/search">
+						<h:outputText class="btn btn-small"
+							value="#{label['button.find']}" />
+					</h:link>
+					<h:outputText value=" #{label['user.dashboard.find.project']}" />
+				</p>
+				<p>
+					<h:link id="create-project" outcome="/page/project/create">
+						<h:outputText class="btn btn-small"
+							value="#{label['button.create']}" />
+					</h:link>
+					<h:outputText value=" #{label['user.dashboard.create.project']}" />
+				</p>
 			</div>
 		</div>
 	</ui:define>

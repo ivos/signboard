@@ -37,12 +37,14 @@ and a link to edit my profile.
 	*__My projects__*
 
 	If I am a member of a project, 
-the page lists the projects I am a member of.
+the section lists the projects I am a member of.
 The list shows name attribute of project.
 
 	If I am not a member of any project, 
-the page states so and shows links to create a new project 
-and to find an existing project.
+the section states so.
+
+	The section shows links to to find an existing project
+and create a new project.
 
 1. __Edit my user profile__
 
