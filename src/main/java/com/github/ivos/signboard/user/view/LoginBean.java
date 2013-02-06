@@ -3,6 +3,7 @@ package com.github.ivos.signboard.user.view;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Produces;
 import javax.faces.context.FacesContext;
@@ -102,6 +103,7 @@ public class LoginBean implements Serializable {
 	}
 
 	@Produces
+	@RequestScoped
 	@Client
 	@Named("clientUser")
 	public User getUser() {
