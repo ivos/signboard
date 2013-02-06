@@ -35,7 +35,7 @@ public class EditUserTest extends ITBase {
 		gotoPage("user");
 		clickLinkWithExactText("email" + number);
 		clickLink("main:edit");
-		assertTitleEquals("Edit user - Signboard");
+		verifyTitle("Edit user");
 		assertTextPresent("email" + number);
 		assertSelectOptionsEqual("edit:systemRoles", new String[] { "User",
 				"System administrator" });
@@ -67,7 +67,7 @@ public class EditUserTest extends ITBase {
 		unselectRole("System administrator");
 		clickButton("edit:save");
 		assertTextPresent("Cannot remove system administrator role on your own user.");
-		assertTitleEquals("Edit user - Signboard");
+		verifyTitle("Edit user");
 
 		setWorkingForm("edit");
 		unselectRole("User");

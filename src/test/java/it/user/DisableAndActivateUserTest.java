@@ -24,13 +24,13 @@ public class DisableAndActivateUserTest extends ITBase {
 		// active to disabled
 		gotoPage("user");
 		clickLinkWithExactText("email02");
-		assertTitleEquals("View user - Signboard");
+		verifyTitle("View user");
 		assertSelectedOptionEquals("main:status", "Active");
 		assertElementPresentByXPath("//button[@id='main:activate' and @disabled='disabled']");
 		clickButton("main:disable");
 		verifyAction("Saved.");
 		assertSelectedOptionEquals("main:status", "Disabled");
-		assertTitleEquals("View user - Signboard");
+		verifyTitle("View user");
 
 		// disabled to active
 		gotoPage("user");

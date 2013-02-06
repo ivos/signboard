@@ -47,7 +47,7 @@ public class ITBase {
 	}
 
 	public static void assertAccessDenied() {
-		assertTitleEquals("Unauthorized access - Signboard");
+		verifyTitle("Unauthorized access");
 		assertTextPresent("You are not authorized to perform the requested operation.");
 	}
 

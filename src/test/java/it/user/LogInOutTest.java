@@ -96,16 +96,16 @@ public class LogInOutTest extends ITBase {
 	public void nav() {
 		beginAt("/");
 		setupAjax();
-		assertTitleEquals("Welcome - Signboard");
+		verifyTitle("Welcome");
 		assertTrue(getTestingEngine().getPageURL().toString()
 				.endsWith("/signboard/"));
 		clickLinkWithExactText("Log in");
-		assertTitleEquals("Log in - Signboard");
+		verifyTitle("Log in");
 		assertTrue(getTestingEngine().getPageURL().toString()
 				.contains("/signboard/login"));
 		assertTextPresent("Enter your login data to start using the system.");
 		clickLinkWithExactText("Cancel");
-		assertTitleEquals("Welcome - Signboard");
+		verifyTitle("Welcome");
 		assertTrue(getTestingEngine().getPageURL().toString()
 				.endsWith("/signboard/"));
 	}

@@ -100,16 +100,16 @@ public class RegisterTest extends ITBase {
 	@Test
 	public void nav() {
 		beginAt("/");
-		assertTitleEquals("Welcome - Signboard");
+		verifyTitle("Welcome");
 		assertTrue(getTestingEngine().getPageURL().toString()
 				.endsWith("/signboard/"));
 		clickLinkWithExactText("register");
-		assertTitleEquals("Register - Signboard");
+		verifyTitle("Register");
 		assertTrue(getTestingEngine().getPageURL().toString()
 				.contains("/signboard/register"));
 		assertTextPresent("Please enter your registration.");
 		clickLinkWithExactText("Cancel");
-		assertTitleEquals("Welcome - Signboard");
+		verifyTitle("Welcome");
 		assertTrue(getTestingEngine().getPageURL().toString()
 				.endsWith("/signboard/"));
 	}
