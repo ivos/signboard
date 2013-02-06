@@ -10,7 +10,7 @@ import net.sf.lightair.annotation.Verify;
 import org.junit.Before;
 import org.junit.Test;
 
-@Setup({ "../deleteAll.xml", "../users.xml", "CreateProjectTest.xml" })
+@Setup({ "../deleteAll.xml", "../users.xml" })
 @Verify("CreateProjectTest-empty.xml")
 @BaseUrl("http://localhost:8080/signboard")
 public class CreateProjectTest extends ITBase {
