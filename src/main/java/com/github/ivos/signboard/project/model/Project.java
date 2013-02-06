@@ -72,17 +72,35 @@ public class Project implements Serializable {
 
 	public boolean isMember(User user) {
 		for (ProjectMember projectMember : user.getProjectMembers()) {
-			if (projectMember.getProject().equals(this)) {
+			boolean isMember = projectMember.getProject().equals(this);
+			if (isMember) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public boolean isAdministrator(User user) {
+	public boolean isActiveMember(User user) {
 		for (ProjectMember projectMember : user.getProjectMembers()) {
-			if (projectMember.getProject().equals(this)) {
-				return projectMember.getRoles().contains(ProjectRole.admin);
+			boolean isMember = projectMember.getProject().equals(this);
+			if (isMember) {
+				boolean isActive = ProjectMemberStatus.active
+						.equals(projectMember.getStatus());
+				return isActive;
+			}
+		}
+		return false;
+	}
+
+	public boolean isActiveAdministrator(User user) {
+		for (ProjectMember projectMember : user.getProjectMembers()) {
+			boolean isMember = projectMember.getProject().equals(this);
+			if (isMember) {
+				boolean isAdministrator = projectMember.getRoles().contains(
+						ProjectRole.admin);
+				boolean isActive = ProjectMemberStatus.active
+						.equals(projectMember.getStatus());
+				return isAdministrator && isActive;
 			}
 		}
 		return false;

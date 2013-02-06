@@ -27,15 +27,15 @@ public class ViewProjectTest extends ITBase {
 		assertTextPresent("View project");
 	}
 
-	private void viewNonMember(String number) {
+	private void viewNonActiveMember(String number) {
 		navigate(number);
 		assertTextPresent("code" + number);
 		assertTextPresent("name" + number);
-		assertTextNotPresent("Description");
-		assertTextNotPresent("Date created");
+		assertTextNotPresent("description" + number);
+		assertTextNotPresent("Created on");
 	}
 
-	private void viewMember(String number) {
+	private void viewActiveMember(String number) {
 		navigate(number);
 		assertTextPresent("code" + number);
 		assertTextPresent("name" + number);
@@ -45,17 +45,19 @@ public class ViewProjectTest extends ITBase {
 
 	@Test
 	public void fn() {
-		viewMember("1");
-		viewNonMember("2");
-		viewMember("3");
+		viewActiveMember("1");
+		viewNonActiveMember("2");
+		viewNonActiveMember("3");
+		viewActiveMember("4");
 	}
 
 	@Test
 	public void fn_OtherUser() {
 		login("email3", "qqqq");
-		viewNonMember("1");
-		viewMember("2");
-		viewMember("3");
+		viewNonActiveMember("1");
+		viewActiveMember("2");
+		viewNonActiveMember("3");
+		viewActiveMember("4");
 	}
 
 	@Test

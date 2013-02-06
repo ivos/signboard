@@ -6,4 +6,6 @@
 		date_created="2012-01-02" />
 	<project code="code3" name="name3" description="description3"
 		date_created="2012-01-03" version="0" />
+	<project code="code4" name="name4" description="description4"
+		date_created="2012-01-04" version="0" />
 </dataset>

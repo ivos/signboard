@@ -10,5 +10,5 @@ import org.jboss.seam.security.annotations.SecurityBindingType;
 @SecurityBindingType
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.TYPE, ElementType.METHOD, ElementType.FIELD })
-public @interface ProjectAdministrator {
+public @interface ActiveProjectAdministrator {
 }

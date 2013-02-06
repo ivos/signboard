@@ -30,14 +30,14 @@
 		date_created="2012-01-06" version="0" />
 
 	<project_member id="11" project="projectCode02" user="2"
-		version="0" />
+		status="active" version="0" />
 	<project_member id="12" project="projectCode04" user="2"
-		version="0" />
+		status="active" version="0" />
 	<project_member id="13" project="projectCode05" user="2"
-		version="0" />
+		status="active" version="0" />
 
 	<project_member id="21" project="projectCode03" user="1"
-		version="0" />
+		status="active" version="0" />
 	<project_member id="22" project="projectCode04" user="1"
-		version="0" />
+		status="active" version="0" />
 </dataset>

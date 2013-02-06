@@ -35,14 +35,14 @@ public class SecurityCheck {
 	ProjectBean projectBean;
 
 	@Secures
-	@ProjectAdministrator
+	@ActiveProjectAdministrator
 	public boolean isProjectAdministrator(HttpServletRequest request) {
 		Project project = projectBean.getProject();
 		if (null != request && null == project.getId()) {
 			project.setId(getIdFromRequestURI(request.getRequestURI()));
 		}
 		if (null != clientUser) {
-			return project.isAdministrator(clientUser);
+			return project.isActiveAdministrator(clientUser);
 		}
 		return false;
 	}

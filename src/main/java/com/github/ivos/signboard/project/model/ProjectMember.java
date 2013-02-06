@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.ForeignKey;
 
@@ -44,12 +45,23 @@ public class ProjectMember implements Serializable {
 	@ForeignKey(name = "project_member_roles__project_member")
 	private Set<ProjectRole> roles = new HashSet<ProjectRole>();
 
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	@Column(length = 32)
+	private ProjectMemberStatus status;
+
 	public ProjectMember() {
 	}
 
-	public ProjectMember(Project project, User user) {
+	public ProjectMember(Project project, User user, ProjectMemberStatus status) {
 		this.project = project;
 		this.user = user;
+		this.status = status;
+	}
+
+	public void addToMasters() {
+		project.getProjectMembers().add(this);
+		user.getProjectMembers().add(this);
 	}
 
 	// Java bean
@@ -94,6 +106,14 @@ public class ProjectMember implements Serializable {
 		this.roles = roles;
 	}
 
+	public ProjectMemberStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(ProjectMemberStatus status) {
+		this.status = status;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -129,7 +149,7 @@ public class ProjectMember implements Serializable {
 	public String toString() {
 		return "ProjectMember [id=" + id + ", version=" + version
 				+ ", project=" + project.getId() + ", user=" + user.getId()
-				+ ", roles=" + roles + "]";
+				+ ", roles=" + roles + ", status=" + status + "]";
 	}
 
 	private static final long serialVersionUID = 1L;

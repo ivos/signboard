@@ -34,6 +34,7 @@
 
     create table project_member (
         id bigint not null,
+        status varchar(32) not null,
         version integer not null,
         project varchar(64) not null,
         user bigint not null,

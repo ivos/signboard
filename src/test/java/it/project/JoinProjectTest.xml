@@ -6,20 +6,14 @@
 		date_created="2012-01-02" version="0" />
 	<project code="code3" name="name3" description="description3"
 		date_created="2012-01-03" version="0" />
-	<project code="code4" name="name4" description="description4"
-		date_created="2012-01-04" version="0" />
 
-	<project_member id="11" project="code1" user="1" status="active"
+	<project_member id="11" project="code1" user="3" status="active"
 		version="0" />
 	<project_member_roles project_member="11" role="admin" />
-	<project_member id="12" project="code3" user="1" status="active"
+	<project_member id="12" project="code2" user="3" status="active"
 		version="0" />
-	<project_member_roles project_member="12" role="user" />
-	<project_member id="13" project="code4" user="1" status="pending"
+	<project_member_roles project_member="12" role="admin" />
+	<project_member id="13" project="code3" user="3" status="active"
 		version="0" />
 	<project_member_roles project_member="13" role="admin" />
-
-	<project_member id="21" project="code2" user="3" status="active"
-		version="0" />
-	<project_member_roles project_member="21" role="admin" />
 </dataset>

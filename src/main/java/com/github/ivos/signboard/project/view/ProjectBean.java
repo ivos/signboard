@@ -12,10 +12,11 @@ import org.jboss.solder.core.Client;
 import org.jboss.solder.exception.control.ExceptionHandled;
 import org.jboss.solder.logging.Logger;
 
-import com.github.ivos.signboard.config.security.ProjectAdministrator;
+import com.github.ivos.signboard.config.security.ActiveProjectAdministrator;
 import com.github.ivos.signboard.config.security.SystemUser;
 import com.github.ivos.signboard.project.model.Project;
 import com.github.ivos.signboard.project.model.ProjectMember;
+import com.github.ivos.signboard.project.model.ProjectMemberStatus;
 import com.github.ivos.signboard.project.model.ProjectRole;
 import com.github.ivos.signboard.user.model.User;
 import com.github.ivos.signboard.user.view.LoginBean;
@@ -41,9 +42,14 @@ public class ProjectBean implements Serializable {
 		return project.isMember(clientUser);
 	}
 
-	public boolean isClientUserAdministrator() {
+	public boolean isClientUserActiveMember() {
 		clientUser = entityManager.find(User.class, clientUser.getId());
-		return project.isAdministrator(clientUser);
+		return project.isActiveMember(clientUser);
+	}
+
+	public boolean isClientUserActiveAdministrator() {
+		clientUser = entityManager.find(User.class, clientUser.getId());
+		return project.isActiveAdministrator(clientUser);
 	}
 
 	private static final long serialVersionUID = 1L;
@@ -87,9 +93,9 @@ public class ProjectBean implements Serializable {
 	@SystemUser
 	public String create() {
 		clientUser = entityManager.find(User.class, clientUser.getId());
-		ProjectMember projectMember = new ProjectMember(project, clientUser);
-		project.getProjectMembers().add(projectMember);
-		clientUser.getProjectMembers().add(projectMember);
+		ProjectMember projectMember = new ProjectMember(project, clientUser,
+				ProjectMemberStatus.active);
+		projectMember.addToMasters();
 		projectMember.getRoles().add(ProjectRole.admin);
 		projectMember.getRoles().add(ProjectRole.user);
 		entityManager.persist(project);
@@ -101,11 +107,26 @@ public class ProjectBean implements Serializable {
 	}
 
 	@SystemUser
-	@ProjectAdministrator
+	@ActiveProjectAdministrator
 	public String update() {
 		log.infov("Update project {0}.", project);
 		entityManager.merge(project);
 		viewContext.info("saved");
+		return "view?faces-redirect=true&id=" + project.getId();
+	}
+
+	@SystemUser
+	public String join() {
+		clientUser = entityManager.find(User.class, clientUser.getId());
+		project = entityManager.find(Project.class, project.getId());
+		ProjectMember projectMember = new ProjectMember(project, clientUser,
+				ProjectMemberStatus.pending);
+		projectMember.addToMasters();
+		projectMember.getRoles().add(ProjectRole.user);
+		entityManager.persist(projectMember);
+		loginBean.setUser(clientUser);
+		log.infov("Join project {0}.", project);
+		viewContext.info("project.join.request.created");
 		return "view?faces-redirect=true&id=" + project.getId();
 	}
 

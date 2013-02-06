@@ -7,10 +7,11 @@ import org.junit.Test;
 
 import com.github.ivos.signboard.project.model.Project;
 import com.github.ivos.signboard.project.model.ProjectMember;
+import com.github.ivos.signboard.project.model.ProjectMemberStatus;
 import com.github.ivos.signboard.project.model.ProjectRole;
 import com.github.ivos.signboard.user.model.User;
 
-public class ProjectIsAdministratorTest {
+public class ProjectIsActiveAdministratorTest {
 
 	Project p1, p2, p3, p4;
 	User u1, u2;
@@ -24,23 +25,27 @@ public class ProjectIsAdministratorTest {
 		u1 = new User("1");
 		u2 = new User("2");
 
-		ProjectMember pm1 = new ProjectMember(p1, u1);
+		ProjectMember pm1 = new ProjectMember(p1, u1,
+				ProjectMemberStatus.disabled);
 		p1.getProjectMembers().add(pm1);
 		u1.getProjectMembers().add(pm1);
 		pm1.getRoles().add(ProjectRole.admin);
 		pm1.getRoles().add(ProjectRole.user);
 
-		ProjectMember pm2 = new ProjectMember(p2, u1);
+		ProjectMember pm2 = new ProjectMember(p2, u1,
+				ProjectMemberStatus.active);
 		p2.getProjectMembers().add(pm2);
 		u1.getProjectMembers().add(pm2);
 		pm2.getRoles().add(ProjectRole.user);
 
-		ProjectMember pm3 = new ProjectMember(p3, u1);
+		ProjectMember pm3 = new ProjectMember(p3, u1,
+				ProjectMemberStatus.active);
 		p3.getProjectMembers().add(pm3);
 		u1.getProjectMembers().add(pm3);
 		pm3.getRoles().add(ProjectRole.admin);
 
-		ProjectMember pm4 = new ProjectMember(p4, u2);
+		ProjectMember pm4 = new ProjectMember(p4, u2,
+				ProjectMemberStatus.active);
 		p4.getProjectMembers().add(pm4);
 		u2.getProjectMembers().add(pm4);
 		pm4.getRoles().add(ProjectRole.admin);
@@ -49,15 +54,15 @@ public class ProjectIsAdministratorTest {
 
 	@Test
 	public void isMember() {
-		assertTrue(p1.isAdministrator(u1));
-		assertFalse(p2.isAdministrator(u1));
-		assertTrue(p3.isAdministrator(u1));
-		assertTrue(p4.isAdministrator(u2));
+		assertFalse(p1.isActiveAdministrator(u1));
+		assertFalse(p2.isActiveAdministrator(u1));
+		assertTrue(p3.isActiveAdministrator(u1));
+		assertTrue(p4.isActiveAdministrator(u2));
 
-		assertFalse(p1.isAdministrator(u2));
-		assertFalse(p2.isAdministrator(u2));
-		assertFalse(p3.isAdministrator(u2));
-		assertFalse(p4.isAdministrator(u1));
+		assertFalse(p1.isActiveAdministrator(u2));
+		assertFalse(p2.isActiveAdministrator(u2));
+		assertFalse(p3.isActiveAdministrator(u2));
+		assertFalse(p4.isActiveAdministrator(u1));
 	}
 
 }

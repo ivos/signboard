@@ -18,37 +18,49 @@
 	<ui:define name="main">
 		<h1><span class="muted"><h:outputText value="#{label['project.page.header']}" /></span>
 			<h:outputText value=" #{projectBean.project.name}" /></h1>
-		<div class="row">
-			<div class="span6">
-				<p>
-					<h:outputText value="#{label['project.code']}" />
-					<strong><h:outputText value="#{projectBean.project.code}" /></strong>.
-				</p>
-				<h:panelGroup rendered="#{projectBean.clientUserMember}">
-					<h:panelGroup rendered="#{not empty projectBean.project.description}">
-						<pre><h:outputText value="#{projectBean.project.description}" /></pre>
+		<h:form id="view">
+			<div class="row">
+				<div class="span6">
+					<p>
+						<h:outputText value="#{label['project.code']}" />
+						<strong><h:outputText value="#{projectBean.project.code}" /></strong>.
+					</p>
+					<h:panelGroup rendered="#{projectBean.clientUserActiveMember}">
+						<h:panelGroup rendered="#{not empty projectBean.project.description}">
+							<pre><h:outputText value="#{projectBean.project.description}" /></pre>
+						</h:panelGroup>
+						<p>
+							<h:outputText value="#{label['project.dateCreated']} " />
+							<h:outputText value="#{projectBean.project.dateCreated}">
+								<f:convertDateTime timeZone="${userDateTimeZone.ID}" />
+							</h:outputText>.
+						</p>
 					</h:panelGroup>
-					<p>
-						<h:outputText value="#{label['project.dateCreated']} " />
-						<h:outputText value="#{projectBean.project.dateCreated}">
-							<f:convertDateTime timeZone="${userDateTimeZone.ID}" />
-						</h:outputText>.
-					</p>
-				</h:panelGroup>
-
-				<h:panelGroup rendered="#{projectBean.clientUserAdministrator}">
-					<p>
-						<h:link id="edit" class="btn btn-small" outcome="edit"
-							includeViewParams="true">
-							<i class="icon-edit"></i>
-							<h:outputText value=" #{label['button.edit']}" />
-						</h:link>
-						<h:outputText value=" #{label['project.view.project.details']}" />
-					</p>
-				</h:panelGroup>
+	
+					<h:panelGroup rendered="#{projectBean.clientUserActiveAdministrator}">
+						<p>
+							<h:link id="edit" class="btn btn-small" outcome="edit"
+								includeViewParams="true">
+								<i class="icon-edit"></i>
+								<h:outputText value=" #{label['button.edit']}" />
+							</h:link>
+							<h:outputText value=" #{label['project.view.project.details']}" />
+						</p>
+					</h:panelGroup>
+					<h:panelGroup rendered="#{not projectBean.clientUserMember}">
+						<p>
+							<h:commandButton id="join" class="btn btn-success btn-small"
+								action="#{projectBean.join}" tag="button">
+								<i class="icon-signin"></i>
+								<h:outputText value=" #{label['button.join']}" />
+							</h:commandButton>
+							<h:outputText value=" #{label['project.view.join.project']}" />
+						</p>
+					</h:panelGroup>
+				</div>
 			</div>
-		</div>
-		<h:messages id="messages" globalOnly="true" styleClass="form-messages" />
+			<h:messages id="messages" globalOnly="true" styleClass="form-messages" />
+		</h:form>
 	</ui:define>
 
 </ui:composition>

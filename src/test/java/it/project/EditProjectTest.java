@@ -70,16 +70,30 @@ public class EditProjectTest extends ITBase {
 
 	@Test
 	@Verify("EditProjectTest.xml")
+	public void sec_MustBeActiveProjectAdministrator() {
+		gotoPage("project/code4/edit");
+		assertAccessDenied();
+	}
+
+	@Test
+	@Verify("EditProjectTest.xml")
 	public void sec_HideEditButtonForNonProjectMember() {
 		gotoPage("project/code2");
-		assertLinkNotPresent("main:edit");
+		assertLinkNotPresent("view:edit");
 	}
 
 	@Test
 	@Verify("EditProjectTest.xml")
 	public void sec_HideEditButtonForNonProjectAdministrator() {
 		gotoPage("project/code3");
-		assertLinkNotPresent("main:edit");
+		assertLinkNotPresent("view:edit");
+	}
+
+	@Test
+	@Verify("EditProjectTest.xml")
+	public void sec_HideEditButtonForNonActiveProjectAdministrator() {
+		gotoPage("project/code4");
+		assertLinkNotPresent("view:edit");
 	}
 
 }

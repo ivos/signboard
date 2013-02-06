@@ -87,7 +87,7 @@ Project
 	As a system user I can create a project.
 New project attributes: code (unique), name, description.
 System records date created.
-I become project administrator and project user 
+I become active project administrator and project user 
 of the newly created project.
 
 1. __Find a project__
@@ -99,13 +99,20 @@ I can view name, code attributes in the search table.
 
 	As a system user I can view a project's detail.
 
-	As non-project member, I can view code, name
+	As non active project member, I can view code, name
 attributes.
 
-	As project member, I can view code, name, description, date created
+	As active project member, I can view code, name, description, date created
 attributes.
 
 1. __Edit project__
 
-	As a project administrator I can edit the project's 
+	As an active project administrator I can edit the project's 
 name, description attributes.
+
+1. __Join project__
+
+	As a system user I can request to join a project 
+I am not a member of yet to become its member.
+I am created a pending project user 
+(until project administrator confirms my membership request).
