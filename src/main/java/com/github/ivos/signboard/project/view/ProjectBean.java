@@ -18,6 +18,7 @@ import com.github.ivos.signboard.project.model.Project;
 import com.github.ivos.signboard.project.model.ProjectMember;
 import com.github.ivos.signboard.project.model.ProjectRole;
 import com.github.ivos.signboard.user.model.User;
+import com.github.ivos.signboard.user.view.LoginBean;
 import com.github.ivos.signboard.view.ViewContext;
 
 @Named
@@ -80,6 +81,9 @@ public class ProjectBean implements Serializable {
 		}
 	}
 
+	@Inject
+	private LoginBean loginBean;
+
 	@SystemUser
 	public String create() {
 		clientUser = entityManager.find(User.class, clientUser.getId());
@@ -90,6 +94,7 @@ public class ProjectBean implements Serializable {
 		projectMember.getRoles().add(ProjectRole.user);
 		entityManager.persist(project);
 		entityManager.persist(projectMember);
+		loginBean.setUser(clientUser);
 		log.infov("Create project {0}.", project);
 		viewContext.info("saved");
 		return "view?faces-redirect=true&id=" + project.getId();
