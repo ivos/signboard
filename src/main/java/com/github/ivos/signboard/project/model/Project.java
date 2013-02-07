@@ -19,6 +19,9 @@ import javax.validation.constraints.Size;
 
 import org.joda.time.DateMidnight;
 
+import com.github.ivos.signboard.projectmember.model.ProjectMember;
+import com.github.ivos.signboard.projectmember.model.ProjectMemberRole;
+import com.github.ivos.signboard.projectmember.model.ProjectMemberStatus;
 import com.github.ivos.signboard.user.model.User;
 
 @Entity

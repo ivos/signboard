@@ -1,4 +1,4 @@
-package com.github.ivos.signboard.project.model;
+package com.github.ivos.signboard.projectmember.model;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -19,6 +19,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.ForeignKey;
 
+import com.github.ivos.signboard.project.model.Project;
 import com.github.ivos.signboard.user.model.User;
 
 @Entity

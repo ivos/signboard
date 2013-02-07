@@ -24,7 +24,7 @@ import javax.validation.constraints.Size;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.hibernate.annotations.ForeignKey;
 
-import com.github.ivos.signboard.project.model.ProjectMember;
+import com.github.ivos.signboard.projectmember.model.ProjectMember;
 
 @Entity
 public class User implements Serializable {

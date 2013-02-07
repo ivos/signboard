@@ -6,9 +6,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.github.ivos.signboard.project.model.Project;
-import com.github.ivos.signboard.project.model.ProjectMember;
-import com.github.ivos.signboard.project.model.ProjectMemberRole;
-import com.github.ivos.signboard.project.model.ProjectMemberStatus;
+import com.github.ivos.signboard.projectmember.model.ProjectMember;
+import com.github.ivos.signboard.projectmember.model.ProjectMemberRole;
+import com.github.ivos.signboard.projectmember.model.ProjectMemberStatus;
 import com.github.ivos.signboard.user.model.User;
 
 public class ProjectIsActiveAdministratorTest {

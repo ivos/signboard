@@ -1,4 +1,4 @@
-package com.github.ivos.signboard.project.model;
+package com.github.ivos.signboard.projectmember.model;
 
 public enum ProjectMemberStatus {
 
