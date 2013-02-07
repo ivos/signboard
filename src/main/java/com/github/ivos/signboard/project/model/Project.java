@@ -97,7 +97,7 @@ public class Project implements Serializable {
 			boolean isMember = projectMember.getProject().equals(this);
 			if (isMember) {
 				boolean isAdministrator = projectMember.getRoles().contains(
-						ProjectRole.admin);
+						ProjectMemberRole.admin);
 				boolean isActive = ProjectMemberStatus.active
 						.equals(projectMember.getStatus());
 				return isAdministrator && isActive;

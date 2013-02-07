@@ -1,6 +1,6 @@
 package com.github.ivos.signboard.project.model;
 
-public enum ProjectRole {
+public enum ProjectMemberRole {
 
 	user, admin;
 

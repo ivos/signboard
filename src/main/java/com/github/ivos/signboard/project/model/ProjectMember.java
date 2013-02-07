@@ -43,7 +43,7 @@ public class ProjectMember implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "role", length = 32, nullable = false)
 	@ForeignKey(name = "project_member_roles__project_member")
-	private Set<ProjectRole> roles = new HashSet<ProjectRole>();
+	private Set<ProjectMemberRole> roles = new HashSet<ProjectMemberRole>();
 
 	@NotNull
 	@Enumerated(EnumType.STRING)
@@ -98,11 +98,11 @@ public class ProjectMember implements Serializable {
 		this.user = user;
 	}
 
-	public Set<ProjectRole> getRoles() {
+	public Set<ProjectMemberRole> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(Set<ProjectRole> roles) {
+	public void setRoles(Set<ProjectMemberRole> roles) {
 		this.roles = roles;
 	}
 

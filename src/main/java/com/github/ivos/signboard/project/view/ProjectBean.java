@@ -16,8 +16,8 @@ import com.github.ivos.signboard.config.security.ActiveProjectAdministrator;
 import com.github.ivos.signboard.config.security.SystemUser;
 import com.github.ivos.signboard.project.model.Project;
 import com.github.ivos.signboard.project.model.ProjectMember;
+import com.github.ivos.signboard.project.model.ProjectMemberRole;
 import com.github.ivos.signboard.project.model.ProjectMemberStatus;
-import com.github.ivos.signboard.project.model.ProjectRole;
 import com.github.ivos.signboard.user.model.User;
 import com.github.ivos.signboard.user.view.LoginBean;
 import com.github.ivos.signboard.view.ViewContext;
@@ -96,8 +96,8 @@ public class ProjectBean implements Serializable {
 		ProjectMember projectMember = new ProjectMember(project, clientUser,
 				ProjectMemberStatus.active);
 		projectMember.addToMasters();
-		projectMember.getRoles().add(ProjectRole.admin);
-		projectMember.getRoles().add(ProjectRole.user);
+		projectMember.getRoles().add(ProjectMemberRole.admin);
+		projectMember.getRoles().add(ProjectMemberRole.user);
 		entityManager.persist(project);
 		entityManager.persist(projectMember);
 		loginBean.setUser(clientUser);
@@ -122,7 +122,7 @@ public class ProjectBean implements Serializable {
 		ProjectMember projectMember = new ProjectMember(project, clientUser,
 				ProjectMemberStatus.pending);
 		projectMember.addToMasters();
-		projectMember.getRoles().add(ProjectRole.user);
+		projectMember.getRoles().add(ProjectMemberRole.user);
 		entityManager.persist(projectMember);
 		loginBean.setUser(clientUser);
 		log.infov("Join project {0}.", project);
