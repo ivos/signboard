@@ -17,9 +17,13 @@
 	<ui:param name="focusField" value="search\\:name" />
 	<ui:param name="activeMenu" value="project" />
 	<ui:define name="main">
-		<h1>#{label['project.page.header']}</h1>
+		<h1>
+			<h:outputText value="#{label['project.page.header']}" />
+		</h1>
 		<h:form id="search" styleClass="form-horizontal">
-			<legend>#{label['project.search.title']}</legend>
+			<legend>
+				<h:outputText value="#{label['project.search.title']}" />
+			</legend>
 			<div class="row">
 				<div class="span6">
 					<my:field id="name" type="typeahead" entity="project"
@@ -61,9 +65,9 @@
 		</h:form>
 
 		<script type="text/javascript"
-			src="seam/resource/remoting/resource/remote.js"></script>
+			src="/#{viewContext.applicationName}/seam/resource/remoting/resource/remote.js"></script>
 		<script type="text/javascript"
-			src="seam/resource/remoting/interface.js?projectRemoting"></script>
+			src="/#{viewContext.applicationName}/seam/resource/remoting/interface.js?projectRemoting"></script>
 	</ui:define>
 
 </ui:composition>
