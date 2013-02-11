@@ -2,7 +2,7 @@ package com.github.ivos.signboard.user.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -68,7 +68,7 @@ public class User implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "system_role", length = 32, nullable = false)
 	@ForeignKey(name = "user_system_roles__user")
-	private Set<SystemRole> systemRoles = new HashSet<SystemRole>();
+	private Set<SystemRole> systemRoles = new LinkedHashSet<SystemRole>();
 
 	@NotNull
 	@Temporal(TemporalType.DATE)
@@ -78,7 +78,7 @@ public class User implements Serializable {
 	private Date lastLogin;
 
 	@OneToMany(mappedBy = "user")
-	private Set<ProjectMember> projectMembers = new HashSet<ProjectMember>();
+	private Set<ProjectMember> projectMembers = new LinkedHashSet<ProjectMember>();
 
 	// business logic
 

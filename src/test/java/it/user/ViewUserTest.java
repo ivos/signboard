@@ -6,6 +6,7 @@ import net.sf.lightair.annotation.BaseUrl;
 import net.sf.lightair.annotation.Setup;
 import net.sf.lightair.annotation.Verify;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -30,18 +31,29 @@ public class ViewUserTest extends ITBase {
 		gotoPage("user");
 		clickLinkWithExactText("email0" + number);
 		verifyTitle("View user");
-		assertTextPresent("View user");
-		assertTextPresent("lastName0" + number);
-		assertTextPresent("firstName0" + number);
+		assertTextPresent("User firstName0" + number + " lastName0" + number);
 		assertTextPresent("email0" + number);
 		assertTextPresent("phone0" + number);
-		assertTextPresent("skype0" + number);
-		assertTextPresent("Jan " + number + ", 2012");
-		assertTextPresent("May 1, 2012 12:59:0" + number + " PM");
-		assertSelectedOptionEquals("main:status", status);
-		assertSelectOptionsEqual("main:systemRoles", new String[] { "User",
-				"System administrator" });
-		assertSelectedOptionsEqual("main:systemRoles", roles);
+		assertTextPresent("Skype skype0" + number);
+		assertTextPresent("Registered Jan " + number + ", 2012");
+		assertTextPresent("Last login May 1, 2012 12:59:0" + number + " PM");
+		assertTextPresent("Status " + status);
+		assertTextPresent("System roles " + StringUtils.join(roles, ' '));
+	}
+
+	@Test
+	public void fn_OptionalFields() {
+		gotoPage("user");
+		clickLinkWithExactText("email05");
+		verifyTitle("View user");
+		assertTextPresent("User firstName05 lastName05");
+		assertTextPresent("email05");
+		assertTextNotPresent("phone");
+		assertTextNotPresent("Skype");
+		assertTextPresent("Registered Jan 5, 2012");
+		assertTextNotPresent("Last login");
+		assertTextPresent("Status Active");
+		assertTextPresent("System roles None");
 	}
 
 	@Test

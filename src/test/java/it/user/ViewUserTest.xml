@@ -21,4 +21,7 @@
 		version="0" />
 	<user_system_roles user="4" system_role="user" />
 	<user_system_roles user="4" system_role="admin" />
+	<user id="5" email="email05" first_name="firstName05" last_name="lastName05"
+		password="3bad6af0fa4b8b330d162e19938ee981" status="active"
+		registered="2012-01-05" version="0" />
 </dataset>

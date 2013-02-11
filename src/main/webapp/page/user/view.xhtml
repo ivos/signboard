@@ -4,6 +4,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:s="http://jboss.org/seam/faces"
 	xmlns:my="http://signboard.ivos.github.com/jsf/facelets"
 	template="/page/template.xhtml">
@@ -16,49 +17,42 @@
 	<ui:param name="pageTitle" value="#{label['user.view.title']}" />
 	<ui:param name="activeMenu" value="user" />
 	<ui:define name="main">
-		<h1>#{label['user.page.header']}</h1>
+		<h1><span class="muted"><h:outputText value="#{label['user.page.header']}" /></span>
+			<h:outputText value=" #{userBean.user.fullName}" /></h1>
 		<h:form id="main" styleClass="form-horizontal">
-			<legend>#{label['user.view.title']}</legend>
-			<div class="row">
-				<div class="span6">
-					<my:field id="lastName" type="output" entity="user"
-						bean="#{userBean.user}" />
-					<my:field id="firstName" type="output" entity="user"
-						bean="#{userBean.user}" />
-					<my:field id="status" type="selectOneMenu" entity="user"
-						bean="#{userBean.user}" selectBean="#{userBean}" disabled="true" />
-				</div>
-				<div class="span6">
-					<my:field id="email" type="output" entity="user"
-						bean="#{userBean.user}">
-						<f:facet name="append">
-							<a href="mailto:#{userBean.user.email}" class="btn"
-								title="#{label['button.sendEmail']}"><i
-								class="icon-share-alt"></i></a>
-						</f:facet>
-					</my:field>
-					<my:field id="phone" type="output" entity="user"
-						bean="#{userBean.user}" />
-					<my:field id="skype" type="output" entity="user"
-						bean="#{userBean.user}" />
-				</div>
-			</div>
-			<div class="row">
-				<div class="span6">
-					<my:field id="registered" type="output" entity="user"
-						bean="#{userBean.user}">
+			<ul class="unstyled">
+				<li><i class="icon-envelope"></i>&nbsp;<h:outputText value="#{userBean.user.email}" />
+					<a href="mailto:#{userBean.user.email}" class="btn btn-mini"
+					title="#{label['button.sendEmail']}"><i class="icon-share-alt"></i>
+					<h:outputText value="#{label['button.sendEmail']} " /></a></li>
+				<c:if test="#{not empty userBean.user.phone}">
+				<li><i class="icon-phone"></i>&nbsp;<h:outputText value="#{userBean.user.phone}" /></li></c:if>
+				<c:if test="#{not empty userBean.user.skype}">
+				<li><h:outputText value="#{label['user.skype']} " />
+					<h:outputText value="#{userBean.user.skype}" /></li></c:if>
+				<li><h:outputText value="#{label['user.registered']} " />
+					<h:outputText value="#{userBean.user.registered}">
 						<f:convertDateTime timeZone="${userDateTimeZone.ID}" />
-					</my:field>
-					<my:field id="lastLogin" type="output" entity="user"
-						bean="#{userBean.user}">
+					</h:outputText></li>
+				<c:if test="#{not empty userBean.user.lastLogin}">
+				<li><h:outputText value="#{label['user.lastLogin']} " />
+					<h:outputText value="#{userBean.user.lastLogin}">
 						<f:convertDateTime timeZone="${userDateTimeZone.ID}" type="both" />
-					</my:field>
-				</div>
-				<div class="span6">
-					<my:field id="systemRoles" type="selectManyListbox" entity="user"
-						bean="#{userBean}" disabled="true" />
-				</div>
-			</div>
+					</h:outputText></li></c:if>
+				<li><h:outputText value="#{label['user.status']} " />
+					<c:set var="statusKey" value="enum_UserStatus_#{userBean.user.status}" />
+					<span class="label label-#{(userBean.user.status eq 'active')? 'success' : 'important'}">
+					<h:outputText value="#{label[statusKey]}" /></span></li>
+				<li><h:outputText value="#{label['user.systemRoles']} " />
+					<c:forEach items="#{userBean.user.systemRoles}" var="_role">
+						<c:set var="roleKey" value="enum_SystemRole_#{_role}" />
+						<span class="label label-info"><h:outputText value="#{label[roleKey]}" /></span>
+					</c:forEach>
+					<c:if test="#{empty userBean.user.systemRoles}">
+						<span class="label"><h:outputText value="#{label['enum_none']}" /></span>
+					</c:if>
+					</li>
+			</ul>
 
 			<div class="control-group">
 				<div class="form-actions">
