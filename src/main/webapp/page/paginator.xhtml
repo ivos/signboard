@@ -6,15 +6,15 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
+	<div class="pull-right">
+		<span class="badge"><h:outputText
+				value="#{(paginatorBean.page-1) * paginatorBean.pageSize + 1}" />
+			.. <h:outputText
+				value="#{(paginatorBean.page-1) * paginatorBean.pageSize + fn:length(paginatorBean.pageItems)}" /></span>&nbsp;<h:outputText value="#{label['paginator.of']}" />&nbsp;<span class="badge badge-inverse"><h:outputText
+				value="#{paginatorBean.count}" /></span>
+	</div>
 	<h:panelGroup
 		rendered="#{paginatorBean.count gt paginatorBean.pageSize}">
-		<div class="pull-right">
-			<span class="badge"><h:outputText
-					value="#{(paginatorBean.page-1) * paginatorBean.pageSize + 1}" />
-				.. <h:outputText
-					value="#{(paginatorBean.page-1) * paginatorBean.pageSize + fn:length(paginatorBean.pageItems)}" /></span>&nbsp;<h:outputText value="#{label['paginator.of']}" />&nbsp;<span class="badge badge-inverse"><h:outputText
-					value="#{paginatorBean.count}" /></span>
-		</div>
 		<div class="pagination pagination-centered">
 			<ul>
 				<li class="#{(paginatorBean.page==1)? 'disabled':''}"><h:link
@@ -113,5 +113,8 @@
 			</ul>
 		</div>
 	</h:panelGroup>
-
+	<h:panelGroup
+		rendered="#{not(paginatorBean.count gt paginatorBean.pageSize)}">
+		<div class="row"></div>
+	</h:panelGroup>
 </ui:composition>
