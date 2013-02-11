@@ -7,6 +7,7 @@ import org.jboss.seam.faces.view.config.ViewPattern;
 import org.jboss.seam.security.annotations.LoggedIn;
 
 import com.github.ivos.signboard.config.security.ActiveProjectAdministrator;
+import com.github.ivos.signboard.config.security.ActiveProjectMember;
 import com.github.ivos.signboard.config.security.SystemAdministrator;
 import com.github.ivos.signboard.config.security.SystemUser;
 
@@ -60,6 +61,14 @@ public interface Pages {
 		@LoggedIn
 		@SystemUser
 		projectAll,
+
+		// project member
+
+		@ViewPattern("/page/projectMember/*")
+		@LoggedIn
+		@SystemUser
+		@ActiveProjectMember
+		projectMemberAll,
 
 		// common
 

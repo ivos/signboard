@@ -5,9 +5,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.jboss.seam.security.annotations.Secures;
 import org.jboss.solder.core.Client;
+import org.jboss.solder.logging.Logger;
 
 import com.github.ivos.signboard.project.model.Project;
 import com.github.ivos.signboard.project.view.ProjectBean;
+import com.github.ivos.signboard.projectmember.view.ProjectMemberListBean;
 import com.github.ivos.signboard.user.model.SystemRole;
 import com.github.ivos.signboard.user.model.User;
 
@@ -17,9 +19,13 @@ public class SecurityCheck {
 	@Client
 	User clientUser;
 
+	@Inject
+	private Logger log;
+
 	@Secures
 	@SystemAdministrator
 	public boolean isSystemAdministrator() {
+		log.debugv("Verifying system administrator {0}.", clientUser);
 		return (null != clientUser)
 				&& clientUser.getSystemRoles().contains(SystemRole.admin);
 	}
@@ -27,6 +33,7 @@ public class SecurityCheck {
 	@Secures
 	@SystemUser
 	public boolean isSystemUser() {
+		log.debugv("Verifying system user {0}.", clientUser);
 		return (null != clientUser)
 				&& clientUser.getSystemRoles().contains(SystemRole.user);
 	}
@@ -36,11 +43,13 @@ public class SecurityCheck {
 
 	@Secures
 	@ActiveProjectAdministrator
-	public boolean isProjectAdministrator(HttpServletRequest request) {
+	public boolean isActiveProjectAdministrator(HttpServletRequest request) {
 		Project project = projectBean.getProject();
 		if (null != request && null == project.getId()) {
 			project.setId(getIdFromRequestURI(request.getRequestURI()));
 		}
+		log.debugv("Verifying {0} is active project administrator of {1}.",
+				clientUser, project);
 		if (null != clientUser) {
 			return project.isActiveAdministrator(clientUser);
 		}
@@ -56,4 +65,22 @@ public class SecurityCheck {
 		return id;
 	}
 
+	@Inject
+	ProjectMemberListBean projectMemberListBean;
+
+	@Secures
+	@ActiveProjectMember
+	public boolean isActiveProjectMember(HttpServletRequest request) {
+		Project project = projectMemberListBean.getProject();
+		if (null != request && null == project.getId()) {
+			project.setId(getIdFromRequestURI(request.getRequestURI()));
+			projectMemberListBean.retrieveProject();
+		}
+		log.debugv("Verifying {0} is active project member of {1}.",
+				clientUser, project);
+		if (null != clientUser) {
+			return project.isActiveMember(clientUser);
+		}
+		return false;
+	}
 }

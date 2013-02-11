@@ -1,5 +1,6 @@
 package it;
 
+import static junit.framework.Assert.*;
 import static net.sourceforge.jwebunit.junit.JWebUnit.*;
 import net.sf.lightair.LightAir;
 import net.sourceforge.jwebunit.htmlunit.HtmlUnitTestingEngineImpl;
@@ -49,6 +50,10 @@ public class ITBase {
 	public static void assertAccessDenied() {
 		verifyTitle("Unauthorized access");
 		assertTextPresent("You are not authorized to perform the requested operation.");
+	}
+
+	public static void verifyURL(String url) {
+		assertTrue(getTestingEngine().getPageURL().toString().endsWith(url));
 	}
 
 }

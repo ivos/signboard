@@ -9,7 +9,8 @@
 	<c:set var="property" value="#{not empty property ? property : id}" />
 	<c:set var="labelKey" value="#{entity}.#{property}" />
 	<c:set var="type" value="#{not empty type ? type : 'output'}" />
-	<c:set var="optionsKey" value="enum_#{selectEntity}_#{item[property]}" />
+	<c:set var="value" value="#{not empty path ? item[path][property] : item[property]}" />
+	<c:set var="optionsKey" value="enum_#{selectEntity}_#{value}" />
 
 	<h:column>
 		<f:facet name="header">
@@ -19,7 +20,7 @@
 			<f:param name="id" value="#{item.id}" />
 			<c:choose>
 				<c:when test="#{type == 'output'}">
-					<h:outputText id="#{id}" value="#{item[property]}" />
+					<h:outputText id="#{id}" value="#{value}" />
 				</c:when>
 				<c:when test="#{type == 'select'}">
 					<h:outputText id="#{id}" value="#{label[optionsKey]}" />

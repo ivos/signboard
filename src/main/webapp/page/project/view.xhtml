@@ -47,6 +47,17 @@
 							<h:outputText value=" #{label['project.view.project.details']}" />
 						</p>
 					</h:panelGroup>
+					<h:panelGroup rendered="#{projectBean.clientUserActiveMember}">
+						<p>
+							<h:link id="members" class="btn"
+								outcome="/page/projectMember/search">
+								<f:param name="projectId" value="#{projectBean.id}" />
+								<i class="icon-group"></i>
+								<h:outputText value=" #{label['button.members']}" />
+							</h:link>
+							<h:outputText value=" #{label['project.view.of.project']}" />
+						</p>
+					</h:panelGroup>
 					<h:panelGroup rendered="#{not projectBean.clientUserMember}">
 						<p>
 							<h:commandButton id="join" class="btn btn-success btn-small"

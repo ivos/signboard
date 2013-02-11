@@ -107,5 +107,10 @@
 			<name>selectEntity</name>
 			<type>java.lang.String</type>
 		</attribute>
+		<attribute>
+			<description>Path from the item to the property.</description>
+			<name>path</name>
+			<type>java.lang.String</type>
+		</attribute>
 	</tag>
 </facelet-taglib>

@@ -116,3 +116,13 @@ name, description attributes.
 I am not a member of yet to become its member.
 I am created a pending project user 
 (until project administrator confirms my membership request).
+
+1. __Find project member__
+
+	As an active project member I can find any other member by 
+last name, first name, e-mail, phone, member status, date registered,
+date of last login.
+I can view last name, first name, e-mail, phone, member status
+attributes in the search table.
+I can sort table alphabetically (last name, first name, id),
+by recent login, by recent registration.
