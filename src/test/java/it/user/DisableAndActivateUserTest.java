@@ -25,28 +25,28 @@ public class DisableAndActivateUserTest extends ITBase {
 		gotoPage("user");
 		clickLinkWithExactText("email02");
 		verifyTitle("View user");
-		assertSelectedOptionEquals("main:status", "Active");
+		assertTextPresent("Status Active");
 		assertElementPresentByXPath("//button[@id='main:activate' and @disabled='disabled']");
 		clickButton("main:disable");
 		verifyAction("Saved.");
-		assertSelectedOptionEquals("main:status", "Disabled");
+		assertTextPresent("Status Disabled");
 		verifyTitle("View user");
 
 		// disabled to active
 		gotoPage("user");
 		clickLinkWithExactText("email03");
-		assertSelectedOptionEquals("main:status", "Disabled");
+		assertTextPresent("Status Disabled");
 		assertElementPresentByXPath("//button[@id='main:disable' and @disabled='disabled']");
 		clickButton("main:activate");
 		verifyAction("Saved.");
-		assertSelectedOptionEquals("main:status", "Active");
+		assertTextPresent("Status Active");
 	}
 
 	@Test
 	public void sec_CannotDisableOwnAccount() {
 		gotoPage("user");
 		clickLinkWithExactText("email01");
-		assertSelectedOptionEquals("main:status", "Active");
+		assertTextPresent("Status Active");
 		assertElementPresentByXPath("//button[@id='main:activate' and @disabled='disabled']");
 		assertElementPresentByXPath("//button[@id='main:disable' and @disabled='disabled']");
 	}
