@@ -19,7 +19,7 @@
 			<ul>
 				<li class="#{(paginatorBean.page==1)? 'disabled':''}"><h:link
 						title="#{label['paginator.previousPage']}"
-						includeViewParams="true">
+						includeViewParams="true" disabled="#{paginatorBean.page==1}">
 						<f:param name="page" value="#{paginatorBean.page - 1}" />&laquo;</h:link></li>
 				<h:panelGroup rendered="#{paginatorBean.page > 1}">
 					<li><h:link title="#{label['paginator.firstPage']}"
@@ -107,7 +107,8 @@
 				<li
 					class="#{(paginatorBean.page==paginatorBean.lastPage)? 'disabled':''}">
 					<h:link title="#{label['paginator.nextPage']}"
-						includeViewParams="true">
+						includeViewParams="true"
+						disabled="#{paginatorBean.page==paginatorBean.lastPage}">
 						<f:param name="page" value="#{paginatorBean.page + 1}" />&raquo;</h:link>
 				</li>
 			</ul>
