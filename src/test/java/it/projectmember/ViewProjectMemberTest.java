@@ -19,17 +19,16 @@ public class ViewProjectMemberTest extends ITBase {
 
 	@Test
 	public void fn() {
-		view("3", "Active", "Project administrator");
-		view("4", "Pending", "User");
-		view("5", "Pending", "Project administrator");
-		view("6", "Disabled", "User");
-		view("7", "Disabled", "Project administrator");
-		view("8", "Active", "User", "Project administrator");
+		view(3, "Active", "Project administrator");
+		view(4, "Pending", "User");
+		view(5, "Pending", "Project administrator");
+		view(6, "Disabled", "User");
+		view(7, "Disabled", "Project administrator");
+		view(8, "Active", "User", "Project administrator");
 	}
 
-	private void view(String number, String status, String... roles) {
-		gotoPage("project/code2/member");
-		clickLinkWithExactText("email0" + number);
+	private void view(int number, String status, String... roles) {
+		gotoPage("projectMember/" + (number + 19));
 		verifyTitle("View project member");
 		assertTextPresent("Project name2");
 		assertTextPresent("Project member firstName0" + number + " lastName0"
@@ -48,9 +47,7 @@ public class ViewProjectMemberTest extends ITBase {
 	@Test
 	public void fn_OtherProject() {
 		login("email01", "qqqq");
-		gotoPage("project/code1/member");
-		clickLinkWithExactText("email01");
-
+		gotoPage("projectMember/11");
 		verifyTitle("View project member");
 		assertTextPresent("Project name1");
 		assertTextPresent("Project member firstName01 lastName01");
@@ -64,8 +61,7 @@ public class ViewProjectMemberTest extends ITBase {
 
 	@Test
 	public void fn_OptionalFields() {
-		gotoPage("project/code2/member");
-		clickLinkWithExactText("email09");
+		gotoPage("projectMember/28");
 		verifyTitle("View project member");
 		assertTextPresent("Project member firstName09 lastName09");
 		assertTextPresent("email09");
@@ -75,6 +71,15 @@ public class ViewProjectMemberTest extends ITBase {
 		assertTextNotPresent("Last login");
 		assertTextPresent("Status Active");
 		assertTextPresent("Roles None");
+	}
+
+	@Test
+	public void nav() {
+		gotoPage("project/code2/member");
+		clickLinkWithExactText("email03");
+		verifyTitle("View project member");
+		assertTextPresent("Project name2");
+		assertTextPresent("Project member firstName03 lastName03");
 	}
 
 	@Test
