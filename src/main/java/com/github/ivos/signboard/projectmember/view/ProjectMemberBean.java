@@ -32,6 +32,23 @@ public class ProjectMemberBean implements Serializable {
 	@Inject
 	ViewContext viewContext;
 
+	public boolean isActive() {
+		return ProjectMemberStatus.active
+				.equals(getProjectMember().getStatus());
+	}
+
+	@ActiveProjectAdministrator
+	public String disable() {
+		projectMember.setStatus(ProjectMemberStatus.disabled);
+		return update();
+	}
+
+	@ActiveProjectAdministrator
+	public String activate() {
+		projectMember.setStatus(ProjectMemberStatus.active);
+		return update();
+	}
+
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
@@ -46,7 +63,7 @@ public class ProjectMemberBean implements Serializable {
 
 	private ProjectMember projectMember;
 
-	public ProjectMember getProject() {
+	public ProjectMember getProjectMember() {
 		if (null == projectMember) {
 			projectMember = new ProjectMember();
 		}

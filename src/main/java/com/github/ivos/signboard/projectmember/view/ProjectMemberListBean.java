@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -22,6 +21,7 @@ import org.jboss.solder.exception.control.ExceptionHandled;
 import com.github.ivos.signboard.config.security.ActiveProjectMember;
 import com.github.ivos.signboard.config.security.SystemUser;
 import com.github.ivos.signboard.project.model.Project;
+import com.github.ivos.signboard.project.view.ProjectBean;
 import com.github.ivos.signboard.projectmember.model.ProjectMember;
 import com.github.ivos.signboard.projectmember.model.ProjectMemberCriteria;
 import com.github.ivos.signboard.projectmember.model.ProjectMemberStatus;
@@ -29,37 +29,12 @@ import com.github.ivos.signboard.user.model.User;
 import com.github.ivos.signboard.view.ViewContext;
 
 @Named
-@Stateful
 @SessionScoped
 @ExceptionHandled
 public class ProjectMemberListBean implements Serializable {
 
-	private String projectId;
-
-	public String getProjectId() {
-		return projectId;
-	}
-
-	public void setProjectId(String projectId) {
-		this.projectId = projectId;
-	}
-
-	private Project project;
-
-	public Project getProject() {
-		if (null == project) {
-			project = new Project();
-		}
-		return project;
-	}
-
-	public void retrieveProject() {
-		if (null != projectId && entityManager.isOpen()) {
-			project = entityManager.find(Project.class, projectId);
-		} else {
-			project = new Project();
-		}
-	}
+	@Inject
+	private ProjectBean projectBean;
 
 	@Inject
 	ViewContext viewContext;
@@ -108,7 +83,7 @@ public class ProjectMemberListBean implements Serializable {
 
 	public String search() {
 		page = 1;
-		return "search?faces-redirect=true&projectId=" + projectId;
+		return "search?faces-redirect=true&projectId=" + projectBean.getId();
 	}
 
 	@SystemUser
@@ -140,7 +115,7 @@ public class ProjectMemberListBean implements Serializable {
 		List<Predicate> predicatesList = new ArrayList<Predicate>();
 
 		predicatesList.add(builder.equal(root.<Project> get("project")
-				.<String> get("code"), projectId));
+				.<String> get("code"), projectBean.getId()));
 		String email = criteria.getEmail();
 		if (email != null && !"".equals(email)) {
 			predicatesList.add(builder.like(root.<User> get("user")

@@ -154,6 +154,16 @@ public class SearchProjectMemberTest extends ITBase {
 	}
 
 	@Test
+	public void fn_OtherProject() {
+		login("email01", "qqqq");
+		gotoPage("project/code1/member");
+		verifyTitle("Search project members");
+		assertTextPresent("Project name1");
+		assertTextPresent("email01");
+		assertTextPresent("1 .. 1 of 1");
+	}
+
+	@Test
 	public void val_SearchDatesInterval() {
 		search("", "", "", "", "", "01/26/2010", "01/25/2010", "", "");
 		assertTextPresent("The end date must be after the start date.");
@@ -198,6 +208,15 @@ public class SearchProjectMemberTest extends ITBase {
 		login("email06", "qqqq");
 		gotoPage("project/code2/member");
 		assertAccessDenied();
+	}
+
+	@Test
+	public void sec_LoadProjectFromMemberInSecurityCheck() {
+		verifyTitle("Search project members");
+		gotoPage("login");
+		fillAndSubmitLoginForm("email01", "qqqq");
+		gotoPage("project/code1/member");
+		verifyTitle("Search project members");
 	}
 
 }

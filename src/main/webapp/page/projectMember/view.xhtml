@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:s="http://jboss.org/seam/faces"
+	xmlns:my="http://signboard.ivos.github.com/jsf/facelets"
+	template="/page/template.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value="#{projectMemberBean.id}" />
+		<s:viewAction action="#{projectMemberBean.retrieve}" />
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="#{label['projectMember.view.title']}" />
+	<ui:param name="activeMenu" value="project" />
+	<ui:define name="main">
+		<h1><span class="muted"><h:outputText value="#{label['project.page.header']}" /></span>
+			<h:outputText value=" #{projectMemberBean.projectMember.project.name}" /></h1>
+		<h2><span class="muted"><h:outputText value="#{label['projectMember.page.header']}" /></span>
+			<h:outputText value=" #{projectMemberBean.projectMember.user.fullName}" /></h2>
+		<h:form id="main" styleClass="form-horizontal">
+			<ul class="unstyled">
+				<li><i class="icon-envelope"></i>&nbsp;<h:outputText 
+					value="#{projectMemberBean.projectMember.user.email}" />
+					<a href="mailto:#{projectMemberBean.projectMember.user.email}" class="btn btn-mini"
+					title="#{label['button.sendEmail']}"><i class="icon-share-alt"></i>
+					<h:outputText value="#{label['button.sendEmail']} " /></a></li>
+				<c:if test="#{not empty projectMemberBean.projectMember.user.phone}">
+				<li><i class="icon-phone"></i>&nbsp;<h:outputText 
+					value="#{projectMemberBean.projectMember.user.phone}" /></li></c:if>
+				<c:if test="#{not empty projectMemberBean.projectMember.user.skype}">
+				<li><h:outputText value="#{label['projectMember.skype']} " />
+					<h:outputText value="#{projectMemberBean.projectMember.user.skype}" /></li></c:if>
+				<li><h:outputText value="#{label['projectMember.registered']} " />
+					<h:outputText value="#{projectMemberBean.projectMember.user.registered}">
+						<f:convertDateTime timeZone="${userDateTimeZone.ID}" />
+					</h:outputText></li>
+				<c:if test="#{not empty projectMemberBean.projectMember.user.lastLogin}">
+				<li><h:outputText value="#{label['projectMember.lastLogin']} " />
+					<h:outputText value="#{projectMemberBean.projectMember.user.lastLogin}">
+						<f:convertDateTime timeZone="${userDateTimeZone.ID}" type="both" />
+					</h:outputText></li></c:if>
+				<li><h:outputText value="#{label['projectMember.status']} " />
+					<c:set var="statusKey" value="enum_ProjectMemberStatus_#{projectMemberBean.projectMember.status}" />
+					<span class="label label-#{(projectMemberBean.projectMember.status eq 'active')? 'success' : 'important'}">
+					<h:outputText value="#{label[statusKey]}" /></span></li>
+				<li><h:outputText value="#{label['projectMember.roles']} " />
+					<c:forEach items="#{projectMemberBean.projectMember.roles}" var="_role">
+						<c:set var="roleKey" value="enum_ProjectMemberRole_#{_role}" />
+						<span class="label label-info"><h:outputText value="#{label[roleKey]}" /></span>
+					</c:forEach>
+					<c:if test="#{empty projectMemberBean.projectMember.roles}">
+						<span class="label"><h:outputText value="#{label['enum_none']}" /></span>
+					</c:if>
+					</li>
+			</ul>
+
+			<div class="control-group">
+				<div class="form-actions">
+					<h:link id="edit" class="btn btn-success" outcome="edit"
+						includeViewParams="true">
+						<i class="icon-edit"></i>
+						<h:outputText value=" #{label['button.edit']}" />
+					</h:link>
+					<h:commandButton id="disable" class="btn"
+						action="#{projectMemberBean.disable}" tag="button"
+						disabled="#{!projectMemberBean.active or projectMemberBean.projectMember.user.equals(clientUser)}">
+						<i class="icon-ban-circle"></i>
+						<h:outputText value=" #{label['button.disable']}" />
+					</h:commandButton>
+					<h:commandButton id="activate" class="btn"
+						action="#{projectMemberBean.activate}" tag="button"
+						disabled="#{projectMemberBean.active}">
+						<i class="icon-ok"></i>
+						<h:outputText value=" #{label['button.activate']}" />
+					</h:commandButton>
+					<h:link id="search" class="btn" outcome="search">
+						<f:param name="projectId"
+							value="#{projectMemberBean.projectMember.project.id}" />
+						<i class="icon-list"></i>
+						<h:outputText value=" #{label['button.viewAll']}" />
+					</h:link>
+				</div>
+				<h:messages id="messages" globalOnly="true"
+					styleClass="form-messages" />
+			</div>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

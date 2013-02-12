@@ -6,7 +6,6 @@ import net.sf.lightair.annotation.BaseUrl;
 import net.sf.lightair.annotation.Setup;
 import net.sf.lightair.annotation.Verify;
 
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -38,7 +37,9 @@ public class ViewUserTest extends ITBase {
 		assertTextPresent("Registered Jan " + number + ", 2012");
 		assertTextPresent("Last login May 1, 2012 12:59:0" + number + " PM");
 		assertTextPresent("Status " + status);
-		assertTextPresent("System roles " + StringUtils.join(roles, ' '));
+		for (String role : roles) {
+			assertTextPresent(role);
+		}
 	}
 
 	@Test

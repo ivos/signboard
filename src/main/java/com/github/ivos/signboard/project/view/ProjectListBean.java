@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -26,7 +25,6 @@ import com.github.ivos.signboard.project.model.ProjectCriteria;
 import com.github.ivos.signboard.view.ViewContext;
 
 @Named
-@Stateful
 @SessionScoped
 @ExceptionHandled
 public class ProjectListBean implements Serializable {

@@ -126,3 +126,10 @@ I can view last name, first name, e-mail, phone, member status
 attributes in the search table.
 I can sort table alphabetically (last name, first name, id),
 by recent login, by recent registration.
+
+1. __View project member__
+
+	As an active project member I can view any other member's detail.
+I can view last name, first name, e-mail, phone, skype, member status, 
+project roles, registration date, last login time
+attributes.

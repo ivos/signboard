@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -32,7 +31,6 @@ import com.github.ivos.signboard.user.model.UserStatus;
 import com.github.ivos.signboard.view.ViewContext;
 
 @Named
-@Stateful
 @SessionScoped
 @ExceptionHandled
 public class UserListBean implements Serializable {
