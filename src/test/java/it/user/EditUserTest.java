@@ -36,7 +36,6 @@ public class EditUserTest extends ITBase {
 		clickLinkWithExactText("email" + number);
 		clickLink("main:edit");
 		verifyTitle("Edit user");
-		assertTextPresent("email" + number);
 		assertSelectOptionsEqual("edit:systemRoles", new String[] { "User",
 				"System administrator" });
 		List<String> rolesBefore = Arrays.asList(roles);
