@@ -1,6 +1,5 @@
 package it.project;
 
-import static junit.framework.Assert.*;
 import static net.sourceforge.jwebunit.junit.JWebUnit.*;
 import it.ITBase;
 import net.sf.lightair.annotation.BaseUrl;
@@ -20,55 +19,78 @@ public class ViewProjectTest extends ITBase {
 		login("email1", "qqqq");
 	}
 
-	private void navigate(String number) {
-		gotoPage("project");
-		clickLinkWithExactText("code" + number);
+	private void viewActiveMember(String number, String status, String role) {
+		gotoPage("project/code" + number);
 		verifyTitle("View project");
-		assertTextPresent("View project");
+		assertTextPresent("Project name" + number);
+		assertTextPresent("Code code" + number);
+		assertTextPresent("description" + number);
+		assertTextPresent("Created on Jan " + number + ", 2012");
+		assertTextPresent("You are " + status + " member of the project.");
+		if (null != role) {
+			assertTextPresent("You have roles " + role + " in the project.");
+		}
+		assertLinkPresentWithExactText("Members");
+		assertButtonNotPresent("view:join");
 	}
 
-	private void viewNonActiveMember(String number) {
-		navigate(number);
-		assertTextPresent("code" + number);
-		assertTextPresent("name" + number);
+	private void viewNonActiveMember(String number, String status, String role) {
+		gotoPage("project/code" + number);
+		verifyTitle("View project");
+		assertTextPresent("Project name" + number);
+		assertTextPresent("Code code" + number);
 		assertTextNotPresent("description" + number);
 		assertTextNotPresent("Created on");
+		assertTextPresent("You are " + status + " member of the project.");
+		if (null != role) {
+			assertTextPresent("You have roles " + role + " in the project.");
+		}
+		assertLinkNotPresentWithExactText("Members");
+		assertButtonNotPresent("view:join");
 	}
 
-	private void viewActiveMember(String number) {
-		navigate(number);
-		assertTextPresent("code" + number);
-		assertTextPresent("name" + number);
-		assertTextPresent("description" + number);
-		assertTextPresent("Jan " + number + ", 2012");
+	private void viewNonMember(String number) {
+		gotoPage("project/code" + number);
+		verifyTitle("View project");
+		assertTextPresent("Project name" + number);
+		assertTextPresent("Code code" + number);
+		assertTextNotPresent("description" + number);
+		assertTextNotPresent("Created on");
+		assertTextNotPresent("member of the project.");
+		assertTextNotPresent("You have roles");
+		assertLinkNotPresentWithExactText("Members");
+		assertButtonPresent("view:join");
 	}
 
 	@Test
 	public void fn() {
-		viewActiveMember("1");
-		viewNonActiveMember("2");
-		viewNonActiveMember("3");
-		viewActiveMember("4");
+		viewActiveMember("1", "Active", "Project administrator");
+		viewNonMember("2");
+		viewNonActiveMember("3", "Pending", "User");
+		viewActiveMember("4", "Active", "User");
 	}
 
 	@Test
 	public void fn_OtherUser() {
 		login("email3", "qqqq");
-		viewNonActiveMember("1");
-		viewActiveMember("2");
-		viewNonActiveMember("3");
-		viewActiveMember("4");
+		viewNonMember("1");
+		viewActiveMember("2", "Active", "User");
+
+		viewNonActiveMember("3", "Disabled", null);
+		assertTextPresent("You have roles");
+		assertTextPresent("User");
+		assertTextPresent("Project administrator");
+
+		viewActiveMember("4", "Active", "None");
 	}
 
 	@Test
 	public void nav() {
-		gotoPage("/");
-		clickLinkWithExactText("Project");
+		gotoPage("/project");
 		clickLinkWithExactText("code2");
+
 		verifyTitle("View project");
-		assertTrue(getTestingEngine().getPageURL().toString()
-				.endsWith("/signboard/project/code2"));
-		assertTextPresent("View project");
+		verifyURL("/signboard/project/code2");
 	}
 
 	@Test

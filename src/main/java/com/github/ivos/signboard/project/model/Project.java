@@ -83,6 +83,15 @@ public class Project implements Serializable {
 		return false;
 	}
 
+	public ProjectMember getMember(User user) {
+		for (ProjectMember projectMember : user.getProjectMembers()) {
+			if (projectMember.getProject().equals(this)) {
+				return projectMember;
+			}
+		}
+		return null;
+	}
+
 	public boolean isActiveMember(User user) {
 		for (ProjectMember projectMember : user.getProjectMembers()) {
 			boolean isMember = projectMember.getProject().equals(this);

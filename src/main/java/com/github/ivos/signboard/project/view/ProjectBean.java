@@ -52,6 +52,17 @@ public class ProjectBean implements Serializable {
 		return project.isActiveAdministrator(clientUser);
 	}
 
+	private ProjectMember clientProjectMember;
+
+	public ProjectMember getClientProjectMember() {
+		// postback eliminated to toggle language
+		if (null == clientProjectMember
+				&& !FacesContext.getCurrentInstance().isPostback()) {
+			return project.getMember(clientUser);
+		}
+		return clientProjectMember;
+	}
+
 	private static final long serialVersionUID = 1L;
 
 	private String id;

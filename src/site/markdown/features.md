@@ -105,6 +105,9 @@ attributes.
 	As active project member, I can view code, name, description, date created
 attributes.
 
+	As project member I can view my project status and my project roles
+in the project.
+
 1. __Edit project__
 
 	As an active project administrator I can edit the project's 
