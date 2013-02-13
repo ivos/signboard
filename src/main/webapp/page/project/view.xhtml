@@ -16,28 +16,33 @@
 	<ui:param name="pageTitle" value="#{label['project.view.title']}" />
 	<ui:param name="activeMenu" value="project" />
 	<ui:define name="main">
-		<h1><span class="muted"><h:outputText value="#{label['project.page.header']}" /></span>
-			<h:outputText value=" #{projectBean.project.name}" /></h1>
+		<h1>
+			<span class="muted"><h:outputText
+					value="#{label['project.page.header']}" /></span>
+			<h:outputText value=" #{projectBean.project.name}" />
+		</h1>
 		<h:form id="view">
 			<div class="row">
 				<div class="span6">
 					<p>
 						<h:outputText value="#{label['project.code']}" />
-						<strong><h:outputText value="#{projectBean.project.code}" /></strong>.
+						<strong><h:outputText value="#{projectBean.project.code}" /></strong>
 					</p>
 					<h:panelGroup rendered="#{projectBean.clientUserActiveMember}">
-						<h:panelGroup rendered="#{not empty projectBean.project.description}">
+						<h:panelGroup
+							rendered="#{not empty projectBean.project.description}">
 							<pre><h:outputText value="#{projectBean.project.description}" /></pre>
 						</h:panelGroup>
 						<p>
 							<h:outputText value="#{label['project.dateCreated']} " />
 							<h:outputText value="#{projectBean.project.dateCreated}">
 								<f:convertDateTime timeZone="${userDateTimeZone.ID}" />
-							</h:outputText>.
+							</h:outputText>
 						</p>
 					</h:panelGroup>
-	
-					<h:panelGroup rendered="#{projectBean.clientUserActiveAdministrator}">
+
+					<h:panelGroup
+						rendered="#{projectBean.clientUserActiveAdministrator}">
 						<p>
 							<h:link id="edit" class="btn btn-small" outcome="edit"
 								includeViewParams="true">
@@ -70,7 +75,8 @@
 					</h:panelGroup>
 				</div>
 			</div>
-			<h:messages id="messages" globalOnly="true" styleClass="form-messages" />
+			<h:messages id="messages" globalOnly="true"
+				styleClass="form-messages" />
 		</h:form>
 	</ui:define>
 
