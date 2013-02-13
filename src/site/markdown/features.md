@@ -134,6 +134,11 @@ I can view last name, first name, e-mail, phone, skype, member status,
 project roles, registration date, last login time
 attributes.
 
+1. __Edit project member__
+
+	As an active administrator of the project I can edit a member's roles attribute.
+I cannot remove project administrator role from my own member.
+
 1. __Disable and activate project member__
 
 	As an active administrator of the project I can 

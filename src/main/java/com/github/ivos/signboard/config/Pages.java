@@ -64,6 +64,12 @@ public interface Pages {
 
 		// project member
 
+		@ViewPattern("/page/projectMember/edit.xhtml")
+		@LoggedIn
+		@SystemUser
+		@ActiveProjectAdministrator
+		projectMemberEdit,
+
 		@ViewPattern("/page/projectMember/*")
 		@LoggedIn
 		@SystemUser

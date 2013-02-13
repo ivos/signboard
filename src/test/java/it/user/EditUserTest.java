@@ -62,7 +62,6 @@ public class EditUserTest extends ITBase {
 		clickLinkWithExactText("email01");
 		clickLink("main:edit");
 		setWorkingForm("edit");
-		unselectRole("User");
 		unselectRole("System administrator");
 		clickButton("edit:save");
 		assertTextPresent("Cannot remove system administrator role on your own user.");

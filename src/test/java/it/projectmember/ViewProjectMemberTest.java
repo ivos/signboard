@@ -81,9 +81,11 @@ public class ViewProjectMemberTest extends ITBase {
 	public void nav() {
 		gotoPage("project/code2/member");
 		clickLinkWithExactText("email03");
+
 		verifyTitle("View project member");
 		assertTextPresent("Project name2");
 		assertTextPresent("Project member firstName03 lastName03");
+		verifyURL("projectMember/22");
 	}
 
 	@Test

@@ -1,6 +1,7 @@
 package com.github.ivos.signboard.projectmember.view;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 import javax.faces.bean.ViewScoped;
@@ -17,6 +18,7 @@ import com.github.ivos.signboard.config.security.ActiveProjectAdministrator;
 import com.github.ivos.signboard.config.security.SystemUser;
 import com.github.ivos.signboard.project.view.ProjectBean;
 import com.github.ivos.signboard.projectmember.model.ProjectMember;
+import com.github.ivos.signboard.projectmember.model.ProjectMemberRole;
 import com.github.ivos.signboard.projectmember.model.ProjectMemberSort;
 import com.github.ivos.signboard.projectmember.model.ProjectMemberStatus;
 import com.github.ivos.signboard.view.SelectUtils;
@@ -109,6 +111,19 @@ public class ProjectMemberBean implements Serializable {
 
 	@Inject
 	SelectUtils selectUtils;
+
+	public Collection<String> getRoles() {
+		return selectUtils.convertToStrings(getProjectMember().getRoles());
+	}
+
+	public void setRoles(Collection<String> roles) {
+		getProjectMember().setRoles(
+				selectUtils.convertToEnumSet(roles, ProjectMemberRole.class));
+	}
+
+	public List<SelectItem> getRoles__Options() {
+		return selectUtils.convertToSelectItems(ProjectMemberRole.class);
+	}
 
 	public List<SelectItem> getStatus__Options() {
 		return selectUtils

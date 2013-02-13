@@ -60,12 +60,12 @@
 
 			<div class="control-group">
 				<div class="form-actions">
-					<h:link id="edit" class="btn btn-success" outcome="edit"
-						includeViewParams="true">
-						<i class="icon-edit"></i>
-						<h:outputText value=" #{label['button.edit']}" />
-					</h:link>
 					<h:panelGroup rendered="#{projectBean.clientUserActiveAdministrator}">
+						<h:link id="edit" class="btn btn-success" outcome="edit"
+							includeViewParams="true">
+							<i class="icon-edit"></i>
+							<h:outputText value=" #{label['button.edit']}" />
+						</h:link>
 						<h:commandButton id="disable" class="btn"
 							action="#{projectMemberBean.disable}" tag="button"
 							disabled="#{projectMemberBean.disabled or projectMemberBean.projectMember.user.equals(clientUser)}">
