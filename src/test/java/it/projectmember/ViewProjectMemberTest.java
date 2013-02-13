@@ -84,12 +84,14 @@ public class ViewProjectMemberTest extends ITBase {
 
 	@Test
 	public void sec_MustBeProjectMember() {
+		// member of other project
 		gotoPage("projectMember/11");
 		assertAccessDenied();
 	}
 
 	@Test
 	public void sec_MustBeActiveProjectMember() {
+		// pending user member
 		login("email04", "qqqq");
 		gotoPage("projectMember/21");
 		assertAccessDenied();
