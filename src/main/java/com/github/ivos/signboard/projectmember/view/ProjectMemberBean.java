@@ -15,6 +15,7 @@ import org.jboss.solder.logging.Logger;
 
 import com.github.ivos.signboard.config.security.ActiveProjectAdministrator;
 import com.github.ivos.signboard.config.security.SystemUser;
+import com.github.ivos.signboard.project.view.ProjectBean;
 import com.github.ivos.signboard.projectmember.model.ProjectMember;
 import com.github.ivos.signboard.projectmember.model.ProjectMemberSort;
 import com.github.ivos.signboard.projectmember.model.ProjectMemberStatus;
@@ -35,6 +36,11 @@ public class ProjectMemberBean implements Serializable {
 	public boolean isActive() {
 		return ProjectMemberStatus.active
 				.equals(getProjectMember().getStatus());
+	}
+
+	public boolean isDisabled() {
+		return ProjectMemberStatus.disabled.equals(getProjectMember()
+				.getStatus());
 	}
 
 	@ActiveProjectAdministrator
@@ -73,6 +79,9 @@ public class ProjectMemberBean implements Serializable {
 	@Inject
 	private EntityManager entityManager;
 
+	@Inject
+	ProjectBean projectBean;
+
 	@SystemUser
 	public void retrieve() {
 		if (FacesContext.getCurrentInstance().isPostback()) {
@@ -81,6 +90,9 @@ public class ProjectMemberBean implements Serializable {
 		if (id != null) {
 			log.debugv("Retrieve project member by id {0}.", id);
 			projectMember = entityManager.find(ProjectMember.class, id);
+
+			projectBean.setId(projectMember.getProject().getId());
+			projectBean.retrieve();
 		}
 	}
 

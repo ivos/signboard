@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<user id="1" email="email01" first_name="firstName01" last_name="lastName01"
+		password="3bad6af0fa4b8b330d162e19938ee981" phone="phone01" skype="skype01"
+		status="active" registered="2010-01-01" last_login="2010-01-31 01:01:01"
+		version="0" />
+	<user_system_roles user="1" system_role="user" />
+	<user id="2" email="email02" first_name="firstName02" last_name="lastName02"
+		password="3bad6af0fa4b8b330d162e19938ee981" phone="phone02" skype="skype02"
+		status="active" registered="2010-01-02" last_login="2010-01-31 01:01:02"
+		version="0" />
+	<user_system_roles user="2" system_role="user" />
+	<user id="3" email="email03" first_name="firstName03" last_name="lastName03"
+		password="3bad6af0fa4b8b330d162e19938ee981" phone="phone03" skype="skype03"
+		status="active" registered="2010-01-03" last_login="2010-01-31 01:01:03"
+		version="0" />
+	<user_system_roles user="3" system_role="user" />
+	<user id="4" email="email04" first_name="firstName04" last_name="lastName04"
+		password="3bad6af0fa4b8b330d162e19938ee981" phone="phone04" skype="skype04"
+		status="active" registered="2010-01-04" last_login="2010-01-31 01:01:04"
+		version="0" />
+	<user id="5" email="email05" first_name="firstName05" last_name="lastName05"
+		password="3bad6af0fa4b8b330d162e19938ee981" phone="phone05" skype="skype05"
+		status="active" registered="2010-01-05" last_login="2010-01-31 01:01:05"
+		version="0" />
+	<user id="6" email="email06" first_name="firstName06" last_name="lastName06"
+		password="3bad6af0fa4b8b330d162e19938ee981" phone="phone06" skype="skype06"
+		status="active" registered="2010-01-06" last_login="2010-01-31 01:01:06"
+		version="0" />
+
+	<project code="code1" name="name1" description="description1"
+		date_created="2012-01-01" version="0" />
+	<project code="code2" name="name2" description="description2"
+		date_created="2012-01-02" version="0" />
+
+	<!-- member of other project -->
+	<project_member id="11" project="code1" user="1" status="active"
+		version="0" />
+	<project_member_roles project_member="11" role="admin" />
+
+	<!-- active admin -->
+	<project_member id="21" project="code2" user="2" status="active"
+		version="0" />
+	<project_member_roles project_member="21" role="admin" />
+
+	<!-- active user -->
+	<project_member id="22" project="code2" user="3" status="active"
+		version="0" />
+	<project_member_roles project_member="22" role="user" />
+
+	<!-- pending user member -->
+	<project_member id="23" project="code2" user="4" status="pending"
+		version="0" />
+	<project_member_roles project_member="23" role="user" />
+
+	<!-- pending admin member -->
+	<project_member id="24" project="code2" user="5" status="pending"
+		version="0" />
+	<project_member_roles project_member="24" role="admin" />
+
+	<!-- disabled admin member -->
+	<project_member id="25" project="code2" user="6" status="disabled"
+		version="0" />
+	<project_member_roles project_member="25" role="admin" />
+</dataset>

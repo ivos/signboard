@@ -65,18 +65,20 @@
 						<i class="icon-edit"></i>
 						<h:outputText value=" #{label['button.edit']}" />
 					</h:link>
-					<h:commandButton id="disable" class="btn"
-						action="#{projectMemberBean.disable}" tag="button"
-						disabled="#{!projectMemberBean.active or projectMemberBean.projectMember.user.equals(clientUser)}">
-						<i class="icon-ban-circle"></i>
-						<h:outputText value=" #{label['button.disable']}" />
-					</h:commandButton>
-					<h:commandButton id="activate" class="btn"
-						action="#{projectMemberBean.activate}" tag="button"
-						disabled="#{projectMemberBean.active}">
-						<i class="icon-ok"></i>
-						<h:outputText value=" #{label['button.activate']}" />
-					</h:commandButton>
+					<h:panelGroup rendered="#{projectBean.clientUserActiveAdministrator}">
+						<h:commandButton id="disable" class="btn"
+							action="#{projectMemberBean.disable}" tag="button"
+							disabled="#{projectMemberBean.disabled or projectMemberBean.projectMember.user.equals(clientUser)}">
+							<i class="icon-ban-circle"></i>
+							<h:outputText value=" #{label['button.disable']}" />
+						</h:commandButton>
+						<h:commandButton id="activate" class="btn"
+							action="#{projectMemberBean.activate}" tag="button"
+							disabled="#{projectMemberBean.active}">
+							<i class="icon-ok"></i>
+							<h:outputText value=" #{label['button.activate']}" />
+						</h:commandButton>
+					</h:panelGroup>
 					<h:link id="search" class="btn" outcome="search">
 						<f:param name="projectId"
 							value="#{projectMemberBean.projectMember.project.id}" />
