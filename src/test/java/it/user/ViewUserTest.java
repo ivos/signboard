@@ -37,8 +37,12 @@ public class ViewUserTest extends ITBase {
 		assertTextPresent("Registered Jan " + number + ", 2012");
 		assertTextPresent("Last login May 1, 2012 12:59:0" + number + " PM");
 		assertTextPresent("Status " + status);
-		for (String role : roles) {
-			assertTextPresent(role);
+		if (1 == roles.length) {
+			assertTextPresent("System roles " + roles[0]);
+		} else {
+			for (String role : roles) {
+				assertTextPresent(role);
+			}
 		}
 	}
 

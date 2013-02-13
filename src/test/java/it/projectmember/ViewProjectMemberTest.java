@@ -39,8 +39,12 @@ public class ViewProjectMemberTest extends ITBase {
 		assertTextPresent("Registered Jan " + number + ", 2010");
 		assertTextPresent("Last login Jan 31, 2010 1:01:0" + number + " AM");
 		assertTextPresent("Status " + status);
-		for (String role : roles) {
-			assertTextPresent(role);
+		if (1 == roles.length) {
+			assertTextPresent("Roles " + roles[0]);
+		} else {
+			for (String role : roles) {
+				assertTextPresent(role);
+			}
 		}
 	}
 
