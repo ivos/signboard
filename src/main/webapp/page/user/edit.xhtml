@@ -4,32 +4,27 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:s="http://jboss.org/seam/faces"
 	xmlns:my="http://signboard.ivos.github.com/jsf/facelets"
 	template="/page/template.xhtml">
 
 	<f:metadata>
 		<f:viewParam name="id" value="#{userBean.id}" />
-		<f:event type="preRenderView" listener="#{userBean.retrieve}" />
+		<s:viewAction action="#{userBean.retrieve}" />
 	</f:metadata>
 
-	<ui:param name="isCreate" value="#{empty userBean.id}" />
-	<ui:param name="pageTitle"
-		value="#{isCreate ? label['user.create.title'] : label['user.edit.title']}" />
-	<ui:param name="focusField" value="edit\\:lastName" />
+	<ui:param name="pageTitle" value="#{label['user.edit.title']}" />
+	<ui:param name="focusField" value="edit\\:systemRoles" />
+	<ui:param name="activeMenu" value="user" />
 	<ui:define name="main">
-		<h1>#{label['user.page.header']}</h1>
+		<h1><span class="muted"><h:outputText value="#{label['user.page.header']}" /></span>
+			<h:outputText value=" #{userBean.user.fullName}" /></h1>
 		<h:form id="edit" styleClass="form-horizontal">
-			<legend>#{pageTitle}</legend>
-			<my:field id="lastName" type="text" entity="user"
-				bean="#{userBean.user}" required="true" />
-			<my:field id="firstName" type="text" entity="user"
-				bean="#{userBean.user}" required="true" />
-			<my:field id="email" type="text" entity="user"
-				bean="#{userBean.user}" required="true" />
-			<my:field id="phone" type="text" entity="user"
-				bean="#{userBean.user}" />
-			<my:field id="skype" type="text" entity="user"
-				bean="#{userBean.user}" />
+			<legend><h:outputText value="#{pageTitle}" /></legend>
+			<my:field id="systemRoles" type="selectManyListbox" entity="user"
+				bean="#{userBean}">
+				<f:validator validatorId="keepSystemAdminOnSelf" />
+			</my:field>
 
 			<div class="control-group">
 				<div class="form-actions">
@@ -38,17 +33,11 @@
 						<i class="icon-save"></i>
 						<h:outputText value=" #{label['button.save']}" />
 					</h:commandButton>
-					<h:link id="cancel" class="btn btn-warning"
-						outcome="#{isCreate ? 'search' : 'view'}">
-						<f:param name="id" value="#{userBean.id}" disable="#{isCreate}" />
+					<h:link id="cancel" class="btn btn-warning" outcome="view">
+						<f:param name="id" value="#{userBean.id}" />
 						<i class="icon-remove"></i>
 						<h:outputText value=" #{label['button.cancel']}" />
 					</h:link>
-					<h:commandButton id="delete" class="btn btn-danger pull-right"
-						action="#{userBean.delete}" rendered="#{!isCreate}" tag="button">
-						<i class="icon-trash"></i>
-						<h:outputText value=" #{label['button.delete']}" />
-					</h:commandButton>
 				</div>
 				<h:messages id="messages" globalOnly="true"
 					styleClass="form-messages" />

@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<user id="1" email="email01" first_name="firstName01" last_name="lastName01"
+		password="3bad6af0fa4b8b330d162e19938ee981" phone="phone01" skype="skype01"
+		status="active" registered="2010-01-01" version="0" />
+	<user_system_roles user="1" system_role="user" />
+	<user_system_roles user="1" system_role="admin" />
+	<user id="2" email="email02" first_name="firstName02a" last_name="lastName02b"
+		password="3bad6af0fa4b8b330d162e19938ee981" phone="phone02c" skype="skype02d"
+		status="active" registered="2010-01-01" />
+	<user_system_roles user="2" system_role="user" />
+	<user id="3" email="email03" first_name="firstName03" last_name="lastName03"
+		password="3bad6af0fa4b8b330d162e19938ee981" phone="phone03" skype="skype03"
+		status="active" registered="2010-01-01" version="0" />
+	<user_system_roles user="3" system_role="user" />
+</dataset>

@@ -2,10 +2,13 @@ package com.github.ivos.signboard.project.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -15,6 +18,11 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.joda.time.DateMidnight;
+
+import com.github.ivos.signboard.projectmember.model.ProjectMember;
+import com.github.ivos.signboard.projectmember.model.ProjectMemberRole;
+import com.github.ivos.signboard.projectmember.model.ProjectMemberStatus;
+import com.github.ivos.signboard.user.model.User;
 
 @Entity
 public class Project implements Serializable {
@@ -40,7 +48,17 @@ public class Project implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date dateCreated;
 
+	@OneToMany(mappedBy = "project")
+	private Set<ProjectMember> projectMembers = new HashSet<ProjectMember>();
+
 	// business logic
+
+	public Project() {
+	}
+
+	public Project(String code) {
+		this.code = code;
+	}
 
 	public String getId() {
 		return code;
@@ -53,6 +71,51 @@ public class Project implements Serializable {
 	@PrePersist
 	public void initDateCreated() {
 		dateCreated = DateMidnight.now().toDate();
+	}
+
+	public boolean isMember(User user) {
+		for (ProjectMember projectMember : user.getProjectMembers()) {
+			boolean isMember = projectMember.getProject().equals(this);
+			if (isMember) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public ProjectMember getMember(User user) {
+		for (ProjectMember projectMember : user.getProjectMembers()) {
+			if (projectMember.getProject().equals(this)) {
+				return projectMember;
+			}
+		}
+		return null;
+	}
+
+	public boolean isActiveMember(User user) {
+		for (ProjectMember projectMember : user.getProjectMembers()) {
+			boolean isMember = projectMember.getProject().equals(this);
+			if (isMember) {
+				boolean isActive = ProjectMemberStatus.active
+						.equals(projectMember.getStatus());
+				return isActive;
+			}
+		}
+		return false;
+	}
+
+	public boolean isActiveAdministrator(User user) {
+		for (ProjectMember projectMember : user.getProjectMembers()) {
+			boolean isMember = projectMember.getProject().equals(this);
+			if (isMember) {
+				boolean isAdministrator = projectMember.getRoles().contains(
+						ProjectMemberRole.admin);
+				boolean isActive = ProjectMemberStatus.active
+						.equals(projectMember.getStatus());
+				return isAdministrator && isActive;
+			}
+		}
+		return false;
 	}
 
 	// Java bean
@@ -91,6 +154,14 @@ public class Project implements Serializable {
 
 	public Date getDateCreated() {
 		return dateCreated;
+	}
+
+	public Set<ProjectMember> getProjectMembers() {
+		return projectMembers;
+	}
+
+	public void setProjectMembers(Set<ProjectMember> projectMembers) {
+		this.projectMembers = projectMembers;
 	}
 
 	@Override

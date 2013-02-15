@@ -10,6 +10,8 @@
 	<c:set var="required" value="#{not empty required and required}" />
 	<c:set var="labelKey" value="#{entity}.#{property}" />
 	<c:set var="hintKey" value="#{labelKey}.#{hint}.hint" />
+	<c:set var="disabled" value="#{not empty disabled ? disabled : false}" />
+	<c:set var="optionsProperty" value="#{property}__Options" />
 
 	<div class="control-group">
 		<h:outputLabel for="#{id}" styleClass="control-label">
@@ -56,12 +58,63 @@
 						</c:if>
 					</h:inputSecret>
 				</c:when>
-				<c:when test="#{type == 'select'}">
+				<c:when test="#{type == 'selectOneMenu'}">
 					<h:selectOneMenu id="#{id}" value="#{bean[property]}"
-						label="#{label[labelKey]}" styleClass="#{class}">
-						<f:selectItems value="#{options.entrySet()}" var="entry"
-							itemValue="#{entry.key}" itemLabel="#{entry.value}" />
+						label="#{label[labelKey]}" styleClass="#{class}"
+						disabled="#{disabled}">
+						<f:selectItems value="#{selectBean[optionsProperty]}" />
+						<ui:insert />
+						<c:if test="#{customAjaxValidation != true}">
+							<f:ajax event="blur" render="#{id}-message" />
+						</c:if>
 					</h:selectOneMenu>
+				</c:when>
+				<c:when test="#{type == 'selectManyListbox'}">
+					<h:selectManyListbox id="#{id}" value="#{bean[property]}"
+						label="#{label[labelKey]}" styleClass="#{class}"
+						disabled="#{disabled}">
+						<f:selectItems value="#{bean[optionsProperty]}" />
+						<ui:insert />
+						<c:if test="#{customAjaxValidation != true}">
+							<f:ajax event="blur" render="#{id}-message" />
+						</c:if>
+					</h:selectManyListbox>
+				</c:when>
+				<c:when test="#{type == 'dateSearch'}">
+					<c:set var="propertyFrom" value="#{property}__From" />
+					<c:set var="propertyTo" value="#{property}__To" />
+					<div class="input-prepend datepicker date"
+						data-date-language="#{userLocale}"
+						data-date-startdate="#{startDate}" data-date-enddate="#{endDate}">
+						<span class="add-on">&ge;</span>
+						<h:inputText id="#{id}" value="#{bean[propertyFrom]}"
+							label="#{label[labelKey]}"
+							placeholder="#{dateFormatPatternLabel}"
+							styleClass="input-small #{class}" autocomplete="off">
+							<f:convertDateTime timeZone="${userDateTimeZone.ID}"
+								pattern="#{dateFormatPattern}" />
+							<c:if test="#{customAjaxValidation != true}">
+								<f:ajax event="blur" render="#{id}-message" />
+							</c:if>
+						</h:inputText>
+					</div>
+					<div class="input-prepend datepicker date"
+						data-date-language="#{userLocale}"
+						data-date-startdate="#{startDate}" data-date-enddate="#{endDate}">
+						<span class="add-on">&lt;</span>
+						<h:inputText id="#{id}__To" value="#{bean[propertyTo]}"
+							label="#{label[labelKey]}"
+							placeholder="#{dateFormatPatternLabel}"
+							styleClass="input-small #{class}" autocomplete="off">
+							<f:convertDateTime timeZone="${userDateTimeZone.ID}"
+								pattern="#{dateFormatPattern}" />
+							<f:validator validatorId="searchDateInterval" />
+							<c:if test="#{customAjaxValidation != true}">
+								<f:ajax event="blur" execute="#{id} #{id}__To"
+									render="#{id}__To-message" />
+							</c:if>
+						</h:inputText>
+					</div>
 				</c:when>
 				<c:otherwise>
 					<ui:insert />
@@ -69,6 +122,9 @@
 			</c:choose>
 			<h:outputText value=" " />
 			<h:message id="#{id}-message" for="#{id}" />
+			<c:if test="#{type == 'dateSearch'}">
+				<h:message id="#{id}__To-message" for="#{id}__To" />
+			</c:if>
 			<c:if test="#{not empty hint}">
 				<h:outputText id="#{id}-hint-text" value="#{label[hintKey]}"
 					styleClass="help-block" />

@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<user id="1" email="email1" first_name="f1" last_name="l1"
+		password="3bad6af0fa4b8b330d162e19938ee981" status="active"
+		registered="2010-01-01" version="0" />
+	<user_system_roles user="1" system_role="user" />
+
+	<user id="2" email="email2" first_name="f2" last_name="l2"
+		password="3bad6af0fa4b8b330d162e19938ee981" status="active"
+		registered="2010-01-01" version="0" />
+	<user_system_roles user="2" system_role="admin" />
+
+	<user id="3" email="email3" first_name="f3" last_name="l3"
+		password="3bad6af0fa4b8b330d162e19938ee981" status="active"
+		registered="2010-01-03" version="0" />
+	<user_system_roles user="3" system_role="user" />
+</dataset>

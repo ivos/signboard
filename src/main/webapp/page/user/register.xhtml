@@ -23,20 +23,20 @@
 				bean="#{userBean.user}" required="true" hint="register">
 				<f:validator validatorId="emailNotRegistered" />
 				<f:facet name="prepend">
-					<i class="icon-envelope"></i>
+					<span class="add-on"><i class="icon-envelope"></i></span>
 				</f:facet>
 			</my:field>
 			<my:field id="password" type="password" entity="user"
 				bean="#{userBean.user}" required="true" hint="register">
 				<f:facet name="prepend">
-					<i class="icon-key"></i>
+					<span class="add-on"><i class="icon-key"></i></span>
 				</f:facet>
 			</my:field>
 			<my:field id="confirmPassword" type="password" entity="user"
 				bean="#{userBean}" required="true" hint="register"
 				customAjaxValidation="true">
 				<f:facet name="prepend">
-					<i class="icon-key"></i>
+					<span class="add-on"><i class="icon-key"></i></span>
 				</f:facet>
 				<f:validator validatorId="confirmPasswordMatching" />
 				<f:ajax event="blur" execute="password confirmPassword"
@@ -45,24 +45,26 @@
 			<my:field id="firstName" type="text" entity="user"
 				bean="#{userBean.user}" required="true">
 				<f:facet name="prepend">
-					<i class="icon-user"></i>
+					<span class="add-on"><i class="icon-user"></i></span>
 				</f:facet>
 			</my:field>
 			<my:field id="lastName" type="text" entity="user"
 				bean="#{userBean.user}" required="true">
 				<f:facet name="prepend">
-					<i class="icon-user"></i>
+					<span class="add-on"><i class="icon-user"></i></span>
 				</f:facet>
 			</my:field>
 			<my:field id="phone" type="text" entity="user"
 				bean="#{userBean.user}">
 				<f:facet name="prepend">
-					<i class="icon-phone"></i>
+					<span class="add-on"><i class="icon-phone"></i></span>
 				</f:facet>
 			</my:field>
 			<my:field id="skype" type="text" entity="user"
 				bean="#{userBean.user}">
-				<f:facet name="prepend">S</f:facet>
+				<f:facet name="prepend">
+					<span class="add-on">S</span>
+				</f:facet>
 			</my:field>
 			<div class="control-group">
 				<div class="form-actions">
@@ -71,8 +73,7 @@
 						<i class="icon-edit"></i>
 						<h:outputText value=" #{label['button.register']}" />
 					</h:commandButton>
-					<h:link id="cancel" class="btn btn-warning"
-						outcome="/page/index">
+					<h:link id="cancel" class="btn btn-warning" outcome="/page/index">
 						<i class="icon-remove"></i>
 						<h:outputText value=" #{label['button.cancel']}" />
 					</h:link>

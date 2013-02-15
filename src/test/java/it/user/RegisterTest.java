@@ -9,7 +9,7 @@ import net.sf.lightair.annotation.Verify;
 
 import org.junit.Test;
 
-@Setup
+@Setup({ "../deleteAll.xml", "RegisterTest.xml" })
 @Verify("RegisterTest.xml")
 @BaseUrl("http://localhost:8080/signboard")
 public class RegisterTest extends ITBase {
@@ -22,6 +22,9 @@ public class RegisterTest extends ITBase {
 		verifyAction("Saved.");
 		register("email2", "password2", "password2", "firstName2", "lastName2",
 				"phone2", "skype2");
+		verifyAction("Saved.");
+		register("email3", "password3", "password3", "firstName3", "lastName3",
+				"phone3", "skype3");
 		verifyAction("Saved.");
 	}
 
@@ -97,16 +100,16 @@ public class RegisterTest extends ITBase {
 	@Test
 	public void nav() {
 		beginAt("/");
-		assertTitleEquals("Welcome - Signboard");
+		verifyTitle("Welcome");
 		assertTrue(getTestingEngine().getPageURL().toString()
 				.endsWith("/signboard/"));
 		clickLinkWithExactText("register");
-		assertTitleEquals("Register - Signboard");
+		verifyTitle("Register");
 		assertTrue(getTestingEngine().getPageURL().toString()
 				.contains("/signboard/register"));
 		assertTextPresent("Please enter your registration.");
 		clickLinkWithExactText("Cancel");
-		assertTitleEquals("Welcome - Signboard");
+		verifyTitle("Welcome");
 		assertTrue(getTestingEngine().getPageURL().toString()
 				.endsWith("/signboard/"));
 	}

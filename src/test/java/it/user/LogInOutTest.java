@@ -9,22 +9,39 @@ import net.sf.lightair.annotation.Verify;
 
 import org.junit.Test;
 
-@Setup
+@Setup({ "../deleteAll.xml", "LogInOutTest.xml" })
 @Verify("LogInOutTest.xml")
 @BaseUrl("http://localhost:8080/signboard")
 public class LogInOutTest extends ITBase {
 
 	@Test
-	public void fn() {
+	@Verify
+	public void fn_Login_Logout() {
 		beginAt("login");
 		assertNotLoggedIn();
 
-		login("email2", "password2");
-		clickLink("nav-home");
-		assertLoggedIn();
+		fillAndSubmitLoginForm("email2", "password2");
+		clickLink("nav-form:nav-home");
+		assertLoggedIn("2");
 
 		clickLinkWithText("Log out");
 		assertNotLoggedIn();
+	}
+
+	@Test
+	@Verify
+	public void fn_LoginWhenLoggedIn() {
+		beginAt("login");
+
+		fillAndSubmitLoginForm("email2", "password2");
+		clickLink("nav-form:nav-home");
+		assertLoggedIn("2");
+
+		clickLinkWithExactText("Signboard");
+		clickLinkWithExactText("log in");
+		fillAndSubmitLoginForm("email1", "password1");
+		clickLink("nav-form:nav-home");
+		assertLoggedIn("1");
 	}
 
 	private void assertNotLoggedIn() {
@@ -34,8 +51,8 @@ public class LogInOutTest extends ITBase {
 		assertTextNotPresent("email2");
 	}
 
-	private void assertLoggedIn() {
-		assertTextPresent("first2 last2");
+	private void assertLoggedIn(String number) {
+		assertTextPresent("first" + number + " last" + number);
 		assertLinkPresentWithText("Log out");
 		assertLinkNotPresentWithText("Log in");
 	}
@@ -49,19 +66,46 @@ public class LogInOutTest extends ITBase {
 	}
 
 	@Test
+	public void val_InvalidEmail() {
+		beginAt("login");
+		assertNotLoggedIn();
+
+		fillAndSubmitLoginForm("email2XXX", "password2");
+		assertTextPresent("Login failed. The provided e-mail and password do not identify an active system user.");
+	}
+
+	@Test
+	public void val_InvalidPassword() {
+		beginAt("login");
+		assertNotLoggedIn();
+
+		fillAndSubmitLoginForm("email2", "password2XXX");
+		assertTextPresent("Login failed. The provided e-mail and password do not identify an active system user.");
+	}
+
+	@Test
+	public void val_UserNotActive() {
+		beginAt("login");
+		assertNotLoggedIn();
+
+		fillAndSubmitLoginForm("email3", "password3");
+		assertTextPresent("Login failed. The provided e-mail and password do not identify an active system user.");
+	}
+
+	@Test
 	public void nav() {
 		beginAt("/");
 		setupAjax();
-		assertTitleEquals("Welcome - Signboard");
+		verifyTitle("Welcome");
 		assertTrue(getTestingEngine().getPageURL().toString()
 				.endsWith("/signboard/"));
 		clickLinkWithExactText("Log in");
-		assertTitleEquals("Log in - Signboard");
+		verifyTitle("Log in");
 		assertTrue(getTestingEngine().getPageURL().toString()
 				.contains("/signboard/login"));
 		assertTextPresent("Enter your login data to start using the system.");
 		clickLinkWithExactText("Cancel");
-		assertTitleEquals("Welcome - Signboard");
+		verifyTitle("Welcome");
 		assertTrue(getTestingEngine().getPageURL().toString()
 				.endsWith("/signboard/"));
 	}

@@ -69,4 +69,10 @@ public class UserRemoting {
 		return selectItems("email");
 	}
 
+	@WebRemote
+	public String[] phone_Typeahead(String value) {
+		listBean.getCriteria().setPhone(value);
+		return selectItems("phone");
+	}
+
 }

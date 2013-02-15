@@ -4,38 +4,57 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:s="http://jboss.org/seam/faces"
 	xmlns:my="http://signboard.ivos.github.com/jsf/facelets"
 	template="/page/template.xhtml">
 
 	<f:metadata>
 		<f:viewParam name="page" value="#{projectListBean.page}" />
-		<f:event type="preRenderView" listener="#{projectListBean.paginate}" />
+		<s:viewAction action="#{projectListBean.paginate}" />
 	</f:metadata>
 
 	<ui:param name="pageTitle" value="#{label['project.search.title']}" />
-	<ui:define name="header">#{label['project.page.header']}</ui:define>
+	<ui:param name="focusField" value="search\\:name" />
+	<ui:param name="activeMenu" value="project" />
 	<ui:define name="main">
-		<h2>#{label['project.search.title']}</h2>
-		<h:form id="search">
-			<h:messages globalOnly="true" styleClass="messages"
-				errorClass="error" infoClass="info" />
-			<h:panelGroup styleClass="search">
-				<h:panelGrid columnClasses="label,component,required" columns="3">
-					<my:field id="code" type="text" entity="project"
+		<h1>
+			<h:outputText value="#{label['project.page.header']}" />
+		</h1>
+		<h:form id="search" styleClass="form-horizontal">
+			<legend>
+				<h:outputText value="#{label['project.search.title']}" />
+			</legend>
+			<div class="row">
+				<div class="span6">
+					<my:field id="name" type="typeahead" entity="project"
 						bean="#{projectListBean.criteria}" />
-					<my:field id="name" type="text" entity="project"
+				</div>
+				<div class="span6">
+					<my:field id="code" type="typeahead" entity="project"
 						bean="#{projectListBean.criteria}" />
-				</h:panelGrid>
-				<h:panelGroup styleClass="buttons">
-					<h:commandButton id="search" value="#{label['button.search']}"
-						action="#{projectListBean.search}" />
-					<h:link id="create" value="#{label['button.create']}"
-						outcome="create" />
-					<h:commandButton id="reset" value="#{label['button.reset']}"
-						action="#{projectListBean.reset}" />
-				</h:panelGroup>
-			</h:panelGroup>
-			<h:dataTable id="projectListBeanPageItems" styleClass="data-table"
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="form-actions">
+					<h:commandButton id="search" class="btn btn-primary"
+						action="#{projectListBean.search}" tag="button">
+						<i class="icon-search"></i>
+						<h:outputText value=" #{label['button.search']}" />
+					</h:commandButton>
+					<h:link id="create" class="btn btn-info" outcome="create">
+						<i class="icon-plus"></i>
+						<h:outputText value=" #{label['button.create.new']}" />
+					</h:link>
+					<h:commandButton id="reset" class="btn btn-warning pull-right"
+						action="#{projectListBean.reset}" tag="button" immediate="true">
+						<i class="icon-remove"></i>
+						<h:outputText value=" #{label['button.reset']}" />
+					</h:commandButton>
+				</div>
+				<h:messages globalOnly="true" styleClass="form-messages" />
+			</div>
+			<h:dataTable id="projectListBeanPageItems"
+				styleClass="table table-striped table-bordered table-hover data-table"
 				value="#{projectListBean.pageItems}" var="_item">
 				<my:column id="code" entity="project" item="#{_item}" />
 				<my:column id="name" entity="project" item="#{_item}" />
@@ -44,6 +63,11 @@
 				<ui:param name="paginatorBean" value="#{projectListBean}" />
 			</ui:include>
 		</h:form>
+
+		<script type="text/javascript"
+			src="/#{viewContext.applicationName}/seam/resource/remoting/resource/remote.js"></script>
+		<script type="text/javascript"
+			src="/#{viewContext.applicationName}/seam/resource/remoting/interface.js?projectRemoting"></script>
 	</ui:define>
 
 </ui:composition>

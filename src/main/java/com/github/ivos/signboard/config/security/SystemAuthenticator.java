@@ -1,4 +1,4 @@
-package com.github.ivos.signboard.config;
+package com.github.ivos.signboard.config.security;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -34,7 +34,8 @@ public class SystemAuthenticator extends BaseAuthenticator {
 			User userFound = entityManager
 					.createQuery(
 							"select user from User user where user.email=:email "
-									+ "and user.password=:password", User.class)
+									+ "and user.password=:password "
+									+ "and user.status='active'", User.class)
 					.setParameter("email", loginUser.getEmail())
 					.setParameter("password", loginUser.getPassword())
 					.getSingleResult();

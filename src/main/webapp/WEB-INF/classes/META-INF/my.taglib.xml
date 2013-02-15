@@ -16,7 +16,8 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
-			<description>Type of field. One of: output, text, password, select.</description>
+			<description>Type of field. One of: output, text, typeahead, 
+				password, selectOneMenu, selectManyListbox.</description>
 			<name>type</name>
 			<required>true</required>
 			<type>java.lang.String</type>
@@ -57,6 +58,26 @@
 			<name>class</name>
 			<type>java.lang.String</type>
 		</attribute>
+		<attribute>
+			<description>The bean with select options.</description>
+			<name>selectBean</name>
+			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description>Set to true to disable select widgets.</description>
+			<name>disabled</name>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
+			<description>Start date for a date field.</description>
+			<name>startDate</name>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>End date for a date field.</description>
+			<name>endDate</name>
+			<type>java.lang.String</type>
+		</attribute>
 	</tag>
 	<tag>
 		<tag-name>column</tag-name>
@@ -75,6 +96,21 @@
 			<name>item</name>
 			<required>true</required>
 			<type>java.lang.Object</type>
+		</attribute>
+		<attribute>
+			<description>Type of column field. One of: output, select.</description>
+			<name>type</name>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>The select entity.</description>
+			<name>selectEntity</name>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>Path from the item to the property.</description>
+			<name>path</name>
+			<type>java.lang.String</type>
 		</attribute>
 	</tag>
 </facelet-taglib>

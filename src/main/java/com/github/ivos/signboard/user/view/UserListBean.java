@@ -2,9 +2,9 @@ package com.github.ivos.signboard.user.view;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -15,6 +15,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -22,18 +23,24 @@ import net.sf.seaf.util.Generator;
 
 import org.jboss.solder.exception.control.ExceptionHandled;
 
+import com.github.ivos.signboard.config.security.SystemAdministrator;
+import com.github.ivos.signboard.user.model.SystemRole;
 import com.github.ivos.signboard.user.model.User;
 import com.github.ivos.signboard.user.model.UserCriteria;
+import com.github.ivos.signboard.user.model.UserStatus;
+import com.github.ivos.signboard.view.ViewContext;
 
 @Named
-@Stateful
 @SessionScoped
 @ExceptionHandled
 public class UserListBean implements Serializable {
 
+	@Inject
+	ViewContext viewContext;
+
 	public String generate() {
 		Generator g = new Generator();
-		for (int i = 0; i < 121; i++) {
+		for (int i = 0; i < 123; i++) {
 			User user = new User();
 			user.setEmail(g.word(3, 8).toLowerCase() + "@"
 					+ g.word(3, 6).toLowerCase() + ".com");
@@ -44,6 +51,15 @@ public class UserListBean implements Serializable {
 					+ user.getLastName().toLowerCase());
 			user.setPassword("qqqq");
 			user.digestPassword();
+			user.setRegistered(g.date().getTime());
+			user.setStatus(UserStatus.active);
+			if (g.numberIncl(0, 100) < 20) {
+				user.setStatus(UserStatus.disabled);
+			}
+			user.getSystemRoles().add(SystemRole.user);
+			if (g.numberIncl(0, 100) < 1) {
+				user.getSystemRoles().add(SystemRole.admin);
+			}
 			entityManager.persist(user);
 		}
 		return "search?faces-redirect=true";
@@ -102,6 +118,7 @@ public class UserListBean implements Serializable {
 		return "search?faces-redirect=true";
 	}
 
+	@SystemAdministrator
 	public void paginate() {
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 
@@ -115,8 +132,9 @@ public class UserListBean implements Serializable {
 		// Populate pageItems
 		CriteriaQuery<User> listCriteria = builder.createQuery(User.class);
 		root = listCriteria.from(User.class);
-		TypedQuery<User> query = entityManager.createQuery(listCriteria.select(
-				root).where(getSearchPredicates(root)));
+		TypedQuery<User> query = entityManager.createQuery(listCriteria
+				.select(root).where(getSearchPredicates(root))
+				.orderBy(getOrder(builder, root)));
 		query.setFirstResult((page - 1) * getPageSize()).setMaxResults(
 				getPageSize());
 		pageItems = query.getResultList();
@@ -146,15 +164,54 @@ public class UserListBean implements Serializable {
 			predicatesList.add(builder.like(root.<String> get("phone"),
 					'%' + phone + '%'));
 		}
-		String skype = criteria.getSkype();
-		if (skype != null && !"".equals(skype)) {
-			predicatesList.add(builder.like(root.<String> get("skype"),
-					'%' + skype + '%'));
+		UserStatus status = criteria.getStatus();
+		if (status != null) {
+			predicatesList.add(builder.equal(root.<UserStatus> get("status"),
+					status));
+		}
+		Date registered__From = criteria.getRegistered__From();
+		if (null != registered__From) {
+			predicatesList.add(builder.greaterThanOrEqualTo(
+					root.<Date> get("registered"), registered__From));
+		}
+		Date registered__To = criteria.getRegistered__To();
+		if (null != registered__To) {
+			predicatesList.add(builder.lessThan(root.<Date> get("registered"),
+					registered__To));
+		}
+		Date lastLogin__From = criteria.getLastLogin__From();
+		if (null != lastLogin__From) {
+			predicatesList.add(builder.greaterThanOrEqualTo(
+					root.<Date> get("lastLogin"), lastLogin__From));
+		}
+		Date lastLogin__To = criteria.getLastLogin__To();
+		if (null != lastLogin__To) {
+			predicatesList.add(builder.lessThan(root.<Date> get("lastLogin"),
+					lastLogin__To));
 		}
 
 		return predicatesList.toArray(new Predicate[predicatesList.size()]);
 	}
 
+	public List<Order> getOrder(CriteriaBuilder builder, Root<User> root) {
+		List<Order> list = new ArrayList<Order>();
+		switch (criteria.getSort()) {
+		case alphabetically:
+			list.add(builder.asc(root.<String> get("lastName")));
+			list.add(builder.asc(root.<String> get("firstName")));
+			list.add(builder.asc(root.<Long> get("id")));
+			break;
+		case byRecentLogin:
+			list.add(builder.desc(root.<Date> get("lastLogin")));
+			break;
+		case byRecentRegistration:
+			list.add(builder.desc(root.<Date> get("registered")));
+			break;
+		}
+		return list;
+	}
+
+	@SystemAdministrator
 	public List<User> getPageItems() {
 		return pageItems;
 	}
@@ -164,7 +221,7 @@ public class UserListBean implements Serializable {
 	}
 
 	public int getLastPage() {
-		return (int) (count / getPageSize()) + 1;
+		return viewContext.calculateLastPage(count, getPageSize());
 	}
 
 	/*

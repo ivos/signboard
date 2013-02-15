@@ -44,7 +44,7 @@ public class LanguageBean implements Serializable {
 		clientLocaleOverride = true;
 		return FacesContext.getCurrentInstance().getExternalContext()
 				.getRequestServletPath()
-				+ "?faces-redirect=true";
+				+ "?faces-redirect=true&includeViewParams=true";
 	}
 
 	public boolean isLanguage(String language) {

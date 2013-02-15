@@ -10,14 +10,14 @@ import net.sf.lightair.annotation.Verify;
 import org.junit.Before;
 import org.junit.Test;
 
-@Setup
-@Verify("CreateProjectTest.xml")
+@Setup({ "../deleteAll.xml", "../users.xml" })
+@Verify("CreateProjectTest-empty.xml")
 @BaseUrl("http://localhost:8080/signboard")
 public class CreateProjectTest extends ITBase {
 
 	@Before
 	public void before() {
-		login("email1", "password1");
+		login("email1", "qqqq");
 	}
 
 	@Test
@@ -26,6 +26,14 @@ public class CreateProjectTest extends ITBase {
 		create("code1", "name1", "description1");
 		verifyAction("Saved.");
 		create("code2", "name2", "description2");
+		verifyAction("Saved.");
+	}
+
+	@Test
+	@Verify
+	public void fn_OtherUser() {
+		login("email3", "qqqq");
+		create("code1", "name1", "description1");
 		verifyAction("Saved.");
 	}
 
@@ -41,7 +49,7 @@ public class CreateProjectTest extends ITBase {
 		setTextField("edit:code", code);
 		setTextField("edit:name", name);
 		setTextField("edit:description", description);
-		submit();
+		clickButton("edit:save");
 	}
 
 	@Test
@@ -79,13 +87,12 @@ public class CreateProjectTest extends ITBase {
 
 	@Test
 	public void val_CodeNotReserved() {
-		create("create", "name1", "description1");
-		verifyProjectCodeNotReservedError();
-		create("page", "name1", "description1");
-		verifyProjectCodeNotReservedError();
+		verifyProjectCodeNotReservedError("create");
+		verifyProjectCodeNotReservedError("page");
 	}
 
-	private void verifyProjectCodeNotReservedError() {
+	private void verifyProjectCodeNotReservedError(String code) {
+		create(code, "name1", "description1");
 		assertTextPresent("Project codes 'create' and 'page' are reserved.");
 	}
 
@@ -99,36 +106,50 @@ public class CreateProjectTest extends ITBase {
 	}
 
 	@Test
+	@Verify("CreateProjectTest.fn_OptionalFields-verify.xml")
 	public void nav() {
 		gotoPage("/");
-		assertTitleEquals("Welcome - Signboard");
+		verifyTitle("Welcome");
 		assertTrue(getTestingEngine().getPageURL().toString()
 				.endsWith("/signboard/"));
 
 		clickLinkWithExactText("Project");
-		assertTitleEquals("Search projects - Signboard");
+		verifyTitle("Search projects");
 		assertTrue(getTestingEngine().getPageURL().toString()
-				.contains("/signboard/project"));
+				.endsWith("/signboard/project"));
 
 		clickLinkWithExactText("Create new");
-		assertTitleEquals("Create project - Signboard");
+		verifyTitle("Create project");
 		assertTrue(getTestingEngine().getPageURL().toString()
-				.contains("/signboard/project/create"));
+				.endsWith("/signboard/project/create"));
 		assertTextPresent("Create project");
 
 		clickLinkWithExactText("Cancel");
-		assertTitleEquals("Search projects - Signboard");
+		verifyTitle("Search projects");
 		assertTrue(getTestingEngine().getPageURL().toString()
 				.endsWith("/signboard/project"));
+
+		clickLinkWithExactText("Create new");
+		create("code1", "name1", "");
+		verifyTitle("View project");
+		assertTrue(getTestingEngine().getPageURL().toString()
+				.endsWith("/signboard/project/code1"));
 	}
 
 	@Test
-	public void sec() {
+	public void sec_MustBeLoggedIn() {
 		beginAt("/project/create");
-		assertTitleEquals("Log in - Signboard");
-		fillAndSubmitLoginForm("email1", "password1");
+		verifyTitle("Log in");
+		fillAndSubmitLoginForm("email1", "qqqq");
 		gotoPage("/project/create");
-		assertTitleEquals("Create project - Signboard");
+		verifyTitle("Create project");
+	}
+
+	@Test
+	public void sec_MustBeSystemUser() {
+		login("email2", "qqqq");
+		create("code1", "name1", "description1");
+		assertAccessDenied();
 	}
 
 }

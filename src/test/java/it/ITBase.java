@@ -1,5 +1,6 @@
 package it;
 
+import static junit.framework.Assert.*;
 import static net.sourceforge.jwebunit.junit.JWebUnit.*;
 import net.sf.lightair.LightAir;
 import net.sourceforge.jwebunit.htmlunit.HtmlUnitTestingEngineImpl;
@@ -18,6 +19,14 @@ public class ITBase {
 				.setAjaxController(new NicelyResynchronizingAjaxController());
 	}
 
+	public static void turnJavaScriptOff() {
+		setScriptingEnabled(false);
+	}
+
+	public static void turnJavaScriptOn() {
+		setScriptingEnabled(true);
+	}
+
 	public static void login(String email, String password) {
 		beginAt("login");
 		setupAjax();
@@ -32,6 +41,19 @@ public class ITBase {
 
 	public static void verifyAction(String message) {
 		assertTextPresent(message);
+	}
+
+	public static void verifyTitle(String title) {
+		assertTitleEquals(title + " - Signboard");
+	}
+
+	public static void assertAccessDenied() {
+		verifyTitle("Unauthorized access");
+		assertTextPresent("You are not authorized to perform the requested operation.");
+	}
+
+	public static void verifyURL(String url) {
+		assertTrue(getTestingEngine().getPageURL().toString().endsWith(url));
 	}
 
 }

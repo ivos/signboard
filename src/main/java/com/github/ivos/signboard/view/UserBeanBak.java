@@ -35,7 +35,7 @@ import com.github.ivos.signboard.user.model.User;
 // @Named
 // @Stateful
 // @ConversationScoped
-public class UserBean implements Serializable {
+public class UserBeanBak implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -239,7 +239,7 @@ public class UserBean implements Serializable {
 			public Object getAsObject(FacesContext context,
 					UIComponent component, String value) {
 
-				return UserBean.this.entityManager.find(User.class,
+				return UserBeanBak.this.entityManager.find(User.class,
 						Long.valueOf(value));
 			}
 

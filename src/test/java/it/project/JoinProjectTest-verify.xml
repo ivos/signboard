@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<project code="code1" name="name1" description="description1"
+		date_created="2012-01-01" version="0" />
+	<project code="code2" name="name2" description="description2"
+		date_created="2012-01-02" />
+	<project code="code3" name="name3" description="description3"
+		date_created="2012-01-03" version="0" />
+
+	<project_member id="11" project="code1" user="3" status="active"
+		version="0" />
+	<project_member_roles project_member="11" role="admin" />
+	<project_member id="12" project="code2" user="3" status="active"
+		version="0" />
+	<project_member_roles project_member="12" role="admin" />
+	<project_member id="13" project="code3" user="3" status="active"
+		version="0" />
+	<project_member_roles project_member="13" role="admin" />
+
+	<project_member id="$pmid" project="code2" user="1"
+		status="pending" version="0" />
+	<project_member_roles project_member="$pmid" role="user" />
+</dataset>

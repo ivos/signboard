@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -18,17 +17,20 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import org.jboss.seam.security.annotations.LoggedIn;
 import org.jboss.solder.exception.control.ExceptionHandled;
 
+import com.github.ivos.signboard.config.security.SystemUser;
 import com.github.ivos.signboard.project.model.Project;
 import com.github.ivos.signboard.project.model.ProjectCriteria;
+import com.github.ivos.signboard.view.ViewContext;
 
 @Named
-@Stateful
 @SessionScoped
 @ExceptionHandled
 public class ProjectListBean implements Serializable {
+
+	@Inject
+	ViewContext viewContext;
 
 	public String reset() {
 		criteria = new ProjectCriteria();
@@ -40,7 +42,7 @@ public class ProjectListBean implements Serializable {
 	@Inject
 	private EntityManager entityManager;
 
-	private int page;
+	private int page = 1;
 	private long count;
 	private List<Project> pageItems;
 
@@ -51,6 +53,12 @@ public class ProjectListBean implements Serializable {
 	}
 
 	public void setPage(int page) {
+		if (page < 1) {
+			page = 1;
+		}
+		if (page > getLastPage()) {
+			page = getLastPage();
+		}
 		this.page = page;
 	}
 
@@ -67,11 +75,11 @@ public class ProjectListBean implements Serializable {
 	}
 
 	public String search() {
-		page = 0;
+		page = 1;
 		return "search?faces-redirect=true";
 	}
 
-	@LoggedIn
+	@SystemUser
 	public void paginate() {
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 
@@ -87,11 +95,12 @@ public class ProjectListBean implements Serializable {
 		root = criteria.from(Project.class);
 		TypedQuery<Project> query = entityManager.createQuery(criteria.select(
 				root).where(getSearchPredicates(root)));
-		query.setFirstResult(page * getPageSize()).setMaxResults(getPageSize());
+		query.setFirstResult((page - 1) * getPageSize()).setMaxResults(
+				getPageSize());
 		pageItems = query.getResultList();
 	}
 
-	private Predicate[] getSearchPredicates(Root<Project> root) {
+	public Predicate[] getSearchPredicates(Root<Project> root) {
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 		List<Predicate> predicatesList = new ArrayList<Predicate>();
 
@@ -109,12 +118,17 @@ public class ProjectListBean implements Serializable {
 		return predicatesList.toArray(new Predicate[predicatesList.size()]);
 	}
 
+	@SystemUser
 	public List<Project> getPageItems() {
 		return pageItems;
 	}
 
 	public long getCount() {
 		return count;
+	}
+
+	public int getLastPage() {
+		return viewContext.calculateLastPage(count, getPageSize());
 	}
 
 	/*

@@ -4,32 +4,104 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:s="http://jboss.org/seam/faces"
 	xmlns:my="http://signboard.ivos.github.com/jsf/facelets"
 	template="/page/template.xhtml">
 
 	<f:metadata>
 		<f:viewParam name="id" value="#{projectBean.id}" />
-		<f:event type="preRenderView" listener="#{projectBean.retrieve}" />
+		<s:viewAction action="#{projectBean.retrieve}" />
 	</f:metadata>
 
 	<ui:param name="pageTitle" value="#{label['project.view.title']}" />
-	<ui:define name="header">#{label['project.page.header']}</ui:define>
+	<ui:param name="activeMenu" value="project" />
 	<ui:define name="main">
-		<h2>#{label['project.view.title']}</h2>
-		<h:panelGrid columnClasses="label,component,required" columns="3">
-			<my:field id="code" type="output" entity="project"
-				bean="#{projectBean.project}" />
-			<my:field id="name" type="output" entity="project"
-				bean="#{projectBean.project}" />
-		</h:panelGrid>
-		<div class="buttons">
-			<h:link id="search" value="#{label['button.viewAll']}"
-				outcome="search" />
-			<h:link id="edit" value="#{label['button.edit']}" outcome="edit"
-				includeViewParams="true" />
-			<h:link id="create" value="#{label['button.create']}"
-				outcome="create" />
-		</div>
+		<h1>
+			<span class="muted"><h:outputText
+					value="#{label['project.page.header']}" /></span>
+			<h:outputText value=" #{projectBean.project.name}" />
+		</h1>
+		<h:form id="view">
+			<div class="row">
+				<div class="span6">
+					<p>
+						<h:outputText value="#{label['project.code']}" />
+						<strong><h:outputText value="#{projectBean.project.code}" /></strong>
+					</p>
+					<h:panelGroup rendered="#{projectBean.clientUserActiveMember}">
+						<h:panelGroup
+							rendered="#{not empty projectBean.project.description}">
+							<pre><h:outputText value="#{projectBean.project.description}" /></pre>
+						</h:panelGroup>
+						<p>
+							<h:outputText value="#{label['project.dateCreated']} " />
+							<h:outputText value="#{projectBean.project.dateCreated}">
+								<f:convertDateTime timeZone="${userDateTimeZone.ID}" />
+							</h:outputText>
+						</p>
+					</h:panelGroup>
+					<h:panelGroup rendered="#{projectBean.clientUserMember}">
+						<ul class="unstyled">
+							<li>
+								<c:set var="statusValue" value="#{projectBean.clientProjectMember.status}" />
+								<c:set var="statusKey" value="enum_ProjectMemberStatus_#{statusValue}" />
+								<h:outputText value="#{label['project.view.you.are.member.start']} " />
+								<span class="label label-#{(statusValue eq 'active')? 'success' : 'important'}">
+								<h:outputText value="#{label[statusKey]}" /></span>
+								<h:outputText value=" #{label['project.view.you.are.member.end']}" />
+							</li>
+							<li>
+								<h:outputText value="#{label['project.view.you.have.roles.start']} " />
+								<c:forEach items="#{projectBean.clientProjectMember.roles}" var="_role">
+									<c:set var="roleKey" value="enum_ProjectMemberRole_#{_role}" />
+									<span class="label label-info"><h:outputText value="#{label[roleKey]}" /></span>
+								</c:forEach>
+								<c:if test="#{empty projectBean.clientProjectMember.roles}">
+									<span class="label"><h:outputText value="#{label['enum_none']}" /></span>
+								</c:if>
+								<h:outputText value=" #{label['project.view.you.have.roles.end']}" />
+							</li>
+						</ul>
+					</h:panelGroup>
+
+					<h:panelGroup
+						rendered="#{projectBean.clientUserActiveAdministrator}">
+						<p>
+							<h:link id="edit" class="btn btn-small" outcome="edit"
+								includeViewParams="true">
+								<i class="icon-edit"></i>
+								<h:outputText value=" #{label['button.edit']}" />
+							</h:link>
+							<h:outputText value=" #{label['project.view.project.details']}" />
+						</p>
+					</h:panelGroup>
+					<h:panelGroup rendered="#{projectBean.clientUserActiveMember}">
+						<p>
+							<h:link id="members" class="btn"
+								outcome="/page/projectMember/search">
+								<f:param name="projectId" value="#{projectBean.id}" />
+								<i class="icon-group"></i>
+								<h:outputText value=" #{label['button.members']}" />
+							</h:link>
+							<h:outputText value=" #{label['project.view.of.project']}" />
+						</p>
+					</h:panelGroup>
+					<h:panelGroup rendered="#{not projectBean.clientUserMember}">
+						<p>
+							<h:commandButton id="join" class="btn btn-success btn-small"
+								action="#{projectBean.join}" tag="button">
+								<i class="icon-signin"></i>
+								<h:outputText value=" #{label['button.join']}" />
+							</h:commandButton>
+							<h:outputText value=" #{label['project.view.join.project']}" />
+						</p>
+					</h:panelGroup>
+				</div>
+			</div>
+			<h:messages id="messages" globalOnly="true"
+				styleClass="form-messages" />
+		</h:form>
 	</ui:define>
 
 </ui:composition>

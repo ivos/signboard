@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/page/template.xhtml">
+
+	<ui:param name="pageTitle" value="#{label['access.denied.header']}" />
+	<ui:define name="header">#{label['access.denied.header']}</ui:define>
+	<ui:define name="main">
+		<p>
+			<h:outputText value="#{label['access.denied.text.report']}" />
+		</p>
+		<p>
+			<h:outputText value="#{label['error.text.proceed.before']}" />
+			<a href="/#{viewContext.applicationName}/"><h:outputText
+					value="#{label['error.text.proceed.link']}" /></a>
+			<h:outputText value="#{label['error.text.proceed.after']}" />
+		</p>
+	</ui:define>
+
+</ui:composition>

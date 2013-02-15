@@ -97,10 +97,10 @@
 						<!-- Le main menu -->
 						<div class="nav-collapse">
 							<ul class="nav">
-								<li class="#{activeMenu=='home'? 'active':''}"><a
-									id="nav-home" href="/#{viewContext.applicationName}"> <h:outputText
-											value="#{label['template.home']}" />
-								</a></li>
+								<li class="#{activeMenu=='home'? 'active':''}"><h:link
+										id="nav-home" outcome="/page/user/dashboard">
+										<h:outputText value="#{label['template.home']}" />
+									</h:link></li>
 								<h:panelGroup rendered="#{identity.loggedIn}">
 									<li class="#{activeMenu=='user'? 'active':''}"><h:link
 											id="nav-user" value="#{label['user.page.header']}"

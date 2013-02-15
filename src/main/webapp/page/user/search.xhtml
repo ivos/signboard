@@ -15,6 +15,7 @@
 
 	<ui:param name="pageTitle" value="#{label['user.search.title']}" />
 	<ui:param name="focusField" value="search\\:lastName" />
+	<ui:param name="activeMenu" value="user" />
 	<ui:define name="main">
 		<h1>#{label['user.page.header']}</h1>
 		<h:form id="search" styleClass="form-horizontal">
@@ -25,14 +26,26 @@
 						bean="#{userListBean.criteria}" />
 					<my:field id="firstName" type="typeahead" entity="user"
 						bean="#{userListBean.criteria}" />
-					<my:field id="email" type="typeahead" entity="user"
-						bean="#{userListBean.criteria}" class="input-xlarge" />
 				</div>
 				<div class="span6">
-					<my:field id="phone" type="text" entity="user"
+					<my:field id="email" type="typeahead" entity="user"
 						bean="#{userListBean.criteria}" />
-					<my:field id="skype" type="text" entity="user"
+					<my:field id="phone" type="typeahead" entity="user"
 						bean="#{userListBean.criteria}" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="span6">
+					<my:field id="registered" type="dateSearch" entity="user"
+						bean="#{userListBean.criteria}" endDate="today" />
+					<my:field id="lastLogin" type="dateSearch" entity="user"
+						bean="#{userListBean.criteria}" endDate="today" />
+				</div>
+				<div class="span6">
+					<my:field id="status" type="selectOneMenu" entity="user"
+						bean="#{userListBean.criteria}" selectBean="#{userBean}" />
+					<my:field id="sort" type="selectOneMenu" entity="user"
+						bean="#{userListBean.criteria}" selectBean="#{userBean}" />
 				</div>
 			</div>
 			<div class="control-group">
@@ -42,12 +55,8 @@
 						<i class="icon-search"></i>
 						<h:outputText value=" #{label['button.search']}" />
 					</h:commandButton>
-					<h:link id="create" class="btn btn-info" outcome="edit">
-						<i class="icon-plus"></i>
-						<h:outputText value=" #{label['button.create']}" />
-					</h:link>
 					<h:commandButton id="reset" class="btn btn-warning pull-right"
-						action="#{userListBean.reset}" tag="button">
+						action="#{userListBean.reset}" tag="button" immediate="true">
 						<i class="icon-remove"></i>
 						<h:outputText value=" #{label['button.reset']}" />
 					</h:commandButton>
@@ -63,7 +72,8 @@
 				<my:column id="firstName" entity="user" item="#{_item}" />
 				<my:column id="email" entity="user" item="#{_item}" />
 				<my:column id="phone" entity="user" item="#{_item}" />
-				<my:column id="skype" entity="user" item="#{_item}" />
+				<my:column id="status" entity="user" item="#{_item}" type="select"
+					selectEntity="UserStatus" />
 			</h:dataTable>
 			<ui:include src="/page/paginator.xhtml">
 				<ui:param name="paginatorBean" value="#{userListBean}" />
@@ -71,9 +81,9 @@
 		</h:form>
 
 		<script type="text/javascript"
-			src="seam/resource/remoting/resource/remote.js"></script>
+			src="/#{viewContext.applicationName}/seam/resource/remoting/resource/remote.js"></script>
 		<script type="text/javascript"
-			src="seam/resource/remoting/interface.js?userRemoting"></script>
+			src="/#{viewContext.applicationName}/seam/resource/remoting/interface.js?userRemoting"></script>
 	</ui:define>
 
 </ui:composition>

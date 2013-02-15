@@ -30,13 +30,25 @@ public class URLRewriteConfiguration extends HttpConfigurationProvider {
 						Join.path("/login").to("/page/user/login.jsf")
 								.withInboundCorrection())
 				.addRule(
+						Join.path("/profile").to("/page/user/profile.jsf")
+								.withInboundCorrection())
+				.addRule(
+						Join.path("/dashboard").to("/page/user/dashboard.jsf")
+								.withInboundCorrection())
+				.addRule(
 						Join.path("/project/create")
 								.to("/page/project/create.jsf")
 								.withInboundCorrection())
-
 				.addRule(
-						Join.path("/{domain}").to("/page/{domain}/search.jsf")
-								.where("domain").matches(ENTITY_NAME)
+						Join.path("/project/{projectId}/member/page/{page}")
+								.to("/page/projectMember/search.jsf")
+								.where("projectId").matches(ENTITY_ID)
+								.where("page").matches("\\d+")
+								.withInboundCorrection())
+				.addRule(
+						Join.path("/project/{projectId}/member")
+								.to("/page/projectMember/search.jsf")
+								.where("projectId").matches(ENTITY_ID)
 								.withInboundCorrection())
 
 				.addRule(
@@ -62,6 +74,11 @@ public class URLRewriteConfiguration extends HttpConfigurationProvider {
 								.to("/page/{domain}/view.jsf").where("domain")
 								.matches(ENTITY_NAME).where("id")
 								.matches(ENTITY_ID).withInboundCorrection())
+
+				.addRule(
+						Join.path("/{domain}").to("/page/{domain}/search.jsf")
+								.where("domain").matches(ENTITY_NAME)
+								.withInboundCorrection())
 
 				.addRule(Join.path("/error").to("/page/error.jsf"));
 	}

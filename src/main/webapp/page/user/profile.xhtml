@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:s="http://jboss.org/seam/faces"
+	xmlns:my="http://signboard.ivos.github.com/jsf/facelets"
+	template="/page/template.xhtml">
+
+	<f:metadata>
+		<s:viewAction action="#{loginBean.retrieve}" />
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="#{label['user.profile.title']}" />
+	<ui:param name="focusField" value="profile\\:firstName" />
+	<ui:define name="main">
+		<h1>#{label['user.page.header']}</h1>
+		<h:form id="profile" styleClass="form-horizontal">
+			<legend>#{pageTitle}</legend>
+			<my:field id="firstName" type="text" entity="user"
+				bean="#{loginBean.user}" required="true">
+				<f:facet name="prepend">
+					<span class="add-on"><i class="icon-user"></i></span>
+				</f:facet>
+			</my:field>
+			<my:field id="lastName" type="text" entity="user"
+				bean="#{loginBean.user}" required="true">
+				<f:facet name="prepend">
+					<span class="add-on"><i class="icon-user"></i></span>
+				</f:facet>
+			</my:field>
+			<my:field id="phone" type="text" entity="user"
+				bean="#{loginBean.user}">
+				<f:facet name="prepend">
+					<span class="add-on"><i class="icon-phone"></i></span>
+				</f:facet>
+			</my:field>
+			<my:field id="skype" type="text" entity="user"
+				bean="#{loginBean.user}">
+				<f:facet name="prepend">
+					<span class="add-on">S</span>
+				</f:facet>
+			</my:field>
+
+			<div class="control-group">
+				<div class="form-actions">
+					<h:commandButton id="save" class="btn btn-primary"
+						action="#{loginBean.updateProfile}" tag="button">
+						<i class="icon-save"></i>
+						<h:outputText value=" #{label['button.save']}" />
+					</h:commandButton>
+					<h:link id="cancel" class="btn btn-warning"
+						outcome="/page/user/dashboard">
+						<i class="icon-remove"></i>
+						<h:outputText value=" #{label['button.cancel']}" />
+					</h:link>
+				</div>
+			</div>
+		</h:form>
+
+		<h:form id="passwordChange" styleClass="form-horizontal">
+			<legend>#{label['user.passwordChange.title']}</legend>
+			<my:field id="password" type="password" entity="user"
+				bean="#{loginBean.user}" required="true" hint="change">
+				<f:facet name="prepend">
+					<span class="add-on"><i class="icon-key"></i></span>
+				</f:facet>
+			</my:field>
+			<my:field id="confirmPassword" type="password" entity="user"
+				bean="#{loginBean}" required="true" hint="change"
+				customAjaxValidation="true">
+				<f:facet name="prepend">
+					<span class="add-on"><i class="icon-key"></i></span>
+				</f:facet>
+				<f:validator validatorId="confirmPasswordMatching" />
+				<f:ajax event="blur" execute="password confirmPassword"
+					render="confirmPassword-message" />
+			</my:field>
+
+			<div class="control-group">
+				<div class="form-actions">
+					<h:commandButton id="changePassword" class="btn btn-primary"
+						action="#{loginBean.changePassword}" tag="button">
+						<i class="icon-save"></i>
+						<h:outputText value=" #{label['button.save']}" />
+					</h:commandButton>
+					<h:link id="cancel" class="btn btn-warning"
+						outcome="/page/user/dashboard">
+						<i class="icon-remove"></i>
+						<h:outputText value=" #{label['button.cancel']}" />
+					</h:link>
+				</div>
+			</div>
+		</h:form>
+
+		<h:messages id="messages" globalOnly="true" styleClass="form-messages" />
+	</ui:define>
+
+</ui:composition>
