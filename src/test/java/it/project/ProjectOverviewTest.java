@@ -24,7 +24,7 @@ public class ProjectOverviewTest extends ITBase {
 
 		verifyTitle("View project");
 		assertTextPresent("Project name1");
-		assertTextPresent("Code code1.");
+		assertTextPresent("Code code1");
 
 		clickLinkWithExactText("Edit");
 		verifyTitle("Edit project");
@@ -35,7 +35,7 @@ public class ProjectOverviewTest extends ITBase {
 
 		verifyTitle("View project");
 		assertTextPresent("Project name2");
-		assertTextPresent("Code code1.");
+		assertTextPresent("Code code1");
 		assertTextPresent("description2");
 
 		clickLinkWithExactText("Home");
