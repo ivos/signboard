@@ -24,7 +24,7 @@ public class JoinProjectTest extends ITBase {
 		gotoPage("project/code2");
 		verifyTitle("View project");
 		assertTextPresent("Project name2");
-		assertTextPresent("Code code2.");
+		assertTextPresent("Code code2");
 		assertTextNotPresent("description2");
 		clickButton("view:join");
 		verifyAction("Your request to join the project has been created. "
