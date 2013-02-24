@@ -56,7 +56,7 @@ public class SecurityCheck {
 	public boolean isActiveProjectAdministrator() {
 		Project project = projectBean.getProject();
 		if (null != request && null == project.getId()) {
-			project.setId(getProjectIdFromRequestURI(request.getRequestURI()));
+			project.setId(getProjectIdFromRequestURI());
 		}
 		boolean result = false;
 		if (null != clientUser) {
@@ -68,13 +68,16 @@ public class SecurityCheck {
 		return result;
 	}
 
-	public String getProjectIdFromRequestURI(String requestURI) {
+	public String getProjectIdFromRequestURI() {
+		String requestURI = request.getRequestURI();
+		String contextPath = request.getContextPath();
 		log.debugv("Extracting project id from request URI {0}.", requestURI);
-		String id = extractProjectIdFromProjectURI(requestURI);
+		String applicationURI = requestURI.substring(contextPath.length());
+		String id = extractProjectIdFromProjectURI(applicationURI);
 		if (!id.isEmpty()) {
 			return id;
 		}
-		id = extractProjectIdFromProjectMemberURI(requestURI);
+		id = extractProjectIdFromProjectMemberURI(applicationURI);
 		if (!id.isEmpty()) {
 			return id;
 		}
@@ -83,12 +86,11 @@ public class SecurityCheck {
 	}
 
 	private String extractProjectIdFromProjectURI(String requestURI) {
-		return extractId(requestURI, "/signboard/project/");
+		return extractId(requestURI, "/project/");
 	}
 
 	private String extractProjectIdFromProjectMemberURI(String requestURI) {
-		final String projectMemberId = extractId(requestURI,
-				"/signboard/projectMember/");
+		final String projectMemberId = extractId(requestURI, "/projectMember/");
 		if (projectMemberId.isEmpty()) {
 			return projectMemberId;
 		}
@@ -117,7 +119,7 @@ public class SecurityCheck {
 	public boolean isActiveProjectMember() {
 		Project project = projectBean.getProject();
 		if (null != request && null == project.getId()) {
-			project.setId(getProjectIdFromRequestURI(request.getRequestURI()));
+			project.setId(getProjectIdFromRequestURI());
 			projectBean.retrieve();
 		}
 		boolean result = false;
@@ -137,6 +139,10 @@ public class SecurityCheck {
 
 	public void setEntityManager(EntityManager entityManager) {
 		this.entityManager = entityManager;
+	}
+
+	public void setRequest(HttpServletRequest request) {
+		this.request = request;
 	}
 
 }
