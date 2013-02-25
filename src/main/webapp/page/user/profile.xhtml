@@ -15,9 +15,13 @@
 	<ui:param name="pageTitle" value="#{label['user.profile.title']}" />
 	<ui:param name="focusField" value="profile\\:firstName" />
 	<ui:define name="main">
-		<h1>#{label['user.page.header']}</h1>
+		<h1>
+			<h:outputText value="#{label['user.page.header']}" />
+		</h1>
 		<h:form id="profile" styleClass="form-horizontal">
-			<legend>#{pageTitle}</legend>
+			<legend>
+				<h:outputText value="#{pageTitle}" />
+			</legend>
 			<my:field id="firstName" type="text" entity="user"
 				bean="#{loginBean.user}" required="true">
 				<f:facet name="prepend">

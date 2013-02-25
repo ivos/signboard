@@ -16,11 +16,15 @@
 	<ui:param name="pageTitle" value="#{label['user.dashboard.title']}" />
 	<ui:param name="activeMenu" value="home" />
 	<ui:define name="main">
-		<h1>#{pageTitle}</h1>
+		<h1>
+			<h:outputText value="#{pageTitle}" />
+		</h1>
 		<h:messages id="messages" globalOnly="true" styleClass="form-messages" />
 		<div class="row">
 			<div id="my-user" class="span4">
-				<h2><h:outputText value="#{label['user.dashboard.user']}" /></h2>
+				<h2>
+					<h:outputText value="#{label['user.dashboard.user']}" />
+				</h2>
 				<ul class="unstyled">
 					<li><h:outputText value="#{label['user.dashboard.of.user']} " /><strong><h:outputText
 						value="#{clientUser.fullName}" /></strong></li>

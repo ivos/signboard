@@ -6,7 +6,9 @@
 	template="/page/template.xhtml">
 
 	<ui:param name="pageTitle" value="#{label['error.header']}" />
-	<ui:define name="header">#{label['error.header']}</ui:define>
+	<ui:define name="header">
+		<h:outputText value="#{label['error.header']}" />
+	</ui:define>
 	<ui:define name="main">
 		<p>
 			<h:outputText value="#{label['error.text.report']}" />
