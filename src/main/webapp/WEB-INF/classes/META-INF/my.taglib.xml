@@ -49,6 +49,11 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>Set to true to mark the field required.</description>
+			<name>required</name>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
 			<description>Set to true to prevent default Ajax validation.</description>
 			<name>customAjaxValidation</name>
 			<type>java.lang.Boolean</type>
