@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:my="http://signboard.ivos.github.com/jsf/facelets"
+	template="/page/template.xhtml">
+
+	<ui:param name="pageTitle" value="#{label['task.create.title']}" />
+	<ui:param name="focusField" value="edit\\:project" />
+	<ui:param name="activeMenu" value="task" />
+	<ui:define name="main">
+		<h1>
+			<h:outputText value="#{label['task.page.header']}" />
+		</h1>
+		<h:form id="edit" styleClass="form-horizontal">
+			<legend>
+				<h:outputText value="#{pageTitle}" />
+			</legend>
+			<my:field id="project" type="custom" entity="task"
+				bean="#{taskBean.task}" required="true">
+				<h:selectOneMenu id="project" value="#{taskBean.task.project}"
+					label="#{label['task.project']}" converter="#{projectConverter}">
+					<!--  styleClass="combobox" data-bean="taskRemoting" data-method="project_Combobox" -->
+					<f:selectItems value="#{taskBean.project__Options}" />
+					<f:ajax event="blur" render="project-message" />
+				</h:selectOneMenu>
+			</my:field>
+			<my:field id="goal" type="text" entity="task" bean="#{taskBean.task}"
+				required="true" hint="create" class="input-xxlarge" />
+			<my:field id="description" type="custom" entity="task"
+				bean="#{taskBean.task}">
+				<h:inputTextarea id="description"
+					value="#{taskBean.task.description}"
+					label="#{label['task.description']}"
+					placeholder="#{label['task.description']}" rows="8"
+					styleClass="input-xxlarge">
+					<f:ajax event="blur" render="description-message" />
+				</h:inputTextarea>
+			</my:field>
+
+			<div class="control-group">
+				<div class="form-actions">
+					<h:commandButton id="save" class="btn btn-primary"
+						action="#{taskBean.create}" tag="button">
+						<i class="icon-save"></i>
+						<h:outputText value=" #{label['button.save']}" />
+					</h:commandButton>
+					<h:link id="cancel" class="btn btn-warning" outcome="search">
+						<i class="icon-remove"></i>
+						<h:outputText value=" #{label['button.cancel']}" />
+					</h:link>
+				</div>
+				<h:messages id="messages" globalOnly="true"
+					styleClass="form-messages" />
+			</div>
+		</h:form>
+
+		<!-- 
+		<script type="text/javascript"
+			src="/#{viewContext.applicationName}/seam/resource/remoting/resource/remote.js"></script>
+		<script type="text/javascript"
+			src="/#{viewContext.applicationName}/seam/resource/remoting/interface.js?taskRemoting"></script>
+		 -->
+	</ui:define>
+
+</ui:composition>

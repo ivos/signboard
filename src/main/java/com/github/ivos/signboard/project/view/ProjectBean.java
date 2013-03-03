@@ -1,6 +1,8 @@
 package com.github.ivos.signboard.project.view;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -139,6 +141,16 @@ public class ProjectBean implements Serializable {
 		log.infov("Join project {0}.", project);
 		viewContext.info("project.join.request.created");
 		return "view?faces-redirect=true&id=" + project.getId();
+	}
+
+	public List<Project> getAllMyMemberProjects() {
+		log.debugv("Retrieving all my member projects, {0}, {1}.", clientUser,
+				clientUser.getProjectMembers());
+		List<Project> list = new ArrayList<Project>();
+		for (ProjectMember member : clientUser.getProjectMembers()) {
+			list.add(member.getProject());
+		}
+		return list;
 	}
 
 }

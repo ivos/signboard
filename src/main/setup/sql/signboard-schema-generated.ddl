@@ -8,6 +8,12 @@
     alter table project_member_roles 
         drop constraint project_member_roles__project_member;
 
+    alter table task 
+        drop constraint task__project;
+
+    alter table task 
+        drop constraint task__author;
+
     alter table user_system_roles 
         drop constraint user_system_roles__user;
 
@@ -16,6 +22,8 @@
     drop table project_member if exists;
 
     drop table project_member_roles if exists;
+
+    drop table task if exists;
 
     drop table user if exists;
 
@@ -45,6 +53,17 @@
         project_member bigint not null,
         role varchar(32) not null,
         primary key (project_member, role)
+    );
+
+    create table task (
+        id bigint not null,
+        description varchar(1024),
+        goal varchar(512) not null,
+        time_created timestamp not null,
+        version integer not null,
+        author bigint not null,
+        project varchar(64) not null,
+        primary key (id)
     );
 
     create table user (
@@ -82,6 +101,16 @@
         add constraint project_member_roles__project_member 
         foreign key (project_member) 
         references project_member;
+
+    alter table task 
+        add constraint task__project 
+        foreign key (project) 
+        references project;
+
+    alter table task 
+        add constraint task__author 
+        foreign key (author) 
+        references user;
 
     alter table user_system_roles 
         add constraint user_system_roles__user 
