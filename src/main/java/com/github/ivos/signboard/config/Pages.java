@@ -76,6 +76,13 @@ public interface Pages {
 		@ActiveProjectMember
 		projectMemberAll,
 
+		// task
+
+		@ViewPattern("/page/task/*")
+		@LoggedIn
+		@SystemUser
+		taskAll,
+
 		// common
 
 		@ViewPattern("/*")

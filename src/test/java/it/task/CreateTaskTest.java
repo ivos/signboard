@@ -38,7 +38,7 @@ public class CreateTaskTest extends ITBase {
 	@Verify
 	public void fn() {
 		createOk("name1", "goal1", "description1");
-		createOk("name3", "goal2", "description2");
+		createOk("name5", "goal2", "description2");
 	}
 
 	@Test
@@ -66,6 +66,13 @@ public class CreateTaskTest extends ITBase {
 	// @Verify("CreateTaskTest.fn_OptionalFields-verify.xml")
 	public void nav() {
 		// TODO
+	}
+
+	@Test
+	public void sec_MustBeActiveProjectUser() {
+		gotoPage("task/create");
+		assertSelectOptionsEqual("edit:project", new String[] { "Choose one",
+				"name1", "name5", "name6" });
 	}
 
 }

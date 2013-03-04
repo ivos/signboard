@@ -147,3 +147,12 @@ I cannot remove project administrator role from my own member.
 	As an active administrator of the project I can 
 disable a non-disabled member and activate a non-active member.
 I cannot disable my own member.
+
+Task
+----
+
+1. __Create task__
+
+	As an active project user I can create a task for the project.
+New task attributes: project, goal, description.
+System records time created, author.
