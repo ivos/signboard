@@ -47,10 +47,10 @@
 				</h:panelGroup>
 				<h:panelGroup rendered="#{not empty clientUser.projectMembers}">
 					<ul class="nav nav-tabs nav-stacked">
-						<c:forEach items="#{clientUser.projectMembers}" var="pm">
+						<c:forEach items="#{projectBean.allMyMemberProjects}" var="p">
 							<li><h:link outcome="/page/project/view">
-									<f:param name="id" value="#{pm.project.id}" />
-									<h:outputText value="#{pm.project.name}" />
+									<f:param name="id" value="#{p.id}" />
+									<h:outputText value="#{p.name}" />
 								</h:link></li>
 						</c:forEach>
 					</ul>

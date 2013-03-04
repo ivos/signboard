@@ -144,9 +144,20 @@ public class ProjectBean implements Serializable {
 	}
 
 	@LoggedIn
+	public List<Project> getAllMyMemberProjects() {
+		log.debugv("Retrieving all my member projects, {0}.", clientUser);
+		List<Project> list = entityManager
+				.createQuery(
+						"select p from Project p join p.projectMembers pm "
+								+ "where pm.user=:clientUser "
+								+ "order by p.name", Project.class)
+				.setParameter("clientUser", clientUser).getResultList();
+		return list;
+	}
+
+	@LoggedIn
 	public List<Project> getAllMyActiveUserProjects() {
-		log.debugv("Retrieving all my active user projects, {0}, {1}.",
-				clientUser, clientUser.getProjectMembers());
+		log.debugv("Retrieving all my active user projects, {0}.", clientUser);
 		List<Project> list = entityManager
 				.createQuery(
 						"select p from Project p join p.projectMembers pm join pm.roles r "
