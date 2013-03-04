@@ -41,7 +41,7 @@ public class ProjectIsMemberTest {
 	}
 
 	@Test
-	public void isMember() {
+	public void fn() {
 		assertTrue(p1.isMember(u1));
 		assertTrue(p2.isMember(u1));
 		assertTrue(p3.isMember(u1));

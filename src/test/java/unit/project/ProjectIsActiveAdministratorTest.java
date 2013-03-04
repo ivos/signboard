@@ -53,7 +53,7 @@ public class ProjectIsActiveAdministratorTest {
 	}
 
 	@Test
-	public void isMember() {
+	public void fn() {
 		assertFalse(p1.isActiveAdministrator(u1));
 		assertFalse(p2.isActiveAdministrator(u1));
 		assertTrue(p3.isActiveAdministrator(u1));
