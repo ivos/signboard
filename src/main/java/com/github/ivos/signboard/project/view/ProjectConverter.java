@@ -23,7 +23,7 @@ public class ProjectConverter extends Converter<Project> {
 	@Override
 	public String toString(UIComponent comp, Project value) {
 		if (null == value || null == value.getId()) {
-			return null;
+			return "";
 		}
 		return value.getId().toString();
 	}
