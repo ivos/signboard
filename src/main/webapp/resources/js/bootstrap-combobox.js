@@ -35,6 +35,7 @@
     this.selected = false
     this.refresh()
     this.transferAttributes()
+    this.passValue()
     this.listen()
   }
 
@@ -87,6 +88,13 @@
     this.$element.attr('class', this.$source.attr('class'))
     this.$source.prop("id", this.$source.prop("id")+"-original")
     this.$source.prop("name", this.$source.prop("name")+"-original")
+  }
+
+  , passValue: function() {
+	  var that = this;
+	  this.$source.change(function(){
+		  that.$target.val($(this).val());
+	  }).change();
   }
 
   , toggle: function () {
