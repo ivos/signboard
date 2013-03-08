@@ -86,6 +86,7 @@
     this.$target.prop("name", this.$source.prop("name"))
     this.$element.attr('required', this.$source.attr('required'))
     this.$element.attr('class', this.$source.attr('class'))
+    this.$element.attr('onblur', this.$source.attr('onblur'))
     this.$source.prop("id", this.$source.prop("id")+"-original")
     this.$source.prop("name", this.$source.prop("name")+"-original")
   }
