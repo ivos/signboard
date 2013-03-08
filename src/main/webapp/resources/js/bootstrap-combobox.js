@@ -79,9 +79,14 @@
   , transferAttributes: function() {
     this.options.placeholder = this.$source.attr('data-placeholder') || this.options.placeholder
     this.$element.attr('placeholder', this.options.placeholder)
+    this.$element.prop("id", this.$source.prop("id")+"-inputtext")
+    this.$element.prop("name", this.$source.prop("name")+"-inputtext")
+    this.$target.prop("id", this.$source.prop("id"))
     this.$target.prop("name", this.$source.prop("name"))
     this.$element.attr('required', this.$source.attr('required'))
     this.$element.attr('class', this.$source.attr('class'))
+    this.$source.prop("id", this.$source.prop("id")+"-original")
+    this.$source.prop("name", this.$source.prop("name")+"-original")
   }
 
   , toggle: function () {
@@ -217,7 +222,7 @@
   }
 
   $.fn.combobox.defaults = {
-  template: '<div class="combobox-container"><input type="hidden" /><input type="text" autocomplete="off" /><span class="add-on btn dropdown-toggle" data-dropdown="dropdown"><span class="caret"/><span class="combobox-clear"><i class="icon-remove"/></span></span></div>'
+  template: '<span class="combobox-container"><input type="hidden" /><input type="text" autocomplete="off" /><span class="add-on btn dropdown-toggle" data-dropdown="dropdown"><span class="caret"/><span class="combobox-clear"><i class="icon-remove"/></span></span></span>'
   , menu: '<ul class="typeahead typeahead-long dropdown-menu"></ul>'
   , item: '<li><a href="#"></a></li>'
   }
