@@ -14,7 +14,6 @@
 	</h:head>
 	<h:body>
 		<h:outputStylesheet name="css/styles.css" />
-		<h:outputStylesheet name="css/bootstrap-combobox.css" />
 
 		<!-- Le navbar -->
 		<h:form id="nav-form">
@@ -149,12 +148,6 @@
 		</div>
 
 		<h:outputScript name="js/scripts.js" />
-		<h:outputScript name="js/bootstrap-combobox.js" />
-<h:outputScript>
-jQuery(document).ready(function(){
-	jQuery('.combobox').combobox();
-});
-</h:outputScript>
 		<h:outputScript rendered="#{not empty focusField}">jQuery(document).ready(function(){jQuery("##{focusField}").focus();})</h:outputScript>
 	</h:body>
 </f:view>
