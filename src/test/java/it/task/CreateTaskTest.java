@@ -21,7 +21,9 @@ public class CreateTaskTest extends ITBase {
 
 	private void create(String project, String goal, String description) {
 		gotoPage("task/create");
-		setTextField("edit:project", project);
+		if (!"".equals(project)) {
+			selectOption("edit:project", project);
+		}
 		setTextField("edit:goal", goal);
 		setTextField("edit:description", description);
 		clickButton("edit:save");
@@ -35,28 +37,28 @@ public class CreateTaskTest extends ITBase {
 	@Test
 	@Verify
 	public void fn() {
-		createOk("code1", "goal1", "description1");
-		createOk("code5", "goal2", "description2");
+		createOk("name1", "goal1", "description1");
+		createOk("name5", "goal2", "description2");
 	}
 
 	@Test
 	@Verify
 	public void fn_OtherUser() {
 		login("email3", "qqqq");
-		createOk("code2", "goal1", "description1");
+		createOk("name2", "goal1", "description1");
 	}
 
 	@Test
 	@Verify
 	public void fn_OptionalFields() {
-		createOk("code1", "goal1", "");
+		createOk("name1", "goal1", "");
 	}
 
 	@Test
 	public void val_MandatoryFields() {
 		create("", "goal1", "description1");
 		assertTextPresent("May not be empty.");
-		create("code1", "", "description1");
+		create("name1", "", "description1");
 		assertTextPresent("May not be empty.");
 	}
 
@@ -69,8 +71,8 @@ public class CreateTaskTest extends ITBase {
 	@Test
 	public void sec_MustBeActiveProjectUser() {
 		gotoPage("task/create");
-		assertSelectOptionValuesEqual("edit:project-original", new String[] {
-				"", "code1", "code5", "code6" });
+		assertSelectOptionsEqual("edit:project", new String[] { "Choose one",
+				"name1", "name5", "name6" });
 	}
 
 }
