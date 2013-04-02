@@ -61,11 +61,22 @@
 				<c:when test="#{type == 'selectOneMenu'}">
 					<h:selectOneMenu id="#{id}" value="#{bean[property]}"
 						label="#{label[labelKey]}" styleClass="#{class}"
-						disabled="#{disabled}">
+						converter="#{converter}" disabled="#{disabled}">
 						<f:selectItems value="#{selectBean[optionsProperty]}" />
 						<ui:insert />
 						<c:if test="#{customAjaxValidation != true}">
 							<f:ajax event="blur" render="#{id}-message" />
+						</c:if>
+					</h:selectOneMenu>
+				</c:when>
+				<c:when test="#{type == 'combobox'}">
+					<h:selectOneMenu id="#{id}" value="#{bean[property]}"
+						label="#{label[labelKey]}" styleClass="combobox #{class}"
+						converter="#{converter}" disabled="#{disabled}">
+						<f:selectItems value="#{selectBean[optionsProperty]}" />
+						<ui:insert />
+						<c:if test="#{customAjaxValidation != true}">
+							<f:ajax event="blur" render="#{id}-message" execute="#{id}" />
 						</c:if>
 					</h:selectOneMenu>
 				</c:when>

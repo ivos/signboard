@@ -6,6 +6,7 @@ import net.sf.lightair.annotation.BaseUrl;
 import net.sf.lightair.annotation.Setup;
 import net.sf.lightair.annotation.Verify;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,6 +18,12 @@ public class CreateTaskTest extends ITBase {
 	@Before
 	public void before() {
 		login("email1", "qqqq");
+		turnJavaScriptOff();
+	}
+
+	@After
+	public void after() {
+		turnJavaScriptOn();
 	}
 
 	private void create(String project, String goal, String description) {
