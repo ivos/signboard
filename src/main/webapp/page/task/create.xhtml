@@ -18,17 +18,9 @@
 			<legend>
 				<h:outputText value="#{pageTitle}" />
 			</legend>
-			<my:field id="project" type="custom" entity="task"
-				bean="#{taskBean.task}" required="true">
-				<h:selectOneMenu id="project" value="#{taskBean.task.project}"
-					label="#{label['task.project']}" converter="#{projectConverter}"
-					styleClass="combobox">
-					<!--  data-bean="taskRemoting" data-method="project_Combobox" -->
-					<f:selectItems value="#{taskBean.project__Options}" />
-					<f:ajax event="blur" render="project-message"
-						execute="edit:project" />
-				</h:selectOneMenu>
-			</my:field>
+			<my:field id="project" type="combobox" entity="task"
+				bean="#{taskBean.task}" selectBean="#{taskBean}" required="true"
+				converter="#{projectConverter}" />
 			<my:field id="goal" type="text" entity="task" bean="#{taskBean.task}"
 				required="true" hint="create" class="input-xxlarge" />
 			<my:field id="description" type="custom" entity="task"
@@ -59,12 +51,6 @@
 			</div>
 		</h:form>
 
-		<!-- 
-		<script type="text/javascript"
-			src="#{viewContext.contextPath}/seam/resource/remoting/resource/remote.js"></script>
-		<script type="text/javascript"
-			src="#{viewContext.contextPath}/seam/resource/remoting/interface.js?taskRemoting"></script>
-		 -->
 	</ui:define>
 
 </ui:composition>
