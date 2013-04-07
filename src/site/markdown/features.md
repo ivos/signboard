@@ -156,3 +156,11 @@ Task
 	As an active project user I can create a task for the project.
 New task attributes: project, goal, description.
 System records time created, author.
+
+1. __Find task__
+
+	As a system user I can find a task by 
+project, goal, description, time created, author.
+I can view project, goal, time created, author
+attributes in the search table.
+I can sort table by oldest time created, by recent time created.

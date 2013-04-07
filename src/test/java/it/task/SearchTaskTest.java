@@ -159,4 +159,20 @@ public class SearchTaskTest extends ITBase {
 		assertTextNotPresent("Must be in the past.");
 	}
 
+	@Test
+	public void sec_MustBeLoggedIn() {
+		beginAt("/task");
+		verifyTitle("Log in");
+		fillAndSubmitLoginForm("email1", "qqqq");
+		gotoPage("/task");
+		verifyTitle("Search tasks");
+	}
+
+	@Test
+	public void sec_MustBeSystemUser() {
+		login("email2", "qqqq");
+		gotoPage("/task");
+		assertAccessDenied();
+	}
+
 }
