@@ -115,6 +115,25 @@ public class SearchTaskTest extends ITBase {
 	}
 
 	@Test
+	public void fn_Sort() {
+		selectOption("search:sort", "Most recent");
+		search("name5", "", "", "", "", "");
+		assertTableEquals("search:taskListBeanPageItems", new String[][] {
+				{ "Project", "Goal", "Created", "Author" },
+				{ "name5", "goal06", "Jan 4, 2013 2:03:03 AM", "f1 l1" },
+				{ "name5", "goal04", "Jan 4, 2013 2:03:01 AM", "f1 l1" },
+				{ "name5", "goal02", "Jan 2, 2013 2:03:01 AM", "f2 l2" } });
+
+		selectOption("search:sort", "Oldest");
+		search("name5", "", "", "", "", "");
+		assertTableEquals("search:taskListBeanPageItems", new String[][] {
+				{ "Project", "Goal", "Created", "Author" },
+				{ "name5", "goal02", "Jan 2, 2013 2:03:01 AM", "f2 l2" },
+				{ "name5", "goal04", "Jan 4, 2013 2:03:01 AM", "f1 l1" },
+				{ "name5", "goal06", "Jan 4, 2013 2:03:03 AM", "f1 l1" } });
+	}
+
+	@Test
 	public void fn_Columns() {
 		search("", "goal01", "", "", "", "");
 		assertTableEquals("search:taskListBeanPageItems", new String[][] {

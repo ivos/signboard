@@ -17,6 +17,7 @@ import org.jboss.solder.exception.control.ExceptionHandled;
 import com.github.ivos.signboard.config.security.SystemUser;
 import com.github.ivos.signboard.task.model.Task;
 import com.github.ivos.signboard.task.model.TaskCriteria;
+import com.github.ivos.signboard.task.model.TaskSort;
 import com.github.ivos.signboard.user.model.User;
 import com.github.ivos.signboard.view.ViewContext;
 
@@ -77,18 +78,17 @@ public class TaskListBean implements Serializable {
 
 	@SystemUser
 	public void paginate() {
-		count = setBaseParameters(
-				entityManager.createQuery("select count(t) " + getQueryBase(),
+		count = setParameters(
+				entityManager.createQuery("select count(t) " + getQuery(),
 						Long.class)).getSingleResult();
 
-		pageItems = setBaseParameters(
-				entityManager.createQuery("select t " + getQueryBase()
-						+ " order by t.id", Task.class))
-				.setFirstResult((page - 1) * getPageSize())
+		pageItems = setParameters(
+				entityManager.createQuery("select t " + getQuery() + getSort(),
+						Task.class)).setFirstResult((page - 1) * getPageSize())
 				.setMaxResults(getPageSize()).getResultList();
 	}
 
-	public String getQueryBase() {
+	public String getQuery() {
 		return "from Task t join t.project p join p.projectMembers pm join pm.roles r "
 				+ "where pm.user=:clientUser and pm.status='active' and r='user' "
 				+ "and (:project is null or t.project=:project) "
@@ -99,7 +99,15 @@ public class TaskListBean implements Serializable {
 				+ "and (:author is null or t.author=:author)";
 	}
 
-	public <T> TypedQuery<T> setBaseParameters(TypedQuery<T> query) {
+	public String getSort() {
+		String sort = " order by t.id";
+		if (TaskSort.mostRecent == criteria.getSort()) {
+			return sort + " desc";
+		}
+		return sort;
+	}
+
+	public <T> TypedQuery<T> setParameters(TypedQuery<T> query) {
 		return query
 				.setParameter("clientUser", clientUser)
 				.setParameter("project", criteria.getProject())

@@ -23,6 +23,8 @@ public class TaskCriteria {
 
 	private User author;
 
+	private TaskSort sort = TaskSort.oldest;
+
 	public Project getProject() {
 		return project;
 	}
@@ -71,6 +73,14 @@ public class TaskCriteria {
 		this.author = author;
 	}
 
+	public TaskSort getSort() {
+		return sort;
+	}
+
+	public void setSort(TaskSort sort) {
+		this.sort = sort;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -80,6 +90,7 @@ public class TaskCriteria {
 				+ ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((goal == null) ? 0 : goal.hashCode());
 		result = prime * result + ((project == null) ? 0 : project.hashCode());
+		result = prime * result + ((sort == null) ? 0 : sort.hashCode());
 		result = prime
 				* result
 				+ ((timeCreated__From == null) ? 0 : timeCreated__From
@@ -118,6 +129,8 @@ public class TaskCriteria {
 				return false;
 		} else if (!project.equals(other.project))
 			return false;
+		if (sort != other.sort)
+			return false;
 		if (timeCreated__From == null) {
 			if (other.timeCreated__From != null)
 				return false;
@@ -136,7 +149,7 @@ public class TaskCriteria {
 		return "TaskCriteria [project=" + project + ", goal=" + goal
 				+ ", description=" + description + ", timeCreated__From="
 				+ timeCreated__From + ", timeCreated__To=" + timeCreated__To
-				+ ", author=" + author + "]";
+				+ ", author=" + author + ", sort=" + sort + "]";
 	}
 
 }

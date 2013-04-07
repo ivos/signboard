@@ -21,6 +21,7 @@ import com.github.ivos.signboard.config.security.SystemUser;
 import com.github.ivos.signboard.project.model.Project;
 import com.github.ivos.signboard.project.view.ProjectBean;
 import com.github.ivos.signboard.task.model.Task;
+import com.github.ivos.signboard.task.model.TaskSort;
 import com.github.ivos.signboard.user.model.User;
 import com.github.ivos.signboard.view.SelectUtils;
 import com.github.ivos.signboard.view.ViewContext;
@@ -129,6 +130,10 @@ public class TaskBean implements Serializable {
 			list.add(new SelectItem(user, user.getDistinctiveFullName()));
 		}
 		return list;
+	}
+
+	public List<SelectItem> getSort__Options() {
+		return selectUtils.convertToSelectItems(TaskSort.class);
 	}
 
 }

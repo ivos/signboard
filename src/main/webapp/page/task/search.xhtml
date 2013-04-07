@@ -40,6 +40,8 @@
 						converter="#{userConverter}" />
 					<my:field id="description" type="text" entity="task"
 						bean="#{taskListBean.criteria}" />
+					<my:field id="sort" type="selectOneMenu" entity="task"
+						bean="#{taskListBean.criteria}" selectBean="#{taskBean}" />
 				</div>
 			</div>
 			<div class="control-group">
