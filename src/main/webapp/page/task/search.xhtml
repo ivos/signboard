@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:s="http://jboss.org/seam/faces"
+	xmlns:my="http://signboard.ivos.github.com/jsf/facelets"
+	template="/page/template.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="page" value="#{taskListBean.page}" />
+		<s:viewAction action="#{taskListBean.paginate}" />
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="#{label['task.search.title']}" />
+	<ui:param name="focusField" value="search\\:project-inputtext" />
+	<ui:param name="activeMenu" value="task" />
+	<ui:define name="main">
+		<h1>
+			<h:outputText value="#{label['task.page.header']}" />
+		</h1>
+		<h:form id="search" styleClass="form-horizontal">
+			<legend>
+				<h:outputText value="#{label['task.search.title']}" />
+			</legend>
+			<div class="row">
+				<div class="span6">
+					<my:field id="project" type="combobox" entity="task"
+						bean="#{taskListBean.criteria}" selectBean="#{taskBean}"
+						converter="#{projectConverter}" />
+					<my:field id="goal" type="typeahead" entity="task"
+						bean="#{taskListBean.criteria}" />
+					<my:field id="timeCreated" type="dateSearch" entity="task"
+						bean="#{taskListBean.criteria}" endDate="today" />
+				</div>
+				<div class="span6">
+					<my:field id="author" type="combobox" entity="task"
+						bean="#{taskListBean.criteria}" selectBean="#{taskBean}"
+						converter="#{userConverter}" />
+					<my:field id="description" type="text" entity="task"
+						bean="#{taskListBean.criteria}" />
+					<my:field id="sort" type="combobox" entity="task"
+						bean="#{taskListBean.criteria}" selectBean="#{taskBean}" />
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="form-actions">
+					<h:commandButton id="search" class="btn btn-primary"
+						action="#{taskListBean.search}" tag="button">
+						<i class="icon-search"></i>
+						<h:outputText value=" #{label['button.search']}" />
+					</h:commandButton>
+					<h:link id="create" class="btn btn-info" outcome="create">
+						<i class="icon-plus"></i>
+						<h:outputText value=" #{label['button.create.new']}" />
+					</h:link>
+					<h:commandButton id="reset" class="btn btn-warning pull-right"
+						action="#{taskListBean.reset}" tag="button" immediate="true">
+						<i class="icon-remove"></i>
+						<h:outputText value=" #{label['button.reset']}" />
+					</h:commandButton>
+				</div>
+				<h:messages globalOnly="true" styleClass="form-messages" />
+			</div>
+			<h:dataTable id="taskListBeanPageItems"
+				styleClass="table table-striped table-bordered table-hover data-table"
+				value="#{taskListBean.pageItems}" var="_item">
+				<my:column id="project" valuePath="name" entity="task"
+					item="#{_item}" />
+				<my:column id="goal" entity="task" item="#{_item}" />
+				<my:column id="timeCreated" entity="task" item="#{_item}">
+					<f:convertDateTime timeZone="${userDateTimeZone.ID}" type="both" />
+				</my:column>
+				<my:column id="author" valuePath="fullName" entity="task"
+					item="#{_item}" />
+			</h:dataTable>
+			<ui:include src="/page/paginator.xhtml">
+				<ui:param name="paginatorBean" value="#{taskListBean}" />
+			</ui:include>
+		</h:form>
+
+		<script type="text/javascript"
+			src="#{viewContext.contextPath}/seam/resource/remoting/resource/remote.js"></script>
+		<script type="text/javascript"
+			src="#{viewContext.contextPath}/seam/resource/remoting/interface.js?taskRemoting"></script>
+	</ui:define>
+
+</ui:composition>

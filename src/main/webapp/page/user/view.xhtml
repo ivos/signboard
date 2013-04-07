@@ -17,8 +17,11 @@
 	<ui:param name="pageTitle" value="#{label['user.view.title']}" />
 	<ui:param name="activeMenu" value="user" />
 	<ui:define name="main">
-		<h1><span class="muted"><h:outputText value="#{label['user.page.header']}" /></span>
-			<h:outputText value=" #{userBean.user.fullName}" /></h1>
+		<h1>
+			<span class="muted"><h:outputText
+					value="#{label['user.page.header']}" /></span>
+			<h:outputText value=" #{userBean.user.fullName}" />
+		</h1>
 		<h:form id="main" styleClass="form-horizontal">
 			<ul class="unstyled">
 				<li><i class="icon-envelope"></i>&nbsp;<h:outputText value="#{userBean.user.email}" />

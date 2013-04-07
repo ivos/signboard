@@ -58,6 +58,11 @@ public class ViewContext implements Serializable {
 	@Inject
 	ServletContext servletContext;
 
+	public String getContextPath() {
+		// must be available outside faces
+		return servletContext.getContextPath();
+	}
+
 	public String getApplicationName() {
 		// must be available outside faces
 		String contextPath = servletContext.getContextPath();

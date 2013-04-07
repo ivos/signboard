@@ -16,11 +16,15 @@
 	<ui:param name="pageTitle" value="#{label['user.dashboard.title']}" />
 	<ui:param name="activeMenu" value="home" />
 	<ui:define name="main">
-		<h1>#{pageTitle}</h1>
+		<h1>
+			<h:outputText value="#{pageTitle}" />
+		</h1>
 		<h:messages id="messages" globalOnly="true" styleClass="form-messages" />
 		<div class="row">
 			<div id="my-user" class="span4">
-				<h2><h:outputText value="#{label['user.dashboard.user']}" /></h2>
+				<h2>
+					<h:outputText value="#{label['user.dashboard.user']}" />
+				</h2>
 				<ul class="unstyled">
 					<li><h:outputText value="#{label['user.dashboard.of.user']} " /><strong><h:outputText
 						value="#{clientUser.fullName}" /></strong></li>
@@ -43,10 +47,10 @@
 				</h:panelGroup>
 				<h:panelGroup rendered="#{not empty clientUser.projectMembers}">
 					<ul class="nav nav-tabs nav-stacked">
-						<c:forEach items="#{clientUser.projectMembers}" var="pm">
+						<c:forEach items="#{projectBean.allMyMemberProjects}" var="p">
 							<li><h:link outcome="/page/project/view">
-									<f:param name="id" value="#{pm.project.id}" />
-									<h:outputText value="#{pm.project.name}" />
+									<f:param name="id" value="#{p.id}" />
+									<h:outputText value="#{p.name}" />
 								</h:link></li>
 						</c:forEach>
 					</ul>

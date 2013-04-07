@@ -118,6 +118,20 @@ public class Project implements Serializable {
 		return false;
 	}
 
+	public boolean isActiveUser(User user) {
+		for (ProjectMember projectMember : user.getProjectMembers()) {
+			boolean isMember = projectMember.getProject().equals(this);
+			if (isMember) {
+				boolean isUser = projectMember.getRoles().contains(
+						ProjectMemberRole.user);
+				boolean isActive = ProjectMemberStatus.active
+						.equals(projectMember.getStatus());
+				return isUser && isActive;
+			}
+		}
+		return false;
+	}
+
 	// Java bean
 
 	public String getCode() {

@@ -12,9 +12,10 @@
 	<c:set var="hintKey" value="#{labelKey}.#{hint}.hint" />
 	<c:set var="disabled" value="#{not empty disabled ? disabled : false}" />
 	<c:set var="optionsProperty" value="#{property}__Options" />
+	<c:set var="labelFor" value="#{id}#{(type == 'combobox')? '-inputtext' : ''}" />
 
 	<div class="control-group">
-		<h:outputLabel for="#{id}" styleClass="control-label">
+		<h:outputLabel for="#{labelFor}" styleClass="control-label">
 			<h:outputText value="#{label[labelKey]}" />
 			<h:outputText title="#{label.required}" value=" *"
 				rendered="#{required}" styleClass="required" />
@@ -61,11 +62,22 @@
 				<c:when test="#{type == 'selectOneMenu'}">
 					<h:selectOneMenu id="#{id}" value="#{bean[property]}"
 						label="#{label[labelKey]}" styleClass="#{class}"
-						disabled="#{disabled}">
+						converter="#{converter}" disabled="#{disabled}">
 						<f:selectItems value="#{selectBean[optionsProperty]}" />
 						<ui:insert />
 						<c:if test="#{customAjaxValidation != true}">
 							<f:ajax event="blur" render="#{id}-message" />
+						</c:if>
+					</h:selectOneMenu>
+				</c:when>
+				<c:when test="#{type == 'combobox'}">
+					<h:selectOneMenu id="#{id}" value="#{bean[property]}"
+						label="#{label[labelKey]}" styleClass="combobox #{class}"
+						converter="#{converter}" disabled="#{disabled}">
+						<f:selectItems value="#{selectBean[optionsProperty]}" />
+						<ui:insert />
+						<c:if test="#{customAjaxValidation != true}">
+							<f:ajax event="blur" render="#{id}-message" execute="#{id}" />
 						</c:if>
 					</h:selectOneMenu>
 				</c:when>

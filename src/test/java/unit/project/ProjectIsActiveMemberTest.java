@@ -46,7 +46,7 @@ public class ProjectIsActiveMemberTest {
 	}
 
 	@Test
-	public void isMember() {
+	public void fn() {
 		assertTrue(p1.isActiveMember(u1));
 		assertFalse(p2.isActiveMember(u1));
 		assertTrue(p3.isActiveMember(u1));

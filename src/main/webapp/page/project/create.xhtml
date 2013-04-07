@@ -11,9 +11,13 @@
 	<ui:param name="focusField" value="edit\\:code" />
 	<ui:param name="activeMenu" value="project" />
 	<ui:define name="main">
-		<h1>#{label['project.page.header']}</h1>
+		<h1>
+			<h:outputText value="#{label['project.page.header']}" />
+		</h1>
 		<h:form id="edit" styleClass="form-horizontal">
-			<legend>#{pageTitle}</legend>
+			<legend>
+				<h:outputText value="#{pageTitle}" />
+			</legend>
 			<my:field id="code" type="text" entity="project"
 				bean="#{projectBean.project}" required="true" hint="create">
 				<f:validator validatorId="codeNotReserved" />

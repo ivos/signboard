@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<task project="code1" goal="goal1" description="description1"
+		author="1" time_created="@timestamp" />
+	<task project="code5" goal="goal2" description="description2"
+		author="1" time_created="@timestamp" />
+</dataset>

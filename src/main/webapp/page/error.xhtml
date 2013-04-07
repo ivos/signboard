@@ -6,14 +6,16 @@
 	template="/page/template.xhtml">
 
 	<ui:param name="pageTitle" value="#{label['error.header']}" />
-	<ui:define name="header">#{label['error.header']}</ui:define>
+	<ui:define name="header">
+		<h:outputText value="#{label['error.header']}" />
+	</ui:define>
 	<ui:define name="main">
 		<p>
 			<h:outputText value="#{label['error.text.report']}" />
 		</p>
 		<p>
 			<h:outputText value="#{label['error.text.proceed.before']}" />
-			<a href="/#{viewContext.applicationName}/"><h:outputText
+			<a href="#{viewContext.contextPath}/"><h:outputText
 					value="#{label['error.text.proceed.link']}" /></a>
 			<h:outputText value="#{label['error.text.proceed.after']}" />
 		</p>

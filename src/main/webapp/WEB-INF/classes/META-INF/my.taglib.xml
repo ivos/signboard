@@ -17,7 +17,7 @@
 		</attribute>
 		<attribute>
 			<description>Type of field. One of: output, text, typeahead, 
-				password, selectOneMenu, selectManyListbox.</description>
+				password, selectOneMenu, combobox, selectManyListbox.</description>
 			<name>type</name>
 			<required>true</required>
 			<type>java.lang.String</type>
@@ -49,6 +49,11 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>Set to true to mark the field required.</description>
+			<name>required</name>
+			<type>java.lang.Boolean</type>
+		</attribute>
+		<attribute>
 			<description>Set to true to prevent default Ajax validation.</description>
 			<name>customAjaxValidation</name>
 			<type>java.lang.Boolean</type>
@@ -77,6 +82,11 @@
 			<description>End date for a date field.</description>
 			<name>endDate</name>
 			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>Converter bean.</description>
+			<name>converter</name>
+			<type>java.lang.Object</type>
 		</attribute>
 	</tag>
 	<tag>
@@ -109,7 +119,12 @@
 		</attribute>
 		<attribute>
 			<description>Path from the item to the property.</description>
-			<name>path</name>
+			<name>propertyPath</name>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>Path from the property to the displayed value.</description>
+			<name>valuePath</name>
 			<type>java.lang.String</type>
 		</attribute>
 	</tag>

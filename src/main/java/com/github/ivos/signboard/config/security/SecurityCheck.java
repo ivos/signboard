@@ -11,6 +11,7 @@ import org.jboss.solder.logging.Logger;
 import com.github.ivos.signboard.project.model.Project;
 import com.github.ivos.signboard.project.view.ProjectBean;
 import com.github.ivos.signboard.projectmember.model.ProjectMember;
+import com.github.ivos.signboard.task.view.TaskBean;
 import com.github.ivos.signboard.user.model.SystemRole;
 import com.github.ivos.signboard.user.model.User;
 
@@ -49,7 +50,7 @@ public class SecurityCheck {
 	private ProjectBean projectBean;
 
 	@Inject
-	HttpServletRequest request;
+	private HttpServletRequest request;
 
 	@Secures
 	@ActiveProjectAdministrator
@@ -127,6 +128,22 @@ public class SecurityCheck {
 			result = project.isActiveMember(clientUser);
 		}
 		log.debugv("Verifying {0} is active project member of {1}: {2}.",
+				clientUser, project, result);
+		return result;
+	}
+
+	@Inject
+	private TaskBean taskBean;
+
+	@Secures
+	@ActiveProjectUserByTask
+	public boolean isActiveProjectUserByTask() {
+		Project project = taskBean.getTask().getProject();
+		boolean result = false;
+		if (null != clientUser) {
+			result = project.isActiveUser(clientUser);
+		}
+		log.debugv("Verifying {0} is active project user of {1}: {2}.",
 				clientUser, project, result);
 		return result;
 	}

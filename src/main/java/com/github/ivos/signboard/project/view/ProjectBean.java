@@ -1,6 +1,7 @@
 package com.github.ivos.signboard.project.view;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -8,6 +9,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 
+import org.jboss.seam.security.annotations.LoggedIn;
 import org.jboss.solder.core.Client;
 import org.jboss.solder.exception.control.ExceptionHandled;
 import org.jboss.solder.logging.Logger;
@@ -139,6 +141,30 @@ public class ProjectBean implements Serializable {
 		log.infov("Join project {0}.", project);
 		viewContext.info("project.join.request.created");
 		return "view?faces-redirect=true&id=" + project.getId();
+	}
+
+	@LoggedIn
+	public List<Project> getAllMyMemberProjects() {
+		log.debugv("Retrieving all my member projects, {0}.", clientUser);
+		List<Project> list = entityManager
+				.createQuery(
+						"select p from Project p join p.projectMembers pm "
+								+ "where pm.user=:clientUser "
+								+ "order by p.name", Project.class)
+				.setParameter("clientUser", clientUser).getResultList();
+		return list;
+	}
+
+	@LoggedIn
+	public List<Project> getAllMyActiveUserProjects() {
+		log.debugv("Retrieving all my active user projects, {0}.", clientUser);
+		List<Project> list = entityManager
+				.createQuery(
+						"select p from Project p join p.projectMembers pm join pm.roles r "
+								+ "where pm.user=:clientUser and pm.status='active' and r='user' "
+								+ "order by p.name", Project.class)
+				.setParameter("clientUser", clientUser).getResultList();
+		return list;
 	}
 
 }

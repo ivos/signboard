@@ -17,9 +17,13 @@
 	<ui:param name="focusField" value="edit\\:name" />
 	<ui:param name="activeMenu" value="project" />
 	<ui:define name="main">
-		<h1>#{label['project.page.header']}</h1>
+		<h1>
+			<h:outputText value="#{label['project.page.header']}" />
+		</h1>
 		<h:form id="edit" styleClass="form-horizontal">
-			<legend>#{pageTitle}</legend>
+			<legend>
+				<h:outputText value="#{pageTitle}" />
+			</legend>
 			<my:field id="name" type="text" entity="project"
 				bean="#{projectBean.project}" required="true" class="input-xlarge" />
 			<my:field id="description" type="custom" entity="project"
