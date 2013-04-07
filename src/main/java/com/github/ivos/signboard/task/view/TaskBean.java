@@ -86,6 +86,21 @@ public class TaskBean implements Serializable {
 		return "view?faces-redirect=true&id=" + task.getId();
 	}
 
+	public List<User> getTaskAuthorsOfMyActiveUserProjects() {
+		log.debugv("Retrieving task authors of my active user projects, {0}.",
+				clientUser);
+		List<User> list = entityManager
+				.createQuery(
+						"select distinct u from User u, Task t, "
+								+ "Project p join p.projectMembers pm join pm.roles r "
+								+ "where t.author=u and t.project=p and pm.user=:clientUser "
+								+ "and pm.status='active' and r='user' "
+								+ "order by u.lastName, u.firstName, u.email",
+						User.class).setParameter("clientUser", clientUser)
+				.getResultList();
+		return list;
+	}
+
 	// Select options
 
 	@Inject
@@ -102,6 +117,16 @@ public class TaskBean implements Serializable {
 		list.add(new SelectItem(null, viewContext.getLabel("select.chooseOne")));
 		for (Project project : allMyMemberProjects) {
 			list.add(new SelectItem(project, project.getName()));
+		}
+		return list;
+	}
+
+	public List<SelectItem> author__Options() {
+		final List<User> taskAuthors = getTaskAuthorsOfMyActiveUserProjects();
+		List<SelectItem> list = new ArrayList<SelectItem>();
+		list.add(new SelectItem(null, viewContext.getLabel("select.chooseOne")));
+		for (User user : taskAuthors) {
+			list.add(new SelectItem(user, user.getDistinctiveFullName()));
 		}
 		return list;
 	}

@@ -83,13 +83,13 @@
 				styleClass="table table-striped table-bordered table-hover data-table"
 				value="#{projectMemberListBean.pageItems}" var="_item">
 				<my:column id="lastName" entity="projectMember" item="#{_item}"
-					path="user" />
+					propertyPath="user" />
 				<my:column id="firstName" entity="projectMember" item="#{_item}"
-					path="user" />
+					propertyPath="user" />
 				<my:column id="email" entity="projectMember" item="#{_item}"
-					path="user" />
+					propertyPath="user" />
 				<my:column id="phone" entity="projectMember" item="#{_item}"
-					path="user" />
+					propertyPath="user" />
 				<my:column id="status" entity="projectMember" item="#{_item}"
 					type="select" selectEntity="ProjectMemberStatus" />
 			</h:dataTable>

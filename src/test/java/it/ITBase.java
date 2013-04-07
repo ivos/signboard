@@ -56,4 +56,10 @@ public class ITBase {
 		assertTrue(getTestingEngine().getPageURL().toString().endsWith(url));
 	}
 
+	public static String chooseOne(String value) {
+		if (value.length() == 0) {
+			return "Choose one";
+		}
+		return value;
+	}
 }

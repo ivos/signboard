@@ -119,7 +119,12 @@
 		</attribute>
 		<attribute>
 			<description>Path from the item to the property.</description>
-			<name>path</name>
+			<name>propertyPath</name>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>Path from the property to the displayed value.</description>
+			<name>valuePath</name>
 			<type>java.lang.String</type>
 		</attribute>
 	</tag>

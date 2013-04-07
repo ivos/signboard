@@ -100,6 +100,10 @@ public class User implements Serializable {
 		return firstName + ' ' + lastName;
 	}
 
+	public String getDistinctiveFullName() {
+		return getFullName() + ", " + email;
+	}
+
 	// Java bean
 
 	public Long getId() {
