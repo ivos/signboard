@@ -11,6 +11,7 @@ import org.jboss.solder.logging.Logger;
 import com.github.ivos.signboard.project.model.Project;
 import com.github.ivos.signboard.project.view.ProjectBean;
 import com.github.ivos.signboard.projectmember.model.ProjectMember;
+import com.github.ivos.signboard.task.model.Task;
 import com.github.ivos.signboard.task.view.TaskBean;
 import com.github.ivos.signboard.user.model.SystemRole;
 import com.github.ivos.signboard.user.model.User;
@@ -82,6 +83,10 @@ public class SecurityCheck {
 		if (!id.isEmpty()) {
 			return id;
 		}
+		id = extractProjectIdFromTaskURI(applicationURI);
+		if (!id.isEmpty()) {
+			return id;
+		}
 		throw new RuntimeException(
 				"Project id cannot be extracted from request URI " + requestURI);
 	}
@@ -99,6 +104,18 @@ public class SecurityCheck {
 				ProjectMember.class, Long.valueOf(projectMemberId));
 		if (null != projectMember) {
 			return projectMember.getProject().getId();
+		}
+		return "";
+	}
+
+	private String extractProjectIdFromTaskURI(String requestURI) {
+		final String taskId = extractId(requestURI, "/task/");
+		if (taskId.isEmpty()) {
+			return taskId;
+		}
+		final Task task = entityManager.find(Task.class, Long.valueOf(taskId));
+		if (null != task) {
+			return task.getProject().getId();
 		}
 		return "";
 	}
@@ -139,6 +156,10 @@ public class SecurityCheck {
 	@ActiveProjectUserByTask
 	public boolean isActiveProjectUserByTask() {
 		Project project = taskBean.getTask().getProject();
+		if (null != request && null == project) {
+			project = entityManager.find(Project.class,
+					getProjectIdFromRequestURI());
+		}
 		boolean result = false;
 		if (null != clientUser) {
 			result = project.isActiveUser(clientUser);

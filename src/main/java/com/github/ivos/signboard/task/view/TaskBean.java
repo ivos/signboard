@@ -102,6 +102,15 @@ public class TaskBean implements Serializable {
 		return list;
 	}
 
+	@SystemUser
+	@ActiveProjectUserByTask
+	public String update() {
+		log.infov("Update task {0}.", task);
+		entityManager.merge(task);
+		viewContext.info("saved");
+		return "view?faces-redirect=true&id=" + task.getId();
+	}
+
 	// Select options
 
 	@Inject
