@@ -90,6 +90,12 @@ public interface Pages {
 		@ActiveProjectUserByTask
 		taskView,
 
+		@ViewPattern("/page/task/edit.xhtml")
+		@LoggedIn
+		@SystemUser
+		@ActiveProjectUserByTask
+		taskEdit,
+
 		// common
 
 		@ViewPattern("/*")

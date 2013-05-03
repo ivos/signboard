@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<task id="1" project="code1" goal="goal01" description="description01" author="1" time_created="2013-01-01 02:03:01" version="0" />
+	<task id="2" project="code5" goal="goal02" description="description02" author="2" time_created="2013-01-02 02:03:01" version="0" />
+	<task id="3" project="code1" goal="goal03" description="description03" author="1" time_created="2013-01-03 02:03:01" version="0" />
+	<task id="4" project="code5" goal="goal04" description="description04" author="1" time_created="2013-01-04 02:03:01" version="0" />
+	<!-- other user -->
+	<task id="5" project="code2" goal="goal05a" description="description05b" author="1" time_created="2013-01-04 02:03:02" />
+	<task id="6" project="code3" goal="goal06" description="description06" author="1" time_created="2013-01-04 02:03:03" version="0" />
+	<task id="7" project="code4" goal="goal07" description="description07" author="1" time_created="2013-01-04 02:03:04" version="0" />
+</dataset>

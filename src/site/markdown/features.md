@@ -170,3 +170,8 @@ I can sort table by oldest time created, by recent time created.
 	As an active project user I can view the detail of a task of the project.
 I can view project, goal, description, time created, author
 attributes.
+
+1. __Edit task__
+
+	As an active project user I can edit the goal, description
+attributes of a task of the project.
