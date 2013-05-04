@@ -21,7 +21,6 @@ import org.jboss.solder.exception.control.ExceptionHandled;
 import com.github.ivos.signboard.config.security.ActiveProjectMember;
 import com.github.ivos.signboard.config.security.SystemUser;
 import com.github.ivos.signboard.project.model.Project;
-import com.github.ivos.signboard.project.view.ProjectBean;
 import com.github.ivos.signboard.projectmember.model.ProjectMember;
 import com.github.ivos.signboard.projectmember.model.ProjectMemberCriteria;
 import com.github.ivos.signboard.projectmember.model.ProjectMemberStatus;
@@ -33,8 +32,19 @@ import com.github.ivos.signboard.view.ViewContext;
 @ExceptionHandled
 public class ProjectMemberListBean implements Serializable {
 
-	@Inject
-	private ProjectBean projectBean;
+	private String projectId;
+
+	public String getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(String projectId) {
+		this.projectId = projectId;
+	}
+
+	public Project getProject() {
+		return entityManager.find(Project.class, projectId);
+	}
 
 	@Inject
 	ViewContext viewContext;
@@ -83,7 +93,7 @@ public class ProjectMemberListBean implements Serializable {
 
 	public String search() {
 		page = 1;
-		return "search?faces-redirect=true&projectId=" + projectBean.getId();
+		return "search?faces-redirect=true&projectId=" + projectId;
 	}
 
 	@SystemUser
@@ -115,7 +125,7 @@ public class ProjectMemberListBean implements Serializable {
 		List<Predicate> predicatesList = new ArrayList<Predicate>();
 
 		predicatesList.add(builder.equal(root.<Project> get("project")
-				.<String> get("code"), projectBean.getId()));
+				.<String> get("code"), projectId));
 		String email = criteria.getEmail();
 		if (email != null && !"".equals(email)) {
 			predicatesList.add(builder.like(root.<User> get("user")
