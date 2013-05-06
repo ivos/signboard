@@ -30,9 +30,8 @@ public class TaskRemoting {
 
 	public String[] selectItems(String property) {
 		TypedQuery<String> query = entityManager.createQuery(
-				"select distinct(t." + property + ") "
-						+ listBean.getQuery() + " order by t." + property,
-				String.class);
+				"select distinct(r." + property + ") " + listBean.getQuery()
+						+ " order by r." + property, String.class);
 		List<String> items = listBean.setParameters(query)
 				.setMaxResults(getItemsCount()).getResultList();
 

@@ -1,7 +1,8 @@
 package com.github.ivos.signboard.project.view;
 
+import static com.github.ivos.signboard.config.ParamUtil.*;
+
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
@@ -12,10 +13,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 
 import org.jboss.solder.exception.control.ExceptionHandled;
 
@@ -81,41 +79,30 @@ public class ProjectListBean implements Serializable {
 
 	@SystemUser
 	public void paginate() {
-		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		count = setParameters(
+				entityManager.createQuery("select count(r) " + getQuery(),
+						Long.class)).getSingleResult();
 
-		// Populate count
-		CriteriaQuery<Long> countCriteria = builder.createQuery(Long.class);
-		Root<Project> root = countCriteria.from(Project.class);
-		countCriteria = countCriteria.select(builder.count(root)).where(
-				getSearchPredicates(root));
-		count = entityManager.createQuery(countCriteria).getSingleResult();
-
-		// Populate pageItems
-		CriteriaQuery<Project> criteria = builder.createQuery(Project.class);
-		root = criteria.from(Project.class);
-		TypedQuery<Project> query = entityManager.createQuery(criteria.select(
-				root).where(getSearchPredicates(root)));
-		query.setFirstResult((page - 1) * getPageSize()).setMaxResults(
-				getPageSize());
-		pageItems = query.getResultList();
+		pageItems = setParameters(
+				entityManager.createQuery("select r " + getQuery() + getSort(),
+						Project.class))
+				.setFirstResult((page - 1) * getPageSize())
+				.setMaxResults(getPageSize()).getResultList();
 	}
 
-	public Predicate[] getSearchPredicates(Root<Project> root) {
-		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-		List<Predicate> predicatesList = new ArrayList<Predicate>();
+	public String getQuery() {
+		return "from Project r" //
+				+ " where (:code is null or r.code like :code)"
+				+ " and (:name is null or r.name like :name)";
+	}
 
-		String code = criteria.getCode();
-		if (code != null && !"".equals(code)) {
-			predicatesList.add(builder.like(root.<String> get("code"),
-					'%' + code + '%'));
-		}
-		String name = criteria.getName();
-		if (name != null && !"".equals(name)) {
-			predicatesList.add(builder.like(root.<String> get("name"),
-					'%' + name + '%'));
-		}
+	public <T> TypedQuery<T> setParameters(TypedQuery<T> query) {
+		return query.setParameter("code", anywhere(criteria.getCode()))
+				.setParameter("name", anywhere(criteria.getName()));
+	}
 
-		return predicatesList.toArray(new Predicate[predicatesList.size()]);
+	public String getSort() {
+		return " order by r.code";
 	}
 
 	@SystemUser

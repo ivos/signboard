@@ -9,4 +9,11 @@ public class ParamUtil {
 		return '%' + value + '%';
 	}
 
+	public static String asString(Object value) {
+		if (null == value) {
+			return null;
+		}
+		return value.toString();
+	}
+
 }

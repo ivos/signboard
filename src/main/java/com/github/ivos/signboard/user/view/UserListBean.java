@@ -1,23 +1,15 @@
 package com.github.ivos.signboard.user.view;
 
+import static com.github.ivos.signboard.config.ParamUtil.*;
+
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
-import javax.faces.convert.Converter;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Order;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 
 import net.sf.seaf.util.Generator;
 
@@ -70,16 +62,10 @@ public class UserListBean implements Serializable {
 		return search();
 	}
 
-	// generated:
-
 	private static final long serialVersionUID = 1L;
 
 	@Inject
 	private EntityManager entityManager;
-
-	/*
-	 * Support searching User entities with pagination
-	 */
 
 	private int page = 1;
 	private long count;
@@ -120,95 +106,51 @@ public class UserListBean implements Serializable {
 
 	@SystemAdministrator
 	public void paginate() {
-		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		count = setParameters(
+				entityManager.createQuery("select count(r) " + getQuery(),
+						Long.class)).getSingleResult();
 
-		// Populate count
-		CriteriaQuery<Long> countCriteria = builder.createQuery(Long.class);
-		Root<User> root = countCriteria.from(User.class);
-		countCriteria = countCriteria.select(builder.count(root)).where(
-				getSearchPredicates(root));
-		count = entityManager.createQuery(countCriteria).getSingleResult();
-
-		// Populate pageItems
-		CriteriaQuery<User> listCriteria = builder.createQuery(User.class);
-		root = listCriteria.from(User.class);
-		TypedQuery<User> query = entityManager.createQuery(listCriteria
-				.select(root).where(getSearchPredicates(root))
-				.orderBy(getOrder(builder, root)));
-		query.setFirstResult((page - 1) * getPageSize()).setMaxResults(
-				getPageSize());
-		pageItems = query.getResultList();
+		pageItems = setParameters(
+				entityManager.createQuery("select r " + getQuery() + getSort(),
+						User.class)).setFirstResult((page - 1) * getPageSize())
+				.setMaxResults(getPageSize()).getResultList();
 	}
 
-	public Predicate[] getSearchPredicates(Root<User> root) {
-		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-		List<Predicate> predicatesList = new ArrayList<Predicate>();
-
-		String email = criteria.getEmail();
-		if (email != null && !"".equals(email)) {
-			predicatesList.add(builder.like(root.<String> get("email"),
-					'%' + email + '%'));
-		}
-		String firstName = criteria.getFirstName();
-		if (firstName != null && !"".equals(firstName)) {
-			predicatesList.add(builder.like(root.<String> get("firstName"),
-					'%' + firstName + '%'));
-		}
-		String lastName = criteria.getLastName();
-		if (lastName != null && !"".equals(lastName)) {
-			predicatesList.add(builder.like(root.<String> get("lastName"),
-					'%' + lastName + '%'));
-		}
-		String phone = criteria.getPhone();
-		if (phone != null && !"".equals(phone)) {
-			predicatesList.add(builder.like(root.<String> get("phone"),
-					'%' + phone + '%'));
-		}
-		UserStatus status = criteria.getStatus();
-		if (status != null) {
-			predicatesList.add(builder.equal(root.<UserStatus> get("status"),
-					status));
-		}
-		Date registered__From = criteria.getRegistered__From();
-		if (null != registered__From) {
-			predicatesList.add(builder.greaterThanOrEqualTo(
-					root.<Date> get("registered"), registered__From));
-		}
-		Date registered__To = criteria.getRegistered__To();
-		if (null != registered__To) {
-			predicatesList.add(builder.lessThan(root.<Date> get("registered"),
-					registered__To));
-		}
-		Date lastLogin__From = criteria.getLastLogin__From();
-		if (null != lastLogin__From) {
-			predicatesList.add(builder.greaterThanOrEqualTo(
-					root.<Date> get("lastLogin"), lastLogin__From));
-		}
-		Date lastLogin__To = criteria.getLastLogin__To();
-		if (null != lastLogin__To) {
-			predicatesList.add(builder.lessThan(root.<Date> get("lastLogin"),
-					lastLogin__To));
-		}
-
-		return predicatesList.toArray(new Predicate[predicatesList.size()]);
+	public String getQuery() {
+		return "from User r"
+				+ " where (:email is null or r.email like :email)"
+				+ " and (:firstName is null or r.firstName like :firstName)"
+				+ " and (:lastName is null or r.lastName like :lastName)"
+				+ " and (:phone is null or r.phone like :phone)"
+				+ " and (:status is null or r.status=:status)"
+				+ " and (:registered__From is null or r.registered>=:registered__From)"
+				+ " and (:registered__To is null or r.registered<:registered__To)"
+				+ " and (:lastLogin__From is null or r.lastLogin>=:lastLogin__From)"
+				+ " and (:lastLogin__To is null or r.lastLogin<:lastLogin__To)";
 	}
 
-	public List<Order> getOrder(CriteriaBuilder builder, Root<User> root) {
-		List<Order> list = new ArrayList<Order>();
+	public <T> TypedQuery<T> setParameters(TypedQuery<T> query) {
+		return query
+				.setParameter("email", anywhere(criteria.getEmail()))
+				.setParameter("firstName", anywhere(criteria.getFirstName()))
+				.setParameter("lastName", anywhere(criteria.getLastName()))
+				.setParameter("phone", anywhere(criteria.getPhone()))
+				.setParameter("status", asString(criteria.getStatus()))
+				.setParameter("registered__From",
+						criteria.getRegistered__From())
+				.setParameter("registered__To", criteria.getRegistered__To())
+				.setParameter("lastLogin__From", criteria.getLastLogin__From())
+				.setParameter("lastLogin__To", criteria.getLastLogin__To());
+	}
+
+	public String getSort() {
 		switch (criteria.getSort()) {
-		case alphabetically:
-			list.add(builder.asc(root.<String> get("lastName")));
-			list.add(builder.asc(root.<String> get("firstName")));
-			list.add(builder.asc(root.<Long> get("id")));
-			break;
 		case byRecentLogin:
-			list.add(builder.desc(root.<Date> get("lastLogin")));
-			break;
+			return " order by r.lastLogin desc";
 		case byRecentRegistration:
-			list.add(builder.desc(root.<Date> get("registered")));
-			break;
+			return " order by r.registered desc";
 		}
-		return list;
+		return " order by r.lastName, r.firstName, r.id";
 	}
 
 	@SystemAdministrator
@@ -222,40 +164,6 @@ public class UserListBean implements Serializable {
 
 	public int getLastPage() {
 		return viewContext.calculateLastPage(count, getPageSize());
-	}
-
-	/*
-	 * Support listing and POSTing back User entities (e.g. from inside an
-	 * HtmlSelectOneMenu)
-	 */
-
-	public List<User> getAll() {
-		CriteriaQuery<User> criteria = entityManager.getCriteriaBuilder()
-				.createQuery(User.class);
-		return entityManager.createQuery(
-				criteria.select(criteria.from(User.class))).getResultList();
-	}
-
-	public Converter getConverter() {
-		return new Converter() {
-			@Override
-			public Object getAsObject(FacesContext context,
-					UIComponent component, String value) {
-
-				return entityManager.find(User.class, Long.valueOf(value));
-			}
-
-			@Override
-			public String getAsString(FacesContext context,
-					UIComponent component, Object value) {
-
-				if (value == null) {
-					return "";
-				}
-
-				return String.valueOf(((User) value).getId());
-			}
-		};
 	}
 
 }
