@@ -1,4 +1,4 @@
-package com.github.ivos.signboard.cdi.qualifier;
+package com.github.ivos.signboard.config.resource;
 
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.*;

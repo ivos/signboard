@@ -4,6 +4,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:s="http://jboss.org/seam/faces"
 	xmlns:my="http://signboard.ivos.github.com/jsf/facelets"
 	template="/page/template.xhtml">
@@ -21,7 +22,8 @@
 		<h2><span class="muted"><h:outputText value="#{label['task.page.header']}" /></span>
 			<h:outputText value=" #{taskBean.task.goal}" /></h2>
 		<h:form id="main" styleClass="form-horizontal">
-			<pre><h:outputText value="#{taskBean.task.description}" /></pre>
+			<c:if test="#{not empty taskBean.task.description}">
+			<pre><h:outputText value="#{taskBean.task.description}" /></pre></c:if>
 			<ul class="unstyled">
 				<li><i class="icon-calendar"></i>&nbsp;<h:outputText value="#{label['task.timeCreated']} " />
 					<h:outputText value="#{taskBean.task.timeCreated}">

@@ -18,8 +18,8 @@ import org.jboss.seam.security.annotations.LoggedIn;
 import org.jboss.solder.core.Client;
 import org.jboss.solder.logging.Logger;
 
+import com.github.ivos.signboard.config.jsf.ViewContext;
 import com.github.ivos.signboard.user.model.User;
-import com.github.ivos.signboard.view.ViewContext;
 
 @Named
 @SessionScoped

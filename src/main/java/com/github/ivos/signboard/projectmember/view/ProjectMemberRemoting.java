@@ -6,15 +6,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
 import org.jboss.seam.remoting.annotations.WebRemote;
 import org.jboss.solder.logging.Logger;
-
-import com.github.ivos.signboard.projectmember.model.ProjectMember;
-import com.github.ivos.signboard.user.model.User;
 
 @Named
 public class ProjectMemberRemoting {
@@ -35,15 +29,12 @@ public class ProjectMemberRemoting {
 	}
 
 	public String[] selectItems(String property) {
-		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-		CriteriaQuery<String> listCriteria = builder.createQuery(String.class);
-		Root<ProjectMember> root = listCriteria.from(ProjectMember.class);
-
-		TypedQuery<String> query = entityManager.createQuery(listCriteria
-				.select(root.<User> get("user").<String> get(property))
-				.distinct(true).where(listBean.getSearchPredicates(root)));
-		query.setMaxResults(getItemsCount());
-		List<String> items = query.getResultList();
+		TypedQuery<String> query = entityManager.createQuery(
+				"select distinct(r.user." + property + ") "
+						+ listBean.getQuery() + " order by r.user." + property,
+				String.class);
+		List<String> items = listBean.setParameters(query)
+				.setMaxResults(getItemsCount()).getResultList();
 
 		log.debugv("Property " + property
 				+ " search with values {0} produces items {1}.",

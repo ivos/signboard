@@ -1,4 +1,4 @@
-package com.github.ivos.signboard.view;
+package com.github.ivos.signboard.config.jsf;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,6 +9,7 @@ import java.util.Set;
 
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
+
 
 public class SelectUtils implements Serializable {
 

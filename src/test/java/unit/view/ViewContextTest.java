@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.github.ivos.signboard.view.ViewContext;
+import com.github.ivos.signboard.config.jsf.ViewContext;
 
 public class ViewContextTest {
 

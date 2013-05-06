@@ -14,6 +14,8 @@ import javax.persistence.EntityManager;
 import org.jboss.solder.exception.control.ExceptionHandled;
 import org.jboss.solder.logging.Logger;
 
+import com.github.ivos.signboard.config.jsf.SelectUtils;
+import com.github.ivos.signboard.config.jsf.ViewContext;
 import com.github.ivos.signboard.config.security.ActiveProjectAdministrator;
 import com.github.ivos.signboard.config.security.SystemUser;
 import com.github.ivos.signboard.project.view.ProjectBean;
@@ -21,8 +23,6 @@ import com.github.ivos.signboard.projectmember.model.ProjectMember;
 import com.github.ivos.signboard.projectmember.model.ProjectMemberRole;
 import com.github.ivos.signboard.projectmember.model.ProjectMemberSort;
 import com.github.ivos.signboard.projectmember.model.ProjectMemberStatus;
-import com.github.ivos.signboard.view.SelectUtils;
-import com.github.ivos.signboard.view.ViewContext;
 
 @Named
 @ViewScoped

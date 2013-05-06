@@ -9,7 +9,7 @@
 	template="/page/template.xhtml">
 
 	<f:metadata>
-		<f:viewParam name="projectId" value="#{projectBean.id}" />
+		<f:viewParam name="projectId" value="#{projectMemberListBean.projectId}" />
 		<f:viewParam name="page" value="#{projectMemberListBean.page}" />
 		<s:viewAction action="#{projectMemberListBean.paginate}" />
 	</f:metadata>
@@ -22,7 +22,7 @@
 		<h1>
 			<span class="muted"><h:outputText
 					value="#{label['project.page.header']}" /></span>
-			<h:outputText value=" #{projectBean.project.name}" />
+			<h:outputText value=" #{projectMemberListBean.project.name}" />
 		</h1>
 		<h:form id="search" styleClass="form-horizontal">
 			<legend>
@@ -66,7 +66,7 @@
 						<h:outputText value=" #{label['button.search']}" />
 					</h:commandButton>
 					<h:link id="cancel" class="btn" outcome="/page/project/view">
-						<f:param name="id" value="#{projectBean.id}" />
+						<f:param name="id" value="#{projectMemberListBean.projectId}" />
 						<i class="icon-chevron-left"></i>
 						<h:outputText value=" #{label['button.back']}" />
 					</h:link>

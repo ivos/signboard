@@ -1,4 +1,4 @@
-package com.github.ivos.signboard.config.jsf;
+package com.github.ivos.signboard.config.jsf.renderer;
 
 import java.io.IOException;
 import java.util.Iterator;

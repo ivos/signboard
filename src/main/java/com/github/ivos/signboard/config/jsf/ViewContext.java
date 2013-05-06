@@ -1,4 +1,4 @@
-package com.github.ivos.signboard.view;
+package com.github.ivos.signboard.config.jsf;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -13,8 +13,8 @@ import javax.servlet.ServletContext;
 import org.jboss.seam.international.status.Messages;
 import org.jboss.seam.international.status.builder.BundleKey;
 
-import com.github.ivos.signboard.cdi.qualifier.LabelResourceBundle;
-import com.github.ivos.signboard.cdi.qualifier.MessageResourceBundle;
+import com.github.ivos.signboard.config.resource.LabelResourceBundle;
+import com.github.ivos.signboard.config.resource.MessageResourceBundle;
 
 @Named
 @Dependent
@@ -83,6 +83,17 @@ public class ViewContext implements Serializable {
 	public int calculateLastPage(long count, int pageSize) {
 		int last = (int) ((count - 1) / pageSize) + 1;
 		return (0 == last) ? 1 : last;
+	}
+
+	public int coercePage(int page, long count, int pageSize) {
+		if (page < 1) {
+			page = 1;
+		}
+		int lastPage = calculateLastPage(count, pageSize);
+		if (page > lastPage) {
+			page = lastPage;
+		}
+		return page;
 	}
 
 	private static final long serialVersionUID = 1L;
