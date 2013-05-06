@@ -1,4 +1,4 @@
-package com.github.ivos.signboard.view;
+package com.github.ivos.signboard.config.jsf;
 
 import java.util.Date;
 
@@ -10,6 +10,7 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
+
 
 @FacesValidator("searchDateInterval")
 @RequestScoped

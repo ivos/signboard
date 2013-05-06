@@ -1,4 +1,4 @@
-package com.github.ivos.signboard.cdi.producer;
+package com.github.ivos.signboard.config.jpa;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;

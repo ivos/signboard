@@ -1,4 +1,4 @@
-package com.github.ivos.signboard.config;
+package com.github.ivos.signboard.config.jsf;
 
 import org.jboss.seam.faces.security.AccessDeniedView;
 import org.jboss.seam.faces.security.LoginView;

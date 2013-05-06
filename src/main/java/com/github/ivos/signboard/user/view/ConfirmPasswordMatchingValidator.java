@@ -11,7 +11,7 @@ import javax.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.github.ivos.signboard.view.ViewContext;
+import com.github.ivos.signboard.config.jsf.ViewContext;
 
 @FacesValidator("confirmPasswordMatching")
 @RequestScoped

@@ -16,6 +16,8 @@ import org.jboss.solder.core.Client;
 import org.jboss.solder.exception.control.ExceptionHandled;
 import org.jboss.solder.logging.Logger;
 
+import com.github.ivos.signboard.config.jsf.SelectUtils;
+import com.github.ivos.signboard.config.jsf.ViewContext;
 import com.github.ivos.signboard.config.security.ActiveProjectUserByTask;
 import com.github.ivos.signboard.config.security.SystemUser;
 import com.github.ivos.signboard.project.model.Project;
@@ -23,8 +25,6 @@ import com.github.ivos.signboard.project.view.ProjectBean;
 import com.github.ivos.signboard.task.model.Task;
 import com.github.ivos.signboard.task.model.TaskSort;
 import com.github.ivos.signboard.user.model.User;
-import com.github.ivos.signboard.view.SelectUtils;
-import com.github.ivos.signboard.view.ViewContext;
 
 @Named
 @ViewScoped

@@ -17,14 +17,14 @@ import javax.validation.constraints.Size;
 import org.jboss.solder.exception.control.ExceptionHandled;
 import org.jboss.solder.logging.Logger;
 
-import com.github.ivos.signboard.config.PersistenceUtil;
+import com.github.ivos.signboard.config.jpa.PersistenceUtil;
+import com.github.ivos.signboard.config.jsf.SelectUtils;
+import com.github.ivos.signboard.config.jsf.ViewContext;
 import com.github.ivos.signboard.config.security.SystemAdministrator;
 import com.github.ivos.signboard.user.model.SystemRole;
 import com.github.ivos.signboard.user.model.User;
 import com.github.ivos.signboard.user.model.UserSort;
 import com.github.ivos.signboard.user.model.UserStatus;
-import com.github.ivos.signboard.view.SelectUtils;
-import com.github.ivos.signboard.view.ViewContext;
 
 @Named
 @ViewScoped

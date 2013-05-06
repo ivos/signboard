@@ -1,4 +1,4 @@
-package com.github.ivos.signboard.cdi.producer;
+package com.github.ivos.signboard.config.resource;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -11,8 +11,6 @@ import javax.inject.Inject;
 import org.jboss.solder.core.Client;
 import org.jboss.solder.logging.Logger;
 
-import com.github.ivos.signboard.cdi.qualifier.LabelResourceBundle;
-import com.github.ivos.signboard.cdi.qualifier.MessageResourceBundle;
 
 @RequestScoped
 public class ResourceBundleProducer {

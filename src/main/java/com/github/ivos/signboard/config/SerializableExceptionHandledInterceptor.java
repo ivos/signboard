@@ -1,4 +1,4 @@
-package com.github.ivos.signboard.cdi.interceptor;
+package com.github.ivos.signboard.config;
 
 /*
  * JBoss, Home of Professional Open Source

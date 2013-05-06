@@ -16,8 +16,8 @@ import org.jmock.Expectations;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.github.ivos.signboard.view.SelectUtils;
-import com.github.ivos.signboard.view.ViewContext;
+import com.github.ivos.signboard.config.jsf.SelectUtils;
+import com.github.ivos.signboard.config.jsf.ViewContext;
 
 public class SelectUtilsTest extends JMockSupport {
 

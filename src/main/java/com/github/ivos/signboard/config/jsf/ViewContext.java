@@ -1,4 +1,4 @@
-package com.github.ivos.signboard.view;
+package com.github.ivos.signboard.config.jsf;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -13,8 +13,8 @@ import javax.servlet.ServletContext;
 import org.jboss.seam.international.status.Messages;
 import org.jboss.seam.international.status.builder.BundleKey;
 
-import com.github.ivos.signboard.cdi.qualifier.LabelResourceBundle;
-import com.github.ivos.signboard.cdi.qualifier.MessageResourceBundle;
+import com.github.ivos.signboard.config.resource.LabelResourceBundle;
+import com.github.ivos.signboard.config.resource.MessageResourceBundle;
 
 @Named
 @Dependent

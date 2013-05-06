@@ -11,7 +11,7 @@ import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 
-import com.github.ivos.signboard.view.ViewContext;
+import com.github.ivos.signboard.config.jsf.ViewContext;
 
 @FacesValidator("codeNotReserved")
 @RequestScoped

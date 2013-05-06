@@ -1,6 +1,6 @@
 package com.github.ivos.signboard.user.view;
 
-import static com.github.ivos.signboard.config.ParamUtil.*;
+import static com.github.ivos.signboard.config.jpa.ParamUtil.*;
 
 import java.io.Serializable;
 import java.util.List;
@@ -15,12 +15,12 @@ import net.sf.seaf.util.Generator;
 
 import org.jboss.solder.exception.control.ExceptionHandled;
 
+import com.github.ivos.signboard.config.jsf.ViewContext;
 import com.github.ivos.signboard.config.security.SystemAdministrator;
 import com.github.ivos.signboard.user.model.SystemRole;
 import com.github.ivos.signboard.user.model.User;
 import com.github.ivos.signboard.user.model.UserCriteria;
 import com.github.ivos.signboard.user.model.UserStatus;
-import com.github.ivos.signboard.view.ViewContext;
 
 @Named
 @SessionScoped

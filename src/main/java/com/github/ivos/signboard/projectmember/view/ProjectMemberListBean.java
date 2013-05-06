@@ -1,6 +1,6 @@
 package com.github.ivos.signboard.projectmember.view;
 
-import static com.github.ivos.signboard.config.ParamUtil.*;
+import static com.github.ivos.signboard.config.jpa.ParamUtil.*;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,12 +13,12 @@ import javax.persistence.TypedQuery;
 
 import org.jboss.solder.exception.control.ExceptionHandled;
 
+import com.github.ivos.signboard.config.jsf.ViewContext;
 import com.github.ivos.signboard.config.security.ActiveProjectMember;
 import com.github.ivos.signboard.config.security.SystemUser;
 import com.github.ivos.signboard.project.model.Project;
 import com.github.ivos.signboard.projectmember.model.ProjectMember;
 import com.github.ivos.signboard.projectmember.model.ProjectMemberCriteria;
-import com.github.ivos.signboard.view.ViewContext;
 
 @Named
 @SessionScoped
