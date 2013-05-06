@@ -85,6 +85,17 @@ public class ViewContext implements Serializable {
 		return (0 == last) ? 1 : last;
 	}
 
+	public int coercePage(int page, long count, int pageSize) {
+		if (page < 1) {
+			page = 1;
+		}
+		int lastPage = calculateLastPage(count, pageSize);
+		if (page > lastPage) {
+			page = lastPage;
+		}
+		return page;
+	}
+
 	private static final long serialVersionUID = 1L;
 
 }

@@ -2,20 +2,15 @@ package com.github.ivos.signboard.user.view;
 
 import static com.github.ivos.signboard.config.jpa.ParamUtil.*;
 
-import java.io.Serializable;
-import java.util.List;
-
 import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import net.sf.seaf.util.Generator;
 
 import org.jboss.solder.exception.control.ExceptionHandled;
 
-import com.github.ivos.signboard.config.jsf.ViewContext;
+import com.github.ivos.signboard.config.jsf.ListBeanBase;
 import com.github.ivos.signboard.config.security.SystemAdministrator;
 import com.github.ivos.signboard.user.model.SystemRole;
 import com.github.ivos.signboard.user.model.User;
@@ -25,10 +20,12 @@ import com.github.ivos.signboard.user.model.UserStatus;
 @Named
 @SessionScoped
 @ExceptionHandled
-public class UserListBean implements Serializable {
+public class UserListBean extends ListBeanBase<User, UserCriteria> {
 
-	@Inject
-	ViewContext viewContext;
+	@Override
+	public void resetCriteria() {
+		criteria = new UserCriteria();
+	}
 
 	public String generate() {
 		Generator g = new Generator();
@@ -55,65 +52,6 @@ public class UserListBean implements Serializable {
 			entityManager.persist(user);
 		}
 		return "search?faces-redirect=true";
-	}
-
-	public String reset() {
-		criteria = new UserCriteria();
-		return search();
-	}
-
-	private static final long serialVersionUID = 1L;
-
-	@Inject
-	private EntityManager entityManager;
-
-	private int page = 1;
-	private long count;
-	private List<User> pageItems;
-
-	private UserCriteria criteria = new UserCriteria();
-
-	public int getPage() {
-		return page;
-	}
-
-	public void setPage(int page) {
-		if (page < 1) {
-			page = 1;
-		}
-		if (page > getLastPage()) {
-			page = getLastPage();
-		}
-		this.page = page;
-	}
-
-	public int getPageSize() {
-		return 10;
-	}
-
-	public UserCriteria getCriteria() {
-		return criteria;
-	}
-
-	public void setCriteria(UserCriteria criteria) {
-		this.criteria = criteria;
-	}
-
-	public String search() {
-		page = 1;
-		return "search?faces-redirect=true";
-	}
-
-	@SystemAdministrator
-	public void paginate() {
-		count = setParameters(
-				entityManager.createQuery("select count(r) " + getQuery(),
-						Long.class)).getSingleResult();
-
-		pageItems = setParameters(
-				entityManager.createQuery("select r " + getQuery() + getSort(),
-						User.class)).setFirstResult((page - 1) * getPageSize())
-				.setMaxResults(getPageSize()).getResultList();
 	}
 
 	public String getQuery() {
@@ -154,16 +92,17 @@ public class UserListBean implements Serializable {
 	}
 
 	@SystemAdministrator
-	public List<User> getPageItems() {
-		return pageItems;
+	public void paginate() {
+		count = setParameters(
+				entityManager.createQuery("select count(r) " + getQuery(),
+						Long.class)).getSingleResult();
+
+		pageItems = setParameters(
+				entityManager.createQuery("select r " + getQuery() + getSort(),
+						User.class)).setFirstResult((page - 1) * getPageSize())
+				.setMaxResults(getPageSize()).getResultList();
 	}
 
-	public long getCount() {
-		return count;
-	}
-
-	public int getLastPage() {
-		return viewContext.calculateLastPage(count, getPageSize());
-	}
+	private static final long serialVersionUID = 1L;
 
 }

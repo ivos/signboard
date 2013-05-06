@@ -78,6 +78,9 @@ public class TaskCriteria {
 	}
 
 	public void setSort(TaskSort sort) {
+		if (null == sort) {
+			sort = TaskSort.oldest;
+		}
 		this.sort = sort;
 	}
 

@@ -2,19 +2,15 @@ package com.github.ivos.signboard.task.view;
 
 import static com.github.ivos.signboard.config.jpa.ParamUtil.*;
 
-import java.io.Serializable;
-import java.util.List;
-
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import org.jboss.solder.core.Client;
 import org.jboss.solder.exception.control.ExceptionHandled;
 
-import com.github.ivos.signboard.config.jsf.ViewContext;
+import com.github.ivos.signboard.config.jsf.ListBeanBase;
 import com.github.ivos.signboard.config.security.SystemUser;
 import com.github.ivos.signboard.task.model.Task;
 import com.github.ivos.signboard.task.model.TaskCriteria;
@@ -23,68 +19,11 @@ import com.github.ivos.signboard.user.model.User;
 @Named
 @SessionScoped
 @ExceptionHandled
-public class TaskListBean implements Serializable {
+public class TaskListBean extends ListBeanBase<Task, TaskCriteria> {
 
-	@Inject
-	ViewContext viewContext;
-
-	public String reset() {
+	@Override
+	public void resetCriteria() {
 		criteria = new TaskCriteria();
-		return search();
-	}
-
-	private static final long serialVersionUID = 1L;
-
-	@Inject
-	private EntityManager entityManager;
-
-	private int page = 1;
-	private long count;
-	private List<Task> pageItems;
-
-	private TaskCriteria criteria = new TaskCriteria();
-
-	public int getPage() {
-		return page;
-	}
-
-	public void setPage(int page) {
-		if (page < 1) {
-			page = 1;
-		}
-		if (page > getLastPage()) {
-			page = getLastPage();
-		}
-		this.page = page;
-	}
-
-	public int getPageSize() {
-		return 10;
-	}
-
-	public TaskCriteria getCriteria() {
-		return criteria;
-	}
-
-	public void setCriteria(TaskCriteria criteria) {
-		this.criteria = criteria;
-	}
-
-	public String search() {
-		page = 1;
-		return "search?faces-redirect=true";
-	}
-
-	@SystemUser
-	public void paginate() {
-		count = setParameters(
-				entityManager.createQuery("select count(r) " + getQuery(),
-						Long.class)).getSingleResult();
-
-		pageItems = setParameters(
-				entityManager.createQuery("select r " + getQuery() + getSort(),
-						Task.class)).setFirstResult((page - 1) * getPageSize())
-				.setMaxResults(getPageSize()).getResultList();
 	}
 
 	public String getQuery() {
@@ -119,21 +58,22 @@ public class TaskListBean implements Serializable {
 		return " order by r.id";
 	}
 
+	@SystemUser
+	public void paginate() {
+		count = setParameters(
+				entityManager.createQuery("select count(r) " + getQuery(),
+						Long.class)).getSingleResult();
+
+		pageItems = setParameters(
+				entityManager.createQuery("select r " + getQuery() + getSort(),
+						Task.class)).setFirstResult((page - 1) * getPageSize())
+				.setMaxResults(getPageSize()).getResultList();
+	}
+
 	@Inject
 	@Client
 	User clientUser;
 
-	@SystemUser
-	public List<Task> getPageItems() {
-		return pageItems;
-	}
-
-	public long getCount() {
-		return count;
-	}
-
-	public int getLastPage() {
-		return viewContext.calculateLastPage(count, getPageSize());
-	}
+	private static final long serialVersionUID = 1L;
 
 }
