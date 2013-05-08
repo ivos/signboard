@@ -79,10 +79,9 @@ public class TaskBean implements Serializable {
 	@SystemUser
 	@ActiveProjectUserByTask
 	public String create() {
-		// clientUser = entityManager.find(User.class, clientUser.getId());
 		task.setAuthor(clientUser);
 		entityManager.persist(task);
-		log.infov("Create task {0}.", task);
+		log.infov("Create {0}.", task);
 		viewContext.info("saved");
 		return "view?faces-redirect=true&id=" + task.getId();
 	}
