@@ -11,7 +11,6 @@ import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 
-
 @FacesValidator("searchDateInterval")
 @RequestScoped
 public class SearchDateIntervalValidator implements Validator {
