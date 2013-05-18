@@ -48,6 +48,12 @@ public class URLRewriteConfiguration extends HttpConfigurationProvider {
 								.withInboundCorrection())
 
 				.addRule(
+						Join.path("/task/{taskId}/work")
+								.to("/page/workRecord/create.jsf")
+								.where("taskId").matches(ENTITY_ID)
+								.withInboundCorrection())
+
+				.addRule(
 						Join.path("/{domain}/page/{page}")
 								.to("/page/{domain}/search.jsf")
 								.where("domain").matches(ENTITY_NAME)

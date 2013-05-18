@@ -15,6 +15,7 @@ import com.github.ivos.signboard.task.model.Task;
 import com.github.ivos.signboard.task.view.TaskBean;
 import com.github.ivos.signboard.user.model.SystemRole;
 import com.github.ivos.signboard.user.model.User;
+import com.github.ivos.signboard.workrecord.view.WorkRecordBean;
 
 public class SecurityCheck {
 
@@ -156,6 +157,26 @@ public class SecurityCheck {
 	@ActiveProjectUserByTask
 	public boolean isActiveProjectUserByTask() {
 		Project project = taskBean.getTask().getProject();
+		if (null != request && null == project) {
+			project = entityManager.find(Project.class,
+					getProjectIdFromRequestURI());
+		}
+		boolean result = false;
+		if (null != clientUser) {
+			result = project.isActiveUser(clientUser);
+		}
+		log.debugv("Verifying {0} is active project user of {1}: {2}.",
+				clientUser, project, result);
+		return result;
+	}
+
+	@Inject
+	WorkRecordBean workRecordBean;
+
+	@Secures
+	@ActiveProjectUserByWorkRecord
+	public boolean isActiveProjectUserByWorkRecord() {
+		Project project = workRecordBean.getWorkRecord().getTask().getProject();
 		if (null != request && null == project) {
 			project = entityManager.find(Project.class,
 					getProjectIdFromRequestURI());

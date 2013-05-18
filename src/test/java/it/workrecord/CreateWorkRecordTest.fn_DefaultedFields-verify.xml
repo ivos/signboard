@@ -1,0 +1,4 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<work_record task="1" date="@date" duration="3600000" worker="1" created="@timestamp" />
+</dataset>

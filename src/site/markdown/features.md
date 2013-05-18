@@ -175,3 +175,14 @@ attributes.
 
 	As an active project user I can edit the goal, description
 attributes of a task of the project.
+
+Work record
+-----------
+
+1. __Create work record__
+
+	As an active project user I can create a work record 
+for a task of the project.
+New work record attributes: duration, date.
+System defaults date to today and validates it is <= today.
+System records task, time created, worker.

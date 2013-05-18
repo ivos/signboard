@@ -9,6 +9,7 @@ import org.jboss.seam.security.annotations.LoggedIn;
 import com.github.ivos.signboard.config.security.ActiveProjectAdministrator;
 import com.github.ivos.signboard.config.security.ActiveProjectMember;
 import com.github.ivos.signboard.config.security.ActiveProjectUserByTask;
+import com.github.ivos.signboard.config.security.ActiveProjectUserByWorkRecord;
 import com.github.ivos.signboard.config.security.SystemAdministrator;
 import com.github.ivos.signboard.config.security.SystemUser;
 
@@ -95,6 +96,14 @@ public interface Pages {
 		@SystemUser
 		@ActiveProjectUserByTask
 		taskEdit,
+
+		// work record
+
+		@ViewPattern("/page/workRecord/create.xhtml")
+		@LoggedIn
+		@SystemUser
+		@ActiveProjectUserByWorkRecord
+		workRecordCreate,
 
 		// common
 

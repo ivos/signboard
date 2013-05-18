@@ -10,29 +10,37 @@
 	template="/page/template.xhtml">
 
 	<f:metadata>
-		<f:viewParam name="id" value="#{taskBean.id}" />
-		<s:viewAction action="#{taskBean.retrieve}" />
+		<f:viewParam name="id" value="#{workRecordBean.id}" />
+		<s:viewAction action="#{workRecordBean.retrieve}" />
 	</f:metadata>
 
-	<ui:param name="pageTitle" value="#{label['task.view.title']}" />
+	<ui:param name="pageTitle" value="#{label['workRecord.view.title']}" />
 	<ui:param name="activeMenu" value="task" />
 	<ui:define name="main">
 		<h1><span class="muted"><h:outputText value="#{label['project.page.header']}" /></span>
-			<h:outputText value=" #{taskBean.task.project.name}" /></h1>
+			<h:outputText value=" #{workRecordBean.workRecord.task.project.name}" /></h1>
 		<h2><span class="muted"><h:outputText value="#{label['task.page.header']}" /></span>
-			<h:outputText value=" #{taskBean.task.goal}" /></h2>
+			<h:outputText value=" #{workRecordBean.workRecord.task.goal}" /></h2>
+		<h3><h:outputText value="#{label['workRecord.page.header']}" /></h3>
 
 		<h:form id="main" styleClass="form-horizontal">
-			<c:if test="#{not empty taskBean.task.description}">
-			<pre><h:outputText value="#{taskBean.task.description}" /></pre></c:if>
 			<ul class="unstyled">
-				<li><i class="icon-calendar"></i>&nbsp;<h:outputText value="#{label['task.timeCreated']} " />
-					<h:outputText value="#{taskBean.task.timeCreated}">
+				<li><i class="icon-calendar"></i>&nbsp;<h:outputText value="#{label['workRecord.date']} " />
+					<h:outputText value="#{workRecordBean.workRecord.date}">
+						<f:convertDateTime timeZone="${userDateTimeZone.ID}" />
+					</h:outputText>
+				</li>
+				<li><i class="icon-time"></i>&nbsp;<h:outputText
+						value="#{label['workRecord.duration']} " /> <h:outputText
+						value="#{workRecordBean.workRecord.duration}"
+						converter="#{durationConverter}" /></li>
+				<li><i class="icon-user"></i>&nbsp;<h:outputText value="#{label['workRecord.worker']} " />
+					<h:outputText value="#{workRecordBean.workRecord.worker.fullName}" /></li>
+				<li><h:outputText value="#{label['workRecord.created']} " />
+					<h:outputText value="#{workRecordBean.workRecord.created}">
 						<f:convertDateTime timeZone="${userDateTimeZone.ID}" type="both" />
 					</h:outputText>
 				</li>
-				<li><i class="icon-user"></i>&nbsp;<h:outputText value="#{label['task.author']} " />
-					<h:outputText value="#{taskBean.task.author.fullName}" /></li>
 			</ul>
 
 			<div class="control-group">
@@ -45,12 +53,6 @@
 					<h:link id="search" class="btn" outcome="search">
 						<i class="icon-list"></i>
 						<h:outputText value=" #{label['button.viewAll']}" />
-					</h:link>
-					<h:link id="create-work-record" class="btn"
-						outcome="/page/workRecord/create">
-						<f:param name="taskId" value="#{taskBean.id}" />
-						<i class="icon-time"></i>
-						<h:outputText value=" #{label['button.recordWork']}" />
 					</h:link>
 				</div>
 				<h:messages id="messages" globalOnly="true"
