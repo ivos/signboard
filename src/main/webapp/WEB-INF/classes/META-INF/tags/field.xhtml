@@ -12,7 +12,8 @@
 	<c:set var="hintKey" value="#{labelKey}.#{hint}.hint" />
 	<c:set var="disabled" value="#{not empty disabled ? disabled : false}" />
 	<c:set var="optionsProperty" value="#{property}__Options" />
-	<c:set var="labelFor" value="#{id}#{(type == 'combobox')? '-inputtext' : ''}" />
+	<c:set var="labelFor"
+		value="#{id}#{(type == 'combobox')? '-inputtext' : ''}" />
 
 	<div class="control-group">
 		<h:outputLabel for="#{labelFor}" styleClass="control-label">
@@ -31,7 +32,7 @@
 				<c:when test="#{type == 'text'}">
 					<h:inputText id="#{id}" value="#{bean[property]}"
 						label="#{label[labelKey]}" placeholder="#{label[labelKey]}"
-						styleClass="#{class}">
+						styleClass="#{class}" converter="#{converter}">
 						<ui:insert />
 						<c:if test="#{customAjaxValidation != true}">
 							<f:ajax event="blur" render="#{id}-message" />
@@ -92,6 +93,20 @@
 						</c:if>
 					</h:selectManyListbox>
 				</c:when>
+				<c:when test="#{type == 'date'}">
+					<h:inputText id="#{id}" value="#{bean[property]}"
+						label="#{label[labelKey]}" placeholder="#{dateFormatPatternLabel}"
+						styleClass="datepicker input-small #{class}" autocomplete="off"
+						data-date-language="#{userLocale}"
+						data-date-startdate="#{startDate}" data-date-enddate="#{endDate}">
+						<f:convertDateTime timeZone="${userDateTimeZone.ID}"
+							pattern="#{dateFormatPattern}" />
+						<ui:insert />
+						<c:if test="#{customAjaxValidation != true}">
+							<f:ajax event="blur" render="#{id}-message" />
+						</c:if>
+					</h:inputText>
+				</c:when>
 				<c:when test="#{type == 'dateSearch'}">
 					<c:set var="propertyFrom" value="#{property}__From" />
 					<c:set var="propertyTo" value="#{property}__To" />
@@ -127,6 +142,16 @@
 							</c:if>
 						</h:inputText>
 					</div>
+				</c:when>
+				<c:when test="#{type == 'duration'}">
+					<h:inputText id="#{id}" value="#{bean[property]}"
+						label="#{label[labelKey]}" placeholder="#{label[labelKey]}"
+						styleClass="input-small #{class}" converter="#{durationConverter}">
+						<ui:insert />
+						<c:if test="#{customAjaxValidation != true}">
+							<f:ajax event="blur" render="#{id}-message" />
+						</c:if>
+					</h:inputText>
 				</c:when>
 				<c:otherwise>
 					<ui:insert />
