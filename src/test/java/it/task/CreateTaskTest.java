@@ -69,10 +69,26 @@ public class CreateTaskTest extends ITBase {
 		assertTextPresent("May not be empty.");
 	}
 
-	// @Test
-	// @Verify("CreateTaskTest.fn_OptionalFields-verify.xml")
-	public void nav() {
-		// TODO
+	@Test
+	@Verify("CreateTaskTest.fn_OptionalFields-verify.xml")
+	public void nav_AccessFromTaskSearch() {
+		gotoPage("/task");
+		clickLinkWithExactText("Create new");
+		verifyTitle("Create task");
+		verifyURL("/task/create");
+
+		selectOption("edit:project", "name1");
+		setTextField("edit:goal", "goal1");
+		clickButton("edit:save");
+	}
+
+	@Test
+	public void nav_Cancel() {
+		gotoPage("/task/create");
+		clickLinkWithExactText("Cancel");
+
+		verifyTitle("Search tasks");
+		verifyURL("/task");
 	}
 
 	@Test
