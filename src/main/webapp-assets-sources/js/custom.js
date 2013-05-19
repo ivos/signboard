@@ -1,6 +1,8 @@
 /*!
  * Custom JavaScript
- *
+ */
+/*
+ * scroll aid
  */
 function fixLinksWithFixedNavbar() {
 	if ($(document).width() > 979) {
@@ -46,3 +48,30 @@ function fixLinksWithFixedNavbar() {
 		fixLinksWithFixedNavbar();
 	})
 }(window.jQuery)
+
+/*
+ * typeahead
+ */
+jQuery(".typeahead").typeahead({
+	source : function(query, process) {
+		var dtset = jQuery(jQuery(this).get(0)['$element'].get(0)).data();
+		return Seam.createBean(dtset.bean)[dtset.method](query, process);
+	},
+	items : 6
+});
+
+/*
+ * datepicker
+ */
+jQuery(".datepicker").datepicker({
+	autoclose : true,
+	todayBtn : true,
+	todayHighlight : true
+});
+
+/*
+ * combobox
+ */
+jQuery(document).ready(function() {
+	jQuery('.combobox').combobox();
+});
