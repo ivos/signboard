@@ -85,6 +85,12 @@
     this.$element.attr('rel', this.$source.attr('rel'))
     this.$element.attr('title', this.$source.attr('title'))
     this.$element.attr('class', this.$source.attr('class'))
+    // IMX FIX start
+    this.$target.prop("id", this.$source.prop("id"))
+    this.$element.prop("id", this.$source.prop("id")+"-inputtext")
+    this.$source.prop("id", this.$source.prop("id")+"-original")
+    this.$element.attr('onblur', this.$source.attr('onblur'))
+    // IMX FIX end
   }
 
   , toggle: function () {
