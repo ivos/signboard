@@ -7,8 +7,12 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.jboss.solder.core.Client;
+import org.jboss.solder.logging.Logger;
 
 public class DateFormatPatternProducer {
+
+	@Inject
+	Logger log;
 
 	@Inject
 	@Client
@@ -17,10 +21,14 @@ public class DateFormatPatternProducer {
 	@Produces
 	@Named
 	public String getDateFormatPattern() {
+		String pattern;
 		if (clientLocale.toString().startsWith("cs")) {
-			return "d.M.yyyy";
+			pattern = "d.M.yyyy";
+		} else {
+			pattern = "MM/dd/yyyy";
 		}
-		return "MM/dd/yyyy";
+		log.debugv("Date format pattern {0}.", pattern);
+		return pattern;
 	}
 
 	@Produces
