@@ -480,9 +480,11 @@ this.$element.attr("required",this.$source.attr("required"));
 this.$element.attr("rel",this.$source.attr("rel"));
 this.$element.attr("title",this.$source.attr("title"));
 this.$element.attr("class",this.$source.attr("class"));
-this.$target.prop("id",this.$source.prop("id"));
 this.$element.prop("id",this.$source.prop("id")+"-inputtext");
+this.$target.prop("id",this.$source.prop("id"));
 this.$source.prop("id",this.$source.prop("id")+"-original");
+this.$element.prop("name",this.$target.prop("name")+"-inputtext");
+this.$source.prop("name",this.$target.prop("name")+"-original");
 this.$element.attr("onblur",this.$source.attr("onblur"))
 },toggle:function(){if(this.$container.hasClass("combobox-selected")){this.clearTarget();
 this.triggerChange();

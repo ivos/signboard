@@ -86,9 +86,14 @@
     this.$element.attr('title', this.$source.attr('title'))
     this.$element.attr('class', this.$source.attr('class'))
     // IMX FIX start
-    this.$target.prop("id", this.$source.prop("id"))
+    // id's for tests
     this.$element.prop("id", this.$source.prop("id")+"-inputtext")
+    this.$target.prop("id", this.$source.prop("id"))
     this.$source.prop("id", this.$source.prop("id")+"-original")
+    // names to distinguish name-value pairs on submit
+    this.$element.prop("name", this.$target.prop("name")+"-inputtext")
+    this.$source.prop("name", this.$target.prop("name")+"-original")
+    // take onblur for ajax actions
     this.$element.attr('onblur', this.$source.attr('onblur'))
     // IMX FIX end
   }
