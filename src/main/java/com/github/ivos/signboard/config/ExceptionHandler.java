@@ -34,4 +34,9 @@ public class ExceptionHandler {
 		event.handled();
 	}
 
+	public void anyThrowable(@Handles CaughtException<Throwable> event) {
+		log.error("Caught throwable", event.getException());
+		event.handled();
+	}
+
 }
