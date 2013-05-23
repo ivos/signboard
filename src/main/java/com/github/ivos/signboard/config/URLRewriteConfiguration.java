@@ -24,6 +24,9 @@ public class URLRewriteConfiguration extends HttpConfigurationProvider {
 						Join.path("/").to("/page/index.jsf")
 								.withInboundCorrection())
 				.addRule(
+						Join.path("/api{path}").to("/api{path}").where("path")
+								.matches(".*"))
+				.addRule(
 						Join.path("/register").to("/page/user/register.jsf")
 								.withInboundCorrection())
 				.addRule(

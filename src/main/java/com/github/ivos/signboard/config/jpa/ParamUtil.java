@@ -16,4 +16,11 @@ public class ParamUtil {
 		return value.toString();
 	}
 
+	public static String nonNull(String string) {
+		if (null == string) {
+			return "";
+		}
+		return string;
+	}
+
 }
