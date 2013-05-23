@@ -35,6 +35,10 @@
     this.selected = false
     this.refresh()
     this.transferAttributes()
+    // IMX FIX start
+    // keep value on subsequent POSTs
+    this.passValue()
+    // IMX FIX end
     this.listen()
   }
 
@@ -97,6 +101,16 @@
     this.$element.attr('onblur', this.$source.attr('onblur'))
     // IMX FIX end
   }
+
+  // IMX FIX start
+  // keep value on subsequent POSTs
+  , passValue: function() {
+	  var that = this;
+	  this.$source.change(function(){
+		  that.$target.val($(this).val());
+	  }).change();
+  }
+  // IMX FIX end
 
   , toggle: function () {
     if (this.$container.hasClass('combobox-selected')) {

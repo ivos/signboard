@@ -453,6 +453,7 @@ this.shown=false;
 this.selected=false;
 this.refresh();
 this.transferAttributes();
+this.passValue();
 this.listen()
 };
 a.prototype=b.extend({},b.fn.typeahead.Constructor.prototype,{constructor:a,setup:function(){var c=b(this.options.template);
@@ -486,6 +487,9 @@ this.$source.prop("id",this.$source.prop("id")+"-original");
 this.$element.prop("name",this.$target.prop("name")+"-inputtext");
 this.$source.prop("name",this.$target.prop("name")+"-original");
 this.$element.attr("onblur",this.$source.attr("onblur"))
+},passValue:function(){var c=this;
+this.$source.change(function(){c.$target.val(b(this).val())
+}).change()
 },toggle:function(){if(this.$container.hasClass("combobox-selected")){this.clearTarget();
 this.triggerChange();
 this.clearElement()
