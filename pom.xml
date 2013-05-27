@@ -235,6 +235,17 @@
 			<artifactId>resteasy-jaxrs</artifactId>
 			<version>3.0-beta-5</version>
 			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-simple</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.6.4</version>
 		</dependency>
 		<!-- random data generation: -->
 		<dependency>
@@ -254,11 +265,6 @@
 			<artifactId>light-air</artifactId>
 			<version>0.2-SNAPSHOT</version>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.6.4</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sourceforge.jwebunit</groupId>
