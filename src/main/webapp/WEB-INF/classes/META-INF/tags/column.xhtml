@@ -7,18 +7,21 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 	<c:set var="property" value="#{not empty property ? property : id}" />
-	<c:set var="labelKey" value="#{entity}.#{property}" />
+	<c:set var="labelKey" value="#{entity}.#{id}" />
 	<c:set var="type" value="#{not empty type ? type : 'output'}" />
 	<c:set var="propertyValue" value="#{not empty propertyPath ? item[propertyPath][property] : item[property]}" />
 	<c:set var="value" value="#{not empty valuePath ? propertyValue[valuePath] : propertyValue}" />
 	<c:set var="optionsKey" value="enum_#{selectEntity}_#{value}" />
+	<c:set var="linkPage" value="#{not empty linkPage ? linkPage : 'view'}" />
+	<c:set var="linkEntity" value="#{not empty linkEntity ? linkEntity : entity}" />
+	<c:set var="paramName" value="#{not empty paramName ? paramName : 'id'}" />
 
 	<h:column>
 		<f:facet name="header">
 			<h:outputText value="#{label[labelKey]}" />
 		</f:facet>
-		<h:link outcome="/page/#{entity}/view">
-			<f:param name="id" value="#{item.id}" />
+		<h:link outcome="/page/#{linkEntity}/#{linkPage}">
+			<f:param name="#{paramName}" value="#{item.id}" />
 			<c:choose>
 				<c:when test="#{type == 'output'}">
 					<h:outputText id="#{id}" value="#{value}">

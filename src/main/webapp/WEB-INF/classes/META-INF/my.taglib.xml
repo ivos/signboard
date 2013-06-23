@@ -17,7 +17,8 @@
 		</attribute>
 		<attribute>
 			<description>Type of field. One of: output, text, typeahead, 
-				password, selectOneMenu, combobox, selectManyListbox.</description>
+				password, selectOneMenu, combobox, selectManyListbox, 
+				date, dateSearch, duration.</description>
 			<name>type</name>
 			<required>true</required>
 			<type>java.lang.String</type>
@@ -113,6 +114,11 @@
 			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
+			<description>Name of the entity property.</description>
+			<name>property</name>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
 			<description>The select entity.</description>
 			<name>selectEntity</name>
 			<type>java.lang.String</type>
@@ -125,6 +131,21 @@
 		<attribute>
 			<description>Path from the property to the displayed value.</description>
 			<name>valuePath</name>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>Name of the page of the same entity to link to. Default is 'view'.</description>
+			<name>linkPage</name>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>Name of the parameter to pass to the link. Default is 'id'.</description>
+			<name>paramName</name>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<description>The entity of the page to link to. Default is the main entity.</description>
+			<name>linkEntity</name>
 			<type>java.lang.String</type>
 		</attribute>
 	</tag>
