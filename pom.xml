@@ -263,7 +263,7 @@
 		<dependency>
 			<groupId>net.sf.lightair</groupId>
 			<artifactId>light-air</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>0.2</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
