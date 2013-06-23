@@ -38,6 +38,7 @@ public class URLRewriteConfiguration extends HttpConfigurationProvider {
 				.addRule(
 						Join.path("/dashboard").to("/page/user/dashboard.jsf")
 								.withInboundCorrection())
+				.addRule(Join.path("/error").to("/page/error.jsf"))
 				.addRule(
 						Join.path("/project/{projectId}/member/page/{page}")
 								.to("/page/projectMember/search.jsf")
@@ -84,9 +85,7 @@ public class URLRewriteConfiguration extends HttpConfigurationProvider {
 				.addRule(
 						Join.path("/{domain}").to("/page/{domain}/search.jsf")
 								.where("domain").matches(ENTITY_NAME)
-								.withInboundCorrection())
-
-				.addRule(Join.path("/error").to("/page/error.jsf"));
+								.withInboundCorrection());
 	}
 
 	@Override
